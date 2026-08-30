@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LED尺寸速算 · 国际运费测算</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, "Microsoft YaHei", "微软雅黑", sans-serif; background:#f1f2f6; color:#333; font-size:14px; }
+.header { background:linear-gradient(135deg,#1a3a5c 0%,#2d5f8a 100%); color:#fff; padding:18px 24px; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+.header h1 { font-size:20px; font-weight:600; }
+.header-btn { padding:6px 16px; background:rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.25); border-radius:20px; cursor:pointer; font-size:13px; }
+.header-btn:hover { background:rgba(255,255,255,0.22); }
+.modal-mask { position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center; }
+.modal-box { background:#fff;border-radius:10px;max-width:800px;width:90%;max-height:85vh;display:flex;flex-direction:column;overflow:hidden; }
+.modal-title { display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #f0f0f0;flex-shrink:0; }
+.modal-title h3 { margin:0;color:#1a3a5c; }
+.modal-close { background:none;border:none;font-size:20px;cursor:pointer;color:#999; }
+.modal-body { padding:24px;overflow-y:auto;flex:1; }
+.float-btn-group { position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column; gap:12px; z-index:100; }
+.float-btn { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); transition:transform 0.2s; }
+.float-btn:hover { transform:scale(1.08); }
+.float-btn-log { background:#597a9b; color:#fff; }
+.float-btn-admin { background:#193a5b; color:#fff; }
+.admin-float:hover { box-shadow:0 4px 16px rgba(0,0,0,0.2); }
+.header .sub { font-size:12px; opacity:0.8; margin-top:4px; }
+.tabs { display:flex; background:#fff; border-bottom:2px solid #e8e8e8; padding:0 24px; }
+.tab { padding:12px 24px; cursor:pointer; font-size:14px; color:#666; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all 0.2s; }
+.tab.active { color:#1a3a5c; border-bottom-color:#1a3a5c; font-weight:600; }
+.tab:hover { color:#1a3a5c; }
+.container { padding:20px 24px; max-width:1600px; margin:0 auto; }
+.panel { display:none; }
+.panel.active { display:block; }
+
+/* 筛选栏 */
+.filter-bar { background:#fff; border-radius:8px; padding:16px; margin-bottom:16px; box-shadow:0 1px 4px rgba(0,0,0,0.06); display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+.filter-bar label { font-size:13px; color:#666; margin-right:6px; }
+.filter-bar select { padding:6px 12px; border:1px solid #d9d9d9; border-radius:4px; font-size:13px; min-width:140px; background:#fff; }
+.filter-bar .reset-btn { padding:6px 16px; background:#f0f0f0; border:1px solid #d9d9d9; border-radius:4px; cursor:pointer; font-size:13px; }
+.filter-bar .reset-btn:hover { background:#e6e6e6; }
+.filter-bar .clear-btn { padding:6px 16px; background:#fff1f0; border:1px solid #ffa39e; color:#cf1322; border-radius:4px; cursor:pointer; font-size:13px; }
+.filter-bar .clear-btn:hover { background:#ffccc7; }
+
+/* 汇总卡片 */
+.summary-bar { background:#fff; border-radius:6px; padding:10px 16px; margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,0.06); font-size:13px; color:#666; display:flex; flex-wrap:wrap; gap:8px 24px; align-items:center; }
+.summary-bar strong { color:#1a3a5c; font-weight:700; font-size:14px; }
+.summary-bar.container-bar { background:#fffbe6; border:1px solid #ffe58f; }
+.summary-bar.container-bar strong { color:#ad6800; }
+.summary-bar .note { color:#999; font-size:12px; margin-left:auto; }
+.view-container-btn { padding:6px 16px; background:#fa8c16; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:13px; font-weight:500; }
+.view-container-btn:hover { background:#fa8c16; opacity:0.85; }
+
+/* 表格 */
+.table-wrap { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.06); overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead { background:#fafafa; position:sticky; top:0; z-index:1; }
+th { padding:10px 8px; text-align:left; font-weight:600; color:#555; border-bottom:2px solid #e8e8e8; white-space:nowrap; }
+td { padding:8px; border-bottom:1px solid #f0f0f0; text-align:center; }
+th { padding:10px 8px; text-align:center; font-weight:600; color:#333; }
+tr:hover { background:#f5f7fa; }
+tr.group-header { background:#eef2f7; }
+tr.group-header td { font-weight:700; color:#1a3a5c; padding:10px 8px; }
+tr.method-header { background:#f5f7fa; }
+tr.method-header td { font-weight:600; color:#555; padding:8px; }
+input.qty-input { width:60px; padding:6px 8px; border:1px solid #e6a23c; border-radius:6px; text-align:center; font-size:13px; background:#fffbe6; }
+input.qty-input:focus { border-color:#1677ff; outline:none; box-shadow:0 0 0 2px rgba(22,119,255,0.1); }
+input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
+.calc-cell { text-align:center; font-variant-numeric:tabular-nums; background:#fafafa; }
+.zero { color:#ccc; }
+
+/* 运费测算 */
+.freight-layout { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:900px) { .freight-layout { grid-template-columns:1fr; } }
+.freight-card { background:#fff; border-radius:8px; padding:20px; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+.freight-card h3 { font-size:15px; color:#1a3a5c; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid #eee; }
+.form-row { margin-bottom:14px; }
+.form-row label { display:block; font-size:13px; color:#666; margin-bottom:6px; font-weight:500; }
+.form-row select, .form-row input { width:100%; padding:8px 12px; border:1px solid #d9d9d9; border-radius:4px; font-size:13px; background:#fff; }
+.form-row select:focus, .form-row input:focus { border-color:#1a3a5c; outline:none; box-shadow:0 0 0 2px rgba(26,58,92,0.1); }
+.form-row .hint { font-size:11px; color:#999; margin-top:4px; }
+
+/* 搜索下拉 */
+.search-wrap { position:relative; }
+.search-dropdown { position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #d9d9d9; border-radius:4px; max-height:280px; overflow-y:auto; z-index:100; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:none; }
+.search-dropdown.show { display:block; }
+.search-item { padding:8px 12px; cursor:pointer; border-bottom:1px solid #f5f5f5; }
+.search-item:hover { background:#f0f5ff; }
+.search-item .country { font-weight:600; color:#1a3a5c; font-size:13px; }
+.search-item .detail { font-size:12px; color:#888; margin-top:2px; }
+.search-item .rate-tag { display:inline-block; background:#e6f0ff; color:#1a3a5c; padding:1px 6px; border-radius:3px; font-size:11px; margin-left:6px; }
+
+/* 费率编辑 */
+.rate-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.rate-item { background:#f9f9f9; padding:10px; border-radius:4px; }
+.rate-item .rate-label { font-size:12px; color:#888; margin-bottom:4px; }
+.rate-item input { width:100%; padding:6px 8px; border:1px solid #d9d9d9; border-radius:3px; font-size:13px; }
+
+/* 结果区 */
+.result-box { background:linear-gradient(135deg,#1a3a5c 0%,#2d5f8a 100%); color:#fff; border-radius:8px; padding:24px; margin-top:16px; }
+.result-box .result-title { font-size:14px; opacity:0.8; margin-bottom:12px; }
+.result-box .total-fee { font-size:36px; font-weight:700; }
+.result-box .total-fee .currency { font-size:18px; opacity:0.8; }
+.result-detail { margin-top:16px; border-top:1px solid rgba(255,255,255,0.2); padding-top:12px; }
+.result-detail .row { display:flex; justify-content:space-between; padding:4px 0; font-size:13px; opacity:0.9; }
+.result-detail .row .label { opacity:0.8; }
+
+/* 货物信息同步 */
+.cargo-sync { background:#e6f7ff; border:1px solid #91d5ff; border-radius:6px; padding:12px; margin-bottom:16px; font-size:13px; color:#0050b3; display:flex; justify-content:space-between; align-items:center; }
+.cargo-sync button { padding:5px 12px; background:#1890ff; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:12px; }
+.cargo-sync button:hover { background:#40a9ff; }
+
+/* 备注 */
+.note-box { background:#fffbe6; border:1px solid #ffe58f; border-radius:6px; padding:12px; margin-top:16px; font-size:12px; color:#874d00; line-height:1.6; }
+.note-box strong { color:#ad6800; }
+
+/* 空状态 */
+.empty-state { text-align:center; padding:40px; color:#999; }
+
+/* 滚动条 */
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-thumb { background:#ccc; border-radius:4px; }
+::-webkit-scrollbar-track { background:#f1f1f1; }
+
+/* 港口/机场标签 */
+.port-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.port-tag { background:#f0f5ff; border:1px solid #d6e4ff; color:#1a3a5c; padding:4px 10px; border-radius:4px; font-size:12px; cursor:pointer; }
+.port-tag:hover { background:#d6e4ff; }
+.port-tag.selected { background:#1a3a5c; color:#fff; border-color:#1a3a5c; }
+
+/* 运输方式切换 */
+.mode-toggle { display:flex; gap:0; border:1px solid #d9d9d9; border-radius:4px; overflow:hidden; }
+.mode-toggle button { flex:1; padding:8px; border:none; background:#fff; cursor:pointer; font-size:13px; color:#666; }
+.mode-toggle button.active { background:#1a3a5c; color:#fff; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>预估尺寸速算表</h1>
+    <div class="sub">LED 显示屏产品包装尺寸 · 重量 · 体积自动计算工具</div>
+    <div class="sub" style="margin-top:4px;display:flex;align-items:center;gap:12px;">
+      <span>黄色列为打包件数输入区，汇总重量/体积/箱体总数自动计算 · 仅供参考，具体以下单打包尺寸为准</span>
+      
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('size')">📦 尺寸速算</div>
+  <div class="tab" onclick="switchTab('freight')">🚢 国际运费测算</div>
+</div>
+
+<div class="container">
+
+<!-- ==================== 尺寸速算面板 ==================== -->
+<div class="panel active" id="panel-size">
+  <div class="filter-bar">
+    <div>
+      <label>应用场景</label>
+      <select id="filterScene" onchange="onSceneChange()">
+        <option value="">全部场景</option>
+        <option value="舞台Rental">舞台Rental</option>
+        <option value="ProAV">ProAV</option>
+        <option value="广告DOOH">广告DOOH</option>
+        <option value="创意">创意</option>
+      </select>
+    </div>
+    <div>
+      <label>产品系列</label>
+      <select id="filterSeries" onchange="renderTable()">
+        <option value="">全部系列</option>
+      </select>
+    </div>
+    <div>
+      <label>包装方式</label>
+      <select id="filterMethod" onchange="renderTable()">
+        <option value="">全部方式</option>
+        <option value="航空箱">航空箱</option>
+        <option value="木箱">木箱</option>
+        <option value="运输架">运输架</option>
+        <option value="小推车">小推车</option>
+        <option value="纸箱/卡板">纸箱/卡板</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+    <button class="reset-btn" onclick="resetFilter()">重置筛选</button>
+    <button class="clear-btn" onclick="resetAll()">清空件数</button>
+  </div>
+
+  <div class="summary-bar">
+    <span>匹配产品：<strong id="sumProducts" style="color:#1890ff;">65</strong></span>
+    <span>匹配方案：<strong id="sumPlans" style="color:#1890ff;">419</strong></span>
+    <span>已填件数方案：<strong id="sumFilled" style="color:#1890ff;">0</strong></span>
+    <span>预估总重量：<strong id="sumWeight" style="color:#f5222d;">0.0</strong> KG</span>
+    <span>预估总体积：<strong id="sumVolume" style="color:#f5222d;">0.0000</strong> CBM</span>
+    <span>预估箱体总数：<strong id="sumCases" style="color:#f5222d;">0</strong></span>
+  </div>
+  <div class="summary-bar container-bar">
+    <span style="color:#f5222d;font-weight:600;">货柜需求估算：</span>
+    <span>20GP (25CBM/21T)：<strong id="sum20gp" style="color:#fa8c16;">0</strong> <span style="color:#fa8c16;">⬆</span> 个</span>
+    <span>40GP (55CBM/26T)：<strong id="sum40gp" style="color:#fa8c16;">0</strong> <span style="color:#fa8c16;">⬆</span> 个</span>
+    <span>40HQ (68CBM/26T)：<strong id="sum40hq" style="color:#fa8c16;">0</strong> <span style="color:#fa8c16;">⬆</span> 个</span>
+    <span class="note">按体积和重量取大值估算，仅供参考</span>
+    <button class="view-container-btn" onclick="viewContainerEffect()">查看装柜效果图</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th style="text-align:left;">产品系列<br><span style="font-weight:400;font-size:11px;color:#999;">Product Series</span></th>
+          <th style="background:#fffbe6;color:#f5222d;">打包件数<br><span style="font-weight:400;font-size:11px;color:#f5222d;">Qty</span></th>
+          <th>包装方式<br><span style="font-weight:400;font-size:11px;color:#999;">Method</span></th>
+          <th>每箱产品数量<br><span style="font-weight:400;font-size:11px;color:#999;">Qty/Case</span></th>
+          <th>箱内物品<br><span style="font-weight:400;font-size:11px;color:#999;">Contents</span></th>
+          <th>尺寸(mm)<br><span style="font-weight:400;font-size:11px;color:#999;">Size</span></th>
+          <th>长度(m)<br><span style="font-weight:400;font-size:11px;color:#999;">Length</span></th>
+          <th>宽度(m)<br><span style="font-weight:400;font-size:11px;color:#999;">Width</span></th>
+          <th>高度(m)<br><span style="font-weight:400;font-size:11px;color:#999;">Height</span></th>
+          <th>单包重量(KG)<br><span style="font-weight:400;font-size:11px;color:#999;">Unit Weight</span></th>
+          <th style="color:#1890ff;">汇总重量(KG)<br><span style="font-weight:400;font-size:11px;color:#1890ff;">Total Weight</span></th>
+          <th style="color:#1890ff;">体积<br><span style="font-weight:400;font-size:11px;color:#1890ff;">CBM</span></th>
+          <th style="color:#1890ff;">箱体总数<br><span style="font-weight:400;font-size:11px;color:#1890ff;">Total Panels</span></th>
+        </tr>
+      </thead>
+      <tbody id="productTbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== 运费测算面板 ==================== -->
+<div class="panel" id="panel-freight">
+  <div class="cargo-sync">
+    <span>📦 当前尺寸速算汇总：<strong id="syncWeight">0</strong> KG / <strong id="syncVolume">0</strong> CBM / <strong id="syncCases">0</strong> 箱</span>
+    <button onclick="syncFromSize()">从尺寸速算带入</button>
+  </div>
+
+  <div class="freight-layout">
+    <!-- 左侧：运输参数 -->
+    <div class="freight-card">
+      <h3>🚀 运输参数</h3>
+
+      <div class="form-row">
+        <label>运输方式</label>
+        <div class="mode-toggle">
+          <button id="modeSea" class="active" onclick="setMode('sea')">🚢 海运 (LCL拼箱)</button>
+          <button id="modeAir" onclick="setMode('air')">✈️ 空运</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>发货地</label>
+        <select id="originSelect" onchange="onOriginChange()">
+          <option value="huizhou">中国惠州</option>
+          <option value="hongkong">中国香港</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label id="originPortLabel">起运港 / 起运机场</label>
+        <select id="originPortSelect"></select>
+      </div>
+
+      <div class="form-row">
+        <label>目的地（搜索国家 / 港口 / 机场）</label>
+        <div class="search-wrap">
+          <input type="text" id="destSearch" placeholder="输入国家名、港口名、机场名或代码..." autocomplete="off" oninput="onDestSearch()" onfocus="onDestSearch()">
+          <div class="search-dropdown" id="destDropdown"></div>
+        </div>
+        <div class="hint">支持中文/英文搜索，如"巴西"、"桑托斯"、"GRU"、"Mexico"</div>
+      </div>
+
+      <div class="form-row" id="destPortRow" style="display:none;">
+        <label id="destPortLabel">目的港</label>
+        <div class="port-tags" id="destPortTags"></div>
+      </div>
+
+      <div class="form-row">
+        <label>货物重量 (KG)</label>
+        <input type="number" id="cargoWeight" value="0" min="0" step="0.1" oninput="calcFreight()">
+      </div>
+
+      <div class="form-row">
+        <label>货物体积 (CBM)</label>
+        <input type="number" id="cargoVolume" value="0" min="0" step="0.0001" oninput="calcFreight()">
+      </div>
+
+      <div class="form-row">
+        <label>箱数</label>
+        <input type="number" id="cargoCases" value="0" min="0" step="1" oninput="calcFreight()">
+      </div>
+    </div>
+
+    <!-- 右侧：费率与结果 -->
+    <div>
+      <div class="freight-card">
+        <h3>💰 费率参数（可编辑，参考2026年市场行情）</h3>
+        <div class="rate-grid">
+          <div class="rate-item">
+            <div class="rate-label" id="rateBaseLabel">基础运费 (USD/CBM)</div>
+            <input type="number" id="rateBase" value="0" min="0" step="1" oninput="calcFreight()">
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">最低计费 (CBM/KG)</div>
+            <input type="number" id="rateMin" value="1" min="0" step="0.5" oninput="calcFreight()">
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">文件费 (USD/BL)</div>
+            <input type="number" id="rateDoc" value="50" min="0" step="1" oninput="calcFreight()">
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">报关费 (USD)</div>
+            <input type="number" id="rateCustoms" value="50" min="0" step="1" oninput="calcFreight()">
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">申报费 AMS/ENS (USD)</div>
+            <input type="number" id="rateAms" value="30" min="0" step="1" oninput="calcFreight()">
+          </div>
+          <div class="rate-item">
+            <div class="rate-label">燃油/操作附加费 (USD)</div>
+            <input type="number" id="rateFuel" value="0" min="0" step="1" oninput="calcFreight()">
+          </div>
+        </div>
+        <div class="hint" style="margin-top:10px; font-size:11px; color:#999;">
+          海运计费：体积重比 1CBM=363KG，取体积与重量较大者；最低1CBM起算<br>
+          空运计费：体积重 = 长×宽×高(cm)÷6000，即 1CBM≈166.67KG，取实际重与体积重较大者
+        </div>
+      </div>
+
+      <div class="result-box" id="resultBox">
+        <div class="result-title" id="resultRoute">请选择目的地</div>
+        <div class="total-fee">
+          <span class="currency">USD </span><span id="resultTotal">0.00</span>
+        </div>
+        <div class="result-detail" id="resultDetail">
+          <div class="row"><span class="label">计费重量/体积</span><span id="resultChargeable">-</span></div>
+          <div class="row"><span class="label">基础运费</span><span id="resultBase">-</span></div>
+          <div class="row"><span class="label">附加费合计</span><span id="resultSurcharge">-</span></div>
+          <div class="row"><span class="label">预计航程</span><span id="resultTransit">-</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>⚠️ 费用说明：</strong><br>
+    1. 以上运费为2026年市场参考价格，实际费用以货代实时报价为准，海运价格波动较大，建议出货前重新确认。<br>
+    2. 费用仅包含海/空运费及基本附加费，不含目的港清关费、关税、增值税、目的港派送费、保险费等。<br>
+    3. 海运按LCL拼箱方式估算，货量达到整柜(20GP/40GP/40HQ)时建议按整柜询价，通常比拼箱更经济。<br>
+    4. 玻利维亚、巴拉圭为内陆国，海运需经智利/秘鲁/阿根廷/巴西港口转运，费用含转运段。<br>
+    5. LED显示屏属电子产品，部分国家可能需要特定认证（如巴西INMETRO、墨西哥NOM），请提前确认清关要求。<br>
+    6. 发货地惠州默认经深圳盐田港/宝安机场出运，香港默认经葵青码头/香港国际机场出运。
+  </div>
+</div>
+
+</div>
+
+<script>
+// ==================== 数据 ====================
+let PRODUCTS = [{"scene": "舞台Rental", "series": "PR", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "7IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.15, "width": 0.63, "height": 0.73, "weight": 110.0, "volume": 0.5289}, {"scene": "舞台Rental", "series": "PR", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "6IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.13, "width": 0.99, "height": 0.73, "weight": 135.0, "volume": 0.8167}, {"scene": "舞台Rental", "series": "PR", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考111", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PR", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.21, "width": 0.58, "height": 0.79, "weight": 130.0, "volume": 0.5544}, {"scene": "舞台Rental", "series": "PR", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "4IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.21, "width": 0.58, "height": 0.79, "weight": 108.0, "volume": 0.5544}, {"scene": "舞台Rental", "series": "PR", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "单倍16IN1或者双倍8IN1", "contents": "吊梁", "sizeMm": "", "length": 1.16, "width": 0.85, "height": 0.67, "weight": 148.0, "volume": 0.6606}, {"scene": "舞台Rental", "series": "PR", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个航空箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "PR", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PR", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 180.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "SA", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.2, "width": 0.61, "height": 0.77, "weight": 116.0, "volume": 0.5636}, {"scene": "舞台Rental", "series": "SA", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "1000*500", "length": 1.2, "width": 0.61, "height": 0.77, "weight": 110.0, "volume": 0.5636}, {"scene": "舞台Rental", "series": "SA", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "单倍18IN1", "contents": "吊环式吊梁", "sizeMm": "", "length": 1.2, "width": 0.61, "height": 0.78, "weight": 115.0, "volume": 0.571}, {"scene": "舞台Rental", "series": "SA", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "双倍9IN1", "contents": "吊环式吊梁", "sizeMm": "", "length": 1.2, "width": 0.61, "height": 0.78, "weight": 121.0, "volume": 0.571}, {"scene": "舞台Rental", "series": "SA", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个航空箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "SA", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "SA", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "7IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.1, "width": 0.65, "height": 0.75, "weight": 93.0, "volume": 0.5363}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "6IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.16, "width": 1.11, "height": 0.73, "weight": 122.0, "volume": 0.9399}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "纯吊梁（单倍）", "sizeMm": "选择吊梁的打包方式后左侧输入对应的打包件数，会自动计算", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 155.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 109.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "15IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 150.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 171.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 101.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.72, "height": 0.59, "weight": 113.0, "volume": 0.4928}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PL  V2", "method": "运输架", "methodDetail": "运输架", "qtyPerCase": "30IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.64, "width": 0.75, "height": 1.37, "weight": 356.0, "volume": 1.6851}, {"scene": "舞台Rental", "series": "PL  V2", "method": "运输架", "methodDetail": "运输架", "qtyPerCase": "15IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.64, "width": 0.75, "height": 1.37, "weight": 366.0, "volume": 1.6851}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "18IN1", "contents": "2IN1吊地梁（单倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 142.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "9IN1", "contents": "2IN1吊地梁（双倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 130.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16in1", "contents": "纯吊梁（单倍）", "sizeMm": "选择吊梁的打包方式后左侧输入对应的打包件数，会自动计算", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 101.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10in1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.72, "height": 0.59, "weight": 113.0, "volume": 0.4928}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 155.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 109.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "15IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 150.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 171.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个航空箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.2, "width": 0.61, "height": 0.77, "weight": 147.0, "volume": 0.5636}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.2, "width": 0.61, "height": 0.77, "weight": 129.0, "volume": 0.5636}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "18IN1", "contents": "2IN1吊地梁（单倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 142.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "9IN1", "contents": "2IN1吊地梁（双倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 130.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16in1", "contents": "纯吊梁（单倍）", "sizeMm": "选择吊梁的打包方式后左侧输入对应的打包件数，会自动计算", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 101.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10in1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.72, "height": 0.59, "weight": 113.0, "volume": 0.4928}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 155.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 109.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "15IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 150.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 171.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个航空箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL  V2", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "7IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.1, "width": 0.65, "height": 0.75, "weight": 93.0, "volume": 0.5363}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "6IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.16, "width": 1.11, "height": 0.73, "weight": 122.0, "volume": 0.9399}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 155.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 109.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "15IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 150.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 171.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "航空箱", "methodDetail": "塑胶航空箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.16, "width": 0.62, "height": 0.75, "weight": 110.0, "volume": 0.5394}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "4IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.12, "width": 0.52, "height": 0.72, "weight": 99.0, "volume": 0.4193}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 101.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.72, "height": 0.59, "weight": 113.0, "volume": 0.4928}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个航空箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "PL  lite V10", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(旧版本)\n旧款航空箱", "method": "航空箱", "methodDetail": "1号航空箱", "qtyPerCase": "6IN1", "contents": "1米梯形支架", "sizeMm": "/", "length": 1.13, "width": 0.56, "height": 0.5, "weight": 80.0, "volume": 0.3164}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(旧版本)\n旧款航空箱", "method": "航空箱", "methodDetail": "2号航空箱", "qtyPerCase": "8IN1", "contents": "梯形架底座", "sizeMm": "/", "length": 1.13, "width": 0.87, "height": 0.5, "weight": 120.0, "volume": 0.4915}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(旧版本)\n旧款航空箱", "method": "航空箱", "methodDetail": "3号航空箱", "qtyPerCase": "16IN1", "contents": "单倍底座", "sizeMm": "/", "length": 1.23, "width": 0.6, "height": 0.46, "weight": 160.0, "volume": 0.3395}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(旧版本)\n旧款航空箱", "method": "航空箱", "methodDetail": "4号航空箱", "qtyPerCase": "8IN1", "contents": "双倍底座", "sizeMm": "/", "length": 1.13, "width": 0.6, "height": 0.46, "weight": 110.0, "volume": 0.3119}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(旧版本)\n旧款航空箱", "method": "航空箱", "methodDetail": "5号航空箱", "qtyPerCase": "箱体抓手--24个/箱\n踏板--6个/箱", "contents": "箱体抓手和踏板", "sizeMm": "/", "length": 1.13, "width": 0.58, "height": 0.5, "weight": 90.0, "volume": 0.3277}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(旧版本)\n旧款航空箱", "method": "航空箱", "methodDetail": "8号航空箱", "qtyPerCase": "梯形支架_0.5米--6个/箱\n1米固定杆--6个/箱\n0.5米固定杆--6个/箱", "contents": "0.5米梯形支架\n0.5米水平杆", "sizeMm": "/", "length": 1.35, "width": 0.58, "height": 0.5, "weight": 80.0, "volume": 0.3915}, {"scene": "舞台Rental", "series": "PL V2\n落地支架(旧版本)\nLive选用-新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "7IN1", "contents": "1米梯形支架", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 108.5, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL V2\n落地支架(旧版本)\nLive选用-新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "3IN1\n箱体抓手--9个/箱\n0.5米固定杆--5个/箱", "contents": "梯形架底座\n0.5米固定杆\n箱体抓手", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 137.6, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL V2\n落地支架(旧版本)\nLive选用-新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "14IN1", "contents": "单倍底座", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 170.8, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL V2\n落地支架(旧版本)\nLive选用-新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "8IN1", "contents": "双倍底座", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 182.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL V2\n落地支架(旧版本)\nLive选用-新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "24IN1", "contents": "踏板", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 170.32, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL V2\n落地支架(旧版本)\nLive选用-新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "40IN1", "contents": "1米固定杆", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 182.8, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "8IN1", "contents": "1米梯形支架", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 108.72, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "4IN1", "contents": "梯形架底座", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 94.8, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "18N1", "contents": "单倍底座", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 161.8, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "9IN1", "contents": "双倍底座", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 146.5, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "14IN1", "contents": "踏板", "sizeMm": "/", "length": 1.4, "width": 0.68, "height": 0.78, "weight": 162.04, "volume": 0.7426}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "32IN1", "contents": "箱体抓手", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 102.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "16IN1", "contents": "1米固定杆", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 113.2, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL&NT&NT V2\n落地支架(新版本)\n新款通用航空箱", "method": "航空箱", "methodDetail": "通用航空箱", "qtyPerCase": "28IN1", "contents": "0.5米固定杆", "sizeMm": "/", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 126.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "NT", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "7IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.1, "width": 0.65, "height": 0.75, "weight": 90.0, "volume": 0.5363}, {"scene": "舞台Rental", "series": "NT", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "6IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.15, "width": 0.99, "height": 0.73, "weight": 124.0, "volume": 0.8311}, {"scene": "舞台Rental", "series": "NT", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 155.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "NT", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 109.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "NT", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "15IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 150.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "NT", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 171.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "NT", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "塑胶航空箱", "qtyPerCase": "8IN1", "contents": "短箱体", "sizeMm": "500*500", "length": 1.16, "width": 0.62, "height": 0.76, "weight": 102.0, "volume": 0.5466}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "4IN1", "contents": "长箱体", "sizeMm": "500*1000", "length": 1.12, "width": 0.54, "height": 0.77, "weight": 106.0, "volume": 0.4657}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "18IN1", "contents": "2IN1吊地梁（单倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 142.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "9IN1", "contents": "2IN1吊地梁（双倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 130.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 101.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.72, "height": 0.59, "weight": 113.0, "volume": 0.4928}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "NT", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "AX pro", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "610*343", "length": 0.93, "width": 0.7, "height": 0.63, "weight": 123.0, "volume": 0.4101}, {"scene": "舞台Rental", "series": "AX pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "20IN1", "contents": "单倍吊梁", "sizeMm": "", "length": 1.35, "width": 0.69, "height": 0.57, "weight": 130.0, "volume": 0.531}, {"scene": "舞台Rental", "series": "AX pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "双倍吊梁", "sizeMm": "", "length": 1.38, "width": 0.69, "height": 0.57, "weight": 137.0, "volume": 0.5428}, {"scene": "舞台Rental", "series": "AX pro", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "AX pro", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "MR4.8", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "6IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.28, "width": 0.66, "height": 0.8, "weight": 154.0, "volume": 0.6758}, {"scene": "舞台Rental", "series": "MR4.8", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "MR4.8", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "JP3.9-7.8 pro", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "10IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 1.09, "width": 0.85, "height": 2.35, "weight": 375.0, "volume": 2.1773}, {"scene": "舞台Rental", "series": "JP3.9-7.8 pro", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "8IN1", "contents": "小箱体", "sizeMm": "500*500", "length": 1.16, "width": 0.63, "height": 0.78, "weight": 127.0, "volume": 0.57}, {"scene": "舞台Rental", "series": "JP3.9-7.8 pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "1米吊梁", "sizeMm": "", "length": 1.16, "width": 0.73, "height": 0.65, "weight": 132.0, "volume": 0.5504}, {"scene": "舞台Rental", "series": "JP3.9-7.8 pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "6IN1", "contents": "2米吊梁", "sizeMm": "", "length": 2.09, "width": 0.6, "height": 0.63, "weight": 159.0, "volume": 0.79}, {"scene": "舞台Rental", "series": "JP3.9-7.8 pro", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "JP3.9-7.8 pro", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "8IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 2.12, "width": 0.82, "height": 1.35, "weight": 406.0, "volume": 2.3468}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "小推车", "methodDetail": "小推车（新）", "qtyPerCase": "8IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 1.12, "width": 1.23, "height": 1.35, "weight": 388.0, "volume": 1.8598}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "小推车", "methodDetail": "小推车（新）", "qtyPerCase": "6IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 1.12, "width": 1.23, "height": 1.35, "weight": 329.0, "volume": 1.8598}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "8IN1", "contents": "小箱体", "sizeMm": "500*500", "length": 1.16, "width": 0.64, "height": 0.8, "weight": 132.0, "volume": 0.5939}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "1米吊梁", "sizeMm": "", "length": 1.16, "width": 0.73, "height": 0.65, "weight": 132.0, "volume": 0.5504}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "6IN1", "contents": "2米吊梁", "sizeMm": "", "length": 2.09, "width": 0.6, "height": 0.63, "weight": 159.0, "volume": 0.79}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "JP5 pro", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "5IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 1.12, "width": 0.82, "height": 1.34, "weight": 205.0, "volume": 1.2307}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "4IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 1.09, "width": 0.81, "height": 1.34, "weight": 183.0, "volume": 1.1831}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "小推车", "methodDetail": "小推车（新）", "qtyPerCase": "8IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 1.12, "width": 1.23, "height": 1.35, "weight": 316.0, "volume": 1.8598}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "小推车", "methodDetail": "小推车（新）", "qtyPerCase": "6IN1", "contents": "大箱体", "sizeMm": "1000*1000", "length": 1.12, "width": 1.23, "height": 1.35, "weight": 276.0, "volume": 1.8598}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "1米吊梁", "sizeMm": "", "length": 1.16, "width": 0.73, "height": 0.65, "weight": 132.0, "volume": 0.5504}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "6IN1", "contents": "2米吊梁", "sizeMm": "", "length": 2.09, "width": 0.6, "height": 0.63, "weight": 159.0, "volume": 0.79}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "JP8 pro", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "MC", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "箱体", "sizeMm": "500*500", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "舞台Rental", "series": "MC", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "箱体", "sizeMm": "500*1000", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "舞台Rental", "series": "MC", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "单倍吊梁", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 155.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "MC", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 109.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "MC", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "15IN1", "contents": "双倍吊梁", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 150.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "MC", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 171.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "MC", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "MC", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "12IN1", "contents": "短箱体", "sizeMm": "500*500", "length": 1.13, "width": 0.75, "height": 0.79, "weight": 112.0, "volume": 0.6695}, {"scene": "舞台Rental", "series": "MC", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "6IN1", "contents": "长箱体", "sizeMm": "500*1000", "length": 1.12, "width": 0.75, "height": 0.78, "weight": 118.0, "volume": 0.6552}, {"scene": "舞台Rental", "series": "MC", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16IN1", "contents": "单倍吊梁", "sizeMm": "", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 101.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "MC", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "双倍吊梁", "sizeMm": "", "length": 1.16, "width": 0.72, "height": 0.59, "weight": 113.0, "volume": 0.4928}, {"scene": "舞台Rental", "series": "MC", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "MC", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "LR V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "7IN1", "contents": "小箱体", "sizeMm": "500*500", "length": 1.09, "width": 0.64, "height": 0.73, "weight": 75.0, "volume": 0.5092}, {"scene": "舞台Rental", "series": "LR V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "6IN1", "contents": "大箱体", "sizeMm": "1000*500", "length": 1.15, "width": 0.99, "height": 0.73, "weight": 107.0, "volume": 0.8311}, {"scene": "舞台Rental", "series": "LR V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "2米吊梁", "sizeMm": "", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "舞台Rental", "series": "LR V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "1米吊梁", "sizeMm": "", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "舞台Rental", "series": "LR V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "LR V2", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "12IN1", "contents": "小箱体", "sizeMm": "500*500", "length": 1.13, "width": 0.71, "height": 0.8, "weight": 131.0, "volume": 0.6418}, {"scene": "舞台Rental", "series": "LR V2", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "10IN1", "contents": "大箱体", "sizeMm": "1000*500", "length": 1.26, "width": 0.89, "height": 0.8, "weight": 162.0, "volume": 0.8971}, {"scene": "舞台Rental", "series": "LR V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "2米吊梁", "sizeMm": "", "length": 2.18, "width": 0.61, "height": 0.63, "weight": 154.0, "volume": 0.8378}, {"scene": "舞台Rental", "series": "LR V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "1米吊梁", "sizeMm": "", "length": 1.13, "width": 0.64, "height": 0.62, "weight": 82.0, "volume": 0.4484}, {"scene": "舞台Rental", "series": "LR V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16IN1", "contents": "0.5米吊梁", "sizeMm": "", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 80.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "LR V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "LR V2", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "FL", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.12, "width": 0.58, "height": 0.75, "weight": 119.0, "volume": 0.4872}, {"scene": "舞台Rental", "series": "FL", "method": "航空箱", "methodDetail": "吊块航空箱", "qtyPerCase": "30IN1", "contents": "吊装块", "sizeMm": "", "length": 1.2, "width": 0.41, "height": 0.6, "weight": 82.0, "volume": 0.2952}, {"scene": "舞台Rental", "series": "FL", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "FL", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "NT V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "7IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.1, "width": 0.65, "height": 0.75, "weight": 85.0, "volume": 0.5363}, {"scene": "舞台Rental", "series": "NT V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "6IN1", "contents": "箱体", "sizeMm": "500*1000", "length": 1.15, "width": 0.99, "height": 0.73, "weight": 110.0, "volume": 0.8311}, {"scene": "舞台Rental", "series": "NT V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 155.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "NT V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 109.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "NT V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "15IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.77, "height": 0.7, "weight": 150.0, "volume": 0.6252}, {"scene": "舞台Rental", "series": "NT V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "", "sizeMm": "", "length": 1.3, "width": 1.05, "height": 0.53, "weight": 171.0, "volume": 0.7235}, {"scene": "舞台Rental", "series": "NT V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "10IN1", "contents": "短箱体", "sizeMm": "500*500", "length": 1.2, "width": 0.61, "height": 0.78, "weight": 120.0, "volume": 0.571}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "5IN1", "contents": "长箱体", "sizeMm": "500*1000", "length": 1.2, "width": 0.61, "height": 0.78, "weight": 110.0, "volume": 0.571}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "塑胶航空箱", "qtyPerCase": "8IN1", "contents": "短箱体", "sizeMm": "500*500", "length": 1.16, "width": 0.62, "height": 0.76, "weight": 98.0, "volume": 0.5466}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "塑胶航空箱", "qtyPerCase": "4IN1", "contents": "长箱体", "sizeMm": "500*1000", "length": 1.16, "width": 0.62, "height": 0.76, "weight": 96.0, "volume": 0.5466}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "18IN1", "contents": "2IN1吊地梁（单倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 142.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "9IN1", "contents": "2IN1吊地梁（双倍）", "sizeMm": "", "length": 1.21, "width": 0.69, "height": 0.8, "weight": 130.0, "volume": 0.6679}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "16IN1", "contents": "纯吊梁（单倍）", "sizeMm": "", "length": 1.16, "width": 0.62, "height": 0.59, "weight": 101.0, "volume": 0.4243}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "10IN1", "contents": "纯吊梁（双倍）", "sizeMm": "", "length": 1.16, "width": 0.72, "height": 0.59, "weight": 113.0, "volume": 0.4928}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "NT V2", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "FL V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "10IN1", "contents": "短箱体", "sizeMm": "500*500", "length": 1.2, "width": 0.61, "height": 0.78, "weight": 120.0, "volume": 0.571}, {"scene": "舞台Rental", "series": "FL V2", "method": "航空箱", "methodDetail": "塑胶航空箱", "qtyPerCase": "8IN1", "contents": "短箱体", "sizeMm": "500*500", "length": 1.16, "width": 0.62, "height": 0.76, "weight": 98.0, "volume": 0.5466}, {"scene": "舞台Rental", "series": "FL V2", "method": "航空箱", "methodDetail": "吊块航空箱", "qtyPerCase": "30IN1", "contents": "吊装块", "sizeMm": "", "length": 1.2, "width": 0.41, "height": 0.6, "weight": 82.0, "volume": 0.2952}, {"scene": "舞台Rental", "series": "FL V2", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "20IN1", "contents": "弧形吊梁", "sizeMm": "", "length": 1.28, "width": 0.59, "height": 0.53, "weight": 108.0, "volume": 0.4003}, {"scene": "舞台Rental", "series": "FL V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "FL V2", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "FL V2", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "FL V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.27, "width": 0.75, "height": 0.73, "weight": 114.0, "volume": 0.6953}, {"scene": "舞台Rental", "series": "FL V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "舞台Rental", "series": "PL V3", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "14IN1(底部小推车)", "contents": "大箱体+抗风架", "sizeMm": "500*1000", "length": 1.12, "width": 1.23, "height": 1.35, "weight": 385.0, "volume": 1.8598}, {"scene": "舞台Rental", "series": "PL V3", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "14IN1(顶部小推车)", "contents": "大箱体+抗风架", "sizeMm": "500*1000", "length": 1.12, "width": 1.23, "height": 1.28, "weight": 355.0, "volume": 1.7633}, {"scene": "舞台Rental", "series": "PL V3", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "14IN1(底部小推车)", "contents": "大箱体", "sizeMm": "500*1000", "length": 1.12, "width": 1.23, "height": 1.35, "weight": 326.0, "volume": 1.8598}, {"scene": "舞台Rental", "series": "PL V3", "method": "小推车", "methodDetail": "小推车", "qtyPerCase": "14IN1(顶部小推车)", "contents": "大箱体", "sizeMm": "500*1000", "length": 1.12, "width": 1.23, "height": 1.28, "weight": 299.0, "volume": 1.7633}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "5IN1", "contents": "大箱体", "sizeMm": "500*1000", "length": 1.21, "width": 0.61, "height": 0.78, "weight": 121.0, "volume": 0.5757}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "10IN1", "contents": "小箱体", "sizeMm": "500*500", "length": 1.21, "width": 0.61, "height": 0.78, "weight": 131.0, "volume": 0.5757}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "4IN1", "contents": "1米三角吊梁", "sizeMm": "", "length": 1.21, "width": 0.61, "height": 0.81, "weight": 136.0, "volume": 0.5979}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "8IN1", "contents": "0.5米三角吊梁", "sizeMm": "", "length": 1.21, "width": 0.61, "height": 0.81, "weight": 136.0, "volume": 0.5979}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "9IN1", "contents": "1米不带三角架吊梁", "sizeMm": "", "length": 1.21, "width": 0.61, "height": 0.8, "weight": 150.0, "volume": 0.5905}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "吊梁航空箱", "qtyPerCase": "18IN1", "contents": "0.5米不带三角架吊梁", "sizeMm": "", "length": 1.21, "width": 0.61, "height": 0.8, "weight": 150.0, "volume": 0.5905}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.87, "width": 0.87, "height": 0.94, "weight": 180.0, "volume": 0.7115}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "备品航空箱", "qtyPerCase": "可按每15平米一个航空箱", "contents": "备品", "sizeMm": "备品航空箱(Live)", "length": 1.2, "width": 0.68, "height": 0.78, "weight": 240.0, "volume": 0.6365}, {"scene": "舞台Rental", "series": "PL V3", "method": "航空箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "A27 V3", "method": "纸箱/卡板", "methodDetail": "纸箱+卡板", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "610*343", "length": 0.93, "width": 0.77, "height": 0.84, "weight": 80.0, "volume": 0.6015}, {"scene": "ProAV", "series": "A27 V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "双倍挂架", "sizeMm": "有选挂架，可以按照对应的包装规格输入打包件数", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 116.0, "volume": 0.5933}, {"scene": "ProAV", "series": "A27 V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "32IN1", "contents": "单倍挂架", "sizeMm": "", "length": 0.9, "width": 0.6, "height": 0.85, "weight": 89.0, "volume": 0.459}, {"scene": "ProAV", "series": "A27 V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "A27 V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "610*343", "length": 0.92, "width": 0.75, "height": 0.82, "weight": 93.0, "volume": 0.5658}, {"scene": "ProAV", "series": "A27 V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "双倍挂架", "sizeMm": "有选挂架，可以按照对应的包装规格输入打包件数", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 116.0, "volume": 0.5933}, {"scene": "ProAV", "series": "A27 V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "32IN1", "contents": "单倍挂架", "sizeMm": "", "length": 0.9, "width": 0.6, "height": 0.85, "weight": 89.0, "volume": 0.459}, {"scene": "ProAV", "series": "A27 V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "NX渠道订单\n（北美渠道订单用）", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体包", "sizeMm": "960*540", "length": 1.24, "width": 1.14, "height": 0.79, "weight": 140.0, "volume": 1.1167}, {"scene": "ProAV", "series": "NX渠道订单\n（北美渠道订单用）", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "80IN1", "contents": "模组包", "sizeMm": "240*270", "length": 1.22, "width": 0.72, "height": 0.79, "weight": 80.0, "volume": 0.6939}, {"scene": "ProAV", "series": "NX渠道订单\n（北美渠道订单用）", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "箱体包", "sizeMm": "240*540", "length": 1.01, "width": 0.73, "height": 0.75, "weight": 200.0, "volume": 0.553}, {"scene": "ProAV", "series": "NX渠道订单\n（北美渠道订单用）", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "80IN1", "contents": "模组包", "sizeMm": "240*270", "length": 1.22, "width": 0.72, "height": 0.79, "weight": 80.0, "volume": 0.6939}, {"scene": "ProAV", "series": "NX渠道订单\n（北美渠道订单用）", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "24IN1", "contents": "挂架包", "sizeMm": "大箱体挂架", "length": 1.1, "width": 0.65, "height": 0.86, "weight": 107.0, "volume": 0.6149}, {"scene": "ProAV", "series": "NX渠道订单\n（北美渠道订单用）", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*540", "length": 1.17, "width": 0.71, "height": 1.13, "weight": 145.0, "volume": 0.9387}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "240*540", "length": 1.01, "width": 0.72, "height": 0.84, "weight": 78.0, "volume": 0.6108}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "240*810", "length": 1.02, "width": 1.0, "height": 0.73, "weight": 95.0, "volume": 0.7446}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "240*1080", "length": 1.33, "width": 1.0, "height": 0.73, "weight": 110.0, "volume": 0.9709}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "960*270", "length": 1.22, "width": 0.75, "height": 0.75, "weight": 124.0, "volume": 0.6863}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "24IN1", "contents": "挂架包", "sizeMm": "大箱体挂架", "length": 1.1, "width": 0.65, "height": 0.86, "weight": 107.0, "volume": 0.6149}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "NX项目订单", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "9IN1", "contents": "箱体", "sizeMm": "960*540", "length": 1.09, "width": 0.66, "height": 1.06, "weight": 129.0, "volume": 0.7626}, {"scene": "ProAV", "series": "NX项目订单", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "240*540", "length": 1.0, "width": 0.71, "height": 0.73, "weight": 72.0, "volume": 0.5183}, {"scene": "ProAV", "series": "NX项目订单", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "240*810", "length": 1.09, "width": 0.68, "height": 0.74, "weight": 87.0, "volume": 0.5485}, {"scene": "ProAV", "series": "NX项目订单", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "240*1080", "length": 1.21, "width": 0.74, "height": 0.72, "weight": 115.0, "volume": 0.6447}, {"scene": "ProAV", "series": "NX项目订单", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "12IN1", "contents": "箱体", "sizeMm": "960*270", "length": 1.21, "width": 0.74, "height": 0.72, "weight": 115.0, "volume": 0.6447}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "24IN1", "contents": "挂架包", "sizeMm": "大箱体挂架", "length": 1.1, "width": 0.65, "height": 0.86, "weight": 107.0, "volume": 0.6149}, {"scene": "ProAV", "series": "NX项目订单", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "KL II&CPL", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "640*360", "length": 0.96, "width": 0.77, "height": 0.8, "weight": 92.0, "volume": 0.5914}, {"scene": "ProAV", "series": "KL II&CPL", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "N PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "1440*288", "length": 1.55, "width": 1.01, "height": 0.52, "weight": 147.0, "volume": 0.8141}, {"scene": "ProAV", "series": "N PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "1152*288", "length": 1.27, "width": 1.01, "height": 0.49, "weight": 120.0, "volume": 0.6285}, {"scene": "ProAV", "series": "N PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "864*288", "length": 1.01, "width": 0.99, "height": 0.49, "weight": 94.0, "volume": 0.49}, {"scene": "ProAV", "series": "N PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "KLCOB V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "28IN1", "contents": "箱体", "sizeMm": "600x337.5", "length": 1.2, "width": 0.86, "height": 0.96, "weight": 189.0, "volume": 0.9907}, {"scene": "ProAV", "series": "KLCOB V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "32IN1", "contents": "双倍挂架", "sizeMm": "有选挂架，可以按照对应的包装规格输入打包件数", "length": 1.37, "width": 0.81, "height": 0.83, "weight": 106.0, "volume": 0.9211}, {"scene": "ProAV", "series": "KLCOB V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "单倍挂架", "sizeMm": "", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "ProAV", "series": "KLCOB V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "KLCOB V2", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "28IN1", "contents": "箱体", "sizeMm": "600x337.5", "length": 1.16, "width": 0.82, "height": 0.97, "weight": 167.0, "volume": 0.9227}, {"scene": "ProAV", "series": "KLCOB V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "32IN1", "contents": "双倍挂架", "sizeMm": "有选挂架，可以按照对应的包装规格输入打包件数", "length": 1.37, "width": 0.81, "height": 0.83, "weight": 106.0, "volume": 0.9211}, {"scene": "ProAV", "series": "KLCOB V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "单倍挂架", "sizeMm": "", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "ProAV", "series": "KLCOB V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "K PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "500x1000", "length": 1.27, "width": 1.1, "height": 0.72, "weight": 155.0, "volume": 1.0058}, {"scene": "ProAV", "series": "K PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "500x750", "length": 1.27, "width": 0.86, "height": 0.72, "weight": 130.0, "volume": 0.7864}, {"scene": "ProAV", "series": "K PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "CPK", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "48IN1", "contents": "箱体包", "sizeMm": "600*337.5", "length": 1.39, "width": 0.88, "height": 0.97, "weight": 213.0, "volume": 1.1865}, {"scene": "ProAV", "series": "CPK", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "16IN1", "contents": "箱体包", "sizeMm": "", "length": 1.03, "width": 0.76, "height": 1.02, "weight": 93.0, "volume": 0.7985}, {"scene": "ProAV", "series": "CPK", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "432IN1", "contents": "模组包", "sizeMm": "", "length": 1.27, "width": 0.87, "height": 1.2, "weight": 233.0, "volume": 1.3259}, {"scene": "ProAV", "series": "CPK", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "144IN1", "contents": "模组包", "sizeMm": "", "length": 1.0, "width": 0.9, "height": 0.9, "weight": 98.0, "volume": 0.81}, {"scene": "ProAV", "series": "CPK", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "CPN", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体包", "sizeMm": "640*480", "length": 0.9, "width": 0.79, "height": 0.71, "weight": 82.0, "volume": 0.5048}, {"scene": "ProAV", "series": "CPN", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "5IN1", "contents": "箱体包", "sizeMm": "", "length": 0.48, "width": 0.79, "height": 0.71, "weight": 65.0, "volume": 0.2692}, {"scene": "ProAV", "series": "CPN", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "240IN1", "contents": "模组包", "sizeMm": "", "length": 1.07, "width": 0.85, "height": 1.04, "weight": 160.0, "volume": 0.9459}, {"scene": "ProAV", "series": "CPN", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "120IN1", "contents": "模组包", "sizeMm": "", "length": 0.9, "width": 0.6, "height": 1.07, "weight": 90.0, "volume": 0.5778}, {"scene": "ProAV", "series": "CPN", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "60IN1", "contents": "模组包", "sizeMm": "", "length": 1.1, "width": 0.6, "height": 0.7, "weight": 60.0, "volume": 0.462}, {"scene": "ProAV", "series": "CPN", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "CPS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "48IN1", "contents": "箱体", "sizeMm": "320*480", "length": 1.19, "width": 0.85, "height": 1.08, "weight": 164.0, "volume": 1.0924}, {"scene": "ProAV", "series": "CPS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "48IN1", "contents": "箱体", "sizeMm": "320*240", "length": 0.87, "width": 0.72, "height": 1.09, "weight": 107.0, "volume": 0.6828}, {"scene": "ProAV", "series": "CPS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "24IN1", "contents": "框架", "sizeMm": "640*480", "length": 1.02, "width": 0.8, "height": 1.25, "weight": 103.0, "volume": 1.02}, {"scene": "ProAV", "series": "CPS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "CPS", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "48IN1", "contents": "箱体", "sizeMm": "320*480", "length": 1.19, "width": 0.85, "height": 1.05, "weight": 148.0, "volume": 1.0621}, {"scene": "ProAV", "series": "CPS", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "25IN1", "contents": "箱体", "sizeMm": "320*240", "length": 1.11, "width": 0.86, "height": 0.82, "weight": 96.0, "volume": 0.7828}, {"scene": "ProAV", "series": "CPS", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "24IN1", "contents": "框架", "sizeMm": "640*480", "length": 1.02, "width": 0.8, "height": 1.25, "weight": 85.0, "volume": 1.02}, {"scene": "ProAV", "series": "CPS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "28IN1", "contents": "箱体包", "sizeMm": "1250*250", "length": 1.39, "width": 0.76, "height": 0.84, "weight": 210.0, "volume": 0.8874}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "14IN1", "contents": "箱体包", "sizeMm": "", "length": 1.39, "width": 0.75, "height": 0.45, "weight": 119.0, "volume": 0.4691}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体包", "sizeMm": "", "length": 1.39, "width": 0.75, "height": 0.45, "weight": 95.0, "volume": 0.4691}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "18IN1", "contents": "模组包(单包5个)", "sizeMm": "", "length": 1.0, "width": 0.75, "height": 0.8, "weight": 79.0, "volume": 0.6}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "28IN1", "contents": "箱体包", "sizeMm": "1000*250", "length": 1.14, "width": 0.76, "height": 0.84, "weight": 175.0, "volume": 0.7278}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "14IN1", "contents": "箱体包", "sizeMm": "", "length": 1.13, "width": 0.75, "height": 0.44, "weight": 98.0, "volume": 0.3729}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体包", "sizeMm": "", "length": 1.13, "width": 0.75, "height": 0.44, "weight": 80.0, "volume": 0.3729}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "24IN1", "contents": "模组包(单包4个)", "sizeMm": "", "length": 1.0, "width": 0.75, "height": 0.8, "weight": 85.0, "volume": 0.6}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "28IN1", "contents": "箱体包", "sizeMm": "750*250", "length": 0.89, "width": 0.76, "height": 0.84, "weight": 140.0, "volume": 0.5682}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "14IN1", "contents": "箱体包", "sizeMm": "", "length": 0.87, "width": 0.75, "height": 0.45, "weight": 74.0, "volume": 0.2936}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体包", "sizeMm": "", "length": 0.89, "width": 0.75, "height": 0.45, "weight": 62.0, "volume": 0.3004}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "30IN1", "contents": "模组包(单包3个)", "sizeMm": "", "length": 1.0, "width": 0.75, "height": 0.8, "weight": 80.0, "volume": 0.6}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "28IN1", "contents": "箱体包", "sizeMm": "1250*250", "length": 1.41, "width": 0.77, "height": 0.85, "weight": 210.0, "volume": 0.9228}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "14IN1", "contents": "箱体包", "sizeMm": "", "length": 1.4, "width": 0.77, "height": 0.48, "weight": 125.0, "volume": 0.5174}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "18IN1", "contents": "模组包(单包5个)", "sizeMm": "", "length": 1.02, "width": 0.77, "height": 0.85, "weight": 70.0, "volume": 0.6676}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "28IN1", "contents": "箱体包", "sizeMm": "1000*250", "length": 1.15, "width": 0.77, "height": 0.8, "weight": 170.0, "volume": 0.7084}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "14IN1", "contents": "箱体包", "sizeMm": "", "length": 1.15, "width": 0.77, "height": 0.48, "weight": 78.0, "volume": 0.425}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "24IN1", "contents": "模组包(单包4个)", "sizeMm": "", "length": 1.02, "width": 0.77, "height": 0.85, "weight": 73.0, "volume": 0.6676}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "28IN1", "contents": "箱体包", "sizeMm": "750*250", "length": 0.92, "width": 0.77, "height": 0.85, "weight": 115.0, "volume": 0.6021}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "14IN1", "contents": "箱体包", "sizeMm": "", "length": 0.92, "width": 0.77, "height": 0.48, "weight": 75.0, "volume": 0.34}, {"scene": "ProAV", "series": "K V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "30IN1", "contents": "模组包(单包3个)", "sizeMm": "", "length": 1.02, "width": 0.77, "height": 0.85, "weight": 70.0, "volume": 0.6676}, {"scene": "ProAV", "series": "K V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "XL", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "16IN1", "contents": "箱体", "sizeMm": "640*480", "length": 1.1, "width": 0.81, "height": 1.21, "weight": 128.0, "volume": 1.0781}, {"scene": "ProAV", "series": "XL", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "HC V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "24IN1", "contents": "箱体", "sizeMm": "600*337.5", "length": 1.16, "width": 0.83, "height": 0.97, "weight": 150.0, "volume": 0.9339}, {"scene": "ProAV", "series": "HC V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "HC V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "24IN1", "contents": "箱体", "sizeMm": "600*337.5", "length": 1.2, "width": 0.86, "height": 0.97, "weight": 160.0, "volume": 1.001}, {"scene": "ProAV", "series": "HC V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "CL V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "32IN1", "contents": "箱体", "sizeMm": "600*337.5", "length": 1.16, "width": 0.83, "height": 0.97, "weight": 190.0, "volume": 0.9339}, {"scene": "ProAV", "series": "CL V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "KL V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "320IN1", "contents": "模组包", "sizeMm": "", "length": 1.31, "width": 0.85, "height": 0.98, "weight": 208.0, "volume": 1.0912}, {"scene": "ProAV", "series": "KL V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "240IN1", "contents": "信号盒", "sizeMm": "", "length": 1.31, "width": 0.85, "height": 0.88, "weight": 261.0, "volume": 0.9799}, {"scene": "ProAV", "series": "KL V3", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "20IN1", "contents": "箱体包", "sizeMm": "640*640", "length": 1.49, "width": 0.92, "height": 0.86, "weight": 127.0, "volume": 1.1789}, {"scene": "ProAV", "series": "KL V3", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "K2.5DS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.25, "width": 0.93, "height": 0.85, "weight": 135.0, "volume": 0.9881}, {"scene": "ProAV", "series": "K2.5DS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每10平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.8, "width": 0.72, "height": 1.03, "weight": 100.0, "volume": 0.5933}, {"scene": "ProAV", "series": "ICON X108", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包等", "contents": "", "sizeMm": "2400*1350", "length": 1.41, "width": 1.03, "height": 2.11, "weight": 338.0, "volume": 3.0644}, {"scene": "ProAV", "series": "ICON X108", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "壁挂结构包", "contents": "", "sizeMm": "", "length": 1.54, "width": 0.25, "height": 0.2, "weight": 28.0, "volume": 0.077}, {"scene": "ProAV", "series": "ICON X108", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包", "contents": "", "sizeMm": "", "length": 2.0, "width": 0.87, "height": 0.5, "weight": 95.0, "volume": 0.87}, {"scene": "ProAV", "series": "ICON X108", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包等", "contents": "", "sizeMm": "2400*1350", "length": 1.55, "width": 0.82, "height": 0.89, "weight": 160.0, "volume": 1.1312}, {"scene": "ProAV", "series": "ICON X108", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "壁挂结构包", "contents": "", "sizeMm": "", "length": 1.54, "width": 0.25, "height": 0.2, "weight": 28.0, "volume": 0.077}, {"scene": "ProAV", "series": "ICON X108", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包", "contents": "", "sizeMm": "", "length": 2.0, "width": 0.87, "height": 0.5, "weight": 95.0, "volume": 0.87}, {"scene": "ProAV", "series": "ICON X136", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包等", "contents": "", "sizeMm": "3000*1687.5", "length": 1.41, "width": 1.03, "height": 2.07, "weight": 373.0, "volume": 3.0063}, {"scene": "ProAV", "series": "ICON X136", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "壁挂结构包", "contents": "", "sizeMm": "", "length": 1.12, "width": 0.42, "height": 0.49, "weight": 43.0, "volume": 0.2305}, {"scene": "ProAV", "series": "ICON X136", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包", "contents": "", "sizeMm": "", "length": 2.2, "width": 0.86, "height": 0.5, "weight": 98.0, "volume": 0.946}, {"scene": "ProAV", "series": "ICON X136", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包等", "contents": "", "sizeMm": "3000*1687.5", "length": 1.94, "width": 0.82, "height": 1.03, "weight": 228.0, "volume": 1.6385}, {"scene": "ProAV", "series": "ICON X136", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "壁挂结构包", "contents": "", "sizeMm": "", "length": 1.12, "width": 0.42, "height": 0.49, "weight": 43.0, "volume": 0.2305}, {"scene": "ProAV", "series": "ICON X136", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包", "contents": "", "sizeMm": "", "length": 2.2, "width": 0.86, "height": 0.5, "weight": 98.0, "volume": 0.946}, {"scene": "ProAV", "series": "ICON X136 4K", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等", "contents": "", "sizeMm": "3000*1687.5", "length": 1.35, "width": 0.94, "height": 1.98, "weight": 351.0, "volume": 2.5126}, {"scene": "ProAV", "series": "ICON X136 4K", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包", "contents": "", "sizeMm": "", "length": 1.86, "width": 0.86, "height": 0.51, "weight": 92.0, "volume": 0.8158}, {"scene": "ProAV", "series": "ICON X136 4K", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等", "contents": "", "sizeMm": "3000*1687.5", "length": 1.9, "width": 1.35, "height": 0.77, "weight": 261.0, "volume": 1.975}, {"scene": "ProAV", "series": "ICON X136 4K", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包", "contents": "", "sizeMm": "", "length": 1.86, "width": 0.87, "height": 0.5, "weight": 92.0, "volume": 0.8091}, {"scene": "ProAV", "series": "ICON X163", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包等", "contents": "", "sizeMm": "3000*1687.5", "length": 1.23, "width": 0.8, "height": 1.92, "weight": 325.0, "volume": 1.8893}, {"scene": "ProAV", "series": "ICON X163", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "壁挂结构包", "contents": "", "sizeMm": "", "length": 1.44, "width": 0.38, "height": 0.2, "weight": 44.0, "volume": 0.1094}, {"scene": "ProAV", "series": "ICON X163", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包等\n（一套用2个木箱打包）", "contents": "", "sizeMm": "3600*2025", "length": 2.22, "width": 0.73, "height": 1.0, "weight": 232.0, "volume": 1.6206}, {"scene": "ProAV", "series": "ICON X163", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "", "sizeMm": "", "length": 1.05, "width": 0.92, "height": 0.73, "weight": 83.0, "volume": 0.7052}, {"scene": "ProAV", "series": "ICON X163", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "壁挂结构包", "contents": "", "sizeMm": "", "length": 1.44, "width": 0.38, "height": 0.2, "weight": 44.0, "volume": 0.1094}, {"scene": "ProAV", "series": "ICON X163 4K", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等", "contents": "", "sizeMm": "3000*1687.5", "length": 1.26, "width": 1.02, "height": 1.83, "weight": 376.0, "volume": 2.3519}, {"scene": "ProAV", "series": "ICON X163 4K", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包（选配）", "contents": "", "sizeMm": "", "length": 1.86, "width": 0.87, "height": 0.5, "weight": 99.0, "volume": 0.8091}, {"scene": "ProAV", "series": "ICON X163 4K", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包、线材包、控制盒包、工具包等\n（一套用2个木箱打包）", "contents": "", "sizeMm": "3600*2025", "length": 1.9, "width": 0.9, "height": 0.57, "weight": 139.0, "volume": 0.9747}, {"scene": "ProAV", "series": "ICON X163 4K", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "", "contents": "", "sizeMm": "", "length": 1.37, "width": 0.72, "height": 1.3, "weight": 202.0, "volume": 1.2823}, {"scene": "ProAV", "series": "ICON X163 4K", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包（选配）", "contents": "", "sizeMm": "", "length": 1.86, "width": 0.87, "height": 0.5, "weight": 99.0, "volume": 0.8091}, {"scene": "ProAV", "series": "ICON X151", "method": "航空箱", "methodDetail": "航空箱1", "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等", "contents": "", "sizeMm": "3600*1350", "length": 0.96, "width": 0.78, "height": 1.7, "weight": 208.0, "volume": 1.273}, {"scene": "ProAV", "series": "ICON X151", "method": "航空箱", "methodDetail": "航空箱2", "qtyPerCase": "", "contents": "", "sizeMm": "", "length": 0.99, "width": 0.69, "height": 0.9, "weight": 94.0, "volume": 0.6148}, {"scene": "ProAV", "series": "ICON X178", "method": "航空箱", "methodDetail": "航空箱1", "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等", "contents": "", "sizeMm": "4200*1687.5", "length": 1.0, "width": 0.75, "height": 1.79, "weight": 238.0, "volume": 1.3425}, {"scene": "ProAV", "series": "ICON X178", "method": "航空箱", "methodDetail": "航空箱2", "qtyPerCase": "", "contents": "", "sizeMm": "", "length": 1.0, "width": 0.75, "height": 1.42, "weight": 170.0, "volume": 1.065}, {"scene": "ProAV", "series": "ICON X205", "method": "航空箱", "methodDetail": "航空箱1", "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等", "contents": "", "sizeMm": "4800*2025", "length": 1.11, "width": 0.77, "height": 1.74, "weight": 286.0, "volume": 1.4872}, {"scene": "ProAV", "series": "ICON X205", "method": "航空箱", "methodDetail": "航空箱2", "qtyPerCase": "", "contents": "", "sizeMm": "", "length": 1.07, "width": 0.76, "height": 1.57, "weight": 214.0, "volume": 1.2767}, {"scene": "ProAV", "series": "ICON X136 V2", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包", "contents": "", "sizeMm": "3000*1687.5", "length": 1.96, "width": 0.79, "height": 1.03, "weight": 278.0, "volume": 1.5949}, {"scene": "ProAV", "series": "ICON X136 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包（选配）", "contents": "", "sizeMm": "", "length": 1.86, "width": 0.87, "height": 0.5, "weight": 90.0, "volume": 0.8091}, {"scene": "ProAV", "series": "ICON X136 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包", "contents": "", "sizeMm": "3000*1687.5", "length": 1.87, "width": 0.76, "height": 0.85, "weight": 225.0, "volume": 1.208}, {"scene": "ProAV", "series": "ICON X136 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包（选配）", "contents": "", "sizeMm": "", "length": 1.86, "width": 0.87, "height": 0.5, "weight": 90.0, "volume": 0.8091}, {"scene": "ProAV", "series": "ICON X163 V2", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包", "contents": "", "sizeMm": "3600*2025", "length": 2.3, "width": 0.78, "height": 1.14, "weight": 362.0, "volume": 2.0452}, {"scene": "ProAV", "series": "ICON X163 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包（选配）", "contents": "", "sizeMm": "", "length": 1.85, "width": 0.85, "height": 0.5, "weight": 132.0, "volume": 0.7863}, {"scene": "ProAV", "series": "ICON X163 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包", "contents": "", "sizeMm": "3600*2025", "length": 2.22, "width": 0.75, "height": 0.97, "weight": 321.0, "volume": 1.6151}, {"scene": "ProAV", "series": "ICON X163 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "移动支架包（选配）", "contents": "", "sizeMm": "", "length": 1.85, "width": 0.85, "height": 0.5, "weight": 132.0, "volume": 0.7863}, {"scene": "ProAV", "series": "ICON X136F", "method": "航空箱", "methodDetail": "航空箱", "qtyPerCase": "箱体包+备件包+包边+工具包+电动升降支架+控制背盒", "contents": "", "sizeMm": "3000*1687.5", "length": 1.98, "width": 0.83, "height": 2.01, "weight": 455.0, "volume": 3.3032}, {"scene": "ProAV", "series": "ICON X136F\n北美版 木箱打包", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "箱体包+备件包", "contents": "", "sizeMm": "3000*1687.5", "length": 1.95, "width": 0.72, "height": 1.24, "weight": 222.0, "volume": 1.741}, {"scene": "ProAV", "series": "ICON X136F\n北美版 木箱打包", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "电动支架等", "contents": "", "sizeMm": "", "length": 2.1, "width": 0.95, "height": 2.19, "weight": 466.0, "volume": 4.369}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*960", "length": 1.39, "width": 1.13, "height": 1.17, "weight": 311.0, "volume": 1.8377}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*960", "length": 1.13, "width": 1.07, "height": 1.17, "weight": 259.0, "volume": 1.4146}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*640", "length": 1.39, "width": 1.13, "height": 0.85, "weight": 218.0, "volume": 1.3351}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*640", "length": 1.13, "width": 1.07, "height": 0.85, "weight": 184.0, "volume": 1.0277}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "640*960", "length": 1.13, "width": 1.07, "height": 0.85, "weight": 184.0, "volume": 1.0277}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "640*640", "length": 1.13, "width": 0.75, "height": 0.85, "weight": 125.0, "volume": 0.7204}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "90°拐角箱体", "sizeMm": "1440*960\n1460*960", "length": 0.95, "width": 0.85, "height": 1.16, "weight": 125.0, "volume": 0.9367}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "—M弧形箱体", "sizeMm": "960*960", "length": 1.1, "width": 0.7, "height": 1.21, "weight": 115.0, "volume": 0.9317}, {"scene": "广告DOOH", "series": "A21", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*960", "length": 1.39, "width": 1.13, "height": 1.17, "weight": 313.0, "volume": 1.8377}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*960", "length": 1.13, "width": 1.07, "height": 1.17, "weight": 263.0, "volume": 1.4146}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*1440", "length": 1.39, "width": 1.13, "height": 1.65, "weight": 510.0, "volume": 2.5917}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*1440", "length": 1.56, "width": 1.14, "height": 1.17, "weight": 418.0, "volume": 2.0807}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "640*960", "length": 1.13, "width": 1.07, "height": 0.85, "weight": 197.0, "volume": 1.0277}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "小模组弧形箱体", "sizeMm": "960*960", "length": 1.1, "width": 0.7, "height": 1.21, "weight": 122.0, "volume": 0.9317}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "小模组弧形箱体", "sizeMm": "960*480", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "广告DOOH", "series": "A25", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*960", "length": 1.39, "width": 1.13, "height": 1.17, "weight": 286.0, "volume": 1.8377}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*960", "length": 1.13, "width": 1.07, "height": 1.17, "weight": 228.0, "volume": 1.4146}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*1440", "length": 1.39, "width": 1.13, "height": 1.65, "weight": 433.0, "volume": 2.5917}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*1440", "length": 1.56, "width": 1.14, "height": 1.17, "weight": 370.0, "volume": 2.0807}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "640*960", "length": 1.13, "width": 1.07, "height": 0.85, "weight": 180.0, "volume": 1.0277}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "小模组弧形箱体", "sizeMm": "960*960", "length": 1.1, "width": 0.7, "height": 1.21, "weight": 122.0, "volume": 0.9317}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "小模组弧形箱体", "sizeMm": "960*480", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "广告DOOH", "series": "A25R&A25E", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "AW", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "9IN1", "contents": "箱体", "sizeMm": "500*750", "length": 1.1, "width": 0.86, "height": 0.72, "weight": 134.0, "volume": 0.6811}, {"scene": "广告DOOH", "series": "AW", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "9IN1", "contents": "箱体", "sizeMm": "500*500", "length": 1.1, "width": 0.6, "height": 0.72, "weight": 100.0, "volume": 0.4752}, {"scene": "广告DOOH", "series": "AW", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "AW V2", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "4IN1", "contents": "箱体（含模组）", "sizeMm": "500*1000", "length": 1.19, "width": 0.89, "height": 0.76, "weight": 94.0, "volume": 0.8049}, {"scene": "广告DOOH", "series": "AW V2", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "8IN1", "contents": "箱体（含模组）", "sizeMm": "500*500", "length": 1.19, "width": 0.89, "height": 0.76, "weight": 98.0, "volume": 0.8049}, {"scene": "广告DOOH", "series": "AW V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "AW PRO", "method": "纸箱/卡板", "methodDetail": "纸箱/卡板", "qtyPerCase": "10IN1", "contents": "箱体", "sizeMm": "540*480", "length": 1.19, "width": 0.7, "height": 0.8, "weight": 126.0, "volume": 0.6664}, {"scene": "广告DOOH", "series": "AW PRO", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "暂无数据 待更新", "contents": "单面灯箱", "sizeMm": "960*1620", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "广告DOOH", "series": "AW PRO", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "暂无数据 待更新", "contents": "双面灯箱", "sizeMm": "960*1620", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "广告DOOH", "series": "AW PRO", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1（待确认）", "contents": "单面灯箱", "sizeMm": "1080*1920", "length": 3.04, "width": 0.77, "height": 1.6, "weight": 675.0, "volume": 3.7453}, {"scene": "广告DOOH", "series": "AW PRO", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "暂无数据 待更新", "contents": "双面灯箱", "sizeMm": "1080*1920", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "广告DOOH", "series": "AW PRO", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "A99", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "1600*900", "length": 1.7, "width": 1.15, "height": 1.2, "weight": 342.0, "volume": 2.346}, {"scene": "广告DOOH", "series": "A99", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "A99", "method": "运输架", "methodDetail": "运输架", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1600*900", "length": 1.72, "width": 1.1, "height": 1.17, "weight": 495.0, "volume": 2.2136}, {"scene": "广告DOOH", "series": "A99", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "A99 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "6IN1", "contents": "箱体", "sizeMm": "1600*900", "length": 1.7, "width": 1.15, "height": 1.2, "weight": 388.0, "volume": 2.346}, {"scene": "广告DOOH", "series": "A99 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "A99 V2", "method": "运输架", "methodDetail": "运输架", "qtyPerCase": "7IN1", "contents": "箱体", "sizeMm": "1600*900", "length": 1.72, "width": 1.1, "height": 1.27, "weight": 501.0, "volume": 2.4028}, {"scene": "广告DOOH", "series": "A99 V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "AS V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*960", "length": 1.39, "width": 1.13, "height": 1.17, "weight": 282.0, "volume": 1.8377}, {"scene": "广告DOOH", "series": "AS V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "960*960", "length": 1.13, "width": 1.07, "height": 1.17, "weight": 248.0, "volume": 1.4146}, {"scene": "广告DOOH", "series": "AS V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "640*960", "length": 1.13, "width": 1.07, "height": 0.85, "weight": 160.0, "volume": 1.0277}, {"scene": "广告DOOH", "series": "AS V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "8IN1", "contents": "箱体", "sizeMm": "1280*640", "length": 1.39, "width": 1.13, "height": 0.85, "weight": 219.0, "volume": 1.3351}, {"scene": "广告DOOH", "series": "AS V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "90°拐角箱体", "sizeMm": "1440*960", "length": 0.95, "width": 0.86, "height": 1.17, "weight": 124.0, "volume": 0.9559}, {"scene": "广告DOOH", "series": "AS V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "2IN1", "contents": "—M弧形箱体", "sizeMm": "960*960", "length": 1.1, "width": 0.7, "height": 1.21, "weight": 112.0, "volume": 0.9317}, {"scene": "广告DOOH", "series": "AS V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "C V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "16IN1", "contents": "箱体", "sizeMm": "500*1500", "length": 1.1, "width": 0.76, "height": 1.65, "weight": 215.0, "volume": 1.3794}, {"scene": "广告DOOH", "series": "C V2", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "SR6S&SR10S", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "1280*960", "length": 1.39, "width": 1.13, "height": 1.17, "weight": 327.0, "volume": 1.8377}, {"scene": "广告DOOH", "series": "SR6S&SR10S", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "960*960", "length": 1.07, "width": 1.06, "height": 1.14, "weight": 210.0, "volume": 1.293}, {"scene": "广告DOOH", "series": "SR6S&SR10S", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "1280*640", "length": 1.39, "width": 1.13, "height": 0.85, "weight": 255.0, "volume": 1.3351}, {"scene": "广告DOOH", "series": "SR6S&SR10S", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "暂无", "contents": "箱体", "sizeMm": "960*640", "length": 0, "width": 0, "height": 0, "weight": 0, "volume": 0}, {"scene": "广告DOOH", "series": "SR6S&SR10S", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "S6R&S10R", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "7IN1", "contents": "箱体", "sizeMm": "640*960", "length": 1.13, "width": 1.07, "height": 0.85, "weight": 168.0, "volume": 1.0277}, {"scene": "广告DOOH", "series": "S6R&S10R", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "广告DOOH", "series": "S6T&S10T", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "1280*960", "length": 1.4, "width": 1.14, "height": 1.22, "weight": 316.0, "volume": 1.9471}, {"scene": "广告DOOH", "series": "S6T&S10T", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "5IN1", "contents": "箱体", "sizeMm": "1280*720", "length": 1.39, "width": 1.04, "height": 0.98, "weight": 254.0, "volume": 1.4167}, {"scene": "广告DOOH", "series": "S6T&S10T", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "可按每15平米一个木箱", "contents": "备品", "sizeMm": "仅供参考", "length": 0.9, "width": 0.85, "height": 1.07, "weight": 150.0, "volume": 0.8186}, {"scene": "创意", "series": "PO PRO（无认证版）", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "2IN1", "contents": "箱体", "sizeMm": "640*1920", "length": 1.053, "width": 0.943, "height": 1.333, "weight": 163.0, "volume": 1.3236}, {"scene": "创意", "series": "PO PRO（无认证版）", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "1IN1", "contents": "箱体", "sizeMm": "640*1920", "length": 0.533, "width": 0.873, "height": 1.333, "weight": 91.0, "volume": 0.6203}, {"scene": "创意", "series": "PO PRO（认证版）", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "2IN1", "contents": "箱体", "sizeMm": "640*1920", "length": 1.023, "width": 0.943, "height": 1.333, "weight": 163.0, "volume": 1.2859}, {"scene": "创意", "series": "PO PRO（认证版）", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "1IN1", "contents": "箱体", "sizeMm": "640*1920", "length": 0.533, "width": 0.943, "height": 1.333, "weight": 91.0, "volume": 0.67}, {"scene": "创意", "series": "PO PRO V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "2IN1", "contents": "箱体", "sizeMm": "640*1920", "length": 1.019, "width": 0.925, "height": 1.333, "weight": 175.0, "volume": 1.2565}, {"scene": "创意", "series": "PO PRO V2", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "1IN1", "contents": "箱体", "sizeMm": "640*1920", "length": 0.533, "width": 0.925, "height": 1.333, "weight": 104.0, "volume": 0.6572}, {"scene": "创意", "series": "PO PLUS", "method": "航空箱", "methodDetail": "木质航空箱", "qtyPerCase": "3IN1", "contents": "箱体", "sizeMm": "600*2025", "length": 2.154, "width": 0.56, "height": 0.89, "weight": 245.0, "volume": 1.0736}, {"scene": "创意", "series": "PO PLUS", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "3IN1", "contents": "箱体", "sizeMm": "600*2025", "length": 2.02, "width": 0.45, "height": 0.82, "weight": 202.0, "volume": 0.7454}, {"scene": "创意", "series": "JD-H", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "20IN1", "contents": "箱体", "sizeMm": "250*1500", "length": 1.7, "width": 0.7, "height": 0.825, "weight": 0, "volume": 0.9817}, {"scene": "创意", "series": "JD-H", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "20IN1", "contents": "箱体", "sizeMm": "250*1200", "length": 1.4, "width": 0.7, "height": 0.825, "weight": 130.0, "volume": 0.8085}, {"scene": "创意", "series": "JD-H", "method": "木箱", "methodDetail": "木箱", "qtyPerCase": "20IN1", "contents": "箱体", "sizeMm": "250*1000", "length": 1.2, "width": 0.7, "height": 0.825, "weight": 120.0, "volume": 0.693}];
+const ORIGINS = [{"id": "huizhou", "name": "中国惠州", "seaPorts": [{"code": "YTN", "name": "盐田港（深圳，惠州邻近）"}, {"code": "SZX", "name": "深圳蛇口港"}, {"code": "HUI", "name": "惠州港"}], "airports": [{"code": "SZX", "name": "深圳宝安国际机场"}, {"code": "HUZ", "name": "惠州平潭机场"}, {"code": "CAN", "name": "广州白云国际机场"}]}, {"id": "hongkong", "name": "中国香港", "seaPorts": [{"code": "HKG", "name": "香港葵青货柜码头"}, {"code": "HKT", "name": "香港屯门内河码头"}], "airports": [{"code": "HKG", "name": "香港国际机场 (HKG)"}]}];
+const DESTINATIONS = [{"country": "巴西", "countryEn": "Brazil", "code": "BR", "seaRate": 135, "airRate": 8.0, "transitSea": 35, "transitAir": 7, "seaPorts": [{"code": "BRSSZ", "name": "桑托斯港 Santos"}, {"code": "BRRIO", "name": "里约热内卢港 Rio de Janeiro"}, {"code": "BRPNG", "name": "巴拉那瓜港 Paranagua"}, {"code": "BRSSA", "name": "萨尔瓦多港 Salvador"}, {"code": "BRREC", "name": "累西腓港 Recife"}, {"code": "BRSUA", "name": "苏阿普港 Suape"}, {"code": "BRITJ", "name": "伊塔雅伊港 Itajai"}], "airports": [{"code": "GRU", "name": "圣保罗瓜鲁柳斯机场 GRU"}, {"code": "GIG", "name": "里约热内卢加利昂机场 GIG"}, {"code": "BSB", "name": "巴西利亚总统机场 BSB"}, {"code": "VCP", "name": "坎皮纳斯维拉科波斯机场 VCP"}]}, {"country": "墨西哥", "countryEn": "Mexico", "code": "MX", "seaRate": 115, "airRate": 6.5, "transitSea": 28, "transitAir": 5, "seaPorts": [{"code": "MXZLO", "name": "曼萨尼约港 Manzanillo"}, {"code": "MXLZC", "name": "拉萨罗卡德纳斯港 Lazaro Cardenas"}, {"code": "MXVER", "name": "韦拉克鲁斯港 Veracruz"}, {"code": "MXATM", "name": "阿尔塔米拉港 Altamira"}, {"code": "MXESE", "name": "恩塞纳达港 Ensenada"}], "airports": [{"code": "MEX", "name": "墨西哥城贝尼托华雷斯机场 MEX"}, {"code": "GDL", "name": "瓜达拉哈拉机场 GDL"}, {"code": "MTY", "name": "蒙特雷机场 MTY"}, {"code": "TIJ", "name": "蒂华纳机场 TIJ"}]}, {"country": "阿根廷", "countryEn": "Argentina", "code": "AR", "seaRate": 150, "airRate": 9.5, "transitSea": 40, "transitAir": 8, "seaPorts": [{"code": "ARBUE", "name": "布宜诺斯艾利斯港 Buenos Aires"}, {"code": "ARROS", "name": "罗萨里奥港 Rosario"}, {"code": "ARBBL", "name": "布兰卡港 Bahia Blanca"}], "airports": [{"code": "EZE", "name": "布宜诺斯艾利斯埃塞萨机场 EZE"}, {"code": "AEP", "name": "布宜诺斯艾利斯霍尔赫纽贝里机场 AEP"}]}, {"country": "智利", "countryEn": "Chile", "code": "CL", "seaRate": 120, "airRate": 7.5, "transitSea": 38, "transitAir": 7, "seaPorts": [{"code": "CLSAN", "name": "圣安东尼奥港 San Antonio"}, {"code": "CLVAP", "name": "瓦尔帕莱索港 Valparaiso"}, {"code": "CLIQQ", "name": "伊基克港 Iquique"}, {"code": "CLANT", "name": "安托法加斯塔港 Antofagasta"}, {"code": "CLCNL", "name": "科罗内尔港 Coronel"}], "airports": [{"code": "SCL", "name": "圣地亚哥阿图罗梅里诺贝尼特斯机场 SCL"}]}, {"country": "秘鲁", "countryEn": "Peru", "code": "PE", "seaRate": 130, "airRate": 8.0, "transitSea": 35, "transitAir": 7, "seaPorts": [{"code": "PECLL", "name": "卡亚俄港 Callao"}, {"code": "PEPIE", "name": "派塔港 Paita"}, {"code": "PEILQ", "name": "伊洛港 Ilo"}], "airports": [{"code": "LIM", "name": "利马豪尔赫查韦斯机场 LIM"}]}, {"country": "哥伦比亚", "countryEn": "Colombia", "code": "CO", "seaRate": 130, "airRate": 8.5, "transitSea": 32, "transitAir": 7, "seaPorts": [{"code": "COBUE", "name": "布埃纳文图拉港 Buenaventura"}, {"code": "COCTG", "name": "卡塔赫纳港 Cartagena"}, {"code": "COSMR", "name": "圣玛尔塔港 Santa Marta"}, {"code": "CORIO", "name": "巴兰基亚港 Barranquilla"}], "airports": [{"code": "BOG", "name": "波哥大埃尔多拉多机场 BOG"}, {"code": "MDE", "name": "麦德林何塞玛丽亚科尔多瓦机场 MDE"}, {"code": "CLO", "name": "卡利阿方索邦尼利亚阿拉贡机场 CLO"}]}, {"country": "委内瑞拉", "countryEn": "Venezuela", "code": "VE", "seaRate": 160, "airRate": 11.0, "transitSea": 35, "transitAir": 9, "seaPorts": [{"code": "VELAG", "name": "拉瓜伊拉港 La Guaira"}, {"code": "VEPBL", "name": "卡贝略港 Puerto Cabello"}, {"code": "VEMAR", "name": "马拉开波港 Maracaibo"}], "airports": [{"code": "CCS", "name": "加拉加斯西蒙玻利瓦尔机场 CCS"}]}, {"country": "厄瓜多尔", "countryEn": "Ecuador", "code": "EC", "seaRate": 130, "airRate": 8.5, "transitSea": 32, "transitAir": 7, "seaPorts": [{"code": "ECGYE", "name": "瓜亚基尔港 Guayaquil"}, {"code": "ECBLA", "name": "玻利瓦尔港 Bolivar"}], "airports": [{"code": "UIO", "name": "基多苏克雷元帅机场 UIO"}, {"code": "GYE", "name": "瓜亚基尔何塞华金日奥尔梅多机场 GYE"}]}, {"country": "玻利维亚", "countryEn": "Bolivia", "code": "BO", "seaRate": 160, "airRate": 10.5, "transitSea": 45, "transitAir": 9, "note": "内陆国，海运经智利/秘鲁港口转运", "seaPorts": [{"code": "BOLPZ", "name": "拉巴斯（经阿里卡/卡亚俄转运）La Paz"}, {"code": "BOVVI", "name": "圣克鲁斯（经桑托斯/卡亚俄转运）Santa Cruz"}], "airports": [{"code": "LPB", "name": "拉巴斯埃尔阿尔托机场 LPB"}, {"code": "VVI", "name": "圣克鲁斯维鲁维鲁机场 VVI"}]}, {"country": "巴拉圭", "countryEn": "Paraguay", "code": "PY", "seaRate": 160, "airRate": 10.5, "transitSea": 45, "transitAir": 9, "note": "内陆国，海运经阿根廷/巴西港口转运", "seaPorts": [{"code": "PYASU", "name": "亚松森（经布宜诺斯艾利斯/桑托斯转运）Asuncion"}], "airports": [{"code": "ASU", "name": "亚松森西尔维奥佩蒂罗西机场 ASU"}]}, {"country": "乌拉圭", "countryEn": "Uruguay", "code": "UY", "seaRate": 140, "airRate": 9.5, "transitSea": 40, "transitAir": 8, "seaPorts": [{"code": "UYMVD", "name": "蒙得维的亚港 Montevideo"}], "airports": [{"code": "MVD", "name": "蒙得维的亚卡拉斯科机场 MVD"}]}, {"country": "巴拿马", "countryEn": "Panama", "code": "PA", "seaRate": 105, "airRate": 7.0, "transitSea": 25, "transitAir": 6, "seaPorts": [{"code": "PACOL", "name": "科隆港 Colon"}, {"code": "PABAL", "name": "巴尔博亚港 Balboa"}, {"code": "PAPAN", "name": "巴拿马城港 Panama City"}], "airports": [{"code": "PTY", "name": "巴拿马城托库门机场 PTY"}]}, {"country": "哥斯达黎加", "countryEn": "Costa Rica", "code": "CR", "seaRate": 110, "airRate": 7.5, "transitSea": 28, "transitAir": 6, "seaPorts": [{"code": "CRLIO", "name": "利蒙港 Puerto Limon"}, {"code": "CRCAL", "name": "卡尔德拉港 Caldera"}], "airports": [{"code": "SJO", "name": "圣何塞胡安圣玛丽亚机场 SJO"}]}, {"country": "危地马拉", "countryEn": "Guatemala", "code": "GT", "seaRate": 110, "airRate": 7.5, "transitSea": 28, "transitAir": 6, "seaPorts": [{"code": "GTSJO", "name": "圣何塞港 Puerto San Jose"}, {"code": "GTBAR", "name": "巴里奥斯港 Puerto Barrios"}], "airports": [{"code": "GUA", "name": "危地马拉城拉奥罗拉机场 GUA"}]}, {"country": "洪都拉斯", "countryEn": "Honduras", "code": "HN", "seaRate": 110, "airRate": 7.5, "transitSea": 28, "transitAir": 6, "seaPorts": [{"code": "HNPCR", "name": "科尔特斯港 Puerto Cortes"}, {"code": "HNPCA", "name": "卡斯蒂利亚港 Puerto Castilla"}], "airports": [{"code": "TGU", "name": "特古西加尔巴通康廷机场 TGU"}, {"code": "SAP", "name": "圣佩德罗苏拉拉蒙比列达莫拉莱斯机场 SAP"}]}, {"country": "萨尔瓦多", "countryEn": "El Salvador", "code": "SV", "seaRate": 110, "airRate": 7.5, "transitSea": 28, "transitAir": 6, "seaPorts": [{"code": "SVACA", "name": "阿卡胡特拉港 Acajutla"}, {"code": "SVLUN", "name": "拉乌尼翁港 La Union"}], "airports": [{"code": "SAL", "name": "圣萨尔瓦多奥斯卡阿努尔福罗梅罗机场 SAL"}]}, {"country": "尼加拉瓜", "countryEn": "Nicaragua", "code": "NI", "seaRate": 115, "airRate": 8.0, "transitSea": 30, "transitAir": 7, "seaPorts": [{"code": "NICOR", "name": "科林托港 Corinto"}, {"code": "NIBLU", "name": "布卢菲尔兹港 Bluefields"}], "airports": [{"code": "MGA", "name": "马那瓜奥古斯托塞萨尔桑迪诺机场 MGA"}]}, {"country": "古巴", "countryEn": "Cuba", "code": "CU", "seaRate": 140, "airRate": 9.5, "transitSea": 35, "transitAir": 8, "seaPorts": [{"code": "CUHAV", "name": "哈瓦那港 Havana"}, {"code": "CUSCU", "name": "圣地亚哥港 Santiago de Cuba"}], "airports": [{"code": "HAV", "name": "哈瓦那何塞马蒂机场 HAV"}]}, {"country": "多米尼加", "countryEn": "Dominican Republic", "code": "DO", "seaRate": 115, "airRate": 8.0, "transitSea": 28, "transitAir": 6, "seaPorts": [{"code": "DOCAU", "name": "考塞多港 Caucedo"}, {"code": "DOHAI", "name": "海纳港 Haina"}], "airports": [{"code": "SDQ", "name": "圣多明各拉斯美洲机场 SDQ"}, {"code": "PUJ", "name": "蓬塔卡纳国际机场 PUJ"}]}, {"country": "牙买加", "countryEn": "Jamaica", "code": "JM", "seaRate": 125, "airRate": 8.5, "transitSea": 30, "transitAir": 7, "seaPorts": [{"code": "JMKIN", "name": "金斯顿港 Kingston"}, {"code": "JMMBJ", "name": "蒙特哥贝港 Montego Bay"}], "airports": [{"code": "KIN", "name": "金斯顿诺曼曼利机场 KIN"}, {"code": "MBJ", "name": "蒙特哥贝桑斯特国际机场 MBJ"}]}, {"country": "特立尼达和多巴哥", "countryEn": "Trinidad and Tobago", "code": "TT", "seaRate": 125, "airRate": 8.5, "transitSea": 30, "transitAir": 7, "seaPorts": [{"code": "TTPOS", "name": "西班牙港 Port of Spain"}], "airports": [{"code": "POS", "name": "西班牙港皮亚尔科国际机场 POS"}]}, {"country": "圭亚那", "countryEn": "Guyana", "code": "GY", "seaRate": 150, "airRate": 10.5, "transitSea": 38, "transitAir": 9, "seaPorts": [{"code": "GYGEO", "name": "乔治敦港 Georgetown"}], "airports": [{"code": "GEO", "name": "乔治敦切迪贾根国际机场 GEO"}]}, {"country": "苏里南", "countryEn": "Suriname", "code": "SR", "seaRate": 150, "airRate": 10.5, "transitSea": 38, "transitAir": 9, "seaPorts": [{"code": "SRPBM", "name": "帕拉马里博港 Paramaribo"}], "airports": [{"code": "PBM", "name": "帕拉马里博约翰阿道夫恩格尔机场 PBM"}]}, {"country": "法属圭亚那", "countryEn": "French Guiana", "code": "GF", "seaRate": 150, "airRate": 10.5, "transitSea": 38, "transitAir": 9, "seaPorts": [{"code": "GFCAY", "name": "卡宴港 Cayenne"}], "airports": [{"code": "CAY", "name": "卡宴费利克斯埃布埃机场 CAY"}]}, {"country": "海地", "countryEn": "Haiti", "code": "HT", "seaRate": 130, "airRate": 9.0, "transitSea": 32, "transitAir": 8, "seaPorts": [{"code": "HTPAP", "name": "太子港 Port-au-Prince"}, {"code": "HTCAP", "name": "海地角港 Cap-Haitien"}], "airports": [{"code": "PAP", "name": "太子港杜桑卢维杜尔国际机场 PAP"}]}, {"country": "巴巴多斯", "countryEn": "Barbados", "code": "BB", "seaRate": 130, "airRate": 9.0, "transitSea": 32, "transitAir": 8, "seaPorts": [{"code": "BBBGI", "name": "布里奇敦港 Bridgetown"}], "airports": [{"code": "BGI", "name": "布里奇敦格兰特利亚当斯国际机场 BGI"}]}];
+
+// 状态
+let currentMode = 'sea';
+let selectedOrigin = null;
+let selectedDest = null;
+let selectedDestPort = null;
+let qtyMap = {}; // 产品件数映射 index -> qty
+
+// ==================== Tab切换 ====================
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', (tab==='size'&&i===0)||(tab==='freight'&&i===1));
+  });
+  document.getElementById('panel-size').classList.toggle('active', tab==='size');
+  document.getElementById('panel-freight').classList.toggle('active', tab==='freight');
+  if(tab==='freight') updateSyncDisplay();
+}
+
+// ==================== 尺寸速算 ====================
+function initSeriesFilter() {
+  const scene = document.getElementById('filterScene').value;
+  let filteredProducts = PRODUCTS;
+  if(scene) {
+    filteredProducts = PRODUCTS.filter(p => p.scene === scene);
+  }
+  // 保持Excel原始顺序，不排序
+  const seriesSet = [...new Set(filteredProducts.map(p=>p.series))];
+  const sel = document.getElementById('filterSeries');
+  sel.innerHTML = '<option value="">全部系列</option>';
+  seriesSet.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s; opt.textContent = s;
+    sel.appendChild(opt);
+  });
+}
+
+function onSceneChange() {
+  initSeriesFilter();
+  renderTable();
+}
+
+function renderTable() {
+  const scene = document.getElementById('filterScene').value;
+  const series = document.getElementById('filterSeries').value;
+  const method = document.getElementById('filterMethod').value;
+
+  let filtered = PRODUCTS.filter(p =>
+    (!scene || p.scene===scene) &&
+    (!series || p.series===series) &&
+    (!method || p.method===method)
+  );
+
+  // 更新匹配统计
+  document.getElementById('sumProducts').textContent = new Set(filtered.map(p=>p.series)).size;
+  document.getElementById('sumPlans').textContent = filtered.length;
+
+  const tbody = document.getElementById('productTbody');
+  tbody.innerHTML = '';
+
+  if(filtered.length===0) {
+    tbody.innerHTML = '<tr><td colspan="13" class="empty-state">无匹配产品</td></tr>';
+    updateSummary();
+    return;
+  }
+
+  let lastScene = '', lastSeries = '', lastMethod = '';
+  filtered.forEach((p, idx) => {
+    const realIdx = PRODUCTS.indexOf(p);
+
+    // 场景+系列分组头（合并显示）
+    if(p.scene !== lastScene || p.series !== lastSeries) {
+      const tr = document.createElement('tr');
+      tr.className = 'group-header';
+      tr.innerHTML = `<td colspan="13" style="background:#e6f7ff; padding:8px; font-size:14px; font-weight:500; text-align:left;">${p.scene} <strong style="color:#1890ff;">${p.series}</strong></td>`;
+      tbody.appendChild(tr);
+      lastScene = p.scene;
+      lastSeries = p.series;
+      lastMethod = '';
+    }
+
+    // 包装方式分组头
+    if(p.method !== lastMethod) {
+      const tr = document.createElement('tr');
+      tr.style.background = '#e6f7ff';
+      tr.innerHTML = `<td colspan="13" style="background:#f0f7ff; color:#1890ff; font-size:13px; padding:6px 8px; font-weight:500; text-align:left;">${p.method}</td>`;
+      tbody.appendChild(tr);
+      lastMethod = p.method;
+    }
+
+    const qty = qtyMap[realIdx] || 0;
+    const totalW = qty * p.weight;
+    const totalV = qty * p.volume;
+    // 计算箱体总数：从每箱数量中提取数字，如"7IN1"→7
+    let panelsPerCase = 0;
+    const hasPanel = p.contents && p.contents.indexOf('箱体') !== -1;
+    if(hasPanel) {
+      const ppm = p.qtyPerCase ? p.qtyPerCase.match(/(\d+)/) : null;
+      if(ppm) panelsPerCase = parseInt(ppm[1]);
+    }
+    const totalPanels = qty > 0 && panelsPerCase > 0 ? qty * panelsPerCase : 0;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="text-align:left;">${p.series}</td>
+      <td style="background:#fffbe6;"><input type="number" class="qty-input ${qty>0?'has-value':''}" value="${qty}" min="0" step="1" data-idx="${realIdx}" onchange="onQtyChange(this)"></td>
+      <td style="white-space:nowrap;">${p.methodDetail || p.method}</td>
+      <td>${p.qtyPerCase||'-'}</td>
+      <td style="max-width:200px; font-size:12px;">${p.contents}</td>
+      <td>${p.sizeMm||'-'}</td>
+      <td class="calc-cell">${p.length}</td>
+      <td class="calc-cell">${p.width}</td>
+      <td class="calc-cell">${p.height}</td>
+      <td class="calc-cell">${p.weight}</td>
+      <td class="calc-cell ${totalW===0?'zero':''}">${totalW>0?totalW.toFixed(1):'-'}</td>
+      <td class="calc-cell ${totalV===0?'zero':''}">${totalV>0?totalV.toFixed(4):'-'}</td>
+      <td class="calc-cell ${totalPanels===0?'zero':''}">${totalPanels>0?totalPanels:'-'}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  updateSummary();
+}
+
+function onQtyChange(input) {
+  const idx = parseInt(input.dataset.idx);
+  const val = parseInt(input.value) || 0;
+  if(val<=0) {
+    delete qtyMap[idx];
+    input.classList.remove('has-value');
+  } else {
+    qtyMap[idx] = val;
+    input.classList.add('has-value');
+  }
+  renderTable();
+}
+
+function updateSummary() {
+  let totalW=0, totalV=0, totalCases=0, filled=0, totalPanels=0;
+  for(const [idx, qty] of Object.entries(qtyMap)) {
+    const p = PRODUCTS[parseInt(idx)];
+    if(p && qty>0) {
+      totalW += p.weight * qty;
+      totalV += p.volume * qty;
+      totalCases += qty;
+      filled++;
+      // 只有箱内物品包含"箱体"时才计算箱体总数
+      if(p.contents && p.contents.indexOf('箱体') !== -1) {
+        const ppm = p.qtyPerCase ? p.qtyPerCase.match(/(\d+)/) : null;
+        if(ppm) totalPanels += qty * parseInt(ppm[1]);
+      }
+    }
+  }
+
+  document.getElementById('sumFilled').textContent = filled;
+  document.getElementById('sumWeight').textContent = totalW.toFixed(1);
+  document.getElementById('sumVolume').textContent = totalV.toFixed(4);
+  document.getElementById('sumCases').textContent = totalPanels;
+
+  // 货柜估算：按体积和重量取大值
+  const vol20 = totalV/25, wt20 = totalW/21000;
+  const vol40 = totalV/55, wt40 = totalW/26000;
+  const vol40hq = totalV/68, wt40hq = totalW/26000;
+
+  document.getElementById('sum20gp').textContent = Math.ceil(Math.max(vol20, wt20)) || 0;
+  document.getElementById('sum40gp').textContent = Math.ceil(Math.max(vol40, wt40)) || 0;
+  document.getElementById('sum40hq').textContent = Math.ceil(Math.max(vol40hq, wt40hq)) || 0;
+}
+
+function resetFilter() {
+  document.getElementById('filterScene').value = '';
+  initSeriesFilter();
+  document.getElementById('filterMethod').value = '';
+  renderTable();
+}
+
+function resetAll() {
+  qtyMap = {};
+  renderTable();
+}
+
+function viewContainerEffect() {
+  // 计算当前货物汇总
+  let totalW=0, totalV=0, totalCases=0;
+  for(const [idx, qty] of Object.entries(qtyMap)) {
+    const p = PRODUCTS[parseInt(idx)];
+    if(p && qty>0) {
+      totalW += p.weight * qty;
+      totalV += p.volume * qty;
+      totalCases += qty;
+    }
+  }
+
+  // 货柜参数
+  const containers = {
+    '20GP': { name:'20GP普柜', length:5.69, height:2.18, volume:33, maxW:21000, color:'#fa8c16' },
+    '40GP': { name:'40GP普柜', length:12.03, height:2.18, volume:67, maxW:26000, color:'#1a3a5c' },
+    '40HQ': { name:'40HQ高柜', length:12.03, height:2.48, volume:76, maxW:26000, color:'#fa8c16' }
+  };
+
+  function calcContainer(type) {
+    const c = containers[type];
+    const needCount = Math.ceil(Math.max(totalV/c.volume, totalW/c.maxW));
+    const fillRate = Math.min(totalV/c.volume*100, 100);
+    // 计算每个货柜的装载情况
+    const eachContainer = [];
+    let remainingV = totalV;
+    for(let i=0; i<needCount; i++) {
+      const fillV = Math.min(remainingV, c.volume);
+      const rate = (fillV / c.volume) * 100;
+      eachContainer.push({ idx: i+1, fillV, rate });
+      remainingV -= fillV;
+    }
+    return { needCount, fillRate, eachContainer };
+  }
+
+  const modal = document.createElement('div');
+  modal.className = 'modal-mask';
+  modal.onclick = (e) => { if(e.target===modal) modal.remove(); };
+
+  function renderTab(activeType) {
+    const c = containers[activeType];
+    const r = calcContainer(activeType);
+
+    // 生成每个货柜的示意图
+    let containerHtml = '';
+    if(r.needCount <= 1) {
+      // 单个货柜，显示大示意图
+      const fillHeight = r.fillRate;
+      containerHtml = `
+        <div style="background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:24px;margin-bottom:20px;">
+          <div style="text-align:center;font-size:16px;font-weight:600;color:#333;margin-bottom:20px;">${c.name} 装柜示意图</div>
+          <div style="position:relative;width:100%;height:280px;border-left:2px solid #999;border-bottom:2px solid #999;margin:0 auto;">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:${fillHeight}%;background:linear-gradient(180deg,#40a9ff,#1890ff);transition:height 0.3s;display:flex;align-items:center;justify-content:center;">
+              ${r.fillRate>15 ? `<span style="color:#fff;font-size:20px;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,0.2);">${r.fillRate.toFixed(1)}% 已填充</span>` : ''}
+            </div>
+            ${r.fillRate<=15 ? `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#999;font-size:16px;">${r.fillRate.toFixed(1)}% 已填充</div>` : ''}
+            <div style="position:absolute;left:-40px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:13px;color:#666;white-space:nowrap;">${c.height} m</div>
+            <div style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);font-size:13px;color:#666;">${c.length} m</div>
+          </div>
+        </div>
+      `;
+    } else {
+      // 多个货柜，分别展示每个货柜的装载情况
+      const cols = r.needCount <= 3 ? r.needCount : 3;
+      containerHtml = `
+        <div style="background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:24px;margin-bottom:20px;">
+          <div style="text-align:center;font-size:16px;font-weight:600;color:#333;margin-bottom:20px;">${c.name} 装柜示意图（共 ${r.needCount} 个货柜）</div>
+          <div style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:20px;">
+            ${r.eachContainer.map(ct => `
+              <div style="text-align:center;">
+                <div style="font-size:14px;font-weight:600;color:#333;margin-bottom:10px;">第 ${ct.idx} 个货柜</div>
+                <div style="position:relative;width:100%;height:180px;border-left:2px solid #999;border-bottom:2px solid #999;">
+                  <div style="position:absolute;bottom:0;left:0;right:0;height:${ct.rate}%;background:linear-gradient(180deg,#40a9ff,#1890ff);transition:height 0.3s;display:flex;align-items:center;justify-content:center;">
+                    ${ct.rate>20 ? `<span style="color:#fff;font-size:14px;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,0.2);">${ct.rate.toFixed(1)}%</span>` : ''}
+                  </div>
+                  ${ct.rate<=20 ? `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#999;font-size:13px;">${ct.rate.toFixed(1)}%</div>` : ''}
+                </div>
+                <div style="font-size:12px;color:#666;margin-top:8px;">装载 ${ct.fillV.toFixed(2)} CBM</div>
+              </div>
+            `).join('')}
+          </div>
+          <div style="text-align:center;font-size:12px;color:#999;margin-top:16px;">货柜内部尺寸：${c.length}m × ${c.height}m，单柜容积 ${c.volume} CBM</div>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="modal-box" style="max-width:1100px;max-height:95vh;">
+        <div class="modal-title">
+          <h3 style="font-size:20px;">装柜效果图</h3>
+          <button class="modal-close" onclick="this.closest('.modal-mask').remove()">×</button>
+        </div>
+        <div class="modal-body">
+        <div style="display:flex;gap:8px;margin-bottom:20px;">
+          ${Object.keys(containers).map(t => `
+            <button onclick="window._switchContainerTab('${t}')" style="padding:8px 24px;border:none;border-radius:4px;cursor:pointer;font-size:14px;font-weight:500;${t===activeType?'background:#fa8c16;color:#fff;':'background:#f0f0f0;color:#666;'}">${t}</button>
+          `).join('')}
+        </div>
+        ${containerHtml}
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+          <div style="background:#f5f7fa;padding:16px;border-radius:6px;">
+            <div style="font-size:13px;color:#999;margin-bottom:6px;">货物体积</div>
+            <div style="font-size:20px;font-weight:700;color:#1890ff;">${totalV.toFixed(2)} CBM</div>
+          </div>
+          <div style="background:#f5f7fa;padding:16px;border-radius:6px;">
+            <div style="font-size:13px;color:#999;margin-bottom:6px;">货物总重量</div>
+            <div style="font-size:20px;font-weight:700;color:#fa8c16;">${totalW.toFixed(0)} KG</div>
+          </div>
+          <div style="background:#f5f7fa;padding:16px;border-radius:6px;">
+            <div style="font-size:13px;color:#999;margin-bottom:6px;">体积填充率</div>
+            <div style="font-size:20px;font-weight:700;color:#f5222d;">${r.fillRate.toFixed(1)}%</div>
+          </div>
+          <div style="background:#fff7e6;padding:16px;border-radius:6px;border:1px solid #ffd591;">
+            <div style="font-size:13px;color:#999;margin-bottom:6px;">建议需要货柜</div>
+            <div style="font-size:20px;font-weight:700;color:#fa8c16;">${r.needCount} 个 ${activeType}</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    `;
+  }
+
+  modal.innerHTML = renderTab('20GP');
+  document.body.appendChild(modal);
+
+  window._switchContainerTab = function(type) {
+    modal.innerHTML = renderTab(type);
+  };
+}
+
+function updateSyncDisplay() {
+  let totalW=0, totalV=0, totalCases=0;
+  for(const [idx, qty] of Object.entries(qtyMap)) {
+    const p = PRODUCTS[parseInt(idx)];
+    if(p && qty>0) {
+      totalW += p.weight * qty;
+      totalV += p.volume * qty;
+      totalCases += qty;
+    }
+  }
+  document.getElementById('syncWeight').textContent = totalW.toFixed(1);
+  document.getElementById('syncVolume').textContent = totalV.toFixed(4);
+  document.getElementById('syncCases').textContent = totalCases;
+}
+
+function syncFromSize() {
+  let totalW=0, totalV=0, totalCases=0;
+  for(const [idx, qty] of Object.entries(qtyMap)) {
+    const p = PRODUCTS[parseInt(idx)];
+    if(p && qty>0) {
+      totalW += p.weight * qty;
+      totalV += p.volume * qty;
+      totalCases += qty;
+    }
+  }
+  document.getElementById('cargoWeight').value = totalW.toFixed(1);
+  document.getElementById('cargoVolume').value = totalV.toFixed(4);
+  document.getElementById('cargoCases').value = totalCases;
+  calcFreight();
+}
+
+// ==================== 运费测算 ====================
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('modeSea').classList.toggle('active', mode==='sea');
+  document.getElementById('modeAir').classList.toggle('active', mode==='air');
+
+  if(mode==='sea') {
+    document.getElementById('rateBaseLabel').textContent = '基础运费 (USD/CBM)';
+    document.getElementById('originPortLabel').textContent = '起运港';
+    document.getElementById('rateMin').value = 1;
+    if(selectedDest) document.getElementById('rateBase').value = selectedDest.seaRate;
+  } else {
+    document.getElementById('rateBaseLabel').textContent = '基础运费 (USD/KG)';
+    document.getElementById('originPortLabel').textContent = '起运机场';
+    document.getElementById('rateMin').value = 45;
+    if(selectedDest) document.getElementById('rateBase').value = selectedDest.airRate;
+  }
+
+  onOriginChange();
+  updateDestPortOptions();
+  calcFreight();
+}
+
+function onOriginChange() {
+  const originId = document.getElementById('originSelect').value;
+  selectedOrigin = ORIGINS.find(o=>o.id===originId);
+  const sel = document.getElementById('originPortSelect');
+  sel.innerHTML = '';
+
+  const ports = currentMode==='sea' ? selectedOrigin.seaPorts : selectedOrigin.airports;
+  ports.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.code;
+    opt.textContent = p.name;
+    sel.appendChild(opt);
+  });
+  calcFreight();
+}
+
+function onDestSearch() {
+  const q = document.getElementById('destSearch').value.trim().toLowerCase();
+  const dropdown = document.getElementById('destDropdown');
+
+  if(!q) {
+    // 显示全部国家
+    renderDestDropdown(DESTINATIONS);
+    dropdown.classList.add('show');
+    return;
+  }
+
+  const results = DESTINATIONS.filter(d => {
+    // 搜索国家名、英文名、代码
+    if(d.country.toLowerCase().includes(q)) return true;
+    if(d.countryEn.toLowerCase().includes(q)) return true;
+    if(d.code.toLowerCase().includes(q)) return true;
+    // 搜索港口
+    if(d.seaPorts.some(p => p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q))) return true;
+    // 搜索机场
+    if(d.airports.some(a => a.name.toLowerCase().includes(q) || a.code.toLowerCase().includes(q))) return true;
+    return false;
+  });
+
+  renderDestDropdown(results);
+  dropdown.classList.add('show');
+}
+
+function renderDestDropdown(list) {
+  const dropdown = document.getElementById('destDropdown');
+  if(list.length===0) {
+    dropdown.innerHTML = '<div class="search-item"><div class="country">无匹配结果</div></div>';
+    return;
+  }
+  dropdown.innerHTML = list.map(d => `
+    <div class="search-item" onclick="selectDest('${d.code}')">
+      <div class="country">${d.country} (${d.countryEn})
+        <span class="rate-tag">海${d.seaRate}/CBM</span>
+        <span class="rate-tag">空${d.airRate}/KG</span>
+      </div>
+      <div class="detail">港口：${d.seaPorts.map(p=>p.name.split(' ')[0]).join('、')} | 机场：${d.airports.map(a=>a.code).join('、')}${d.note?' | '+d.note:''}</div>
+    </div>
+  `).join('');
+}
+
+function selectDest(code) {
+  selectedDest = DESTINATIONS.find(d=>d.code===code);
+  document.getElementById('destSearch').value = selectedDest.country + ' - ' + selectedDest.countryEn;
+  document.getElementById('destDropdown').classList.remove('show');
+
+  // 设置默认费率
+  if(currentMode==='sea') {
+    document.getElementById('rateBase').value = selectedDest.seaRate;
+  } else {
+    document.getElementById('rateBase').value = selectedDest.airRate;
+  }
+
+  selectedDestPort = null;
+  updateDestPortOptions();
+  calcFreight();
+}
+
+function updateDestPortOptions() {
+  const row = document.getElementById('destPortRow');
+  const tags = document.getElementById('destPortTags');
+  const label = document.getElementById('destPortLabel');
+
+  if(!selectedDest) {
+    row.style.display = 'none';
+    return;
+  }
+
+  row.style.display = 'block';
+  const ports = currentMode==='sea' ? selectedDest.seaPorts : selectedDest.airports;
+  label.textContent = currentMode==='sea' ? '目的港（点击选择）' : '目的机场（点击选择）';
+
+  tags.innerHTML = ports.map((p,i) => `
+    <span class="port-tag ${i===0?'selected':''}" onclick="selectDestPort('${p.code}', this)">${p.name}</span>
+  `).join('');
+
+  // 默认选第一个
+  if(ports.length>0) {
+    selectedDestPort = ports[0];
+  }
+}
+
+function selectDestPort(code, el) {
+  const ports = currentMode==='sea' ? selectedDest.seaPorts : selectedDest.airports;
+  selectedDestPort = ports.find(p=>p.code===code);
+  document.querySelectorAll('.port-tag').forEach(t=>t.classList.remove('selected'));
+  el.classList.add('selected');
+  calcFreight();
+}
+
+// 点击外部关闭下拉
+document.addEventListener('click', function(e) {
+  if(!e.target.closest('.search-wrap')) {
+    document.getElementById('destDropdown').classList.remove('show');
+  }
+});
+
+function calcFreight() {
+  const weight = parseFloat(document.getElementById('cargoWeight').value) || 0;
+  const volume = parseFloat(document.getElementById('cargoVolume').value) || 0;
+  const rateBase = parseFloat(document.getElementById('rateBase').value) || 0;
+  const rateMin = parseFloat(document.getElementById('rateMin').value) || 0;
+  const rateDoc = parseFloat(document.getElementById('rateDoc').value) || 0;
+  const rateCustoms = parseFloat(document.getElementById('rateCustoms').value) || 0;
+  const rateAms = parseFloat(document.getElementById('rateAms').value) || 0;
+  const rateFuel = parseFloat(document.getElementById('rateFuel').value) || 0;
+
+  let chargeable = 0;
+  let baseFee = 0;
+  let chargeDesc = '';
+
+  if(currentMode==='sea') {
+    // 海运：体积重比 1CBM=363KG，取大值
+    const weightCBM = weight / 363;
+    chargeable = Math.max(volume, weightCBM);
+    chargeable = Math.max(chargeable, rateMin);
+    baseFee = chargeable * rateBase;
+    chargeDesc = chargeable.toFixed(4) + ' CBM' + (weightCBM>volume ? ' (按重量换算:'+weightCBM.toFixed(4)+'CBM)' : '');
+  } else {
+    // 空运：体积重 = CBM * 166.67
+    const volWeight = volume * 166.67;
+    chargeable = Math.max(weight, volWeight);
+    chargeable = Math.max(chargeable, rateMin);
+    baseFee = chargeable * rateBase;
+    chargeDesc = chargeable.toFixed(2) + ' KG' + (volWeight>weight ? ' (按体积重:'+volWeight.toFixed(2)+'KG)' : '');
+  }
+
+  const surcharge = rateDoc + rateCustoms + rateAms + rateFuel;
+  const total = baseFee + surcharge;
+
+  // 路线描述
+  let routeDesc = '请选择目的地';
+  let transit = '-';
+  if(selectedOrigin && selectedDest) {
+    const originPortName = document.getElementById('originPortSelect').selectedOptions[0]?.text || '';
+    const destPortName = selectedDestPort ? selectedDestPort.name : '';
+    routeDesc = `${selectedOrigin.name} ${originPortName} → ${selectedDest.country} ${destPortName}`;
+    transit = currentMode==='sea' ? selectedDest.transitSea+' 天' : selectedDest.transitAir+' 天';
+  }
+
+  document.getElementById('resultRoute').textContent = routeDesc;
+  document.getElementById('resultTotal').textContent = total.toFixed(2);
+  document.getElementById('resultChargeable').textContent = chargeDesc;
+  document.getElementById('resultBase').textContent = 'USD ' + baseFee.toFixed(2);
+  document.getElementById('resultSurcharge').textContent = 'USD ' + surcharge.toFixed(2) + ' (文件'+rateDoc+' + 报关'+rateCustoms+' + 申报'+rateAms+' + 附加'+rateFuel+')';
+  document.getElementById('resultTransit').textContent = transit;
+}
+
+// ==================== 初始化 ====================
+// 从localStorage读取更新后的产品数据
+const savedProducts = localStorage.getItem('led_products');
+if(savedProducts) {
+  try {
+    const parsed = JSON.parse(savedProducts);
+    if(parsed && Array.isArray(parsed) && parsed.length > 0) {
+      PRODUCTS = parsed;
+    }
+  } catch(e) { console.error('读取产品数据失败', e); }
+}
+// 从localStorage读取更新后的履历数据
+const savedLogs = localStorage.getItem('led_update_logs');
+if(savedLogs) {
+  try {
+    const parsed = JSON.parse(savedLogs);
+    if(parsed && parsed.length > 0) {
+      UPDATE_LOGS = parsed;
+    }
+  } catch(e) { console.error('读取履历数据失败', e); }
+}
+initSeriesFilter();
+renderTable();
+onOriginChange();
+calcFreight();
+
+// ==================== 更新履历 ====================
+function showUpdateLog() {
+  const defaultLogs = [{"date": "2025-03-03", "content": "制作预估尺寸计算表V1.0", "editor": "杜辉"}, {"date": "", "content": "说明：仅供参考，具体尺寸以下单打包尺寸为准；", "editor": "杜辉"}, {"date": "2025-03-04", "content": "输出预估尺寸计算表V1.1，Axx25由于系统中无数据，暂未统计", "editor": "杜辉"}, {"date": "", "content": "感谢北美商务李础楚、拉美商务周芳提供部分数据支持", "editor": "杜辉"}, {"date": "2025-03-05", "content": "补充AS V2系列各种尺寸打包预估尺寸，表格版本V1.2-20250305", "editor": "杜辉"}, {"date": "", "content": "使用说明：在表格左侧标黄区域输入对应打包件数", "editor": "杜辉"}, {"date": "2025-03-07", "content": "新增A27 V3系列木箱打包方式预估尺寸信息", "editor": "杜辉"}, {"date": "", "content": "新增AXX25预估打包尺寸信息，表格版本V1.3-20250307", "editor": "杜辉"}, {"date": "2025-03-15", "content": "修改CPS纸箱打包方式预估尺寸信息，表格版本V1.4-20250315", "editor": "杜辉"}, {"date": "2025-03-25", "content": "新增K V3纸箱预估打包尺寸信息，表格版本V1.5-20250325", "editor": "杜辉"}, {"date": "2025-04-10", "content": "新增XL纸箱预估打包尺寸信息", "editor": "杜辉"}, {"date": "", "content": "新增MC航空箱预估打包尺寸信息", "editor": "杜辉"}, {"date": "", "content": "新增LR V2航空箱预估打包尺寸信息，表格版本V1.6-20250410", "editor": "杜辉"}, {"date": "2025-04-18", "content": "新增FL航空箱预估打包尺寸信息，表格版本V1.7-20250418", "editor": "杜辉"}, {"date": "2025-05-09", "content": "新增KLCOB V2纸箱预估打包尺寸信息", "editor": "杜辉"}, {"date": "2025-05-27", "content": "新增NT V2预估打包尺寸信息", "editor": "杜辉"}, {"date": "", "content": "PL V2航空箱更新为木质10IN1和5IN1，更新预估打包尺寸", "editor": "杜辉"}, {"date": "2025-06-09", "content": "新增ICON X系列预估打包尺寸", "editor": "杜辉"}, {"date": "2025-06-10", "content": "新增HC V3木箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-07-24", "content": "新增FL V2航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "", "content": "补充NT V2塑胶航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-07-30", "content": "新增SA航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-08-04", "content": "补充NX其他箱体尺寸预估打包尺寸，修正部分错误", "editor": "杜辉"}, {"date": "2025-08-20", "content": "新增JP8 pro 8IN1小推车打包预估尺寸", "editor": "杜辉"}, {"date": "2025-09-02", "content": "补充NT V2木箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-09-09", "content": "新增新款落地支架预估打包尺寸--数据来自詹志安", "editor": "杜辉"}, {"date": "", "content": "增加LIVE版备品航空箱预估打包尺寸信息--数据来自詹志安", "editor": "杜辉"}, {"date": "2025-09-10", "content": "最后一列加入箱体总数，增加A25R打包预估尺寸", "editor": "杜辉"}, {"date": "", "content": "补充完整ICON X系列预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增ICON X V2系列预估打包尺寸", "editor": "杜辉"}, {"date": "2025-09-29", "content": "补充A25和A25R版本960*1440尺寸预估打包信息", "editor": "杜辉"}, {"date": "2025-10-20", "content": "新做C V2系列预估打包尺寸", "editor": "杜辉"}, {"date": "2025-11-04", "content": "新增JP pro系列吊梁预估打包尺寸", "editor": "杜辉"}, {"date": "2025-12-30", "content": "新增HC V3系列纸箱预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充ICON部分缺失的预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充PL V3部分缺失的预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充LR V2部分缺失的预估打包尺寸", "editor": "杜辉"}, {"date": "2026-01-05", "content": "补充A25和A25 R版本640*960预估打包尺寸", "editor": "杜辉"}, {"date": "2026-03-24", "content": "新增A99 V2系列运输架预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增CL V3系列预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-10", "content": "新增ICON X136F预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-17", "content": "补充CPS框架预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-22", "content": "新增SR系列预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增S6R&S10R预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增S6T&S10T预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-24", "content": "新增FL V2系列木箱预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-28", "content": "新增KL V3系列预估打包尺寸", "editor": "杜辉"}, {"date": "2026-05-07", "content": "增加FL V2弧形吊梁航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "", "content": "更新LR V2吊梁航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "2026-05-08", "content": "补充NT V2 PL NT 2IN1吊地梁预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增PO系列预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增JD-H系列预估打包尺寸", "editor": "杜辉"}, {"date": "2026-05-13", "content": "修正PL V3航空箱预估打包数据错误", "editor": "杜辉"}, {"date": "", "content": "增加PL V3运输架预估打包数据", "editor": "杜辉"}, {"date": "2026-05-28", "content": "补充A99 V2木箱预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充AW V2预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充AW PRO预估打包尺寸", "editor": "杜辉"}, {"date": "2026-07-24", "content": "新增PO PRO V2预估打包尺寸", "editor": "杜辉"}, {"date": "2026-08-13", "content": "新增K2.5DS预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增AW pro单面灯箱预估打包尺寸", "editor": "杜辉"}, {"date": "2026-08-22", "content": "2222222", "editor": "杜辉"}];
+  const logs = UPDATE_LOGS || defaultLogs;
+  const html = `
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr style="background:#fafafa;">
+          <th style="padding:10px 12px;text-align:center;border-bottom:2px solid #e8e8e8;width:120px;white-space:nowrap;">日期</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e8e8e8;">修订内容</th>
+          <th style="padding:10px 12px;text-align:center;border-bottom:2px solid #e8e8e8;width:80px;white-space:nowrap;">编辑人</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${logs.map(l => `
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:10px 12px;vertical-align:top;white-space:nowrap;color:#666;text-align:center;">${l.date}</td>
+            <td style="padding:10px 12px;vertical-align:top;line-height:1.6;color:#333;word-break:break-all;text-align:left;">${l.content}</td>
+            <td style="padding:10px 12px;vertical-align:top;white-space:nowrap;color:#999;text-align:center;">${l.editor}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  openModal('📋 更新履历', html);
+}
+
+// ==================== 后台维护 ====================
+let adminLoggedIn = false;
+let pendingProducts = null;
+let pendingFileName = '';
+let pendingLogs = null;
+let UPDATE_LOGS = null;
+
+function showAdminPanel() {
+  if(!adminLoggedIn) {
+    showAdminLogin();
+    return;
+  }
+  showAdminMain();
+}
+
+function showAdminLogin() {
+  const html = `
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:40px;margin-bottom:16px;">🔐</div>
+      <div style="font-size:16px;font-weight:600;color:#333;margin-bottom:20px;">后台维护登录</div>
+      <input type="password" id="adminPwd" placeholder="请输入密码" style="width:240px;padding:10px 14px;border:1px solid #d9d9d9;border-radius:4px;font-size:14px;margin-bottom:16px;" onkeypress="if(event.key==='Enter')checkAdminPwd()">
+      <div id="pwdError" style="color:#f5222d;font-size:13px;margin-bottom:16px;display:none;">密码错误，请重试</div>
+      <div>
+        <button onclick="checkAdminPwd()" style="padding:10px 32px;background:#1a3a5c;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:14px;">登录</button>
+        <button onclick="this.closest('.modal-mask').remove()" style="padding:10px 32px;background:#f0f0f0;color:#666;border:none;border-radius:4px;cursor:pointer;font-size:14px;margin-left:8px;">取消</button>
+      </div>
+    </div>
+  `;
+  openModal('后台数据维护', html);
+  // 登录弹窗缩小
+  setTimeout(() => {
+    const box = document.querySelector('.modal-box');
+    if(box) box.style.maxWidth = '420px';
+  }, 10);
+  setTimeout(()=>document.getElementById('adminPwd').focus(), 100);
+}
+
+function checkAdminPwd() {
+  const pwd = document.getElementById('adminPwd').value;
+  if(pwd === '123321') {
+    adminLoggedIn = true;
+    document.querySelector('.modal-mask').remove();
+    showAdminMain();
+  } else {
+    document.getElementById('pwdError').style.display = 'block';
+    document.getElementById('adminPwd').value = '';
+    document.getElementById('adminPwd').focus();
+  }
+}
+
+function showAdminMain() {
+  const seriesCount = new Set(PRODUCTS.map(p=>p.series)).size;
+  const html = `
+    <div style="margin-bottom:20px;">
+      <div style="font-size:14px;color:#999;margin-bottom:8px;">当前数据状态</div>
+      <div style="font-size:18px;font-weight:600;color:#333;">产品系列：${seriesCount} 个 | 打包方案：${PRODUCTS.length} 条</div>
+    </div>
+    <div style="border:2px dashed #d9d9d9;border-radius:8px;padding:40px 20px;text-align:center;margin-bottom:20px;">
+      <div style="font-size:48px;margin-bottom:16px;">📁</div>
+      <div style="font-size:18px;font-weight:600;color:#333;margin-bottom:8px;">上传 Excel 文件覆盖更新数据</div>
+      <div style="font-size:13px;color:#999;margin-bottom:20px;">支持 .xlsx / .xls 格式，上传后将完全覆盖当前数据</div>
+      <input type="file" id="adminFile" accept=".xlsx,.xls" style="display:none;" onchange="handleAdminUpload(event)">
+      <button onclick="document.getElementById('adminFile').click()" style="padding:12px 40px;background:#1a3a5c;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:15px;font-weight:500;">选择文件</button>
+    </div>
+    <div id="uploadResult" style="margin-bottom:20px;"></div>
+    <div style="display:flex;gap:12px;">
+      <button onclick="this.closest('.modal-mask').remove()" style="flex:1;padding:12px;background:#f0f0f0;color:#666;border:none;border-radius:4px;cursor:pointer;font-size:14px;">关闭</button>
+      <button onclick="adminLogout()" style="flex:1;padding:12px;background:#fff1f0;color:#cf1322;border:1px solid #ffa39e;border-radius:4px;cursor:pointer;font-size:14px;">退出登录</button>
+    </div>
+  `;
+  openModal('后台数据维护', html);
+}
+
+function adminLogout() {
+  adminLoggedIn = false;
+  document.querySelector('.modal-mask').remove();
+}
+
+function handleAdminUpload(event) {
+  const file = event.target.files[0];
+  if(!file) return;
+  pendingFileName = file.name;
+  const resultEl = document.getElementById('uploadResult');
+  resultEl.innerHTML = '<div style="text-align:center;padding:20px;color:#1890ff;">⏳ 正在解析文件，请稍候...</div>';
+
+  setTimeout(() => {
+    try {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, {type:'array'});
+          const sceneSheets = [
+            {scene:'舞台Rental', sheet:'舞台Rental'},
+            {scene:'ProAV', sheet:'ProAV'},
+            {scene:'广告DOOH', sheet:'广告DOOH'},
+            {scene:'创意', sheet:'创意'}
+          ];
+          const newProducts = [];
+          // 包装方式归类函数
+          function getMethodGroup(methodName, contents, currentGroup) {
+            const m = String(methodName).trim();
+            const c = contents ? String(contents).trim() : '';
+            if(m.indexOf('航空箱') !== -1) return '航空箱';
+            if(m.indexOf('运输架') !== -1) return '运输架';
+            if(m.indexOf('小推车') !== -1) return '小推车';
+            if(m.indexOf('纸箱') !== -1 || m.indexOf('卡板') !== -1) return '纸箱/卡板';
+            if(m === '木箱' || m.indexOf('木箱') !== -1) {
+              if(currentGroup === '航空箱' && (c.indexOf('备品') !== -1 || c.indexOf('参考') !== -1)) return '航空箱';
+              return '木箱';
+            }
+            return currentGroup || '其他';
+          }
+          sceneSheets.forEach(({scene, sheet}) => {
+            if(!workbook.Sheets[sheet]) return;
+            const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheet], {header:1, defval:''});
+            let currentGroup = '';
+            let currentSeries = '';
+            for(let i=0; i<rows.length; i++) {
+              const row = rows[i];
+              const series = row[1], method = row[3], qtyPerCase = row[4];
+              const contents = row[5], sizeMm = row[6];
+              const length = row[7], width = row[8], height = row[9], weight = row[10];
+              if(series && method) {
+                const s = String(series).trim();
+                const m = String(method).trim();
+                // 跳过表头行
+                if(s.indexOf('产品系列') !== -1 || s.indexOf('Product') !== -1) continue;
+                if(m.indexOf('包装方式') !== -1 || m.indexOf('Method') !== -1) continue;
+                if(s !== currentSeries) {
+                  currentSeries = s;
+                  currentGroup = '';
+                }
+                const group = getMethodGroup(m, contents, currentGroup);
+                currentGroup = group;
+                newProducts.push({
+                  scene: scene,
+                  series: s,
+                  method: group,
+                  methodDetail: m,
+                  qtyPerCase: qtyPerCase ? String(qtyPerCase).trim() : '',
+                  contents: contents ? String(contents).trim() : '',
+                  sizeMm: sizeMm ? String(sizeMm).trim() : '',
+                  length: parseFloat(length) || 0,
+                  width: parseFloat(width) || 0,
+                  height: parseFloat(height) || 0,
+                  weight: parseFloat(weight) || 0,
+                  volume: (parseFloat(length)||0)*(parseFloat(width)||0)*(parseFloat(height)||0)
+                });
+              }
+            }
+          });
+          // 读取履历Sheet（严格按照Excel的内容和顺序，不合并、不排序）
+          let newLogs = [];
+          if(workbook.Sheets['履历']) {
+            const logRows = XLSX.utils.sheet_to_json(workbook.Sheets['履历'], {header:1, defval:'', raw:false});
+            // 日期格式化函数
+            function fmtDate(d) {
+              if(d instanceof Date) {
+                const y = d.getFullYear();
+                const m = String(d.getMonth()+1).padStart(2,'0');
+                const day = String(d.getDate()).padStart(2,'0');
+                return y + '-' + m + '-' + day;
+              }
+              if(typeof d === 'number') {
+                const date = new Date((d - 25569) * 86400 * 1000);
+                const y = date.getFullYear();
+                const m = String(date.getMonth()+1).padStart(2,'0');
+                const day = String(date.getDate()).padStart(2,'0');
+                return y + '-' + m + '-' + day;
+              }
+              return d ? String(d).trim() : '';
+            }
+            for(let i=0; i<logRows.length; i++) {
+              const row = logRows[i];
+              if(!row || row.length < 2) continue;
+              const date = row[0], content = row[1], editor = row[2];
+              // 跳过表头行
+              if(date && String(date).indexOf('日') !== -1 && String(date).indexOf('期') !== -1) continue;
+              if(content && String(content).indexOf('修') !== -1 && String(content).indexOf('订') !== -1) continue;
+              
+              const contentStr = content ? String(content).trim() : '';
+              const dateStr = fmtDate(date);
+              // 只保留有内容的行，严格按照Excel顺序
+              if(contentStr || dateStr) {
+                newLogs.push({
+                  date: dateStr,
+                  content: contentStr,
+                  editor: editor ? String(editor).trim() : ''
+                });
+              }
+            }
+          }
+          pendingLogs = newLogs.length > 0 ? newLogs : null;
+
+          if(newProducts.length === 0) {
+            pendingProducts = null;
+            resultEl.innerHTML = '<div style="color:#f5222d;text-align:center;padding:12px;background:#fff1f0;border-radius:4px;">❌ 未解析到有效数据，请检查Excel格式</div>';
+            return;
+          }
+          pendingProducts = newProducts;
+          const newSeriesCount = new Set(newProducts.map(p=>p.series)).size;
+          resultEl.innerHTML = `
+            <div style="background:#f6ffed;border:1px solid #b7eb8f;border-radius:6px;padding:16px;margin-bottom:12px;">
+              <div style="font-size:14px;font-weight:600;color:#52c41a;margin-bottom:8px;">✅ 文件解析成功</div>
+              <div style="font-size:13px;color:#666;line-height:1.8;">
+                <div>文件名：${pendingFileName}</div>
+                <div>新产品系列：<strong style="color:#1a3a5c;">${newSeriesCount}</strong> 个</div>
+                <div>新打包方案：<strong style="color:#1a3a5c;">${newProducts.length}</strong> 条</div>
+              </div>
+            </div>
+            <div style="text-align:center;">
+              <button onclick="saveAdminData()" style="padding:12px 48px;background:#52c41a;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:15px;font-weight:600;">💾 确认保存更新</button>
+            </div>
+          `;
+        } catch(err) {
+          pendingProducts = null;
+          resultEl.innerHTML = '<div style="color:#f5222d;text-align:center;padding:12px;background:#fff1f0;border-radius:4px;">❌ 解析失败：'+err.message+'</div>';
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    } catch(err) {
+      pendingProducts = null;
+      resultEl.innerHTML = '<div style="color:#f5222d;text-align:center;padding:12px;background:#fff1f0;border-radius:4px;">❌ 读取失败：'+err.message+'</div>';
+    }
+  }, 100);
+}
+
+function saveAdminData() {
+  if(!pendingProducts || pendingProducts.length === 0) {
+    alert('没有可保存的数据，请先上传Excel文件');
+    return;
+  }
+  if(!confirm('确定要覆盖更新当前数据吗？此操作不可撤销。')) return;
+
+  PRODUCTS = pendingProducts;
+  qtyMap = {};
+  initSeriesFilter();
+  renderTable();
+
+  // 保存产品数据到localStorage
+  try {
+    localStorage.setItem('led_products', JSON.stringify(PRODUCTS));
+    console.log('产品数据已保存，共' + PRODUCTS.length + '条');
+  } catch(e) { console.error('保存产品数据失败', e); }
+  // 保存履历数据（无论是否为空都覆盖更新）
+  if(pendingLogs) {
+    UPDATE_LOGS = pendingLogs;
+  } else {
+    UPDATE_LOGS = [];
+  }
+  try { localStorage.setItem('led_update_logs', JSON.stringify(UPDATE_LOGS)); } catch(e) {}
+
+  const newSeriesCount = new Set(PRODUCTS.map(p=>p.series)).size;
+  pendingProducts = null;
+  pendingFileName = '';
+  pendingLogs = null;
+
+  const resultEl = document.getElementById('uploadResult');
+  resultEl.innerHTML = `
+    <div style="background:#f6ffed;border:1px solid #b7eb8f;border-radius:6px;padding:20px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:8px;">🎉</div>
+      <div style="font-size:16px;font-weight:600;color:#52c41a;margin-bottom:8px;">数据更新成功！</div>
+      <div style="font-size:13px;color:#666;">产品系列：${newSeriesCount} 个 | 打包方案：${PRODUCTS.length} 条</div>
+    </div>
+  `;
+
+  // 更新当前数据状态显示
+  const statusEl = resultEl.previousElementSibling.previousElementSibling;
+  if(statusEl && statusEl.querySelector('div:last-child')) {
+    statusEl.querySelector('div:last-child').innerHTML = `产品系列：${newSeriesCount} 个 | 打包方案：${PRODUCTS.length} 条`;
+  }
+}
+
+function openModal(title, content) {
+  const mask = document.createElement('div');
+  mask.className = 'modal-mask';
+  mask.onclick = (e) => { if(e.target===mask) mask.remove(); };
+  mask.innerHTML = `
+    <div class="modal-box">
+      <div class="modal-title">
+        <h3>${title}</h3>
+        <button class="modal-close" onclick="this.closest('.modal-mask').remove()">×</button>
+      </div>
+      <div class="modal-body">
+      ${content}
+      </div>
+    </div>
+  `;
+  document.body.appendChild(mask);
+}
+
+</script>
+
+<div class="float-btn-group">
+  <div class="float-btn float-btn-log" onclick="showUpdateLog()" title="更新履历">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </div>
+  <div class="float-btn float-btn-admin" onclick="showAdminPanel()" title="后台维护">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+  </div>
+</div>
+</body>
+</html>
