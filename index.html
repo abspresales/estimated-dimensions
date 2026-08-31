@@ -899,8 +899,9 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
       <div class="freight-section-header">
         <div class="fs-title"><span class="fs-num">5</span><h2>船公司运费数据管理</h2></div>
         <div>
-          <button class="btn btn-sm btn-success" onclick="saveSection('section5')">保存数据</button>
-          <button class="btn btn-sm btn-danger" onclick="resetSection('section5')">重置</button>
+          <button class="btn btn-sm btn-accent" id="rateUnlockBtn" onclick="rateEditUnlocked ? lockRateEdit() : promptRateEditPassword()">🔒 编辑需密码</button>
+          <button class="btn btn-sm btn-success" id="rateSaveBtn" onclick="saveSection('section5')">保存数据</button>
+          <button class="btn btn-sm btn-danger" id="rateResetBtn" onclick="resetSection('section5')">重置</button>
         </div>
       </div>
       <div class="freight-section-body" id="section5">
@@ -2657,9 +2658,118 @@ function updateExchangeRate() {
 }
 
 /* ---------------- 权限控制 ---------------- */
-// 本工具未引入角色登录，板块5默认全部可编辑
+// 板块5「船公司运费数据管理」的编辑受密码保护；起运港/船公司/目的港三个筛选框不受限制
+const RATE_EDIT_PASSWORD = 'absen@123456';
+let rateEditUnlocked = false; // 是否已解锁编辑（不持久化，刷新后重新锁定）
+
 function canEdit(sectionId) {
+  if (sectionId === 'section5') {
+    return rateEditUnlocked;
+  }
   return true;
+}
+
+// 弹出密码框，解锁板块5编辑
+function promptRateEditPassword() {
+  // 已有弹窗则直接使用（允许重新输入）
+  const existing = document.getElementById('rateEditPwdMask');
+  if (existing) { existing.style.display = 'flex'; const inp = document.getElementById('rateEditPwdInput'); if (inp) { inp.value=''; inp.focus(); } return; }
+  const mask = document.createElement('div');
+  mask.className = 'modal-mask';
+  mask.id = 'rateEditPwdMask';
+  mask.onclick = (e) => { if (e.target === mask) mask.remove(); };
+  mask.innerHTML = `
+    <div class="modal-box" style="max-width:420px;width:92%;">
+      <div class="modal-title">
+        <h3>🔒 解锁「船公司运费」编辑</h3>
+        <button class="modal-close" onclick="this.closest('.modal-mask').remove()">&times;</button>
+      </div>
+      <div class="modal-body" style="text-align:center;">
+        <div style="font-size:14px;color:#666;margin-bottom:16px;line-height:1.7;">该板块含运费数据维护，请输入密码解锁编辑。<br><span style="font-size:12px;color:#999;">（筛选/搜索不受影响，始终可用）</span></div>
+        <input type="password" id="rateEditPwdInput" placeholder="请输入编辑密码" style="width:100%;padding:10px 14px;border:1px solid #d9d9d9;border-radius:6px;font-size:15px;text-align:center;box-sizing:border-box;" onkeypress="if(event.key==='Enter')checkRateEditPwd()">
+        <div id="rateEditPwdError" style="color:#f5222d;font-size:13px;margin-top:10px;display:none;">密码错误，请重试</div>
+        <div style="display:flex;gap:10px;margin-top:18px;">
+          <button class="btn" style="flex:1;justify-content:center;padding:10px;" onclick="this.closest('.modal-mask').remove()">取消</button>
+          <button class="btn btn-primary" style="flex:1;justify-content:center;padding:10px;" onclick="checkRateEditPwd()">解锁</button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(mask);
+  const inp = document.getElementById('rateEditPwdInput');
+  if (inp) setTimeout(() => inp.focus(), 100);
+}
+
+function checkRateEditPwd() {
+  const val = document.getElementById('rateEditPwdInput').value;
+  const err = document.getElementById('rateEditPwdError');
+  if (val === RATE_EDIT_PASSWORD) {
+    rateEditUnlocked = true;
+    const mask = document.getElementById('rateEditPwdMask');
+    if (mask) mask.remove();
+    refreshRateEditState();
+    refreshRateUnlockButton();
+    renderRateTable();
+    renderLocalFees();
+    showToast('已解锁编辑权限', 'success');
+  } else {
+    if (err) { err.style.display = 'block'; }
+    const inp = document.getElementById('rateEditPwdInput'); if (inp) { inp.value=''; inp.focus(); }
+  }
+}
+
+// 锁定板块5编辑
+function lockRateEdit() {
+  rateEditUnlocked = false;
+  refreshRateEditState();
+  refreshRateUnlockButton();
+  renderRateTable();
+  renderLocalFees();
+  showToast('已锁定编辑权限，筛选功能仍可用', 'info');
+}
+
+// 切换解锁/锁定按钮显示
+function refreshRateUnlockButton() {
+  const btn = document.getElementById('rateUnlockBtn');
+  if (!btn) return;
+  if (rateEditUnlocked) {
+    btn.textContent = '🔓 已解锁 · 重新锁定';
+    btn.className = 'btn btn-sm btn-outline';
+    btn.style.borderColor = '#38a169'; btn.style.color = '#38a169';
+  } else {
+    btn.textContent = '🔒 编辑需密码';
+    btn.className = 'btn btn-sm btn-accent';
+    btn.style.borderColor = ''; btn.style.color = '';
+  }
+}
+
+// 依据解锁状态，启用/禁用板块5内除筛选框以外的可编辑输入框与按钮
+function refreshRateEditState() {
+  const section = document.getElementById('section5');
+  if (!section) return;
+  // 这三个筛选框始终可用
+  const alwaysEnabled = ['rateOriginFilter', 'rateCarrierFilter', 'rateSearchPort'];
+  section.querySelectorAll('input, select, textarea').forEach(el => {
+    if (alwaysEnabled.includes(el.id)) { el.disabled = false; return; }
+    el.disabled = !rateEditUnlocked;
+  });
+  // 板块5 body 内的编辑/操作按钮（不含筛选框对应）
+  section.querySelectorAll('button').forEach(btn => {
+    const oc = btn.getAttribute('onclick') || '';
+    if (oc.indexOf('promptRateEditPassword') !== -1 || oc.indexOf('lockRateEdit') !== -1) return;
+    btn.disabled = !rateEditUnlocked;
+  });
+  // 头部三个按钮：解锁始终可用；保存/重置跟随解锁状态
+  const unlock = document.getElementById('rateUnlockBtn');
+  if (unlock) unlock.disabled = false;
+  const saveB = document.getElementById('rateSaveBtn');
+  if (saveB) saveB.disabled = !rateEditUnlocked;
+  const resetB = document.getElementById('rateResetBtn');
+  if (resetB) resetB.disabled = !rateEditUnlocked;
+}
+
+// 未解锁时点击按钮的友好提示（保留给手动绑定用）
+function showRateEditLockedTip() {
+  showToast('请先点击「编辑需密码」并输入正确密码解锁', 'warning');
 }
 
 /* ---------------- 运费测算初始化 ---------------- */
@@ -2711,6 +2821,10 @@ function initFreight() {
   initLocalFees();
   renderLocalFees();
   renderPublishedVersions();
+  // 初始化板块5权限状态：默认锁定编辑（筛选仍可用）
+  rateEditUnlocked = false;
+  refreshRateUnlockButton();
+  refreshRateEditState();
 }
 
 // 绑定：切换到运费页时刷新，页面加载完毕后初始化
