@@ -44,11 +44,7 @@ body { font-family: Arial, "Microsoft YaHei", "微软雅黑", sans-serif; backgr
 /* 汇总卡片 */
 .summary-bar { background:#fff; border-radius:6px; padding:10px 16px; margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,0.06); font-size:13px; color:#666; display:flex; flex-wrap:wrap; gap:8px 24px; align-items:center; }
 .summary-bar strong { color:#1a3a5c; font-weight:700; font-size:14px; }
-.summary-bar.container-bar { background:#fffbe6; border:1px solid #ffe58f; }
-.summary-bar.container-bar strong { color:#ad6800; }
 .summary-bar .note { color:#999; font-size:12px; margin-left:auto; }
-.view-container-btn { padding:6px 16px; background:#fa8c16; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:13px; font-weight:500; }
-.view-container-btn:hover { background:#fa8c16; opacity:0.85; }
 
 /* 表格 */
 .table-wrap { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.06); overflow-x:auto; }
@@ -332,20 +328,6 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
     margin-left: 0;
     font-size: 11px;
   }
-  .summary-bar.container-bar {
-    grid-template-columns: 1fr;
-  }
-  .summary-bar.container-bar > span {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .view-container-btn {
-    grid-column: 1 / -1;
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-  }
 
   /* ===== 表格转卡片式布局（核心） ===== */
   .table-wrap {
@@ -597,6 +579,93 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ==================== 运费测算系统（融合自第二套系统） ==================== */
+.freight-system { line-height:1.6; }
+.freight-system h4 { font-size:15px; color:#1a3a5c; }
+.freight-section-card { background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:20px; overflow:hidden; transition:all 0.3s; }
+.freight-section-card:hover { box-shadow:0 8px 24px rgba(0,0,0,0.12); }
+.freight-section-header { background:linear-gradient(135deg,var(--primary,#1a3a5c) 0%,#2c5282 100%); color:#fff; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; }
+.freight-section-header .fs-title { display:flex; align-items:center; }
+.freight-section-header .fs-num { background:rgba(255,255,255,0.2); width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; margin-right:10px; }
+.freight-section-header h2 { font-size:16px; font-weight:700; }
+.freight-section-body { padding:20px; }
+.radio-group { display:flex; gap:12px; flex-wrap:wrap; }
+.radio-item { display:flex; align-items:center; gap:6px; padding:10px 16px; border:2px solid #e2e8f0; border-radius:8px; cursor:pointer; font-size:14px; transition:all 0.2s; }
+.radio-item:hover { border-color:#2c5282; }
+.radio-item.selected { border-color:#e76f51; background:rgba(231,111,81,0.08); }
+.radio-item input { width:auto; }
+.info-box { background:#ebf8ff; border-left:4px solid #2c5282; padding:12px 16px; border-radius:6px; margin-bottom:16px; font-size:13px; }
+.btn { display:inline-flex; align-items:center; gap:6px; padding:8px 18px; border:none; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.3s; white-space:nowrap; }
+.btn-primary { background:#1a3a5c; color:#fff; }
+.btn-primary:hover { background:#2c5282; transform:translateY(-2px); }
+.btn-accent { background:#e76f51; color:#fff; }
+.btn-accent:hover { background:#f4a261; transform:translateY(-2px); }
+.btn-success { background:#38a169; color:#fff; }
+.btn-success:hover { opacity:0.9; transform:translateY(-2px); }
+.btn-danger { background:#e53e3e; color:#fff; }
+.btn-danger:hover { opacity:0.9; }
+.btn-outline { background:transparent; border:1.5px solid #e2e8f0; color:#2d3748; }
+.btn-outline:hover { border-color:#2c5282; color:#2c5282; background:rgba(44,82,130,0.05); }
+.btn-sm { padding:5px 12px; font-size:12px; }
+.btn-group { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+.data-table { width:100%; border-collapse:collapse; font-size:13px; }
+.data-table th { background:var(--primary,#1a3a5c); color:#fff; padding:10px 8px; text-align:center; font-weight:600; position:sticky; top:0; z-index:2; }
+.data-table td { padding:8px; border-bottom:1px solid #e2e8f0; text-align:center; }
+.data-table tr:nth-child(even) { background:#f7fafc; }
+.data-table tr:hover { background:#edf2f7; }
+.data-table input { padding:4px 8px; font-size:12px; text-align:center; }
+.data-table .editable-cell { background:#fffbf0; }
+.table-container { overflow-x:auto; overflow-y:auto; max-height:420px; border:1px solid #e2e8f0; border-radius:6px; }
+.stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; }
+.stat-card { background:linear-gradient(135deg,#f7fafc 0%,#edf2f7 100%); border-radius:8px; padding:16px; text-align:center; }
+.stat-card .stat-value { font-size:28px; font-weight:700; color:#1a3a5c; }
+.stat-card .stat-label { font-size:12px; color:#718096; margin-top:4px; }
+.stat-card .stat-unit { font-size:14px; color:#e76f51; }
+.upload-area { border:2.5px dashed #e2e8f0; border-radius:10px; padding:24px; text-align:center; cursor:pointer; transition:all 0.25s; background:#fafafa; }
+.upload-area:hover, .upload-area.dragover { border-color:#e76f51; background:rgba(231,111,81,0.05); }
+.upload-area .icon { font-size:36px; margin-bottom:8px; }
+.upload-area p { color:#718096; font-size:14px; }
+.upload-area .format { font-size:12px; color:#a0aec0; margin-top:6px; }
+.empty-state { text-align:center; padding:32px; color:#718096; }
+.empty-state .icon { font-size:44px; margin-bottom:8px; }
+.warning-box { background:#fffbeb; border-left:4px solid #d69e2e; padding:12px 16px; border-radius:6px; margin-bottom:16px; font-size:13px; }
+.toast-container { position:fixed; top:80px; right:24px; z-index:10000; display:flex; flex-direction:column; gap:10px; }
+.toast { padding:12px 20px; border-radius:8px; color:#fff; font-size:14px; font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:200px; }
+.toast.success { background:#38a169; }
+.toast.error { background:#e53e3e; }
+.toast.warning { background:#d69e2e; }
+.toast.info { background:#2c5282; }
+.freight-sync { background:#e6f7ff; border:1px solid #91d5ff; border-radius:6px; padding:14px; margin-bottom:18px; font-size:13px; color:#0050b3; }
+.freight-sync .fs-sync-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.freight-sync button { padding:8px 18px; background:#1890ff; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:13px; font-weight:600; }
+.freight-sync button:hover { background:#40a9ff; }
+@media(max-width:768px) {
+  .radio-item { flex:1; justify-content:center; padding:12px 8px; font-size:13px; }
+  .freight-section-header { padding:10px 14px; }
+  .freight-section-body { padding:14px; }
+}
+/* 运费测算——表单布局辅助 */
+.freight-system .form-row { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+.freight-system .form-col { flex:1; min-width:200px; }
+.freight-system .form-group { margin-bottom:16px; }
+.freight-system label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:#2d3748; }
+.freight-system label .req { color:#e53e3e; }
+.freight-system select, .freight-system input[type="text"], .freight-system input[type="number"] {
+  width:100%; padding:8px 12px; border:1.5px solid #e2e8f0; border-radius:6px; font-size:14px; background:#fff;
+}
+.freight-system select:focus, .freight-system input:focus { outline:none; border-color:#2c5282; box-shadow:0 0 0 3px rgba(44,82,130,0.15); }
+.freight-system .cargo-preview { margin-top:16px; max-height:420px; overflow-y:auto; }
+/* 板块5：船公司运费数据管理专用样式 */
+.btn-warning { background:#d69e2e; color:#fff; }
+.btn-warning:hover { opacity:0.9; transform:translateY(-2px); }
+.exchange-box { display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:linear-gradient(135deg,#fefcbf 0%,#fefcbf 100%); border:1px solid #ecc94b; border-radius:6px; padding:10px 14px; margin-bottom:14px; font-size:14px; }
+.multiplier-box { display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:linear-gradient(135deg,#f0fff4 0%,#c6f6d5 100%); border:1px solid #9ae6b4; border-radius:6px; padding:10px 14px; margin-bottom:14px; font-size:14px; }
+.multiplier-box .label { font-weight:700; color:#2f855a; }
+.multiplier-box input[type="number"] { width:90px; padding:6px 10px; border:1.5px solid #e2e8f0; border-radius:6px; font-size:13px; }
+.rate-input { width:90px; padding:6px 10px; border:1.5px solid #e2e8f0; border-radius:6px; font-size:13px; }
+.freight-system .exchange-box input, .freight-system .exchange-box input[type="number"] { width:90px; }
+.freight-system .multiplier-box .label { padding:0; margin:0; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
@@ -663,14 +732,6 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
     <span>预估总体积：<strong id="sumVolume" style="color:#f5222d;">0.0000</strong> CBM</span>
     <span>预估箱体总数：<strong id="sumCases" style="color:#f5222d;">0</strong></span>
   </div>
-  <div class="summary-bar container-bar">
-    <span style="color:#f5222d;font-weight:600;">货柜需求估算：</span>
-    <span>20GP (25CBM/21T)：<strong id="sum20gp" style="color:#fa8c16;">0</strong> <span style="color:#fa8c16;">⬆</span> 个</span>
-    <span>40GP (55CBM/26T)：<strong id="sum40gp" style="color:#fa8c16;">0</strong> <span style="color:#fa8c16;">⬆</span> 个</span>
-    <span>40HQ (68CBM/26T)：<strong id="sum40hq" style="color:#fa8c16;">0</strong> <span style="color:#fa8c16;">⬆</span> 个</span>
-    <span class="note">按体积和重量取大值估算，仅供参考</span>
-    <button class="view-container-btn" onclick="viewContainerEffect()">查看装柜效果图</button>
-  </div>
 
   <div class="table-wrap">
     <table id="productTable">
@@ -698,126 +759,285 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
 
 <!-- ==================== 运费测算面板 ==================== -->
 <div class="panel" id="panel-freight">
-  <div class="cargo-sync">
-    <span>📦 当前尺寸速算汇总：<strong id="syncWeight">0</strong> KG / <strong id="syncVolume">0</strong> CBM / <strong id="syncCases">0</strong> 箱</span>
-    <button onclick="syncFromSize()">从尺寸速算带入</button>
-  </div>
+  <div class="freight-system">
 
-  <div class="freight-layout">
-    <!-- 左侧：运输参数 -->
-    <div class="freight-card">
-      <h3>🚀 运输参数</h3>
-
-      <div class="form-row">
-        <label>运输方式</label>
-        <div class="mode-toggle">
-          <button id="modeSea" class="active" onclick="setMode('sea')">🚢 海运 (LCL拼箱)</button>
-          <button id="modeAir" onclick="setMode('air')">✈️ 空运</button>
+    <!-- 板块1：起运地/目的地/运输方式 -->
+    <div class="freight-section-card">
+      <div class="freight-section-header">
+        <div class="fs-title"><span class="fs-num">1</span><h2>起运地 / 目的地 / 运输方式</h2></div>
+        <div>
+          <button class="btn btn-sm btn-success" onclick="saveSection('section1')">保存数据</button>
+          <button class="btn btn-sm btn-danger" onclick="resetSection('section1')">重置</button>
         </div>
       </div>
-
-      <div class="form-row">
-        <label>发货地</label>
-        <select id="originSelect" onchange="onOriginChange()">
-          <option value="huizhou">中国惠州</option>
-          <option value="hongkong">中国香港</option>
-        </select>
-      </div>
-
-      <div class="form-row">
-        <label id="originPortLabel">起运港 / 起运机场</label>
-        <select id="originPortSelect"></select>
-      </div>
-
-      <div class="form-row">
-        <label>目的地（搜索国家 / 港口 / 机场）</label>
-        <div class="search-wrap">
-          <input type="text" id="destSearch" placeholder="输入国家名、港口名、机场名或代码..." autocomplete="off" oninput="onDestSearch()" onfocus="onDestSearch()">
-          <div class="search-dropdown" id="destDropdown"></div>
+      <div class="freight-section-body" id="section1">
+        <div class="form-row">
+          <div class="form-col">
+            <label>起运地 - 国家 <span class="req">*</span></label>
+            <select id="originCountry" onchange="updateOriginPorts()">
+              <option value="">请选择国家</option>
+              <option value="中国">中国</option>
+              <option value="中国香港">中国香港</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label>起运港 <span class="req">*</span></label>
+            <select id="originPort"><option value="">请先选择国家</option></select>
+          </div>
         </div>
-        <div class="hint">支持中文/英文搜索，如"巴西"、"桑托斯"、"GRU"、"Mexico"</div>
-      </div>
-
-      <div class="form-row" id="destPortRow" style="display:none;">
-        <label id="destPortLabel">目的港</label>
-        <div class="port-tags" id="destPortTags"></div>
-      </div>
-
-      <div class="form-row">
-        <label>货物重量 (KG)</label>
-        <input type="number" id="cargoWeight" value="0" min="0" step="0.1" oninput="calcFreight()">
-      </div>
-
-      <div class="form-row">
-        <label>货物体积 (CBM)</label>
-        <input type="number" id="cargoVolume" value="0" min="0" step="0.0001" oninput="calcFreight()">
-      </div>
-
-      <div class="form-row">
-        <label>箱数</label>
-        <input type="number" id="cargoCases" value="0" min="0" step="1" oninput="calcFreight()">
+        <div class="form-row">
+          <div class="form-col">
+            <label>🔍 搜索目的地国家/地区</label>
+            <input type="text" id="destCountrySearch" placeholder="输入国家/地区名称快速筛选，如：巴西、日本、德国、美国" oninput="filterDestCountries()" onfocus="filterDestCountries()">
+            <div class="hint">输入关键字可实时过滤下方"国家"下拉选项；清空则显示全部。</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label>目的地 - 国家 <span class="req">*</span></label>
+            <select id="destCountry" onchange="updateDestPorts()">
+              <option value="">请选择国家</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label>目的港 <span class="req">*</span></label>
+            <select id="destPort"><option value="">请先选择国家</option></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>运输方式 <span class="req">*</span>（仅可选择一项）</label>
+          <div class="radio-group" id="transportGroup">
+            <label class="radio-item"><input type="radio" name="transport" value="FCL" onchange="onTransportChange()"> 国际海运整柜</label>
+            <label class="radio-item"><input type="radio" name="transport" value="LCL" onchange="onTransportChange()"> 国际海运散货</label>
+            <label class="radio-item"><input type="radio" name="transport" value="AIR" onchange="onTransportChange()"> 国际空运</label>
+            <label class="radio-item"><input type="radio" name="transport" value="EXPRESS" onchange="onTransportChange()"> 国际快递</label>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 右侧：费率与结果 -->
-    <div>
-      <div class="freight-card">
-        <h3>💰 费率参数（可编辑，参考2026年市场行情）</h3>
-        <div class="rate-grid">
-          <div class="rate-item">
-            <div class="rate-label" id="rateBaseLabel">基础运费 (USD/CBM)</div>
-            <input type="number" id="rateBase" value="0" min="0" step="1" oninput="calcFreight()">
-          </div>
-          <div class="rate-item">
-            <div class="rate-label">最低计费 (CBM/KG)</div>
-            <input type="number" id="rateMin" value="1" min="0" step="0.5" oninput="calcFreight()">
-          </div>
-          <div class="rate-item">
-            <div class="rate-label">文件费 (USD/BL)</div>
-            <input type="number" id="rateDoc" value="50" min="0" step="1" oninput="calcFreight()">
-          </div>
-          <div class="rate-item">
-            <div class="rate-label">报关费 (USD)</div>
-            <input type="number" id="rateCustoms" value="50" min="0" step="1" oninput="calcFreight()">
-          </div>
-          <div class="rate-item">
-            <div class="rate-label">申报费 AMS/ENS (USD)</div>
-            <input type="number" id="rateAms" value="30" min="0" step="1" oninput="calcFreight()">
-          </div>
-          <div class="rate-item">
-            <div class="rate-label">燃油/操作附加费 (USD)</div>
-            <input type="number" id="rateFuel" value="0" min="0" step="1" oninput="calcFreight()">
-          </div>
-        </div>
-        <div class="hint" style="margin-top:10px; font-size:11px; color:#999;">
-          海运计费：体积重比 1CBM=363KG，取体积与重量较大者；最低1CBM起算<br>
-          空运计费：体积重 = 长×宽×高(cm)÷6000，即 1CBM≈166.67KG，取实际重与体积重较大者
+    <!-- 板块2：货物打包数据 -->
+    <div class="freight-section-card">
+      <div class="freight-section-header">
+        <div class="fs-title"><span class="fs-num">2</span><h2>货物打包数据</h2></div>
+        <div>
+          <button class="btn btn-sm btn-success" onclick="saveSection('section2')">保存数据</button>
+          <button class="btn btn-sm btn-danger" onclick="resetSection('section2')">重置</button>
         </div>
       </div>
+      <div class="freight-section-body" id="section2">
 
-      <div class="result-box" id="resultBox">
-        <div class="result-title" id="resultRoute">请选择目的地</div>
-        <div class="total-fee">
-          <span class="currency">USD </span><span id="resultTotal">0.00</span>
+        <!-- 2A：从尺寸速算带入 -->
+        <div style="border:1px solid #91d5ff;border-radius:8px;margin-bottom:18px;overflow:hidden;">
+          <div style="background:#e6f7ff;padding:10px 16px;font-weight:700;color:#0050b3;font-size:14px;display:flex;align-items:center;gap:8px;">
+            📦 2A · 从尺寸速算带入
+          </div>
+          <div style="padding:14px 16px;">
+            <div class="fs-sync-row">
+              <span style="font-size:13px;color:#0050b3;">当前尺寸速算汇总：<strong id="syncWeight">0</strong> KG / <strong id="syncVolume">0</strong> CBM / <strong id="syncCases">0</strong> 箱</span>
+              <button onclick="syncFromSize()">从尺寸速算带入</button>
+            </div>
+            <div style="font-size:12px;color:#69a3d0;margin-top:6px;">点击后将"尺寸速算"页中已填写的打包方案，自动转换为货物打包数据（箱型/尺寸/数量/重量）填入下方表格。</div>
+          </div>
         </div>
-        <div class="result-detail" id="resultDetail">
-          <div class="row"><span class="label">计费重量/体积</span><span id="resultChargeable">-</span></div>
-          <div class="row"><span class="label">基础运费</span><span id="resultBase">-</span></div>
-          <div class="row"><span class="label">附加费合计</span><span id="resultSurcharge">-</span></div>
-          <div class="row"><span class="label">预计航程</span><span id="resultTransit">-</span></div>
+
+        <!-- 2B：手动上传数据表格 -->
+        <div style="border:1px solid #d9d9d9;border-radius:8px;overflow:hidden;">
+          <div style="background:#fafafa;padding:10px 16px;font-weight:700;color:#555;font-size:14px;display:flex;align-items:center;gap:8px;">
+            📁 2B · 手动上传 / 填写数据表格
+          </div>
+          <div style="padding:14px 16px;">
+            <div class="info-box">请先下载Excel/CSV模板，按格式填写货物打包数据后上传，或手动添加一行后编辑。系统将自动识别并填报到下方表格。</div>
+            <div class="btn-group" style="margin-bottom:16px">
+              <button class="btn btn-primary" onclick="downloadTemplate()">下载打包数据模板（CSV）</button>
+              <button class="btn btn-outline" onclick="document.getElementById('cargoFileInput').click()">上传打包数据</button>
+              <input type="file" id="cargoFileInput" accept=".csv,.xlsx,.xls" style="display:none" onchange="handleCargoUpload(event)">
+              <button class="btn btn-outline" onclick="addCargoRow()">手动添加一行</button>
+            </div>
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('cargoFileInput').click()">
+              <div class="icon">📁</div>
+              <p>点击或拖拽文件到此区域上传</p>
+              <p class="format">支持格式：.csv / .xlsx / .xls</p>
+            </div>
+            <div class="cargo-preview" id="cargoPreview">
+              <div class="empty-state">
+                <div class="icon">📦</div>
+                <p>暂无货物数据，请上传模板或手动添加</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 板块3：装柜方案与报价 -->
+    <div class="freight-section-card">
+      <div class="freight-section-header">
+        <div class="fs-title"><span class="fs-num">3</span><h2>装柜方案与报价</h2></div>
+        <div>
+          <button class="btn btn-sm btn-success" onclick="saveSection('section3')">保存数据</button>
+          <button class="btn btn-sm btn-danger" onclick="resetSection('section3')">重置</button>
+        </div>
+      </div>
+      <div class="freight-section-body" id="section3">
+        <div class="btn-group" style="margin-bottom:16px">
+          <button class="btn btn-accent" onclick="calculateQuote()">生成装柜方案与报价</button>
+        </div>
+        <div id="quoteResult">
+          <div class="empty-state">
+            <div class="icon">🧮</div>
+            <p>请先完成板块1和板块2，然后点击"生成装柜方案与报价"</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="note-box">
-    <strong>⚠️ 费用说明：</strong><br>
-    1. 以上运费为2026年市场参考价格，实际费用以货代实时报价为准，海运价格波动较大，建议出货前重新确认。<br>
-    2. 费用仅包含海/空运费及基本附加费，不含目的港清关费、关税、增值税、目的港派送费、保险费等。<br>
-    3. 海运按LCL拼箱方式估算，货量达到整柜(20GP/40GP/40HQ)时建议按整柜询价，通常比拼箱更经济。<br>
-    4. 玻利维亚、巴拉圭为内陆国，海运需经智利/秘鲁/阿根廷/巴西港口转运，费用含转运段。<br>
-    5. LED显示屏属电子产品，部分国家可能需要特定认证（如巴西INMETRO、墨西哥NOM），请提前确认清关要求。<br>
-    6. 发货地惠州默认经深圳盐田港/宝安机场出运，香港默认经葵青码头/香港国际机场出运。
+    <!-- 板块5：船公司运费数据管理 -->
+    <div class="freight-section-card">
+      <div class="freight-section-header">
+        <div class="fs-title"><span class="fs-num">5</span><h2>船公司运费数据管理</h2></div>
+        <div>
+          <button class="btn btn-sm btn-success" onclick="saveSection('section5')">保存数据</button>
+          <button class="btn btn-sm btn-danger" onclick="resetSection('section5')">重置</button>
+        </div>
+      </div>
+      <div class="freight-section-body" id="section5">
+        <div class="info-box">
+          参考船司：COSCO / Evergreen / OOCL / MSC / Maersk 等。显示从深圳蛇口/盐田/中国香港到拉美加勒比海各港口的实时运费（可编辑）。数据会自动应用到上方板块1的装柜报价计算。
+        </div>
+
+        <!-- 汇率设置 -->
+        <div class="exchange-box">
+          <span style="font-weight:700">系统汇率：</span>
+          <span>1 USD =</span>
+          <input type="number" class="rate-input" id="exchangeRate" value="7.25" step="0.01" onchange="updateExchangeRate()">
+          <span>CNY</span>
+          <span style="color:var(--text-light);font-size:12px;margin-left:10px">（深圳本地费用CNY将自动换算为USD）</span>
+        </div>
+
+        <!-- 倍数调价 -->
+        <div class="multiplier-box">
+          <span class="label">批量倍数调价：</span>
+          <input type="number" id="priceMultiplier" value="1.00" step="0.01" min="0.01">
+          <span style="font-size:13px;color:var(--text-light)">倍数（如1.6表示运费×1.6）</span>
+          <span style="font-size:12px;color:var(--success);font-weight:600;margin-left:8px">仅调整20GP/40GP/40HQ/拼箱价格，航程天数不变</span>
+          <button class="btn btn-accent" onclick="applyMultiplier()">应用倍数</button>
+          <button class="btn btn-outline" onclick="resetMultiplier()">恢复原价</button>
+        </div>
+
+        <!-- 批量航程天数调整 -->
+        <div class="multiplier-box" style="background:linear-gradient(135deg,#f0f7ff 0%,#e0ecff 100%);border-color:#3182ce">
+          <span class="label" style="color:#3182ce">批量航程天数调整：</span>
+          <input type="number" id="transitDaysAdjust" value="0" step="1">
+          <span style="font-size:13px;color:var(--text-light)">天数（正数增加，负数减少，0不变化）</span>
+          <span style="font-size:12px;color:var(--success);font-weight:600;margin-left:8px">仅调整航程天数，运费价格不变</span>
+          <button class="btn btn-accent" style="background:#3182ce" onclick="applyTransitDays()">应用天数</button>
+          <button class="btn btn-outline" onclick="resetTransitDays()">恢复原天数</button>
+        </div>
+
+        <!-- 船公司运费表 -->
+        <div class="warning-box">
+          下方表格为各船司运费数据（USD），可逐格编辑。点击"保存数据"持久化，"发布此版价格"将冻结当前版本，"重置"恢复到上次保存状态。
+        </div>
+
+        <!-- 起运港筛选 -->
+        <div class="form-row" style="margin-bottom:16px">
+          <div class="form-col">
+            <label>起运港筛选</label>
+            <select id="rateOriginFilter" onchange="renderRateTable()">
+              <option value="ALL">全部起运港</option>
+              <option value="深圳蛇口">深圳蛇口</option>
+              <option value="深圳盐田">深圳盐田</option>
+              <option value="香港">香港</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label>船公司筛选</label>
+            <select id="rateCarrierFilter" onchange="renderRateTable()">
+              <option value="ALL">全部船公司</option>
+              <option value="COSCO">COSCO 中远海运</option>
+              <option value="Evergreen">Evergreen 长荣海运</option>
+              <option value="OOCL">OOCL 东方海外</option>
+              <option value="MSC">MSC 地中海航运</option>
+              <option value="Maersk">Maersk 马士基</option>
+              <option value="Yangming">Yangming 阳明海运</option>
+              <option value="ONE">ONE 海洋网联</option>
+              <option value="WanHai">WanHai 万海航运</option>
+              <option value="PIL">PIL 太平船务</option>
+              <option value="ZIM">ZIM 以星航运</option>
+              <option value="CMA">CMA 达飞轮船</option>
+              <option value="Hapag-Lloyd">Hapag-Lloyd 赫伯罗特</option>
+              <option value="HMM">HMM 韩新海运</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label>搜索目的港</label>
+            <input type="text" id="rateSearchPort" placeholder="输入目的港名称搜索" oninput="renderRateTable()">
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-bottom:16px">
+          <button class="btn btn-primary" onclick="addRateRow()">新增运费行</button>
+          <button class="btn btn-success" onclick="publishRates()">发布此版价格</button>
+          <button class="btn btn-warning" onclick="exportRates()">导出运费表（CSV）</button>
+          <button class="btn btn-danger" onclick="resetRateTable()">重置价格</button>
+        </div>
+
+        <div class="table-container" id="rateTableContainer">
+          <table class="data-table" id="rateTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- 深圳本地费用 -->
+        <div style="margin-top:24px">
+          <h3 style="font-size:15px;margin-bottom:12px;color:var(--primary)">深圳本地费用（CNY → 自动换算USD）</h3>
+          <div class="table-container">
+            <table class="data-table" id="localFeeTable">
+              <thead>
+                <tr>
+                  <th>费用项目</th>
+                  <th>费用明细</th>
+                  <th>金额（CNY）</th>
+                  <th>金额（USD）</th>
+                  <th>备注</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="localFeeBody"></tbody>
+            </table>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="addLocalFeeRow()">添加本地费用项</button>
+            <button class="btn btn-success" onclick="saveLocalFees()">保存本地费用</button>
+          </div>
+        </div>
+
+        <!-- 已发布版本 -->
+        <div style="margin-top:24px">
+          <h3 style="font-size:15px;margin-bottom:12px;color:var(--primary)">已发布价格版本</h3>
+          <div class="table-container">
+            <table class="data-table">
+              <thead><tr><th>版本号</th><th>发布时间</th><th>发布人</th><th>运费行数</th><th>汇率</th><th>操作</th></tr></thead>
+              <tbody id="publishedVersionsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>⚠️ 费用说明：</strong><br>
+      1. 以上运费为2026年市场参考价格，实际费用以货代实时报价为准，海运价格波动较大，建议出货前重新确认。<br>
+      2. 费用仅包含海/空运费及基本附加费，不含目的港清关费、关税、增值税、目的港派送费、保险费等。<br>
+      3. 整柜(20GP/40GP/40HQ)方案已按空间利用率与浪费空间自动优选最经济组合，散货按体积或重量取大值计费。<br>
+      4. 空运按 1CBM≈167KG 体积重计费，快递按 1CBM≈200KG 体积重计费，取实际重与体积重较大者。<br>
+      5. LED显示屏属电子产品，部分国家可能需要特定认证（如巴西INMETRO、墨西哥NOM），请提前确认清关要求。
+    </div>
+
   </div>
 </div>
 
@@ -838,7 +1058,7 @@ let selectedDest = null;
 let selectedDestPort = null;
 let qtyMap = {}; // 产品件数映射 index -> qty
 let currentPage = 1; // 当前分页页码
-const PAGE_SIZE = 50; // 每页显示条数
+const PAGE_SIZE = 20; // 每页显示条数
 
 // ==================== Tab切换 ====================
 function switchTab(tab) {
@@ -1000,15 +1220,6 @@ function updateSummary() {
   document.getElementById('sumWeight').textContent = totalW.toFixed(1);
   document.getElementById('sumVolume').textContent = totalV.toFixed(4);
   document.getElementById('sumCases').textContent = totalPanels;
-
-  // 货柜估算：按体积和重量取大值
-  const vol20 = totalV/25, wt20 = totalW/21000;
-  const vol40 = totalV/55, wt40 = totalW/26000;
-  const vol40hq = totalV/68, wt40hq = totalW/26000;
-
-  document.getElementById('sum20gp').textContent = Math.ceil(Math.max(vol20, wt20)) || 0;
-  document.getElementById('sum40gp').textContent = Math.ceil(Math.max(vol40, wt40)) || 0;
-  document.getElementById('sum40hq').textContent = Math.ceil(Math.max(vol40hq, wt40hq)) || 0;
 }
 
 function resetFilter() {
@@ -1067,235 +1278,7 @@ function jumpToPage() {
   }
 }
 
-function viewContainerEffect() {
-  // 计算当前货物汇总
-  let totalW=0, totalV=0, totalCases=0;
-  for(const [idx, qty] of Object.entries(qtyMap)) {
-    const p = PRODUCTS[parseInt(idx)];
-    if(p && qty>0) {
-      totalW += p.weight * qty;
-      totalV += p.volume * qty;
-      totalCases += qty;
-    }
-  }
 
-  // 货柜参数
-  const containers = {
-    '20GP': { name:'20GP普柜', length:5.69, width:2.35, height:2.18, volume:33, maxW:21000, color:'#fa8c16' },
-    '40GP': { name:'40GP普柜', length:12.03, width:2.35, height:2.18, volume:67, maxW:26000, color:'#1a3a5c' },
-    '40HQ': { name:'40HQ高柜', length:12.03, width:2.35, height:2.48, volume:76, maxW:26000, color:'#fa8c16' }
-  };
-
-  function calcContainer(type) {
-    const c = containers[type];
-    const needCount = Math.ceil(Math.max(totalV/c.volume, totalW/c.maxW));
-    const fillRate = Math.min(totalV/c.volume*100, 100);
-    // 计算每个货柜的装载情况
-    const eachContainer = [];
-    let remainingV = totalV;
-    for(let i=0; i<needCount; i++) {
-      const fillV = Math.min(remainingV, c.volume);
-      const rate = (fillV / c.volume) * 100;
-      eachContainer.push({ idx: i+1, fillV, rate });
-      remainingV -= fillV;
-    }
-    return { needCount, fillRate, eachContainer };
-  }
-
-  const modal = document.createElement('div');
-  modal.className = 'modal-mask';
-  modal.onclick = (e) => { if(e.target===modal) modal.remove(); };
-
-  function renderTab(activeType) {
-    const c = containers[activeType];
-    const r = calcContainer(activeType);
-
-    // 获取已输入件数且有有效尺寸的货物
-    const cargoItems = [];
-    for(const [idx, qty] of Object.entries(qtyMap)) {
-      const p = PRODUCTS[parseInt(idx)];
-      if(p && qty > 0 && p.length > 0 && p.width > 0 && p.height > 0 && p.weight > 0) {
-        cargoItems.push({ ...p, qty });
-      }
-    }
-
-    // 为每个产品系列分配颜色
-    const colorPalette = ['#1890ff','#fa8c16','#52c41a','#f5222d','#722ed1','#13c2c2','#eb2f96','#faad14','#2f54eb','#a0d911','#fa541c','#597ef7'];
-    const seriesColors = {};
-    let ci = 0;
-    cargoItems.forEach(item => {
-      if(!seriesColors[item.series]) {
-        seriesColors[item.series] = colorPalette[ci % colorPalette.length];
-        ci++;
-      }
-    });
-
-    // 绘制单个货柜的细化装箱图（长×高侧视图）
-    function drawContainer(containerData, fillItems) {
-      const L = containerData.length;
-      const H = containerData.height;
-      const W = containerData.width;
-
-      // 展开所有箱子，按高度从大到小排序（先放大箱子）
-      const allBoxes = [];
-      fillItems.forEach(item => {
-        for(let i = 0; i < item.qty; i++) {
-          allBoxes.push({
-            series: item.series,
-            method: item.methodDetail || item.method,
-            length: item.length,
-            width: item.width,
-            height: item.height,
-            weight: item.weight,
-            color: seriesColors[item.series]
-          });
-        }
-      });
-      allBoxes.sort((a, b) => b.height - a.height);
-
-      // 贪心排列：从下到上、从左到右（长×高切面）
-      const placed = [];
-      let curY = 0, curX = 0, rowH = 0;
-      allBoxes.forEach(box => {
-        if(curX + box.length > L + 0.001) {
-          curY += rowH;
-          curX = 0;
-          rowH = 0;
-        }
-        placed.push({ ...box, x: curX, y: curY });
-        curX += box.length;
-        rowH = Math.max(rowH, box.height);
-      });
-      const filledH = curY + rowH;
-
-      // 生成箱子HTML（按实际尺寸比例定位）
-      const boxesHtml = placed.map(box => {
-        const leftPct = (box.x / L) * 100;
-        const bottomPct = (box.y / H) * 100;
-        const wPct = (box.length / L) * 100;
-        const hPct = (box.height / H) * 100;
-        const canShow = wPct > 5 && hPct > 7;
-        return '<div class="cargo-box" style="left:' + leftPct.toFixed(2) + '%;bottom:' + bottomPct.toFixed(2) + '%;width:' + wPct.toFixed(2) + '%;height:' + hPct.toFixed(2) + '%;background:' + box.color + ';" title="' + box.series + ' | ' + box.method + ' | ' + box.length + 'x' + box.width + 'x' + box.height + 'm | ' + box.weight + 'kg">' +
-          (canShow ? '<span class="cargo-name">' + box.series + '</span><span class="cargo-size">' + box.length + 'x' + box.height + 'm</span>' : '') +
-        '</div>';
-      }).join('');
-
-      // 底部刻度
-      const scaleX = [];
-      for(let i = 0; i <= 4; i++) {
-        scaleX.push('<span>' + (L * i / 4).toFixed(1) + 'm</span>');
-      }
-
-      const emptyTip = placed.length === 0 ? '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#bbb;font-size:13px;">暂无货物数据</div>' : '';
-
-      return {
-        html: '<div class="container-detail-wrap">' +
-          '<div class="container-detail-title">' + containerData.name + ' 装柜侧视图（长×高切面，按实际尺寸比例）</div>' +
-          '<div style="padding-left:8px;">' +
-            '<div class="container-frame" style="aspect-ratio:' + L + '/' + H + ';">' +
-              '<div class="container-grid"></div>' +
-              boxesHtml +
-              emptyTip +
-            '</div>' +
-            '<div class="container-scale-x">' + scaleX.join('') + '</div>' +
-          '</div>' +
-          '<div style="text-align:center;font-size:12px;color:#888;margin-top:10px;line-height:1.7;">' +
-            '货柜内部：' + L + 'm(长) × ' + W + 'm(宽) × ' + H + 'm(高) | ' +
-            '已装 <strong style="color:#1890ff;">' + placed.length + '</strong> 箱 | ' +
-            '填充高度 <strong style="color:#fa8c16;">' + filledH.toFixed(2) + '</strong>m / ' + H + 'm (' + (filledH/H*100).toFixed(1) + '%)' +
-          '</div>' +
-        '</div>',
-        placedCount: placed.length,
-        filledHeight: filledH
-      };
-    }
-
-    // 生成货柜示意图
-    let containerHtml = '';
-    if(r.needCount <= 1) {
-      const draw = drawContainer(c, cargoItems);
-      containerHtml = draw.html;
-    } else {
-      // 多货柜：按顺序平均分配货物到各货柜
-      const totalBoxes = cargoItems.reduce((s, i) => s + i.qty, 0);
-      const perContainer = Math.ceil(totalBoxes / r.needCount);
-      let remaining = cargoItems.map(i => ({ ...i }));
-      const containerCards = [];
-      for(let ci2 = 0; ci2 < r.needCount; ci2++) {
-        let count = 0;
-        const items = [];
-        while(count < perContainer && remaining.length > 0) {
-          const item = remaining[0];
-          const take = Math.min(item.qty, perContainer - count);
-          items.push({ ...item, qty: take });
-          count += take;
-          item.qty -= take;
-          if(item.qty <= 0) remaining.shift();
-        }
-        const draw = drawContainer(c, items);
-        containerCards.push(
-          '<div>' +
-            '<div style="text-align:center;margin-bottom:8px;font-size:13px;font-weight:600;color:#555;">第 ' + (ci2+1) + ' 个货柜</div>' +
-            draw.html +
-          '</div>'
-        );
-      }
-      const cols = r.needCount <= 2 ? r.needCount : 2;
-      containerHtml = '<div style="display:grid;grid-template-columns:repeat(' + cols + ',1fr);gap:16px;">' + containerCards.join('') + '</div>';
-    }
-
-    // 图例
-    const legendHtml = Object.keys(seriesColors).length > 0 ?
-      '<div class="cargo-legend">' +
-        Object.entries(seriesColors).map(([s, color]) =>
-          '<div class="cargo-legend-item"><span class="cargo-legend-color" style="background:' + color + ';"></span><span>' + s + '</span></div>'
-        ).join('') +
-      '</div>' : '';
-
-    return `
-      <div class="modal-box" style="max-width:1100px;max-height:95vh;">
-        <div class="modal-title">
-          <h3 style="font-size:20px;">装柜效果图</h3>
-          <button class="modal-close" onclick="this.closest('.modal-mask').remove()">×</button>
-        </div>
-        <div class="modal-body">
-        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-          ${Object.keys(containers).map(t => `
-            <button onclick="window._switchContainerTab('${t}')" style="padding:8px 24px;border:none;border-radius:4px;cursor:pointer;font-size:14px;font-weight:500;${t===activeType?'background:#fa8c16;color:#fff;':'background:#f0f0f0;color:#666;'}">${t}</button>
-          `).join('')}
-        </div>
-        ${containerHtml}
-        ${legendHtml}
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;">
-          <div style="background:#f5f7fa;padding:16px;border-radius:6px;">
-            <div style="font-size:13px;color:#999;margin-bottom:6px;">货物体积</div>
-            <div style="font-size:20px;font-weight:700;color:#1890ff;">${totalV.toFixed(2)} CBM</div>
-          </div>
-          <div style="background:#f5f7fa;padding:16px;border-radius:6px;">
-            <div style="font-size:13px;color:#999;margin-bottom:6px;">货物总重量</div>
-            <div style="font-size:20px;font-weight:700;color:#fa8c16;">${totalW.toFixed(0)} KG</div>
-          </div>
-          <div style="background:#f5f7fa;padding:16px;border-radius:6px;">
-            <div style="font-size:13px;color:#999;margin-bottom:6px;">体积填充率</div>
-            <div style="font-size:20px;font-weight:700;color:#f5222d;">${r.fillRate.toFixed(1)}%</div>
-          </div>
-          <div style="background:#fff7e6;padding:16px;border-radius:6px;border:1px solid #ffd591;">
-            <div style="font-size:13px;color:#999;margin-bottom:6px;">建议需要货柜</div>
-            <div style="font-size:20px;font-weight:700;color:#fa8c16;">${r.needCount} 个 ${activeType}</div>
-          </div>
-        </div>
-      </div>
-      </div>
-    `;
-  }
-
-  modal.innerHTML = renderTab('20GP');
-  document.body.appendChild(modal);
-
-  window._switchContainerTab = function(type) {
-    modal.innerHTML = renderTab(type);
-  };
-}
 
 function updateSyncDisplay() {
   let totalW=0, totalV=0, totalCases=0;
@@ -1312,211 +1295,1425 @@ function updateSyncDisplay() {
   document.getElementById('syncCases').textContent = totalCases;
 }
 
+// 从尺寸速算带入：把已填写的打包方案转换为货物打包数据（箱型/尺寸/数量/重量）
 function syncFromSize() {
-  let totalW=0, totalV=0, totalCases=0;
+  const rows = [];
   for(const [idx, qty] of Object.entries(qtyMap)) {
     const p = PRODUCTS[parseInt(idx)];
-    if(p && qty>0) {
-      totalW += p.weight * qty;
-      totalV += p.volume * qty;
-      totalCases += qty;
+    if(p && qty>0 && p.length>0 && p.width>0 && p.height>0) {
+      rows.push({
+        id: Date.now() + Math.random()*1000 + Math.floor(Math.random()*10000),
+        boxType: p.methodDetail || p.method || '纸箱',
+        length: p.length,
+        width: p.width,
+        height: p.height,
+        qty: qty,
+        grossWeight: p.weight,
+        netWeight: p.weight,
+        remark: (p.series||'') + ' ' + (p.contents||'')
+      });
     }
   }
-  document.getElementById('cargoWeight').value = totalW.toFixed(1);
-  document.getElementById('cargoVolume').value = totalV.toFixed(4);
-  document.getElementById('cargoCases').value = totalCases;
-  calcFreight();
-}
-
-// ==================== 运费测算 ====================
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById('modeSea').classList.toggle('active', mode==='sea');
-  document.getElementById('modeAir').classList.toggle('active', mode==='air');
-
-  if(mode==='sea') {
-    document.getElementById('rateBaseLabel').textContent = '基础运费 (USD/CBM)';
-    document.getElementById('originPortLabel').textContent = '起运港';
-    document.getElementById('rateMin').value = 1;
-    if(selectedDest) document.getElementById('rateBase').value = selectedDest.seaRate;
-  } else {
-    document.getElementById('rateBaseLabel').textContent = '基础运费 (USD/KG)';
-    document.getElementById('originPortLabel').textContent = '起运机场';
-    document.getElementById('rateMin').value = 45;
-    if(selectedDest) document.getElementById('rateBase').value = selectedDest.airRate;
-  }
-
-  onOriginChange();
-  updateDestPortOptions();
-  calcFreight();
-}
-
-function onOriginChange() {
-  const originId = document.getElementById('originSelect').value;
-  selectedOrigin = ORIGINS.find(o=>o.id===originId);
-  const sel = document.getElementById('originPortSelect');
-  sel.innerHTML = '';
-
-  const ports = currentMode==='sea' ? selectedOrigin.seaPorts : selectedOrigin.airports;
-  ports.forEach(p => {
-    const opt = document.createElement('option');
-    opt.value = p.code;
-    opt.textContent = p.name;
-    sel.appendChild(opt);
-  });
-  calcFreight();
-}
-
-function onDestSearch() {
-  const q = document.getElementById('destSearch').value.trim().toLowerCase();
-  const dropdown = document.getElementById('destDropdown');
-
-  if(!q) {
-    // 显示全部国家
-    renderDestDropdown(DESTINATIONS);
-    dropdown.classList.add('show');
+  if(rows.length === 0) {
+    showToast('尺寸速算中暂无已填写件数的有效产品，请先在"尺寸速算"页填写打包件数', 'warning');
     return;
   }
-
-  const results = DESTINATIONS.filter(d => {
-    // 搜索国家名、英文名、代码
-    if(d.country.toLowerCase().includes(q)) return true;
-    if(d.countryEn.toLowerCase().includes(q)) return true;
-    if(d.code.toLowerCase().includes(q)) return true;
-    // 搜索港口
-    if(d.seaPorts.some(p => p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q))) return true;
-    // 搜索机场
-    if(d.airports.some(a => a.name.toLowerCase().includes(q) || a.code.toLowerCase().includes(q))) return true;
-    return false;
-  });
-
-  renderDestDropdown(results);
-  dropdown.classList.add('show');
+  state.cargoData = rows;
+  renderCargoPreview();
+  persistState();
+  showToast('已从尺寸速算带入 ' + rows.length + ' 条货物数据，请填写板块1后生成报价', 'success');
+  const btn = document.querySelector('#panel-freight .btn-accent');
+  if(btn) btn.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
-function renderDestDropdown(list) {
-  const dropdown = document.getElementById('destDropdown');
-  if(list.length===0) {
-    dropdown.innerHTML = '<div class="search-item"><div class="country">无匹配结果</div></div>';
+/* ========================================================================
+   运费测算系统（融合自第二套系统）
+======================================================================== */
+/* ---------------- 数据定义 ---------------- */
+const CHINA_PORTS = {
+  "中国": ["深圳蛇口", "深圳盐田", "上海", "宁波", "广州南沙", "青岛", "天津", "厦门", "大连", "珠海"],
+  "中国香港": ["香港"]
+};
+
+const LATAM_PORTS = {
+  "墨西哥": ["曼萨尼约(Manzanillo)", "韦拉克鲁斯(Veracruz)", "拉萨罗卡德纳斯(Lazaro Cardenas)", "恩塞纳达(Ensenada)"],
+  "巴拿马": ["巴尔博亚(Balboa)", "科隆(Colon)", "曼萨尼约巴拿马(Manzanillo PA)"],
+  "哥伦比亚": ["卡塔赫纳(Cartagena)", "巴兰基亚(Barranquilla)", "布埃纳文图拉(Buenaventura)"],
+  "委内瑞拉": ["拉瓜伊拉(La Guaira)", "卡贝略港(Puerto Cabello)"],
+  "巴西": ["桑托斯(Santos)", "伊塔雅伊(Itajai)", "巴拉那瓜(Paranagua)", "里约热内卢(Rio de Janeiro)", "萨尔瓦多(Salvador)", "维多利亚(Vitoria)"],
+  "阿根廷": ["布宜诺斯艾利斯(Buenos Aires)", "萨拉特(Zarate)"],
+  "智利": ["圣安东尼奥(San Antonio)", "瓦尔帕莱索(Valparaiso)", "圣维森特(San Vicente)"],
+  "秘鲁": ["卡亚俄(Callao)"],
+  "厄瓜多尔": ["瓜亚基尔(Guayaquil)"],
+  "乌拉圭": ["蒙得维的亚(Montevideo)"],
+  "多米尼加": ["考塞多(Caucedo)", "里奥海纳(Rio Haina)", "圣多明各(Santo Domingo)"],
+  "古巴": ["哈瓦那(Havana)", "圣地亚哥(Santiago de Cuba)"],
+  "牙买加": ["金斯敦(Kingston)"],
+  "海地": ["太子港(Port-au-Prince)"],
+  "巴巴多斯": ["布里奇敦(Bridgetown)"],
+  "特立尼达和多巴哥": ["西班牙港(Port of Spain)"],
+  "巴哈马": ["拿骚(Nassau)", "弗里波特(Freeport)"],
+  "哥斯达黎加": ["利蒙港(Puerto Limon)", "卡尔德拉(Caldera)"],
+  "危地马拉": ["圣何塞港(Puerto Quetzal)", "圣托马斯德卡斯蒂利亚(Santo Tomas)"],
+  "洪都拉斯": ["科尔特斯港(Puerto Cortes)", "圣洛伦索(San Lorenzo)"],
+  "尼加拉瓜": ["科林托(Corinto)"],
+  "萨尔瓦多": ["阿卡胡特拉(Acajutla)"],
+  "伯利兹": ["伯利兹城(Belize City)"],
+  "波多黎各": ["圣胡安(San Juan)"],
+  "阿鲁巴": ["奥拉涅斯塔德(Oranjestad)"],
+  "圣基茨和尼维斯": ["巴斯特尔(Basseterre)"],
+  "安提瓜和巴布达": ["圣约翰斯(St. John's)"],
+  "多米尼克": ["罗索(Roseau)"],
+  "圣卢西亚": ["卡斯特里(Castries)"],
+  "格林纳达": ["圣乔治(St. George's)"],
+  "库拉索": ["威廉斯塔德(Willemstad)"]
+};
+
+// 全世界其他国家/地区（不含拉美）的主要港口
+const WORLD_DEST = {
+  // ---- 东亚 ----
+  "日本": ["东京(Tokyo)", "横滨(Yokohama)", "大阪(Osaka)", "神户(Kobe)", "名古屋(Nagoya)", "博多(Hakata)"],
+  "韩国": ["釜山(Busan)", "仁川(Incheon)", "光阳(Gwangyang)", "蔚山(Ulsan)"],
+  "蒙古": ["乌兰巴托(Ulaanbaatar)"],
+  // ---- 东南亚 ----
+  "新加坡": ["新加坡(Singapore)"],
+  "马来西亚": ["巴生港(Port Klang)", "槟城(Penang)", "丹戎帕拉帕斯(Tanjung Pelepas)", "巴西古当(Pasir Gudang)"],
+  "泰国": ["林查班(Laem Chabang)", "曼谷(Bangkok)"],
+  "越南": ["胡志明市(Ho Chi Minh City)", "海防(Haiphong)", "岘港(Da Nang)", "盖梅(Cai Mep)"],
+  "印度尼西亚": ["雅加达(Jakarta)", "泗水(Surabaya)", "三宝垄(Semarang)", "勿拉湾(Belawan)"],
+  "菲律宾": ["马尼拉(Manila)", "宿务(Cebu)", "苏比克(Subic)", "卡加延(Cagayan)"],
+  "柬埔寨": ["西哈努克(Sihanoukville)", "金边(Phnom Penh)"],
+  "缅甸": ["仰光(Yangon)"],
+  "文莱": ["穆阿拉(Muara)"],
+  "老挝": ["万象(Vientiane)"],
+  "东帝汶": ["帝力(Dili)"],
+  // ---- 南亚 ----
+  "印度": ["那瓦舍瓦(Nhava Sheva)", "钦奈(Chennai)", "孟买(Mumbai)", "科钦(Cochin)", "加尔各答(Kolkata)", "蒙德拉(Mundra)"],
+  "巴基斯坦": ["卡拉奇(Karachi)", "卡西姆港(Port Qasim)"],
+  "孟加拉国": ["吉大港(Chittagong)", "蒙格拉(Mongla)"],
+  "斯里兰卡": ["科伦坡(Colombo)"],
+  "马尔代夫": ["马累(Male)"],
+  "尼泊尔": ["加德满都(Kathmandu)"],
+  "不丹": ["廷布(Thimphu)"],
+  "阿富汗": ["喀布尔(Kabul)", "坎大哈(Kandahar)"],
+  // ---- 中亚 ----
+  "哈萨克斯坦": ["阿拉木图(Almaty)", "阿斯塔纳(Astana)"],
+  "乌兹别克斯坦": ["塔什干(Tashkent)"],
+  "吉尔吉斯斯坦": ["比什凯克(Bishkek)"],
+  "塔吉克斯坦": ["杜尚别(Dushanbe)"],
+  "土库曼斯坦": ["阿什哈巴德(Ashgabat)"],
+  // ---- 中东 ----
+  "沙特阿拉伯": ["吉达(Jeddah)", "达曼(Dammam)", "利雅得(Riyadh)"],
+  "阿联酋": ["迪拜(Dubai)", "杰贝阿里(Jebel Ali)", "阿布扎比(Abu Dhabi)", "沙迦(Sharjah)"],
+  "卡塔尔": ["多哈(Doha)"],
+  "科威特": ["科威特城(Kuwait City)"],
+  "巴林": ["巴林(Bahrain)"],
+  "阿曼": ["马斯喀特(Muscat)", "塞拉莱(Salalah)", "苏哈尔(Sohar)"],
+  "以色列": ["海法(Haifa)", "阿什杜德(Ashdod)"],
+  "土耳其": ["伊斯坦布尔(Istanbul)", "伊兹密尔(Izmir)", "梅尔辛(Mersin)", "盖姆利克(Gemlik)"],
+  "伊朗": ["阿巴斯港(Bandar Abbas)"],
+  "伊拉克": ["乌姆盖斯尔(Umm Qasr)"],
+  "约旦": ["亚喀巴(Aqaba)"],
+  "黎巴嫩": ["贝鲁特(Beirut)"],
+  "叙利亚": ["拉塔基亚(Latakia)"],
+  "也门": ["亚丁(Aden)"],
+  "格鲁吉亚": ["波季(Poti)"],
+  "阿塞拜疆": ["巴库(Baku)"],
+  "亚美尼亚": ["埃里温(Yerevan)"],
+  "塞浦路斯": ["利马索尔(Limassol)"],
+  // ---- 欧洲 ----
+  "英国": ["费利克斯托(Felixstowe)", "南安普顿(Southampton)", "伦敦(London)", "利物浦(Liverpool)"],
+  "德国": ["汉堡(Hamburg)", "不来梅哈芬(Bremerhaven)", "威廉港(Wilhelmshaven)"],
+  "法国": ["勒阿弗尔(Le Havre)", "马赛(Marseille)", "敦刻尔克(Dunkirk)"],
+  "意大利": ["热那亚(Genoa)", "的里雅斯特(Trieste)", "那不勒斯(Naples)", "拉斯佩齐亚(La Spezia)"],
+  "西班牙": ["瓦伦西亚(Valencia)", "巴塞罗那(Barcelona)", "阿尔赫西拉斯(Algeciras)", "毕尔巴鄂(Bilbao)"],
+  "葡萄牙": ["里斯本(Lisbon)", "莱克索斯(Leixoes)", "锡尼什(Sines)"],
+  "荷兰": ["鹿特丹(Rotterdam)"],
+  "比利时": ["安特卫普(Antwerp)", "泽布吕赫(Zeebrugge)"],
+  "卢森堡": ["卢森堡(Luxembourg)"],
+  "瑞士": ["巴塞尔(Basel)"],
+  "奥地利": ["维也纳(Vienna)"],
+  "波兰": ["格但斯克(Gdansk)", "格丁尼亚(Gdynia)"],
+  "捷克": ["布拉格(Prague)"],
+  "斯洛伐克": ["布拉迪斯拉发(Bratislava)"],
+  "匈牙利": ["布达佩斯(Budapest)"],
+  "罗马尼亚": ["康斯坦察(Constanta)"],
+  "保加利亚": ["瓦尔纳(Varna)", "布尔加斯(Burgas)"],
+  "希腊": ["比雷埃夫斯(Piraeus)", "塞萨洛尼基(Thessaloniki)"],
+  "丹麦": ["哥本哈根(Copenhagen)", "奥胡斯(Aarhus)"],
+  "瑞典": ["哥德堡(Gothenburg)", "斯德哥尔摩(Stockholm)"],
+  "挪威": ["奥斯陆(Oslo)", "卑尔根(Bergen)"],
+  "芬兰": ["赫尔辛基(Helsinki)", "科特卡(Kotka)"],
+  "爱尔兰": ["都柏林(Dublin)"],
+  "冰岛": ["雷克雅未克(Reykjavik)"],
+  "克罗地亚": ["里耶卡(Rijeka)", "斯普利特(Split)"],
+  "塞尔维亚": ["贝尔格莱德(Belgrade)"],
+  "斯洛文尼亚": ["科佩尔(Koper)"],
+  "乌克兰": ["敖德萨(Odesa)", "基辅(Kyiv)"],
+  "俄罗斯": ["圣彼得堡(St Petersburg)", "莫斯科(Moscow)", "符拉迪沃斯托克(Vladivostok)", "新罗西斯克(Novorossiysk)"],
+  "立陶宛": ["克莱佩达(Klaipeda)"],
+  "拉脱维亚": ["里加(Riga)"],
+  "爱沙尼亚": ["塔林(Tallinn)"],
+  "白俄罗斯": ["明斯克(Minsk)"],
+  "摩尔多瓦": ["基希讷乌(Chisinau)"],
+  "马耳他": ["瓦莱塔(Valletta)"],
+  "阿尔巴尼亚": ["都拉斯(Durres)"],
+  "北马其顿": ["斯科普里(Skopje)"],
+  "波黑": ["萨拉热窝(Sarajevo)"],
+  "黑山": ["巴尔(Bar)"],
+  // ---- 北美洲（除墨西哥） ----
+  "美国": ["洛杉矶(Los Angeles)", "长滩(Long Beach)", "纽约(New York)", "萨凡纳(Savannah)", "休斯顿(Houston)", "西雅图(Seattle)", "奥克兰(Oakland)", "迈阿密(Miami)", "查尔斯顿(Charleston)"],
+  "加拿大": ["温哥华(Vancouver)", "多伦多(Toronto)", "蒙特利尔(Montreal)", "哈利法克斯(Halifax)", "卡尔加里(Calgary)"],
+  // ---- 大洋洲 ----
+  "澳大利亚": ["悉尼(Sydney)", "墨尔本(Melbourne)", "布里斯班(Brisbane)", "弗里曼特尔(Fremantle)", "阿德莱德(Adelaide)"],
+  "新西兰": ["奥克兰(Auckland)", "惠灵顿(Wellington)", "利特尔顿(Lyttelton)"],
+  "斐济": ["苏瓦(Suva)"],
+  "巴布亚新几内亚": ["莫尔兹比港(Port Moresby)"],
+  "萨摩亚": ["阿皮亚(Apia)"],
+  "汤加": ["努库阿洛法(Nuku'alofa)"],
+  "瓦努阿图": ["维拉港(Port Vila)"],
+  "所罗门群岛": ["霍尼亚拉(Honiara)"],
+  // ---- 非洲 ----
+  "南非": ["德班(Durban)", "开普敦(Cape Town)", "约翰内斯堡(Johannesburg)"],
+  "尼日利亚": ["拉各斯(Lagos)", "阿帕帕(Apapa)"],
+  "埃及": ["亚历山大(Alexandria)", "塞得港(Port Said)", "开罗(Cairo)"],
+  "肯尼亚": ["蒙巴萨(Mombasa)", "内罗毕(Nairobi)"],
+  "坦桑尼亚": ["达累斯萨拉姆(Dar es Salaam)"],
+  "摩洛哥": ["卡萨布兰卡(Casablanca)", "丹吉尔(Tangier)"],
+  "阿尔及利亚": ["阿尔及尔(Algiers)", "奥兰(Oran)"],
+  "突尼斯": ["突尼斯(Tunis)", "斯法克斯(Sfax)"],
+  "加纳": ["特马(Tema)"],
+  "科特迪瓦": ["阿比让(Abidjan)"],
+  "塞内加尔": ["达喀尔(Dakar)"],
+  "喀麦隆": ["杜阿拉(Douala)"],
+  "安哥拉": ["罗安达(Luanda)"],
+  "莫桑比克": ["马普托(Maputo)"],
+  "埃塞俄比亚": ["亚的斯亚贝巴(Addis Ababa)"],
+  "乌干达": ["坎帕拉(Kampala)"],
+  "卢旺达": ["基加利(Kigali)"],
+  "赞比亚": ["卢萨卡(Lusaka)"],
+  "津巴布韦": ["哈拉雷(Harare)"],
+  "博茨瓦纳": ["哈博罗内(Gaborone)"],
+  "纳米比亚": ["沃尔维斯湾(Walvis Bay)"],
+  "马达加斯加": ["塔马塔夫(Toamasina)"],
+  "毛里求斯": ["路易港(Port Louis)"],
+  "利比亚": ["的黎波里(Tripoli)"],
+  "苏丹": ["苏丹港(Port Sudan)"],
+  "刚果(金)": ["马塔迪(Matadi)"],
+  "刚果(布)": ["黑角(Pointe-Noire)"],
+  "吉布提": ["吉布提(Djibouti)"],
+  "索马里": ["摩加迪沙(Mogadishu)"],
+  "塞拉利昂": ["弗里敦(Freetown)"],
+  "几内亚": ["科纳克里(Conakry)"],
+  "贝宁": ["科托努(Cotonou)"],
+  "多哥": ["洛美(Lome)"],
+  "赤道几内亚": ["马拉博(Malabo)"],
+  "冈比亚": ["班珠尔(Banjul)"],
+  "厄立特里亚": ["马萨瓦(Massawa)"],
+  "佛得角": ["明德卢(Mindelo)"],
+  "利比里亚": ["蒙罗维亚(Monrovia)"],
+  "毛里塔尼亚": ["努瓦克肖特(Nouakchott)"]
+};
+
+const CONTAINER_SPECS = {
+  "20GP":  { name: "20'GP 普通柜",   L: 5.898, W: 2.352, H: 2.393, maxWeight: 28200, maxVol: 33.2 },
+  "40GP":  { name: "40'GP 普通柜",   L: 12.032, W: 2.352, H: 2.393, maxWeight: 26680, maxVol: 67.7 },
+  "40HQ":  { name: "40'HQ 高柜",    L: 12.032, W: 2.352, H: 2.698, maxWeight: 26510, maxVol: 76.4 },
+  "45HQ":  { name: "45'HQ 超高柜",   L: 13.556, W: 2.352, H: 2.698, maxWeight: 27800, maxVol: 86.0 },
+};
+
+// 2026年8月各航线参考运费（按目的国区域分级）
+const REGION_RATES = {
+  "墨西哥":       { r20: 1850, r40: 3350, r40hq: 3650, lcl: 65, days: 28 },
+  "巴拿马":       { r20: 1950, r40: 3550, r40hq: 3850, lcl: 68, days: 30 },
+  "哥伦比亚":     { r20: 2000, r40: 3600, r40hq: 3950, lcl: 70, days: 30 },
+  "委内瑞拉":     { r20: 2100, r40: 3800, r40hq: 4100, lcl: 72, days: 32 },
+  "巴西":         { r20: 2500, r40: 4500, r40hq: 4900, lcl: 88, days: 38 },
+  "阿根廷":       { r20: 2700, r40: 4850, r40hq: 5250, lcl: 95, days: 42 },
+  "智利":         { r20: 2250, r40: 4050, r40hq: 4400, lcl: 80, days: 35 },
+  "秘鲁":         { r20: 2200, r40: 3950, r40hq: 4300, lcl: 78, days: 34 },
+  "厄瓜多尔":     { r20: 2150, r40: 3880, r40hq: 4200, lcl: 76, days: 33 },
+  "乌拉圭":       { r20: 2650, r40: 4750, r40hq: 5150, lcl: 92, days: 40 },
+  "多米尼加":     { r20: 2050, r40: 3700, r40hq: 4000, lcl: 72, days: 31 },
+  "古巴":         { r20: 2100, r40: 3780, r40hq: 4080, lcl: 74, days: 32 },
+  "牙买加":       { r20: 2080, r40: 3750, r40hq: 4050, lcl: 73, days: 31 },
+  "海地":         { r20: 2120, r40: 3800, r40hq: 4100, lcl: 75, days: 32 },
+  "巴巴多斯":     { r20: 2200, r40: 3950, r40hq: 4250, lcl: 78, days: 33 },
+  "特立尼达和多巴哥": { r20: 2180, r40: 3900, r40hq: 4200, lcl: 77, days: 33 },
+  "巴哈马":       { r20: 2150, r40: 3850, r40hq: 4150, lcl: 76, days: 32 },
+  "哥斯达黎加":   { r20: 1980, r40: 3580, r40hq: 3880, lcl: 68, days: 30 },
+  "危地马拉":     { r20: 1960, r40: 3540, r40hq: 3840, lcl: 67, days: 29 },
+  "洪都拉斯":     { r20: 1980, r40: 3560, r40hq: 3860, lcl: 68, days: 30 },
+  "尼加拉瓜":     { r20: 1990, r40: 3570, r40hq: 3870, lcl: 68, days: 30 },
+  "萨尔瓦多":     { r20: 1970, r40: 3550, r40hq: 3850, lcl: 67, days: 29 },
+  "伯利兹":       { r20: 2000, r40: 3600, r40hq: 3900, lcl: 70, days: 31 },
+  "波多黎各":     { r20: 2100, r40: 3780, r40hq: 4080, lcl: 74, days: 31 },
+  "阿鲁巴":       { r20: 2150, r40: 3850, r40hq: 4150, lcl: 76, days: 33 },
+  "圣基茨和尼维斯": { r20: 2200, r40: 3950, r40hq: 4250, lcl: 78, days: 34 },
+  "安提瓜和巴布达": { r20: 2200, r40: 3950, r40hq: 4250, lcl: 78, days: 34 },
+  "多米尼克":     { r20: 2220, r40: 3980, r40hq: 4280, lcl: 79, days: 34 },
+  "圣卢西亚":     { r20: 2230, r40: 4000, r40hq: 4300, lcl: 79, days: 35 },
+  "格林纳达":     { r20: 2250, r40: 4020, r40hq: 4320, lcl: 80, days: 35 },
+  "库拉索":       { r20: 2150, r40: 3850, r40hq: 4150, lcl: 76, days: 33 },
+  // ---- 东亚 ----
+  "日本":         { r20: 1200, r40: 2100, r40hq: 2300, lcl: 45, days: 8 },
+  "韩国":         { r20: 1150, r40: 2000, r40hq: 2200, lcl: 42, days: 7 },
+  "蒙古":         { r20: 2600, r40: 4700, r40hq: 5100, lcl: 90, days: 25 },
+  // ---- 东南亚 ----
+  "新加坡":       { r20: 1000, r40: 1750, r40hq: 1900, lcl: 38, days: 7 },
+  "马来西亚":     { r20: 1050, r40: 1850, r40hq: 2000, lcl: 40, days: 8 },
+  "泰国":         { r20: 1080, r40: 1900, r40hq: 2050, lcl: 40, days: 9 },
+  "越南":         { r20: 950,  r40: 1700, r40hq: 1850, lcl: 36, days: 7 },
+  "印度尼西亚":   { r20: 1100, r40: 1950, r40hq: 2100, lcl: 42, days: 10 },
+  "菲律宾":       { r20: 1150, r40: 2050, r40hq: 2200, lcl: 44, days: 10 },
+  "柬埔寨":       { r20: 1250, r40: 2200, r40hq: 2350, lcl: 46, days: 12 },
+  "缅甸":         { r20: 1450, r40: 2550, r40hq: 2750, lcl: 55, days: 15 },
+  "文莱":         { r20: 1150, r40: 2000, r40hq: 2150, lcl: 44, days: 10 },
+  "老挝":         { r20: 2100, r40: 3700, r40hq: 4000, lcl: 75, days: 22 },
+  "东帝汶":       { r20: 1900, r40: 3400, r40hq: 3700, lcl: 70, days: 20 },
+  // ---- 南亚 ----
+  "印度":         { r20: 1350, r40: 2400, r40hq: 2600, lcl: 52, days: 16 },
+  "巴基斯坦":     { r20: 1550, r40: 2750, r40hq: 2950, lcl: 58, days: 18 },
+  "孟加拉国":     { r20: 1500, r40: 2650, r40hq: 2850, lcl: 56, days: 17 },
+  "斯里兰卡":     { r20: 1450, r40: 2550, r40hq: 2750, lcl: 55, days: 16 },
+  "马尔代夫":     { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 20 },
+  "尼泊尔":       { r20: 2400, r40: 4300, r40hq: 4650, lcl: 85, days: 26 },
+  "不丹":         { r20: 2450, r40: 4400, r40hq: 4750, lcl: 88, days: 27 },
+  "阿富汗":       { r20: 2700, r40: 4800, r40hq: 5200, lcl: 95, days: 30 },
+  // ---- 中亚 ----
+  "哈萨克斯坦":   { r20: 2350, r40: 4200, r40hq: 4550, lcl: 82, days: 25 },
+  "乌兹别克斯坦": { r20: 2400, r40: 4300, r40hq: 4650, lcl: 85, days: 26 },
+  "吉尔吉斯斯坦": { r20: 2450, r40: 4400, r40hq: 4750, lcl: 88, days: 27 },
+  "塔吉克斯坦":   { r20: 2500, r40: 4500, r40hq: 4850, lcl: 90, days: 28 },
+  "土库曼斯坦":   { r20: 2450, r40: 4400, r40hq: 4750, lcl: 88, days: 27 },
+  // ---- 中东 ----
+  "沙特阿拉伯":   { r20: 1550, r40: 2750, r40hq: 2950, lcl: 58, days: 18 },
+  "阿联酋":       { r20: 1450, r40: 2550, r40hq: 2750, lcl: 55, days: 16 },
+  "卡塔尔":       { r20: 1500, r40: 2650, r40hq: 2850, lcl: 56, days: 17 },
+  "科威特":       { r20: 1520, r40: 2680, r40hq: 2880, lcl: 57, days: 17 },
+  "巴林":         { r20: 1500, r40: 2650, r40hq: 2850, lcl: 56, days: 17 },
+  "阿曼":         { r20: 1480, r40: 2620, r40hq: 2820, lcl: 56, days: 16 },
+  "以色列":       { r20: 1650, r40: 2950, r40hq: 3150, lcl: 62, days: 20 },
+  "土耳其":       { r20: 1600, r40: 2850, r40hq: 3050, lcl: 60, days: 19 },
+  "伊朗":         { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 22 },
+  "伊拉克":       { r20: 1850, r40: 3300, r40hq: 3550, lcl: 70, days: 24 },
+  "约旦":         { r20: 1680, r40: 2980, r40hq: 3220, lcl: 63, days: 20 },
+  "黎巴嫩":       { r20: 1700, r40: 3020, r40hq: 3260, lcl: 64, days: 21 },
+  "叙利亚":       { r20: 1800, r40: 3200, r40hq: 3450, lcl: 68, days: 23 },
+  "也门":         { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 22 },
+  "格鲁吉亚":     { r20: 1900, r40: 3400, r40hq: 3650, lcl: 70, days: 22 },
+  "阿塞拜疆":     { r20: 1950, r40: 3480, r40hq: 3750, lcl: 72, days: 23 },
+  "亚美尼亚":     { r20: 2000, r40: 3550, r40hq: 3850, lcl: 74, days: 24 },
+  "塞浦路斯":     { r20: 1680, r40: 2980, r40hq: 3220, lcl: 63, days: 20 },
+  // ---- 欧洲 ----
+  "英国":         { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 28 },
+  "德国":         { r20: 1700, r40: 3020, r40hq: 3260, lcl: 64, days: 27 },
+  "法国":         { r20: 1720, r40: 3050, r40hq: 3300, lcl: 65, days: 27 },
+  "意大利":       { r20: 1680, r40: 2980, r40hq: 3220, lcl: 63, days: 26 },
+  "西班牙":       { r20: 1650, r40: 2950, r40hq: 3150, lcl: 62, days: 25 },
+  "葡萄牙":       { r20: 1680, r40: 2980, r40hq: 3220, lcl: 63, days: 26 },
+  "荷兰":         { r20: 1720, r40: 3050, r40hq: 3300, lcl: 65, days: 27 },
+  "比利时":       { r20: 1720, r40: 3050, r40hq: 3300, lcl: 65, days: 27 },
+  "卢森堡":       { r20: 1850, r40: 3300, r40hq: 3550, lcl: 70, days: 28 },
+  "瑞士":         { r20: 1880, r40: 3350, r40hq: 3600, lcl: 71, days: 28 },
+  "奥地利":       { r20: 1820, r40: 3250, r40hq: 3500, lcl: 69, days: 28 },
+  "波兰":         { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 27 },
+  "捷克":         { r20: 1800, r40: 3200, r40hq: 3450, lcl: 68, days: 27 },
+  "斯洛伐克":     { r20: 1800, r40: 3200, r40hq: 3450, lcl: 68, days: 27 },
+  "匈牙利":       { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 27 },
+  "罗马尼亚":     { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 28 },
+  "保加利亚":     { r20: 1760, r40: 3120, r40hq: 3370, lcl: 66, days: 28 },
+  "希腊":         { r20: 1650, r40: 2950, r40hq: 3150, lcl: 62, days: 24 },
+  "丹麦":         { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 27 },
+  "瑞典":         { r20: 1780, r40: 3180, r40hq: 3420, lcl: 67, days: 28 },
+  "挪威":         { r20: 1800, r40: 3220, r40hq: 3460, lcl: 68, days: 29 },
+  "芬兰":         { r20: 1780, r40: 3180, r40hq: 3420, lcl: 67, days: 28 },
+  "爱尔兰":       { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 28 },
+  "冰岛":         { r20: 1980, r40: 3550, r40hq: 3850, lcl: 75, days: 30 },
+  "克罗地亚":     { r20: 1700, r40: 3020, r40hq: 3260, lcl: 64, days: 26 },
+  "塞尔维亚":     { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 27 },
+  "斯洛文尼亚":   { r20: 1700, r40: 3020, r40hq: 3260, lcl: 64, days: 26 },
+  "乌克兰":       { r20: 1850, r40: 3300, r40hq: 3550, lcl: 70, days: 30 },
+  "俄罗斯":       { r20: 1950, r40: 3480, r40hq: 3750, lcl: 72, days: 30 },
+  "立陶宛":       { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 27 },
+  "拉脱维亚":     { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 27 },
+  "爱沙尼亚":     { r20: 1800, r40: 3200, r40hq: 3450, lcl: 68, days: 28 },
+  "白俄罗斯":     { r20: 1950, r40: 3480, r40hq: 3750, lcl: 72, days: 30 },
+  "摩尔多瓦":     { r20: 1900, r40: 3400, r40hq: 3650, lcl: 70, days: 29 },
+  "马耳他":       { r20: 1680, r40: 2980, r40hq: 3220, lcl: 63, days: 24 },
+  "阿尔巴尼亚":   { r20: 1720, r40: 3060, r40hq: 3300, lcl: 65, days: 26 },
+  "北马其顿":     { r20: 1780, r40: 3150, r40hq: 3400, lcl: 67, days: 27 },
+  "波黑":         { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 27 },
+  "黑山":         { r20: 1720, r40: 3060, r40hq: 3300, lcl: 65, days: 26 },
+  // ---- 北美洲（除墨西哥） ----
+  "美国":         { r20: 1900, r40: 3400, r40hq: 3650, lcl: 72, days: 18 },
+  "加拿大":       { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 20 },
+  // ---- 大洋洲 ----
+  "澳大利亚":     { r20: 1600, r40: 2850, r40hq: 3050, lcl: 60, days: 20 },
+  "新西兰":       { r20: 1650, r40: 2950, r40hq: 3150, lcl: 62, days: 22 },
+  "斐济":         { r20: 1850, r40: 3300, r40hq: 3550, lcl: 70, days: 25 },
+  "巴布亚新几内亚": { r20: 1900, r40: 3400, r40hq: 3650, lcl: 72, days: 26 },
+  "萨摩亚":       { r20: 1900, r40: 3400, r40hq: 3650, lcl: 72, days: 26 },
+  "汤加":         { r20: 1920, r40: 3420, r40hq: 3680, lcl: 73, days: 27 },
+  "瓦努阿图":     { r20: 1920, r40: 3420, r40hq: 3680, lcl: 73, days: 27 },
+  "所罗门群岛":   { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 28 },
+  // ---- 非洲 ----
+  "南非":         { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 25 },
+  "尼日利亚":     { r20: 1900, r40: 3400, r40hq: 3650, lcl: 72, days: 28 },
+  "埃及":         { r20: 1800, r40: 3200, r40hq: 3450, lcl: 68, days: 24 },
+  "肯尼亚":       { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 28 },
+  "坦桑尼亚":     { r20: 1980, r40: 3550, r40hq: 3820, lcl: 75, days: 29 },
+  "摩洛哥":       { r20: 1700, r40: 3020, r40hq: 3260, lcl: 64, days: 23 },
+  "阿尔及利亚":   { r20: 1750, r40: 3100, r40hq: 3350, lcl: 66, days: 24 },
+  "突尼斯":       { r20: 1720, r40: 3060, r40hq: 3300, lcl: 65, days: 23 },
+  "加纳":         { r20: 1900, r40: 3400, r40hq: 3650, lcl: 72, days: 28 },
+  "科特迪瓦":     { r20: 1920, r40: 3420, r40hq: 3680, lcl: 73, days: 28 },
+  "塞内加尔":     { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "喀麦隆":       { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "安哥拉":       { r20: 2000, r40: 3580, r40hq: 3850, lcl: 76, days: 30 },
+  "莫桑比克":     { r20: 1980, r40: 3550, r40hq: 3820, lcl: 75, days: 30 },
+  "埃塞俄比亚":   { r20: 2100, r40: 3750, r40hq: 4050, lcl: 80, days: 32 },
+  "乌干达":       { r20: 2050, r40: 3680, r40hq: 3980, lcl: 78, days: 31 },
+  "卢旺达":       { r20: 2100, r40: 3750, r40hq: 4050, lcl: 80, days: 32 },
+  "赞比亚":       { r20: 2050, r40: 3680, r40hq: 3980, lcl: 78, days: 31 },
+  "津巴布韦":     { r20: 2050, r40: 3680, r40hq: 3980, lcl: 78, days: 31 },
+  "博茨瓦纳":     { r20: 2080, r40: 3720, r40hq: 4020, lcl: 79, days: 32 },
+  "纳米比亚":     { r20: 2000, r40: 3580, r40hq: 3850, lcl: 76, days: 30 },
+  "马达加斯加":   { r20: 2020, r40: 3620, r40hq: 3900, lcl: 77, days: 31 },
+  "毛里求斯":     { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "利比亚":       { r20: 1850, r40: 3300, r40hq: 3550, lcl: 70, days: 26 },
+  "苏丹":         { r20: 1980, r40: 3550, r40hq: 3820, lcl: 75, days: 30 },
+  "刚果(金)":     { r20: 2050, r40: 3680, r40hq: 3980, lcl: 78, days: 32 },
+  "刚果(布)":     { r20: 2050, r40: 3680, r40hq: 3980, lcl: 78, days: 32 },
+  "吉布提":       { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "索马里":       { r20: 2000, r40: 3580, r40hq: 3850, lcl: 76, days: 31 },
+  "塞拉利昂":     { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "几内亚":       { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "贝宁":         { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "多哥":         { r20: 1950, r40: 3480, r40hq: 3750, lcl: 74, days: 29 },
+  "赤道几内亚":   { r20: 1980, r40: 3550, r40hq: 3820, lcl: 75, days: 30 },
+  "冈比亚":       { r20: 1980, r40: 3550, r40hq: 3820, lcl: 75, days: 30 },
+  "厄立特里亚":   { r20: 2020, r40: 3620, r40hq: 3900, lcl: 77, days: 31 },
+  "佛得角":       { r20: 2000, r40: 3580, r40hq: 3850, lcl: 76, days: 30 },
+  "利比里亚":     { r20: 1980, r40: 3550, r40hq: 3820, lcl: 75, days: 30 },
+  "毛里塔尼亚":   { r20: 2000, r40: 3580, r40hq: 3850, lcl: 76, days: 30 }
+};
+
+/* ---------------- 状态 ---------------- */
+let state = {
+  currentUser: null,
+  cargoData: [],
+  quoteResult: null,
+  rateData: [],
+  rateDataBackup: [],
+  localFees: [],
+  localFeesBackup: [],
+  exchangeRate: 7.25,
+  priceMultiplier: 1.00,
+  transitDaysAdjust: 0,
+  publishedVersions: [],
+  section1Data: null,
+};
+
+/* ---------------- 板块1：起运地/目的地 ---------------- */
+function updateOriginPorts() {
+  const country = document.getElementById('originCountry').value;
+  const portSelect = document.getElementById('originPort');
+  portSelect.innerHTML = '<option value="">请选择起运港</option>';
+  if (country && CHINA_PORTS[country]) {
+    CHINA_PORTS[country].forEach(port => {
+      portSelect.innerHTML += `<option value="${port}">${port}</option>`;
+    });
+  }
+}
+
+// 目的地国家：拉美 + 全世界所有国家/地区（去重合并）
+function getAllDestCountries() {
+  return [...new Set([...Object.keys(LATAM_PORTS), ...Object.keys(WORLD_DEST)])];
+}
+
+// 取某国家的目的港列表（优先查全世界表，兼容拉美表）
+function getDestPorts(country) {
+  return WORLD_DEST[country] || LATAM_PORTS[country] || [];
+}
+
+function initDestCountries() {
+  const sel = document.getElementById('destCountry');
+  if(!sel) return;
+  sel.innerHTML = '<option value="">请选择国家</option>';
+  getAllDestCountries().forEach(country => {
+    sel.innerHTML += `<option value="${country}">${country}</option>`;
+  });
+}
+
+function updateDestPorts() {
+  const country = document.getElementById('destCountry').value;
+  const portSelect = document.getElementById('destPort');
+  portSelect.innerHTML = '<option value="">请选择目的港</option>';
+  if (country) {
+    getDestPorts(country).forEach(port => {
+      portSelect.innerHTML += `<option value="${port}">${port}</option>`;
+    });
+  }
+}
+
+// 目的地国家搜索框：实时过滤国家下拉选项
+function filterDestCountries() {
+  const sel = document.getElementById('destCountry');
+  const kw = (document.getElementById('destCountrySearch').value || '').toLowerCase().trim();
+  if(!sel) return;
+  if (!kw) {
+    sel.innerHTML = '<option value="">请选择国家</option>';
+    getAllDestCountries().forEach(country => {
+      sel.innerHTML += `<option value="${country}">${country}</option>`;
+    });
     return;
   }
-  dropdown.innerHTML = list.map(d => `
-    <div class="search-item" onclick="selectDest('${d.code}')">
-      <div class="country">${d.country} (${d.countryEn})
-        <span class="rate-tag">海${d.seaRate}/CBM</span>
-        <span class="rate-tag">空${d.airRate}/KG</span>
-      </div>
-      <div class="detail">港口：${d.seaPorts.map(p=>p.name.split(' ')[0]).join('、')} | 机场：${d.airports.map(a=>a.code).join('、')}${d.note?' | '+d.note:''}</div>
-    </div>
+  sel.innerHTML = '<option value="">请选择国家</option>';
+  getAllDestCountries().forEach(country => {
+    if (country.toLowerCase().indexOf(kw) !== -1) {
+      sel.innerHTML += `<option value="${country}">${country}</option>`;
+    }
+  });
+  if (sel.options.length === 1) {
+    sel.innerHTML += '<option value="" disabled>无匹配国家</option>';
+  }
+}
+
+function onTransportChange() {
+  document.querySelectorAll('#transportGroup .radio-item').forEach(item => {
+    const radio = item.querySelector('input');
+    item.classList.toggle('selected', radio.checked);
+  });
+}
+
+function getSection1Data() {
+  return {
+    originCountry: document.getElementById('originCountry').value,
+    originPort: document.getElementById('originPort').value,
+    destCountry: document.getElementById('destCountry').value,
+    destPort: document.getElementById('destPort').value,
+    transport: document.querySelector('input[name="transport"]:checked')?.value || ''
+  };
+}
+
+/* ---------------- 板块2：货物打包数据 ---------------- */
+function downloadTemplate() {
+  const headers = ['序号', '打包箱型', '长(m)', '宽(m)', '高(m)', '外箱数量', '单箱毛重(kg)', '单箱净重(kg)', '备注'];
+  const sample1 = ['1', '纸箱', '0.50', '0.40', '0.35', '200', '12.5', '11.0', '电子产品'];
+  const sample2 = ['2', '木箱', '1.20', '0.80', '0.60', '50', '85.0', '80.0', '机械配件'];
+  const csv = [headers, sample1, sample2].map(row => row.map(c => `"${c}"`).join(',')).join('\n');
+  const bom = '\uFEFF';
+  const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = '货物打包数据模板.csv';
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast('模板已下载，请按格式填写后上传', 'success');
+}
+
+function handleCargoUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    try {
+      const rows = parseCSV(text);
+      if (rows.length < 2) { showToast('文件内容为空或格式不正确', 'error'); return; }
+      const dataRows = rows.slice(1).filter(r => r.length >= 7 && r[0].trim() !== '');
+      state.cargoData = dataRows.map((row, idx) => ({
+        id: Date.now() + idx,
+        boxType: row[1] || '纸箱',
+        length: parseFloat(row[2]) || 0,
+        width: parseFloat(row[3]) || 0,
+        height: parseFloat(row[4]) || 0,
+        qty: parseInt(row[5]) || 0,
+        grossWeight: parseFloat(row[6]) || 0,
+        netWeight: parseFloat(row[7]) || 0,
+        remark: row[8] || ''
+      }));
+      renderCargoPreview();
+      showToast(`成功导入 ${state.cargoData.length} 条货物数据`, 'success');
+      persistState();
+    } catch (err) {
+      showToast('文件解析失败：' + err.message, 'error');
+    }
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  return lines.map(line => {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') { inQuotes = !inQuotes; continue; }
+      if (char === ',' && !inQuotes) { result.push(current); current = ''; continue; }
+      current += char;
+    }
+    result.push(current);
+    return result.map(s => s.trim());
+  });
+}
+
+function renderCargoPreview() {
+  const container = document.getElementById('cargoPreview');
+  if (!container) return;
+  if ((state.cargoData||[]).length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">📦</div><p>暂无货物数据，请上传模板或手动添加</p></div>';
+    return;
+  }
+  let html = `<div class="table-container"><table class="data-table"><thead>
+    <tr><th>序号</th><th>打包箱型</th><th>长(m)</th><th>宽(m)</th><th>高(m)</th><th>外箱数量</th><th>单箱毛重(kg)</th><th>单箱净重(kg)</th><th>备注</th><th>操作</th></tr>
+  </thead><tbody>`;
+  state.cargoData.forEach((item, idx) => {
+    html += `<tr>
+      <td>${idx + 1}</td>
+      <td class="editable-cell"><input type="text" value="${item.boxType||''}" onchange="updateCargoItem(${item.id}, 'boxType', this.value)"></td>
+      <td class="editable-cell"><input type="number" step="0.01" value="${item.length}" onchange="updateCargoItem(${item.id}, 'length', this.value)" style="width:70px"></td>
+      <td class="editable-cell"><input type="number" step="0.01" value="${item.width}" onchange="updateCargoItem(${item.id}, 'width', this.value)" style="width:70px"></td>
+      <td class="editable-cell"><input type="number" step="0.01" value="${item.height}" onchange="updateCargoItem(${item.id}, 'height', this.value)" style="width:70px"></td>
+      <td class="editable-cell"><input type="number" value="${item.qty}" onchange="updateCargoItem(${item.id}, 'qty', this.value)" style="width:70px"></td>
+      <td class="editable-cell"><input type="number" step="0.1" value="${item.grossWeight}" onchange="updateCargoItem(${item.id}, 'grossWeight', this.value)" style="width:80px"></td>
+      <td class="editable-cell"><input type="number" step="0.1" value="${item.netWeight}" onchange="updateCargoItem(${item.id}, 'netWeight', this.value)" style="width:80px"></td>
+      <td class="editable-cell"><input type="text" value="${item.remark||''}" onchange="updateCargoItem(${item.id}, 'remark', this.value)"></td>
+      <td><button class="btn btn-sm btn-danger" onclick="removeCargoItem(${item.id})">删除</button></td>
+    </tr>`;
+  });
+  html += '</tbody></table></div>';
+  const totals = calcCargoTotals();
+  html += `<div class="stats-grid" style="margin-top:16px">
+    <div class="stat-card"><div class="stat-value">${totals.totalBoxes}</div><div class="stat-label">总外箱数</div></div>
+    <div class="stat-card"><div class="stat-value">${totals.totalVolume.toFixed(2)}<span class="stat-unit"> m³</span></div><div class="stat-label">总体积</div></div>
+    <div class="stat-card"><div class="stat-value">${totals.totalGrossWeight.toFixed(1)}<span class="stat-unit"> kg</span></div><div class="stat-label">总毛重</div></div>
+    <div class="stat-card"><div class="stat-value">${totals.totalNetWeight.toFixed(1)}<span class="stat-unit"> kg</span></div><div class="stat-label">总净重</div></div>
+  </div>`;
+  container.innerHTML = html;
+}
+
+function calcCargoTotals() {
+  let totalBoxes = 0, totalVolume = 0, totalGrossWeight = 0, totalNetWeight = 0;
+  (state.cargoData||[]).forEach(item => {
+    const vol = item.length * item.width * item.height * item.qty;
+    totalBoxes += item.qty;
+    totalVolume += vol;
+    totalGrossWeight += item.grossWeight * item.qty;
+    totalNetWeight += item.netWeight * item.qty;
+  });
+  return { totalBoxes, totalVolume, totalGrossWeight, totalNetWeight };
+}
+
+function addCargoRow() {
+  state.cargoData.push({
+    id: Date.now(),
+    boxType: '纸箱', length: 0.5, width: 0.4, height: 0.3, qty: 1, grossWeight: 10, netWeight: 8, remark: ''
+  });
+  renderCargoPreview();
+  persistState();
+}
+
+function updateCargoItem(id, field, value) {
+  const item = state.cargoData.find(c => c.id === id);
+  if (item) {
+    item[field] = field === 'boxType' || field === 'remark' ? value : parseFloat(value) || 0;
+    persistState();
+    renderCargoPreview();
+  }
+}
+
+function removeCargoItem(id) {
+  state.cargoData = state.cargoData.filter(c => c.id !== id);
+  renderCargoPreview();
+  persistState();
+}
+
+/* ---------------- 板块3：装柜方案与报价 ---------------- */
+function calculateQuote() {
+  const s1 = getSection1Data();
+  if (!s1.originPort || !s1.destPort || !s1.transport) {
+    showToast('请先完成板块1的所有选择', 'warning'); return;
+  }
+  if ((state.cargoData||[]).length === 0) {
+    showToast('请先上传货物打包数据（可从尺寸速算带入）', 'warning'); return;
+  }
+  const totals = calcCargoTotals();
+  const transport = s1.transport;
+  let result = { ...totals, transport, origin: s1.originPort, destination: s1.destPort };
+
+  if (transport === 'FCL') {
+    result = calcFCLQuote(totals, s1);
+  } else if (transport === 'LCL') {
+    result = calcLCLQuote(totals, s1);
+  } else if (transport === 'AIR') {
+    result = calcAirQuote(totals, s1);
+  } else if (transport === 'EXPRESS') {
+    result = calcExpressQuote(totals, s1);
+  }
+
+  state.quoteResult = result;
+  renderQuote(result);
+  persistState();
+  showToast('装柜方案与报价已生成', 'success');
+}
+
+function calcFCLQuote(totals, s1) {
+  const vol = totals.totalVolume;
+  const wt = totals.totalGrossWeight;
+  const combinations = [];
+
+  for (const [key, spec] of Object.entries(CONTAINER_SPECS)) {
+    const numByVol = Math.ceil(vol / spec.maxVol);
+    const numByWt = Math.ceil(wt / spec.maxWeight);
+    const num = Math.max(numByVol, numByWt, 1);
+    const totalCapVol = num * spec.maxVol;
+    const totalCapWt = num * spec.maxWeight;
+    const usedVolPct = (vol / totalCapVol * 100);
+    const usedWtPct = (wt / totalCapWt * 100);
+    const rate = getBaseRate(s1.originPort, s1.destPort, key);
+    const totalCost = rate * num;
+    const wastedVol = totalCapVol - vol;
+
+    combinations.push({
+      combo: `${num}× ${key}`,
+      containerType: key,
+      containerName: `${num} × ${spec.name}`,
+      numContainers: num,
+      utilizationVol: usedVolPct.toFixed(1) + '%',
+      utilizationWt: usedWtPct.toFixed(1) + '%',
+      unitRate: rate,
+      totalCost: totalCost,
+      wastedVol: wastedVol.toFixed(2),
+      specs: `${spec.L}m × ${spec.W}m × ${spec.H}m`,
+      isMixed: false,
+      primarySpec: spec
+    });
+  }
+
+  const types = Object.entries(CONTAINER_SPECS);
+  for (let i = 0; i < types.length; i++) {
+    for (let j = i + 1; j < types.length; j++) {
+      const [key1, spec1] = types[i];
+      const [key2, spec2] = types[j];
+      const rate1 = getBaseRate(s1.originPort, s1.destPort, key1);
+      const rate2 = getBaseRate(s1.originPort, s1.destPort, key2);
+      for (let n1 = 0; n1 <= 4; n1++) {
+        const filledVol = n1 * spec1.maxVol;
+        const filledWt = n1 * spec1.maxWeight;
+        const remVol = vol - filledVol;
+        const remWt = wt - filledWt;
+        if (remVol <= 0 && remWt <= 0) continue;
+        const effRemVol = Math.max(remVol, 0);
+        const effRemWt = Math.max(remWt, 0);
+        const n2 = Math.max(Math.ceil(effRemVol / spec2.maxVol), Math.ceil(effRemWt / spec2.maxWeight), 1);
+        const totalCapVol = n1 * spec1.maxVol + n2 * spec2.maxVol;
+        const totalCapWt = n1 * spec1.maxWeight + n2 * spec2.maxWeight;
+        const usedVolPct = (vol / totalCapVol * 100);
+        const usedWtPct = (wt / totalCapWt * 100);
+        const totalCost = n1 * rate1 + n2 * rate2;
+        const wastedVol = totalCapVol - vol;
+        combinations.push({
+          combo: `${n1}× ${key1} + ${n2}× ${key2}`,
+          containerType: `${key1}+${key2}`,
+          containerName: `${n1} × ${spec1.name} + ${n2} × ${spec2.name}`,
+          numContainers: n1 + n2,
+          utilizationVol: usedVolPct.toFixed(1) + '%',
+          utilizationWt: usedWtPct.toFixed(1) + '%',
+          unitRate: '混合',
+          totalCost: totalCost,
+          wastedVol: wastedVol.toFixed(2),
+          specs: '混合柜型',
+          isMixed: true,
+          primarySpec: n1 >= n2 ? spec1 : spec2
+        });
+      }
+    }
+  }
+
+  const seen = new Set();
+  const unique = combinations.filter(c => {
+    if (seen.has(c.combo)) return false;
+    seen.add(c.combo);
+    return true;
+  });
+  unique.sort((a, b) => {
+    const scoreA = a.totalCost + parseFloat(a.wastedVol) * 8;
+    const scoreB = b.totalCost + parseFloat(b.wastedVol) * 8;
+    return scoreA - scoreB;
+  });
+  const recommended = unique[0];
+
+  return {
+    transport: 'FCL', origin: s1.originPort, destination: s1.destPort,
+    ...totals,
+    recommended,
+    allOptions: unique,
+    containerSpecs: recommended.primarySpec,
+    transitDays: REGION_RATES[s1.destCountry] ? REGION_RATES[s1.destCountry].days : 32
+  };
+}
+
+function calcLCLQuote(totals, s1) {
+  const vol = totals.totalVolume;
+  const wt = totals.totalGrossWeight;
+  const chargeableVol = Math.max(vol, wt / 1000);
+  const ratePerCBM = getBaseRate(s1.originPort, s1.destPort, '拼箱(LCL)');
+  const freight = chargeableVol * ratePerCBM;
+  const days = REGION_RATES[s1.destCountry] ? REGION_RATES[s1.destCountry].days : 32;
+  return {
+    transport: 'LCL', origin: s1.originPort, destination: s1.destPort,
+    ...totals, chargeableVol, ratePerCBM, freight, transitDays: days
+  };
+}
+
+function calcAirQuote(totals, s1) {
+  const vol = totals.totalVolume;
+  const wt = totals.totalGrossWeight;
+  const volWeight = vol * 167;
+  const chargeableWeight = Math.max(wt, volWeight);
+  const ratePerKg = getBaseRate(s1.originPort, s1.destPort, 'AIR');
+  const freight = chargeableWeight * ratePerKg;
+  const days = 5;
+  return {
+    transport: 'AIR', origin: s1.originPort, destination: s1.destPort,
+    ...totals, volWeight: volWeight.toFixed(1), chargeableWeight, ratePerKg, freight, transitDays: days
+  };
+}
+
+function calcExpressQuote(totals, s1) {
+  const wt = totals.totalGrossWeight;
+  const vol = totals.totalVolume;
+  const volWeight = vol * 200;
+  const chargeableWeight = Math.max(wt, volWeight);
+  const ratePerKg = getBaseRate(s1.originPort, s1.destPort, 'EXPRESS');
+  const baseFreight = chargeableWeight * ratePerKg;
+  const fuelSurcharge = baseFreight * 0.15;
+  const total = baseFreight + fuelSurcharge;
+  const days = 4;
+  return {
+    transport: 'EXPRESS', origin: s1.originPort, destination: s1.destPort,
+    ...totals, volWeight: volWeight.toFixed(1), chargeableWeight, ratePerKg,
+    baseFreight, fuelSurcharge, total, transitDays: days
+  };
+}
+
+// 取费率：优先匹配船公司运费表（起运港+目的港），无匹配时按目的地国家参考价兜底
+function getBaseRate(originPort, destPort, type) {
+  // 1) 查船公司运费表（按起运港+目的港匹配），优先使用已维护的运费数据
+  const match = (state.rateData || []).find(r =>
+    r.originPort === originPort && r.destPort === destPort
+  );
+  if (match) {
+    if (type === '20GP') return (match.rate20GP || match.rate20GP === 0) ? match.rate20GP : getBaseRateByCountry(match.destCountry, '20GP');
+    if (type === '40GP') return (match.rate40GP || match.rate40GP === 0) ? match.rate40GP : getBaseRateByCountry(match.destCountry, '40GP');
+    if (type === '40HQ') return (match.rate40HQ || match.rate40HQ === 0) ? match.rate40HQ : getBaseRateByCountry(match.destCountry, '40HQ');
+    if (type === '45HQ') return (match.rate40HQ > 0) ? Math.round(match.rate40HQ * 1.15) : getBaseRateByCountry(match.destCountry, '45HQ');
+    if (type === '拼箱(LCL)') return (match.rateLCL || match.rateLCL === 0) ? match.rateLCL : getBaseRateByCountry(match.destCountry, '拼箱(LCL)');
+    // AIR / EXPRESS 无表值，走国家兜底
+  }
+  // 2) 兜底：按目的地国家参考价
+  return getBaseRateByCountry(destPortCountry(destPort), type);
+}
+
+function getBaseRateByCountry(destCountry, type) {
+  const base = REGION_RATES[destCountry] || { r20: 2000, r40: 3600, r40hq: 3900, lcl: 70, days: 32 };
+  if (type === '20GP') return base.r20;
+  if (type === '40GP') return base.r40;
+  if (type === '40HQ') return base.r40hq;
+  if (type === '45HQ') return Math.round(base.r40hq * 1.15);
+  if (type === '拼箱(LCL)') return base.lcl;
+  const defaults = { 'AIR': 32, 'EXPRESS': 52 };
+  return defaults[type] || 0;
+}
+
+// 从"国家-港口"字符串中解析国家（如 "巴西-桑托斯(Santos)" → "巴西"）；兼容纯港口名
+function destPortCountry(destPort) {
+  if (!destPort) return '';
+  const parts = String(destPort).split('-');
+  if (parts.length > 1 && REGION_RATES[parts[0].trim()]) return parts[0].trim();
+  // 反查：先在全世界港口表、再在拉美港口表里查找包含该港口名的国家
+  for (const country of Object.keys(REGION_RATES)) {
+    const ports = getDestPorts(country);
+    if (ports.some(p => String(destPort).indexOf(p) !== -1)) return country;
+  }
+  return Object.keys(REGION_RATES).find(c => String(destPort).indexOf(c) !== -1) || '';
+}
+
+function renderQuote(result) {
+  const container = document.getElementById('quoteResult');
+  if (!container) return;
+  let html = '';
+
+  html += `<div class="stats-grid" style="margin-bottom:20px">
+    <div class="stat-card"><div class="stat-value">${result.totalBoxes}</div><div class="stat-label">总外箱数</div></div>
+    <div class="stat-card"><div class="stat-value">${result.totalVolume.toFixed(2)}<span class="stat-unit">m³</span></div><div class="stat-label">总体积</div></div>
+    <div class="stat-card"><div class="stat-value">${result.totalGrossWeight.toFixed(1)}<span class="stat-unit">kg</span></div><div class="stat-label">总毛重</div></div>
+  </div>`;
+
+  if (result.transport === 'FCL') {
+    const rec = result.recommended;
+    const mixTag = rec.isMixed ? '<span style="background:#e76f51;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;margin-left:8px">混合柜型</span>' : '';
+    html += `<div class="info-box" style="background:#f0fff4;border-left-color:#38a169">
+      <strong>推荐方案：${rec.containerName}${mixTag}</strong><br>
+      需要柜数：${rec.numContainers} 个 | 空间利用率：${rec.utilizationVol} | 重量利用率：${rec.utilizationWt} | 浪费空间：${rec.wastedVol} m³<br>
+      柜型规格：${rec.specs} | 航程约 ${result.transitDays||'-'} 天 | 预计总运费：<strong style="color:#e76f51;font-size:18px">$${rec.totalCost.toLocaleString()}</strong>
+    </div>`;
+    html += '<h3 style="font-size:14px;margin:16px 0 10px">所有可选方案对比（含单一柜型与混合柜型）</h3>';
+    html += '<div class="table-container"><table class="data-table"><thead><tr><th>方案</th><th>柜型组合</th><th>柜数</th><th>空间利用率</th><th>重量利用率</th><th>浪费空间(m³)</th><th>总运费(USD)</th></tr></thead><tbody>';
+    result.allOptions.forEach(opt => {
+      const isRec = opt.combo === rec.combo;
+      html += `<tr style="${isRec ? 'background:#f0fff4;font-weight:700' : ''}">
+        <td>${opt.combo}${isRec ? ' ⭐' : ''}</td>
+        <td>${opt.containerName}</td>
+        <td>${opt.numContainers}</td>
+        <td>${opt.utilizationVol}</td>
+        <td>${opt.utilizationWt}</td>
+        <td>${opt.wastedVol}</td>
+        <td>$${opt.totalCost.toLocaleString()}</td>
+      </tr>`;
+    });
+    html += '</tbody></table></div>';
+  } else if (result.transport === 'LCL') {
+    html += `<div class="info-box" style="background:#f0fff4;border-left-color:#38a169">
+      <strong>散货拼箱方案</strong><br>
+      计费体积：${result.chargeableVol.toFixed(2)} m³ | 单价：$${result.ratePerCBM}/CBM | 航程约 ${result.transitDays} 天<br>
+      预计总运费：<strong style="color:#e76f51;font-size:18px">$${result.freight.toFixed(2)}</strong>
+    </div>`;
+  } else if (result.transport === 'AIR') {
+    html += `<div class="info-box" style="background:#f0fff4;border-left-color:#38a169">
+      <strong>空运方案</strong><br>
+      实际重量：${result.totalGrossWeight.toFixed(1)} kg | 体积重量：${result.volWeight} kg | 计费重量：${result.chargeableWeight.toFixed(1)} kg<br>
+      单价：$${result.ratePerKg}/kg | 航程约 ${result.transitDays} 天 | 预计总运费：<strong style="color:#e76f51;font-size:18px">$${result.freight.toFixed(2)}</strong>
+    </div>`;
+  } else if (result.transport === 'EXPRESS') {
+    html += `<div class="info-box" style="background:#f0fff4;border-left-color:#38a169">
+      <strong>快递方案</strong><br>
+      实际重量：${result.totalGrossWeight.toFixed(1)} kg | 体积重量：${result.volWeight} kg | 计费重量：${result.chargeableWeight.toFixed(1)} kg<br>
+      基础运费：$${result.baseFreight.toFixed(2)} | 燃油附加费(15%)：$${result.fuelSurcharge.toFixed(2)} | 航程约 ${result.transitDays} 天<br>
+      预计总运费：<strong style="color:#e76f51;font-size:18px">$${result.total.toFixed(2)}</strong>
+    </div>`;
+  }
+
+  html += `<div class="warning-box" style="margin-top:16px">
+    注：以上运费为参考报价，实际费用以船公司/航司最新报价为准；已按目的地国家取2026年8月参考费率计算。
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+/* ---------------- 持久化 / 保存 / 重置 ---------------- */
+function persistState() {
+  try {
+    localStorage.setItem('freightData', JSON.stringify({
+      cargoData: state.cargoData,
+      quoteResult: state.quoteResult,
+      section1Data: state.section1Data,
+      rateData: state.rateData,
+      rateDataBackup: state.rateDataBackup,
+      localFees: state.localFees,
+      localFeesBackup: state.localFeesBackup,
+      exchangeRate: state.exchangeRate,
+      priceMultiplier: state.priceMultiplier,
+      transitDaysAdjust: state.transitDaysAdjust,
+      publishedVersions: state.publishedVersions
+    }));
+  } catch(e) {}
+}
+
+function saveSection(sectionId) {
+  switch (sectionId) {
+    case 'section1':
+      const s1 = getSection1Data();
+      state.section1Data = s1;
+      break;
+    case 'section2':
+      break;
+    case 'section3':
+      break;
+    case 'section5':
+      state.rateDataBackup = JSON.parse(JSON.stringify(state.rateData));
+      state.localFeesBackup = JSON.parse(JSON.stringify(state.localFees));
+      persistState();
+      break;
+  }
+  persistState();
+  showToast('数据已保存', 'success');
+}
+
+function resetSection(sectionId) {
+  switch (sectionId) {
+    case 'section1':
+      resetSection1FormFields();
+      state.section1Data = null;
+      break;
+    case 'section2':
+      state.cargoData = [];
+      renderCargoPreview();
+      break;
+    case 'section3':
+      state.quoteResult = null;
+      document.getElementById('quoteResult').innerHTML = '<div class="empty-state"><div class="icon">🧮</div><p>请先完成板块1和板块2，然后点击"生成装柜方案与报价"</p></div>';
+      break;
+    case 'section5':
+      state.rateData = JSON.parse(JSON.stringify(state.rateDataBackup));
+      state.localFees = JSON.parse(JSON.stringify(state.localFeesBackup));
+      document.getElementById('priceMultiplier').value = '1.00';
+      state.priceMultiplier = 1.00;
+      document.getElementById('transitDaysAdjust').value = '0';
+      state.transitDaysAdjust = 0;
+      renderRateTable();
+      renderLocalFees();
+      break;
+  }
+  persistState();
+  showToast('已重置', 'info');
+}
+
+function resetSection1FormFields() {
+  const setOrReset = function (id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = '';
+  };
+  setOrReset('originCountry');
+  const op = document.getElementById('originPort');
+  if (op) op.innerHTML = '<option value="">请选择起运港</option>';
+  op.value='';
+  setOrReset('destCountry');
+  setOrReset('destCountrySearch');
+  filterDestCountries();
+  const dp = document.getElementById('destPort');
+  if (dp) dp.innerHTML = '<option value="">请选择目的港</option>';
+  dp.value='';
+  document.querySelectorAll('input[name="transport"]').forEach(r => r.checked = false);
+  document.querySelectorAll('#transportGroup .radio-item').forEach(i => i.classList.remove('selected'));
+}
+
+/* ---------------- Toast 通知 ---------------- */
+function showToast(message, type = 'info', duration = 3000) {
+  let container = document.getElementById('toastContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toastContainer';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(100%)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
+}
+
+/* ---------------- 板块5：船公司运费数据管理 ---------------- */
+const ORIGIN_PORTS_RATE = ["深圳蛇口", "深圳盐田", "香港"];
+const CARRIERS = ["COSCO", "Evergreen", "OOCL", "MSC", "Maersk", "Yangming", "ONE", "WanHai", "PIL", "ZIM", "CMA", "Hapag-Lloyd", "HMM"];
+
+// 船公司运价微调系数
+const CARRIER_FACTORS = {
+  "COSCO": 0.98, "Evergreen": 1.00, "OOCL": 1.02, "MSC": 0.96, "Maersk": 1.04,
+  "Yangming": 1.01, "ONE": 1.03, "WanHai": 0.97, "PIL": 0.98, "ZIM": 1.05,
+  "CMA": 1.01, "Hapag-Lloyd": 1.06, "HMM": 0.99
+};
+
+// 起运港附加费系数
+const ORIGIN_FACTORS = { "深圳蛇口": 1.00, "深圳盐田": 0.98, "香港": 1.05 };
+
+function getRateForRoute(origin, country, carrier) {
+  const base = REGION_RATES[country] || { r20: 2000, r40: 3600, r40hq: 3900, lcl: 70, days: 32 };
+  const cf = CARRIER_FACTORS[carrier] || 1.0;
+  const of = ORIGIN_FACTORS[origin] || 1.0;
+  const f = cf * of;
+  return {
+    rate20GP: Math.round(base.r20 * f),
+    rate40GP: Math.round(base.r40 * f),
+    rate40HQ: Math.round(base.r40hq * f),
+    rateLCL: Math.round(base.lcl * f),
+    transitTime: base.days + '天'
+  };
+}
+
+function initRateData() {
+  if (state.rateData.length === 0) {
+    ORIGIN_PORTS_RATE.forEach(origin => {
+      Object.entries(LATAM_PORTS).forEach(([country, ports]) => {
+        ports.forEach(port => {
+          CARRIERS.forEach(carrier => {
+            const destLabel = `${country}-${port}`;
+            const r = getRateForRoute(origin, country, carrier);
+            state.rateData.push({
+              id: Date.now() + Math.random(),
+              originPort: origin,
+              destCountry: country,
+              destPort: port,
+              destLabel: destLabel,
+              carrier: carrier,
+              rate20GP: r.rate20GP,
+              rate40GP: r.rate40GP,
+              rate40HQ: r.rate40HQ,
+              rateLCL: r.rateLCL,
+              transitTime: r.transitTime,
+              remark: '2026年8月参考价'
+            });
+          });
+        });
+      });
+    });
+    state.rateDataBackup = JSON.parse(JSON.stringify(state.rateData));
+  }
+  if (state.rateDataBackup.length === 0) {
+    state.rateDataBackup = JSON.parse(JSON.stringify(state.rateData));
+  }
+}
+
+function renderRateTable() {
+  const originFilter = document.getElementById('rateOriginFilter').value;
+  const carrierFilter = document.getElementById('rateCarrierFilter').value;
+  const searchPort = (document.getElementById('rateSearchPort').value || '').toLowerCase().trim();
+
+  let filtered = state.rateData.filter(row => {
+    if (originFilter !== 'ALL' && row.originPort !== originFilter) return false;
+    if (carrierFilter !== 'ALL' && row.carrier !== carrierFilter) return false;
+    if (searchPort && !row.destLabel.toLowerCase().includes(searchPort) && !row.destCountry.toLowerCase().includes(searchPort)) return false;
+    return true;
+  });
+
+  const table = document.getElementById('rateTable');
+  if (!table) return;
+  const thead = table.querySelector('thead');
+  const tbody = table.querySelector('tbody');
+
+  thead.innerHTML = `<tr>
+    <th>起运港</th><th>目的国</th><th>目的港</th><th>船公司</th>
+    <th>20GP(USD)</th><th>40GP(USD)</th><th>40HQ(USD)</th><th>拼箱(USD/CBM)</th>
+    <th>航程</th><th>备注</th><th>操作</th>
+  </tr>`;
+
+  const editable = canEdit('section5');
+  let html = '';
+  filtered.forEach(row => {
+    html += `<tr>
+      <td>${row.originPort}</td>
+      <td>${row.destCountry}</td>
+      <td>${row.destPort}</td>
+      <td>${row.carrier}</td>
+      <td class="editable-cell">${editable ? `<input type="number" value="${row.rate20GP}" onchange="updateRateItem('${row.id}', 'rate20GP', this.value)" style="width:80px">` : row.rate20GP}</td>
+      <td class="editable-cell">${editable ? `<input type="number" value="${row.rate40GP}" onchange="updateRateItem('${row.id}', 'rate40GP', this.value)" style="width:80px">` : row.rate40GP}</td>
+      <td class="editable-cell">${editable ? `<input type="number" value="${row.rate40HQ}" onchange="updateRateItem('${row.id}', 'rate40HQ', this.value)" style="width:80px">` : row.rate40HQ}</td>
+      <td class="editable-cell">${editable ? `<input type="number" value="${row.rateLCL}" onchange="updateRateItem('${row.id}', 'rateLCL', this.value)" style="width:80px">` : row.rateLCL}</td>
+      <td class="editable-cell">${editable ? `<input type="text" value="${row.transitTime}" onchange="updateRateItem('${row.id}', 'transitTime', this.value)" style="width:70px">` : row.transitTime}</td>
+      <td class="editable-cell">${editable ? `<input type="text" value="${row.remark}" onchange="updateRateItem('${row.id}', 'remark', this.value)" style="width:100px">` : row.remark}</td>
+      <td>${editable ? `<button class="btn btn-sm btn-danger" onclick="removeRateRow('${row.id}')">删除</button>` : '-'}</td>
+    </tr>`;
+  });
+
+  if (filtered.length === 0) {
+    html = '<tr><td colspan="11" style="text-align:center;padding:20px;color:#999">无匹配数据</td></tr>';
+  }
+
+  tbody.innerHTML = html;
+}
+
+function updateRateItem(id, field, value) {
+  const row = state.rateData.find(r => String(r.id) === String(id));
+  if (row) {
+    if (field === 'transitTime' || field === 'remark') row[field] = value;
+    else row[field] = parseFloat(value) || 0;
+  }
+}
+
+function removeRateRow(id) {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  state.rateData = state.rateData.filter(r => String(r.id) !== String(id));
+  renderRateTable();
+}
+
+function addRateRow() {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  const r = getRateForRoute('深圳蛇口', '墨西哥', 'COSCO');
+  state.rateData.push({
+    id: Date.now() + Math.random(),
+    originPort: '深圳蛇口',
+    destCountry: '墨西哥',
+    destPort: '曼萨尼约(Manzanillo)',
+    destLabel: '墨西哥-曼萨尼约(Manzanillo)',
+    carrier: 'COSCO',
+    rate20GP: r.rate20GP, rate40GP: r.rate40GP, rate40HQ: r.rate40HQ, rateLCL: r.rateLCL,
+    transitTime: r.transitTime, remark: '2026年8月参考价'
+  });
+  renderRateTable();
+  showToast('已新增运费行', 'success');
+}
+
+function applyMultiplier() {
+  if (!canEdit('section5')) { showToast('无编辑权限，请以管理员身份登录', 'error'); return; }
+  const multVal = document.getElementById('priceMultiplier').value;
+  const mult = parseFloat(multVal);
+  if (isNaN(mult) || mult <= 0) { showToast('请输入有效倍数（大于0的数字）', 'error'); return; }
+  if (state.rateData.length === 0) { showToast('运费数据为空，请先初始化数据', 'warning'); return; }
+  state.rateData.forEach(row => {
+    row.rate20GP = Math.round((row.rate20GP || 0) * mult);
+    row.rate40GP = Math.round((row.rate40GP || 0) * mult);
+    row.rate40HQ = Math.round((row.rate40HQ || 0) * mult);
+    row.rateLCL = Math.round((row.rateLCL || 0) * mult);
+  });
+  state.priceMultiplier = mult;
+  renderRateTable();
+  showToast(`运费价格已乘以 ${mult} 倍（20GP/40GP/40HQ/拼箱），航程天数不变`, 'success');
+}
+
+function resetMultiplier() {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  state.rateData = JSON.parse(JSON.stringify(state.rateDataBackup));
+  document.getElementById('priceMultiplier').value = '1.00';
+  state.priceMultiplier = 1.00;
+  renderRateTable();
+  showToast('已恢复原价', 'info');
+}
+
+function applyTransitDays() {
+  if (!canEdit('section5')) { showToast('无编辑权限，请以管理员身份登录', 'error'); return; }
+  const adjustVal = document.getElementById('transitDaysAdjust').value;
+  const adjust = parseInt(adjustVal, 10);
+  if (isNaN(adjust)) { showToast('请输入有效天数（整数）', 'error'); return; }
+  if (state.rateData.length === 0) { showToast('运费数据为空，请先初始化数据', 'warning'); return; }
+  state.rateData.forEach(row => {
+    const cur = parseInt((row.transitTime || '0').replace(/[^0-9\-]/g, ''), 10);
+    const base = isNaN(cur) ? 0 : cur;
+    const newVal = Math.max(0, base + adjust);
+    row.transitTime = newVal + '天';
+  });
+  state.transitDaysAdjust = adjust;
+  renderRateTable();
+  persistState();
+  showToast(`航程天数已${adjust >= 0 ? '增加' : '减少'} ${Math.abs(adjust)} 天（运费价格不变）`, 'success');
+}
+
+function resetTransitDays() {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  state.rateData = JSON.parse(JSON.stringify(state.rateDataBackup));
+  document.getElementById('transitDaysAdjust').value = '0';
+  state.transitDaysAdjust = 0;
+  renderRateTable();
+  showToast('航程天数已恢复原值', 'info');
+}
+
+function resetRateTable() {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  state.rateData = JSON.parse(JSON.stringify(state.rateDataBackup));
+  renderRateTable();
+  showToast('运费已重置到上次保存状态', 'info');
+}
+
+function publishRates() {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  const version = {
+    id: Date.now(),
+    versionNum: 'V' + (state.publishedVersions.length + 1),
+    publishTime: new Date().toLocaleString('zh-CN'),
+    publishedBy: state.currentUser ? state.currentUser.name : '本地维护',
+    rowCount: state.rateData.length,
+    exchangeRate: state.exchangeRate,
+    snapshot: JSON.parse(JSON.stringify(state.rateData))
+  };
+  state.publishedVersions.push(version);
+  state.rateDataBackup = JSON.parse(JSON.stringify(state.rateData));
+  renderPublishedVersions();
+  persistState();
+  showToast(`价格版本 ${version.versionNum} 已发布`, 'success');
+}
+
+function exportRates() {
+  const headers = ['起运港', '目的国', '目的港', '船公司', '20GP(USD)', '40GP(USD)', '40HQ(USD)', '拼箱(USD/CBM)', '航程', '备注'];
+  const csv = [headers, ...state.rateData.map(r => [
+    r.originPort, r.destCountry, r.destPort, r.carrier, r.rate20GP, r.rate40GP, r.rate40HQ, r.rateLCL, r.transitTime, r.remark
+  ])].map(row => row.map(c => `"${c}"`).join(',')).join('\n');
+  const bom = '\uFEFF';
+  const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `船公司运费表_${new Date().toLocaleDateString('zh-CN').replace(/\//g, '')}.csv`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast('运费表已导出', 'success');
+}
+
+function renderPublishedVersions() {
+  const tbody = document.getElementById('publishedVersionsBody');
+  if (!tbody) return;
+  if (state.publishedVersions.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:#999">暂无已发布版本</td></tr>';
+    return;
+  }
+  tbody.innerHTML = state.publishedVersions.map(v => `
+    <tr>
+      <td>${v.versionNum}</td>
+      <td>${v.publishTime}</td>
+      <td>${v.publishedBy}</td>
+      <td>${v.rowCount}</td>
+      <td>${v.exchangeRate}</td>
+      <td><button class="btn btn-sm btn-outline" onclick="loadPublishedVersion(${v.id})">加载此版本</button></td>
+    </tr>
   `).join('');
 }
 
-function selectDest(code) {
-  selectedDest = DESTINATIONS.find(d=>d.code===code);
-  document.getElementById('destSearch').value = selectedDest.country + ' - ' + selectedDest.countryEn;
-  document.getElementById('destDropdown').classList.remove('show');
-
-  // 设置默认费率
-  if(currentMode==='sea') {
-    document.getElementById('rateBase').value = selectedDest.seaRate;
-  } else {
-    document.getElementById('rateBase').value = selectedDest.airRate;
-  }
-
-  selectedDestPort = null;
-  updateDestPortOptions();
-  calcFreight();
+function loadPublishedVersion(id) {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  const ver = state.publishedVersions.find(v => v.id === id);
+  if (!ver) return;
+  state.rateData = JSON.parse(JSON.stringify(ver.snapshot));
+  renderRateTable();
+  showToast(`已加载版本 ${ver.versionNum}`, 'info');
 }
 
-function updateDestPortOptions() {
-  const row = document.getElementById('destPortRow');
-  const tags = document.getElementById('destPortTags');
-  const label = document.getElementById('destPortLabel');
-
-  if(!selectedDest) {
-    row.style.display = 'none';
-    return;
+/* ---------------- 深圳本地费用 ---------------- */
+function initLocalFees() {
+  if (state.localFees.length === 0) {
+    state.localFees = [
+      { id: 1, item: '报关费', detail: '单票报关', amountCNY: 250, remark: '含商检' },
+      { id: 2, item: '拖车费', detail: '20GP蛇口/盐田', amountCNY: 1200, remark: '视距离而定' },
+      { id: 3, item: '码头操作费(THC)', detail: '20GP', amountCNY: 950, remark: '' },
+      { id: 4, item: '码头操作费(THC)', detail: '40GP/40HQ', amountCNY: 1400, remark: '' },
+      { id: 5, item: '文件费(DOC)', detail: '每票', amountCNY: 350, remark: '' },
+      { id: 6, item: 'VGM称重费', detail: '每柜', amountCNY: 150, remark: '' },
+      { id: 7, item: '铅封费', detail: '每柜', amountCNY: 50, remark: '' },
+      { id: 8, item: '打单费(EIR)', detail: '每柜', amountCNY: 40, remark: '' },
+    ];
+    state.localFeesBackup = JSON.parse(JSON.stringify(state.localFees));
   }
-
-  row.style.display = 'block';
-  const ports = currentMode==='sea' ? selectedDest.seaPorts : selectedDest.airports;
-  label.textContent = currentMode==='sea' ? '目的港（点击选择）' : '目的机场（点击选择）';
-
-  tags.innerHTML = ports.map((p,i) => `
-    <span class="port-tag ${i===0?'selected':''}" onclick="selectDestPort('${p.code}', this)">${p.name}</span>
-  `).join('');
-
-  // 默认选第一个
-  if(ports.length>0) {
-    selectedDestPort = ports[0];
+  if (state.localFeesBackup.length === 0) {
+    state.localFeesBackup = JSON.parse(JSON.stringify(state.localFees));
   }
 }
 
-function selectDestPort(code, el) {
-  const ports = currentMode==='sea' ? selectedDest.seaPorts : selectedDest.airports;
-  selectedDestPort = ports.find(p=>p.code===code);
-  document.querySelectorAll('.port-tag').forEach(t=>t.classList.remove('selected'));
-  el.classList.add('selected');
-  calcFreight();
+function renderLocalFees() {
+  const tbody = document.getElementById('localFeeBody');
+  if (!tbody) return;
+  const rate = state.exchangeRate;
+  const editable = canEdit('section5');
+  let totalCNY = 0;
+  let rowsHtml = state.localFees.map(fee => {
+    totalCNY += fee.amountCNY || 0;
+    const usd = ((fee.amountCNY || 0) / rate).toFixed(2);
+    return `<tr>
+      <td class="editable-cell">${editable ? `<input type="text" value="${fee.item}" onchange="updateLocalFee(${fee.id}, 'item', this.value)">` : fee.item}</td>
+      <td class="editable-cell">${editable ? `<input type="text" value="${fee.detail}" onchange="updateLocalFee(${fee.id}, 'detail', this.value)">` : fee.detail}</td>
+      <td class="editable-cell">${editable ? `<input type="number" value="${fee.amountCNY}" onchange="updateLocalFee(${fee.id}, 'amountCNY', this.value)" style="width:100px">` : fee.amountCNY}</td>
+      <td style="color:var(--accent);font-weight:700">$${usd}</td>
+      <td class="editable-cell">${editable ? `<input type="text" value="${fee.remark}" onchange="updateLocalFee(${fee.id}, 'remark', this.value)">` : fee.remark}</td>
+      <td>${editable ? `<button class="btn btn-sm btn-danger" onclick="removeLocalFee(${fee.id})">删除</button>` : '-'}</td>
+    </tr>`;
+  }).join('');
+  const totalUSD = (totalCNY / rate).toFixed(2);
+  rowsHtml += `<tr style="background:linear-gradient(135deg,#1a3a5c 0%,#2c5282 100%);color:#fff;font-weight:700;font-size:15px">
+    <td colspan="2" style="text-align:right;padding:10px 16px">总计费用</td>
+    <td style="text-align:center;font-size:16px;color:#f4a261">¥${totalCNY.toLocaleString()}</td>
+    <td style="text-align:center;font-size:16px;color:#f4a261">$${totalUSD}</td>
+    <td colspan="2" style="text-align:center;font-size:12px;opacity:0.8">自动汇总（CNY→USD）</td>
+  </tr>`;
+  tbody.innerHTML = rowsHtml;
 }
 
-// 点击外部关闭下拉
-document.addEventListener('click', function(e) {
-  if(!e.target.closest('.search-wrap')) {
-    document.getElementById('destDropdown').classList.remove('show');
+function updateLocalFee(id, field, value) {
+  const fee = state.localFees.find(f => f.id === id);
+  if (fee) {
+    fee[field] = field === 'amountCNY' ? parseFloat(value) || 0 : value;
+    if (field === 'amountCNY') renderLocalFees(); // 刷新USD显示
   }
-});
-
-function calcFreight() {
-  const weight = parseFloat(document.getElementById('cargoWeight').value) || 0;
-  const volume = parseFloat(document.getElementById('cargoVolume').value) || 0;
-  const rateBase = parseFloat(document.getElementById('rateBase').value) || 0;
-  const rateMin = parseFloat(document.getElementById('rateMin').value) || 0;
-  const rateDoc = parseFloat(document.getElementById('rateDoc').value) || 0;
-  const rateCustoms = parseFloat(document.getElementById('rateCustoms').value) || 0;
-  const rateAms = parseFloat(document.getElementById('rateAms').value) || 0;
-  const rateFuel = parseFloat(document.getElementById('rateFuel').value) || 0;
-
-  let chargeable = 0;
-  let baseFee = 0;
-  let chargeDesc = '';
-
-  if(currentMode==='sea') {
-    // 海运：体积重比 1CBM=363KG，取大值
-    const weightCBM = weight / 363;
-    chargeable = Math.max(volume, weightCBM);
-    chargeable = Math.max(chargeable, rateMin);
-    baseFee = chargeable * rateBase;
-    chargeDesc = chargeable.toFixed(4) + ' CBM' + (weightCBM>volume ? ' (按重量换算:'+weightCBM.toFixed(4)+'CBM)' : '');
-  } else {
-    // 空运：体积重 = CBM * 166.67
-    const volWeight = volume * 166.67;
-    chargeable = Math.max(weight, volWeight);
-    chargeable = Math.max(chargeable, rateMin);
-    baseFee = chargeable * rateBase;
-    chargeDesc = chargeable.toFixed(2) + ' KG' + (volWeight>weight ? ' (按体积重:'+volWeight.toFixed(2)+'KG)' : '');
-  }
-
-  const surcharge = rateDoc + rateCustoms + rateAms + rateFuel;
-  const total = baseFee + surcharge;
-
-  // 路线描述
-  let routeDesc = '请选择目的地';
-  let transit = '-';
-  if(selectedOrigin && selectedDest) {
-    const originPortName = document.getElementById('originPortSelect').selectedOptions[0]?.text || '';
-    const destPortName = selectedDestPort ? selectedDestPort.name : '';
-    routeDesc = `${selectedOrigin.name} ${originPortName} → ${selectedDest.country} ${destPortName}`;
-    transit = currentMode==='sea' ? selectedDest.transitSea+' 天' : selectedDest.transitAir+' 天';
-  }
-
-  document.getElementById('resultRoute').textContent = routeDesc;
-  document.getElementById('resultTotal').textContent = total.toFixed(2);
-  document.getElementById('resultChargeable').textContent = chargeDesc;
-  document.getElementById('resultBase').textContent = 'USD ' + baseFee.toFixed(2);
-  document.getElementById('resultSurcharge').textContent = 'USD ' + surcharge.toFixed(2) + ' (文件'+rateDoc+' + 报关'+rateCustoms+' + 申报'+rateAms+' + 附加'+rateFuel+')';
-  document.getElementById('resultTransit').textContent = transit;
 }
+
+function addLocalFeeRow() {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  state.localFees.push({ id: Date.now(), item: '新费用项', detail: '', amountCNY: 0, remark: '' });
+  renderLocalFees();
+}
+
+function removeLocalFee(id) {
+  if (!canEdit('section5')) { showToast('无编辑权限', 'error'); return; }
+  state.localFees = state.localFees.filter(f => f.id !== id);
+  renderLocalFees();
+}
+
+function saveLocalFees() {
+  state.localFeesBackup = JSON.parse(JSON.stringify(state.localFees));
+  persistState();
+  showToast('本地费用已保存', 'success');
+}
+
+function updateExchangeRate() {
+  state.exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 7.25;
+  renderLocalFees();
+  persistState();
+}
+
+/* ---------------- 权限控制 ---------------- */
+// 本工具未引入角色登录，板块5默认全部可编辑
+function canEdit(sectionId) {
+  return true;
+}
+
+/* ---------------- 运费测算初始化 ---------------- */
+function initFreight() {
+  initDestCountries();
+  renderCargoPreview();
+  // 从localStorage恢复数据
+  try {
+    const saved = localStorage.getItem('freightData');
+    if (saved) {
+      const d = JSON.parse(saved);
+      if (d.cargoData && d.cargoData.length) state.cargoData = d.cargoData;
+      if (d.section1Data) state.section1Data = d.section1Data;
+      if (d.rateData) state.rateData = d.rateData;
+      if (d.rateDataBackup) state.rateDataBackup = d.rateDataBackup;
+      if (d.localFees) state.localFees = d.localFees;
+      if (d.localFeesBackup) state.localFeesBackup = d.localFeesBackup;
+      if (d.publishedVersions) state.publishedVersions = d.publishedVersions;
+      if (typeof d.exchangeRate === 'number') state.exchangeRate = d.exchangeRate;
+      if (typeof d.priceMultiplier === 'number') state.priceMultiplier = d.priceMultiplier;
+      if (typeof d.transitDaysAdjust === 'number') state.transitDaysAdjust = d.transitDaysAdjust;
+    }
+  } catch(e) {}
+  renderCargoPreview();
+  // 拖拽上传
+  const uploadArea = document.getElementById('uploadArea');
+  if (uploadArea) {
+    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+    uploadArea.addEventListener('drop', e => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        const input = document.getElementById('cargoFileInput');
+        if (input) input.files = e.dataTransfer.files;
+        handleCargoUpload({ target: { files: e.dataTransfer.files } });
+      }
+    });
+  }
+  // 板块5：船公司运费数据管理初始化
+  initRateData();
+  const exG = document.getElementById('exchangeRate');
+  if (exG) exG.value = state.exchangeRate;
+  const pmG = document.getElementById('priceMultiplier');
+  if (pmG) pmG.value = state.priceMultiplier;
+  const tdaG = document.getElementById('transitDaysAdjust');
+  if (tdaG) tdaG.value = state.transitDaysAdjust;
+  renderRateTable();
+  initLocalFees();
+  renderLocalFees();
+  renderPublishedVersions();
+}
+
+// 绑定：切换到运费页时刷新，页面加载完毕后初始化
+document.addEventListener('DOMContentLoaded', initFreight);
 
 // ==================== 初始化 ====================
 // 从localStorage读取更新后的产品数据
@@ -1575,8 +2772,7 @@ async function initApp() {
   }
   initSeriesFilter();
   renderTable();
-  onOriginChange();
-  calcFreight();
+  initFreight();
 }
 initApp();
 
