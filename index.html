@@ -2189,6 +2189,10 @@ function renderQuote(result) {
       计费体积：${result.chargeableVol.toFixed(2)} m³ | 单价：$${result.ratePerCBM}/CBM | 航程约 ${result.transitDays} 天<br>
       预计总运费：<strong style="color:#e76f51;font-size:18px">$${result.freight.toFixed(2)}</strong>
     </div>`;
+    // 拼柜(LCL)装柜三视图（正视图/俯视图/侧视图）：散货拼载于一个标准柜中，默认按40HQ展示，可切换柜型查看货物占用空间
+    const _c3dDefaultLCL = '40HQ';
+    html += '<div id="container3D_view"></div>';
+    html += renderContainer3DShell('container3D_view', _c3dDefaultLCL);
   } else if (result.transport === 'AIR') {
     html += `<div class="info-box" style="background:#f0fff4;border-left-color:#38a169">
       <strong>空运方案</strong><br>
