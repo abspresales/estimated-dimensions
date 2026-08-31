@@ -3173,6 +3173,7 @@ function handleAdminUpload(event) {
             }
             const cSeries = findCol(headerRow, ['产品系列']);
             const cPack = findCol(headerRow, ['打包方式']);
+            const cCategory = findCol(headerRow, ['打包类别']);
             const cMethod = findCol(headerRow, ['包装方式']);
             const cPer = findCol(headerRow, ['每箱产品数量']);
             const cContent = findCol(headerRow, ['箱内物品']);
@@ -3208,12 +3209,17 @@ function handleAdminUpload(event) {
             }
             if(cur.length) groups.push(cur);
 
-            // 每组归属 = 组内「箱体」行的包装方式(箱体行决定大类)
+            // 每组归属：优先用「打包类别」列(D列, 舞台等sheet); 无该列时用组内「箱体」行的包装方式推断大类
             for(const g of groups) {
               let owner = null;
-              for(const row of g) {
-                const ct = String(row[cContent]||'');
-                if(ct.indexOf('箱体') !== -1) { owner = getMethodGroup(row[cMethod], ct, ''); break; }
+              if(cCategory>=0) {
+                for(const row of g) { if(row[cCategory] && String(row[cCategory]).trim()) { owner = String(row[cCategory]).trim(); break; } }
+              }
+              if(!owner) {
+                for(const row of g) {
+                  const ct = String(row[cContent]||'');
+                  if(ct.indexOf('箱体') !== -1) { owner = getMethodGroup(row[cMethod], ct, ''); break; }
+                }
               }
               if(!owner) owner = getMethodGroup(g[0][cMethod], g[0][cContent]||'', '');
               for(const row of g) {
