@@ -104,7 +104,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -202,7 +202,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -510,7 +510,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -692,7 +692,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -1686,7 +1686,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -1812,7 +1812,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -1822,104 +1822,6 @@
   {
     "scene": "舞台Rental",
     "series": "JP8 pro",
-    "method": "木箱",
-    "methodDetail": "木箱",
-    "qtyPerCase": "可按每10平米一个木箱",
-    "contents": "备品",
-    "sizeMm": "仅供参考",
-    "length": 0.8,
-    "width": 0.72,
-    "height": 1.03,
-    "weight": 100,
-    "volume": 0.5932799999999999
-  },
-  {
-    "scene": "舞台Rental",
-    "series": "MC",
-    "method": "木箱",
-    "methodDetail": "木箱",
-    "qtyPerCase": "",
-    "contents": "箱体",
-    "sizeMm": "500*500",
-    "length": 0,
-    "width": 0,
-    "height": 0,
-    "weight": 0,
-    "volume": 0
-  },
-  {
-    "scene": "舞台Rental",
-    "series": "MC",
-    "method": "木箱",
-    "methodDetail": "木箱",
-    "qtyPerCase": "",
-    "contents": "箱体",
-    "sizeMm": "500*1000",
-    "length": 0,
-    "width": 0,
-    "height": 0,
-    "weight": 0,
-    "volume": 0
-  },
-  {
-    "scene": "舞台Rental",
-    "series": "MC",
-    "method": "木箱",
-    "methodDetail": "木箱",
-    "qtyPerCase": "30IN1",
-    "contents": "单倍吊梁",
-    "sizeMm": "",
-    "length": 1.16,
-    "width": 0.77,
-    "height": 0.7,
-    "weight": 155,
-    "volume": 0.6252399999999999
-  },
-  {
-    "scene": "舞台Rental",
-    "series": "MC",
-    "method": "木箱",
-    "methodDetail": "木箱",
-    "qtyPerCase": "12IN1",
-    "contents": "",
-    "sizeMm": "",
-    "length": 1.3,
-    "width": 1.05,
-    "height": 0.53,
-    "weight": 109,
-    "volume": 0.7234500000000001
-  },
-  {
-    "scene": "舞台Rental",
-    "series": "MC",
-    "method": "木箱",
-    "methodDetail": "木箱",
-    "qtyPerCase": "15IN1",
-    "contents": "双倍吊梁",
-    "sizeMm": "",
-    "length": 1.16,
-    "width": 0.77,
-    "height": 0.7,
-    "weight": 150,
-    "volume": 0.6252399999999999
-  },
-  {
-    "scene": "舞台Rental",
-    "series": "MC",
-    "method": "木箱",
-    "methodDetail": "木箱",
-    "qtyPerCase": "18IN1",
-    "contents": "",
-    "sizeMm": "",
-    "length": 1.3,
-    "width": 1.05,
-    "height": 0.53,
-    "weight": 171,
-    "volume": 0.7234500000000001
-  },
-  {
-    "scene": "舞台Rental",
-    "series": "MC",
     "method": "木箱",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
@@ -2470,7 +2372,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -2568,7 +2470,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -2778,7 +2680,7 @@
     "methodDetail": "备品航空箱",
     "qtyPerCase": "可按每15平米一个航空箱",
     "contents": "备品",
-    "sizeMm": "备品航空箱(Live)",
+    "sizeMm": "备品航空箱\n(Live)",
     "length": 1.2,
     "width": 0.68,
     "height": 0.78,
@@ -2858,7 +2760,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "8IN1",
     "contents": "箱体",
@@ -2872,7 +2774,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "30IN1",
     "contents": "双倍挂架",
@@ -2886,7 +2788,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "32IN1",
     "contents": "单倍挂架",
@@ -2900,7 +2802,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -2914,7 +2816,7 @@
   {
     "scene": "ProAV",
     "series": "NX渠道订单\n（北美渠道订单用）",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体包",
@@ -2928,7 +2830,7 @@
   {
     "scene": "ProAV",
     "series": "NX渠道订单\n（北美渠道订单用）",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "80IN1",
     "contents": "模组包",
@@ -2942,7 +2844,7 @@
   {
     "scene": "ProAV",
     "series": "NX渠道订单\n（北美渠道订单用）",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "18IN1",
     "contents": "箱体包",
@@ -2956,7 +2858,7 @@
   {
     "scene": "ProAV",
     "series": "NX渠道订单\n（北美渠道订单用）",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "80IN1",
     "contents": "模组包",
@@ -2970,7 +2872,7 @@
   {
     "scene": "ProAV",
     "series": "NX渠道订单\n（北美渠道订单用）",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "24IN1",
     "contents": "挂架包",
@@ -2984,7 +2886,7 @@
   {
     "scene": "ProAV",
     "series": "NX渠道订单\n（北美渠道订单用）",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -2998,7 +2900,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "8IN1",
     "contents": "箱体",
@@ -3012,7 +2914,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3026,7 +2928,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3040,7 +2942,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3054,7 +2956,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3068,7 +2970,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "24IN1",
     "contents": "挂架包",
@@ -3082,7 +2984,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3096,7 +2998,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "9IN1",
     "contents": "箱体",
@@ -3110,7 +3012,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3124,7 +3026,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3138,7 +3040,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3152,7 +3054,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "12IN1",
     "contents": "箱体",
@@ -3166,7 +3068,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "24IN1",
     "contents": "挂架包",
@@ -3180,7 +3082,7 @@
   {
     "scene": "ProAV",
     "series": "NX项目订单",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3194,7 +3096,7 @@
   {
     "scene": "ProAV",
     "series": "KL II&CPL",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "8IN1",
     "contents": "箱体",
@@ -3208,7 +3110,7 @@
   {
     "scene": "ProAV",
     "series": "KL II&CPL",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3222,7 +3124,7 @@
   {
     "scene": "ProAV",
     "series": "N PLUS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体",
@@ -3236,7 +3138,7 @@
   {
     "scene": "ProAV",
     "series": "N PLUS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体",
@@ -3250,7 +3152,7 @@
   {
     "scene": "ProAV",
     "series": "N PLUS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体",
@@ -3264,7 +3166,7 @@
   {
     "scene": "ProAV",
     "series": "N PLUS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3278,7 +3180,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "28IN1",
     "contents": "箱体",
@@ -3292,7 +3194,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "32IN1",
     "contents": "双倍挂架",
@@ -3306,7 +3208,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "",
     "contents": "单倍挂架",
@@ -3320,7 +3222,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3334,7 +3236,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "28IN1",
     "contents": "箱体",
@@ -3348,7 +3250,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "32IN1",
     "contents": "双倍挂架",
@@ -3362,7 +3264,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "",
     "contents": "单倍挂架",
@@ -3376,7 +3278,7 @@
   {
     "scene": "ProAV",
     "series": "KLCOB V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3390,7 +3292,7 @@
   {
     "scene": "ProAV",
     "series": "K PLUS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体",
@@ -3404,7 +3306,7 @@
   {
     "scene": "ProAV",
     "series": "K PLUS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体",
@@ -3418,7 +3320,7 @@
   {
     "scene": "ProAV",
     "series": "K PLUS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3432,7 +3334,7 @@
   {
     "scene": "ProAV",
     "series": "CPK",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "48IN1",
     "contents": "箱体包",
@@ -3446,7 +3348,7 @@
   {
     "scene": "ProAV",
     "series": "CPK",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "16IN1",
     "contents": "箱体包",
@@ -3460,7 +3362,7 @@
   {
     "scene": "ProAV",
     "series": "CPK",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "432IN1",
     "contents": "模组包",
@@ -3474,7 +3376,7 @@
   {
     "scene": "ProAV",
     "series": "CPK",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "144IN1",
     "contents": "模组包",
@@ -3488,7 +3390,7 @@
   {
     "scene": "ProAV",
     "series": "CPK",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3502,7 +3404,7 @@
   {
     "scene": "ProAV",
     "series": "CPN",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体包",
@@ -3516,7 +3418,7 @@
   {
     "scene": "ProAV",
     "series": "CPN",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "5IN1",
     "contents": "箱体包",
@@ -3530,7 +3432,7 @@
   {
     "scene": "ProAV",
     "series": "CPN",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "240IN1",
     "contents": "模组包",
@@ -3544,7 +3446,7 @@
   {
     "scene": "ProAV",
     "series": "CPN",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "120IN1",
     "contents": "模组包",
@@ -3558,7 +3460,7 @@
   {
     "scene": "ProAV",
     "series": "CPN",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "60IN1",
     "contents": "模组包",
@@ -3572,7 +3474,7 @@
   {
     "scene": "ProAV",
     "series": "CPN",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3586,7 +3488,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "48IN1",
     "contents": "箱体",
@@ -3600,7 +3502,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "48IN1",
     "contents": "箱体",
@@ -3614,7 +3516,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "24IN1",
     "contents": "框架",
@@ -3628,7 +3530,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3642,7 +3544,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "48IN1",
     "contents": "箱体",
@@ -3656,7 +3558,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "25IN1",
     "contents": "箱体",
@@ -3670,7 +3572,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "24IN1",
     "contents": "框架",
@@ -3684,7 +3586,7 @@
   {
     "scene": "ProAV",
     "series": "CPS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3698,7 +3600,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "28IN1",
     "contents": "箱体包",
@@ -3712,7 +3614,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "14IN1",
     "contents": "箱体包",
@@ -3726,7 +3628,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体包",
@@ -3740,7 +3642,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "18IN1",
     "contents": "模组包(单包5个)",
@@ -3754,7 +3656,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "28IN1",
     "contents": "箱体包",
@@ -3768,7 +3670,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "14IN1",
     "contents": "箱体包",
@@ -3782,7 +3684,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体包",
@@ -3796,7 +3698,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "24IN1",
     "contents": "模组包(单包4个)",
@@ -3810,7 +3712,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "28IN1",
     "contents": "箱体包",
@@ -3824,7 +3726,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "14IN1",
     "contents": "箱体包",
@@ -3838,7 +3740,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体包",
@@ -3852,7 +3754,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "30IN1",
     "contents": "模组包(单包3个)",
@@ -3866,7 +3768,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -3880,7 +3782,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "28IN1",
     "contents": "箱体包",
@@ -3894,7 +3796,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "14IN1",
     "contents": "箱体包",
@@ -3908,7 +3810,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "18IN1",
     "contents": "模组包(单包5个)",
@@ -3922,7 +3824,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "28IN1",
     "contents": "箱体包",
@@ -3936,7 +3838,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "14IN1",
     "contents": "箱体包",
@@ -3950,7 +3852,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "24IN1",
     "contents": "模组包(单包4个)",
@@ -3964,7 +3866,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "28IN1",
     "contents": "箱体包",
@@ -3978,7 +3880,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "14IN1",
     "contents": "箱体包",
@@ -3992,7 +3894,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "30IN1",
     "contents": "模组包(单包3个)",
@@ -4006,7 +3908,7 @@
   {
     "scene": "ProAV",
     "series": "K V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -4020,7 +3922,7 @@
   {
     "scene": "ProAV",
     "series": "XL",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "16IN1",
     "contents": "箱体",
@@ -4034,7 +3936,7 @@
   {
     "scene": "ProAV",
     "series": "XL",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -4048,7 +3950,7 @@
   {
     "scene": "ProAV",
     "series": "HC V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "24IN1",
     "contents": "箱体",
@@ -4062,7 +3964,7 @@
   {
     "scene": "ProAV",
     "series": "HC V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -4076,7 +3978,7 @@
   {
     "scene": "ProAV",
     "series": "HC V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "24IN1",
     "contents": "箱体",
@@ -4090,7 +3992,7 @@
   {
     "scene": "ProAV",
     "series": "HC V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -4104,7 +4006,7 @@
   {
     "scene": "ProAV",
     "series": "CL V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "32IN1",
     "contents": "箱体",
@@ -4118,7 +4020,7 @@
   {
     "scene": "ProAV",
     "series": "CL V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -4132,7 +4034,7 @@
   {
     "scene": "ProAV",
     "series": "KL V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "320IN1",
     "contents": "模组包",
@@ -4146,7 +4048,7 @@
   {
     "scene": "ProAV",
     "series": "KL V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "240IN1",
     "contents": "信号盒",
@@ -4160,7 +4062,7 @@
   {
     "scene": "ProAV",
     "series": "KL V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱/卡板",
     "qtyPerCase": "20IN1",
     "contents": "箱体包",
@@ -4174,7 +4076,7 @@
   {
     "scene": "ProAV",
     "series": "KL V3",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -4188,7 +4090,7 @@
   {
     "scene": "ProAV",
     "series": "K2.5DS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "10IN1",
     "contents": "箱体",
@@ -4202,7 +4104,7 @@
   {
     "scene": "ProAV",
     "series": "K2.5DS",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
@@ -4216,7 +4118,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X108",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包等",
     "contents": "",
@@ -4230,7 +4132,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X108",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "壁挂结构包",
     "contents": "",
@@ -4244,7 +4146,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X108",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包",
     "contents": "",
@@ -4258,7 +4160,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X108",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包等",
     "contents": "",
@@ -4272,7 +4174,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X108",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "壁挂结构包",
     "contents": "",
@@ -4286,7 +4188,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X108",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包",
     "contents": "",
@@ -4300,7 +4202,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包等",
     "contents": "",
@@ -4314,7 +4216,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "壁挂结构包",
     "contents": "",
@@ -4328,7 +4230,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包",
     "contents": "",
@@ -4342,7 +4244,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包等",
     "contents": "",
@@ -4356,7 +4258,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "壁挂结构包",
     "contents": "",
@@ -4370,7 +4272,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包",
     "contents": "",
@@ -4384,7 +4286,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等",
     "contents": "",
@@ -4398,7 +4300,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包",
     "contents": "",
@@ -4412,7 +4314,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等",
     "contents": "",
@@ -4426,7 +4328,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包",
     "contents": "",
@@ -4440,7 +4342,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包等",
     "contents": "",
@@ -4454,7 +4356,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "壁挂结构包",
     "contents": "",
@@ -4468,7 +4370,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包等\n（一套用2个木箱打包）",
     "contents": "",
@@ -4482,7 +4384,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "",
     "contents": "",
@@ -4496,7 +4398,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "壁挂结构包",
     "contents": "",
@@ -4510,7 +4412,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等",
     "contents": "",
@@ -4524,7 +4426,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包（选配）",
     "contents": "",
@@ -4538,7 +4440,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包等\n（一套用2个木箱打包）",
     "contents": "",
@@ -4552,7 +4454,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "",
     "contents": "",
@@ -4566,7 +4468,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 4K",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包（选配）",
     "contents": "",
@@ -4580,7 +4482,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X151",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱1",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等",
     "contents": "",
@@ -4594,7 +4496,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X151",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱2",
     "qtyPerCase": "",
     "contents": "",
@@ -4608,7 +4510,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X178",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱1",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等",
     "contents": "",
@@ -4622,7 +4524,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X178",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱2",
     "qtyPerCase": "",
     "contents": "",
@@ -4636,7 +4538,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X205",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱1",
     "qtyPerCase": "箱体包、线材包、控制盒包、工具包、壁挂包等",
     "contents": "",
@@ -4650,7 +4552,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X205",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱2",
     "qtyPerCase": "",
     "contents": "",
@@ -4664,7 +4566,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包",
     "contents": "",
@@ -4678,7 +4580,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包（选配）",
     "contents": "",
@@ -4692,7 +4594,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包",
     "contents": "",
@@ -4706,7 +4608,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包（选配）",
     "contents": "",
@@ -4720,7 +4622,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包",
     "contents": "",
@@ -4734,7 +4636,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包（选配）",
     "contents": "",
@@ -4748,7 +4650,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包+备件包+包边+工具包+壁挂结构+控制背盒+投屏包",
     "contents": "",
@@ -4762,7 +4664,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X163 V2",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "移动支架包（选配）",
     "contents": "",
@@ -4776,7 +4678,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136F",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "航空箱",
     "qtyPerCase": "箱体包+备件包+包边+工具包+电动升降支架+控制背盒",
     "contents": "",
@@ -4790,7 +4692,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136F\n北美版 木箱打包",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "箱体包+备件包",
     "contents": "",
@@ -4804,7 +4706,7 @@
   {
     "scene": "ProAV",
     "series": "ICON X136F\n北美版 木箱打包",
-    "method": "木箱",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "电动支架等",
     "contents": "",
