@@ -2164,6 +2164,10 @@ function renderQuote(result) {
       需要柜数：${rec.numContainers} 个 | 空间利用率：${rec.utilizationVol} | 重量利用率：${rec.utilizationWt} | 浪费空间：${rec.wastedVol} m³<br>
       柜型规格：${rec.specs} | 航程约 ${result.transitDays||'-'} 天 | 预计总运费：<strong style="color:#e76f51;font-size:18px">$${rec.totalCost.toLocaleString()}</strong>
     </div>`;
+    // 装柜三视图（正视图/俯视图/侧视图），默认用推荐柜型
+    const _c3dDefault = (rec && rec.containerType && CONTAINER_SPECS[rec.containerType]) ? rec.containerType : Object.keys(CONTAINER_SPECS)[0];
+    html += '<div id="container3D_view"></div>';
+    html += renderContainer3DShell('container3D_view', _c3dDefault);
     html += '<h3 style="font-size:14px;margin:16px 0 10px">所有可选方案对比（含单一柜型与混合柜型）</h3>';
     html += '<div class="table-container"><table class="data-table"><thead><tr><th>方案</th><th>柜型组合</th><th>柜数</th><th>空间利用率</th><th>重量利用率</th><th>浪费空间(m³)</th><th>总运费(USD)</th></tr></thead><tbody>';
     result.allOptions.forEach(opt => {
@@ -2206,6 +2210,119 @@ function renderQuote(result) {
 
   container.innerHTML = html;
 }
+
+/* ==================== 装柜三视图（正视图/俯视图/侧视图） ==================== */
+function container3DColorPalette() {
+  return ['#1890ff','#fa8c16','#52c41a','#f5222d','#722ed1','#13c2c2','#eb2f96','#faad14','#2f54eb','#a0d911','#fa541c','#597ef7'];
+}
+function container3DBuildBoxes() {
+  const palette = container3DColorPalette();
+  const boxes = [];
+  const typeColor = {};
+  let ci = 0;
+  (state.cargoData || []).forEach(item => {
+    if (!(item.length > 0 && item.width > 0 && item.height > 0 && item.qty > 0)) return;
+    let key = (item.boxType || '纸箱').trim() || '纸箱';
+    if (!typeColor[key]) { typeColor[key] = palette[ci % palette.length]; ci++; }
+    for (let j = 0; j < item.qty; j++) {
+      boxes.push({
+        type: key,
+        color: typeColor[key],
+        length: item.length, width: item.width, height: item.height,
+        weight: item.grossWeight || 0, qty: item.qty
+      });
+    }
+  });
+  // 按体积从大到小排序，方便贪心排布
+  boxes.sort((a, b) => (b.length * b.width * b.height) - (a.length * a.width * a.height));
+  return { boxes, typeColor };
+}
+function container3DPack(spec, boxes) {
+  const L = spec.L, W = spec.W, H = spec.H;
+  const placed = [];
+  // 贪心：从左下后角开始，沿X(长)→Y(宽)→Z(高)依次找空位填充
+  boxes.forEach(box => {
+    let pos = null;
+    for (let c = 0; c + box.height <= H + 0.001 && !pos; c++) {
+      for (let r = 0; r + box.width <= W + 0.001 && !pos; r++) {
+        for (let x = 0; x + box.length <= L + 0.001 && !pos; x++) {
+          const collided = placed.some(p =>
+            !(x + box.length <= p.x + 0.001 || p.x + p.length <= x + 0.001 ||
+              r + box.width <= p.y + 0.001 || p.y + p.width <= r + 0.001 ||
+              c + box.height <= p.z + 0.001 || p.z + p.height <= c + 0.001)
+          );
+          if (!collided) pos = { x: x, y: r, z: c };
+        }
+      }
+    }
+    if (pos) placed.push({ ...box, x: pos.x, y: pos.y, z: pos.z });
+    // 放不下则跳过（超出柜体容量）
+  });
+  return placed;
+}
+function container3DRenderView(spec, placed, view) {
+  // view: 'side' 侧视图(长×高,X-Z)、'front' 正视图(宽×高,Y-Z)、'top' 俯视图(长×宽,X-Y)
+  let frameW, frameH, mapBox;
+  if (view === 'side') {
+    frameW = spec.L; frameH = spec.H;
+    mapBox = (b) => ({ left: b.x, bottom: b.z, w: b.length, h: b.height, lx: b.x, hy: b.z });
+  } else if (view === 'front') {
+    frameW = spec.W; frameH = spec.H;
+    mapBox = (b) => ({ left: b.y, bottom: b.z, w: b.width, h: b.height, lx: b.y, hy: b.z });
+  } else { // top
+    frameW = spec.L; frameH = spec.W;
+    mapBox = (b) => ({ left: b.x, bottom: b.y, w: b.length, h: b.width, lx: b.x, hy: b.y });
+  }
+  const boxHtml = placed.map(b => {
+    const m = mapBox(b);
+    const leftPct = (m.left / frameW) * 100;
+    const bottomPct = (m.bottom / frameH) * 100;
+    const wPct = (m.w / frameW) * 100;
+    const hPct = (m.h / frameH) * 100;
+    const canShow = wPct > 4 && hPct > 6;
+    const title = `${b.type} | ${b.length}x${b.width}x${b.height}m | ${b.weight}kg`;
+    return '<div class="cargo-box" style="left:' + leftPct.toFixed(2) + '%;bottom:' + bottomPct.toFixed(2) + '%;width:' + wPct.toFixed(2) + '%;height:' + hPct.toFixed(2) + '%;background:' + b.color + ';" title="' + title + '">' +
+      (canShow ? '<span class="cargo-name">' + b.type + '</span><span class="cargo-size">' + (view==='side'||view==='top' ? b.length : b.width).toFixed(1) + 'x' + (view==='front' ? b.width : b.height).toFixed(1) + 'm</span>' : '') +
+      '</div>';
+  }).join('');
+  const emptyTip = placed.length === 0 ? '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#bbb;font-size:13px;">暂无货物数据</div>' : '';
+  const scaleX = [];
+  for (let i = 0; i <= 4; i++) scaleX.push('<span>' + (frameW * i / 4).toFixed(1) + 'm</span>');
+  const viewName = view === 'side' ? '侧视图' : (view === 'front' ? '正视图' : '俯视图');
+  return '<div class="container-detail-wrap">' +
+    '<div class="container-detail-title">' + viewName + '（' + (view==='side'?('长'+frameW+'m×高'+frameH+'m'):(view==='front'?('宽'+frameW+'m×高'+frameH+'m'):('长'+frameW+'m×宽'+frameH+'m'))) + '，按实际尺寸比例）</div>' +
+    '<div style="padding-left:8px;">' +
+      '<div class="container-frame" style="aspect-ratio:' + frameW + '/' + frameH + ';">' +
+        '<div class="container-grid"></div>' +
+        boxHtml + emptyTip +
+      '</div>' +
+      '<div class="container-scale-x">' + scaleX.join('') + '</div>' +
+    '</div>' +
+  '</div>';
+}
+function renderContainer3DShell(containerId, activeType) {
+  const spec = CONTAINER_SPECS[activeType];
+  if (!spec) return '';
+  const { boxes, typeColor } = container3DBuildBoxes();
+  const placed = container3DPack(spec, boxes);
+  const viewsHtml = ['side','front','top'].map(v => container3DRenderView(spec, placed, v)).join('');
+  const legendHtml = Object.keys(typeColor).length > 0 ?
+    '<div class="cargo-legend">' + Object.keys(typeColor).map(s => '<div class="cargo-legend-item"><span class="cargo-legend-color" style="background:' + typeColor[s] + ';"></span><span>' + s + '</span></div>').join('') + '</div>' : '';
+  const tabsHtml = Object.keys(CONTAINER_SPECS).map(t =>
+    '<button class="btn btn-sm" style="' + (t === activeType ? 'background:#fa8c16;color:#fff;border-color:#fa8c16;' : 'background:#f0f0f0;color:#666;border-color:#ddd;') + 'margin-right:6px;" onclick="window._switchContainer3D(\'' + containerId + '\',\'' + t + '\')">' + t + '</button>').join('');
+  const totalWt = placed.reduce((s, b) => s + b.weight, 0);
+  return '<div class="container-detail-wrap" style="margin-top:16px;border:1px solid #d9d9d9;">' +
+    '<div class="container-detail-title" style="font-size:15px;color:#333;">📦 装柜三视图（' + spec.name + '，内尺寸 ' + spec.L + '×' + spec.W + '×' + spec.H + 'm）</div>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;justify-content:center;">' + tabsHtml + '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">' + viewsHtml + '</div>' +
+    legendHtml +
+    '<div class="container-detail-title" style="margin-top:6px;font-size:13px;color:#888;font-weight:400;">已排入 <strong style="color:#1890ff;">' + placed.length + '</strong> 箱 | 柜内尺寸 ' + spec.L + 'm × ' + spec.W + 'm × ' + spec.H + 'm | 参考重量 ' + totalWt.toFixed(1) + ' kg</div>' +
+  '</div>';
+}
+window._switchContainer3D = function(containerId, type) {
+  const el = document.getElementById(containerId);
+  if (el) el.innerHTML = renderContainer3DShell(containerId, type);
+};
 
 /* ---------------- 持久化 / 保存 / 重置 ---------------- */
 function persistState() {
