@@ -1101,10 +1101,12 @@ function renderTable() {
   const series = document.getElementById('filterSeries').value;
   const method = document.getElementById('filterMethod').value;
 
+  // 备品(contents含"备品")是伴随系列的通用项，不受包装方式(method)过滤影响，始终跟系列显示
+  const isSpare = (p) => (p.contents && String(p.contents).indexOf('备品') !== -1);
   let filtered = PRODUCTS.filter(p =>
     (!scene || p.scene===scene) &&
     (!series || p.series===series) &&
-    (!method || p.method===method)
+    (!method || p.method===method || isSpare(p))
   );
 
   // 更新匹配统计
