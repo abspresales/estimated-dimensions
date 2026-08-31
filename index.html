@@ -1141,26 +1141,58 @@ function renderTable() {
 
   let lastScene = '', lastSeries = '', lastMethod = '';
   // 预计算尺寸列合并：优先用数据里的 sizeSpan(来自Excel合并单元格)；无则按同系列+方法内连续相同且非空尺寸自动合并
-  const sizeSpan = new Array(pageData.length).fill(1);
-  const hasDataSpan = pageData.some(p => p.sizeSpan !== undefined && p.sizeSpan !== null);
+  // 注意：分页会切开某些跨页的合并组，因此这里在【完整 filtered 数组】上先算出每行的合并归属，
+  // 再针对【当前页 pageData】生成有效的 rowspan：跨页被切断时，下一页首行会重新起一个 rowspan 展示剩余行，避免表格错位。
+  const hasDataSpan = filtered.some(p => p.sizeSpan !== undefined && p.sizeSpan !== null);
+  let mergeInfo = null;
   if(hasDataSpan) {
-    for(let i=0;i<pageData.length;i++){
-      const sp = pageData[i].sizeSpan;
-      if(sp !== undefined && sp !== null && sp >= 2) sizeSpan[i] = sp;
-      else if(sp === 0) sizeSpan[i] = 0; // 延续行，省略该td
-    }
-  } else {
-    for(let i=0;i<pageData.length;i++){
-      const p=pageData[i];
-      if(!p.sizeMm) continue;
-      let j=i+1;
-      while(j<pageData.length && pageData[j].series===p.series && pageData[j].method===p.method && pageData[j].sizeMm===p.sizeMm){
-        sizeSpan[i]++; j++;
+    mergeInfo = new Array(filtered.length);
+    let runSpan = 0;        // 当前合并组剩余 span（>0 表示处于合并组内）
+    let runFirst = false;   // 当前行是否为合并组首行
+    for(let g=0; g<filtered.length; g++){
+      const sp = filtered[g].sizeSpan;
+      if(sp !== undefined && sp !== null && sp >= 2) { runSpan = sp; runFirst = true; }
+      if(runSpan > 0) {
+        mergeInfo[g] = { span: runSpan, first: runFirst };
+        runFirst = false;    // 后续行都是延续行
+        runSpan--;
+      } else if(sp === 0) {
+        mergeInfo[g] = { span: 0, first: false }; // Excel 延续行（不在本页首行的延续）
+      } else {
+        mergeInfo[g] = { span: 1, first: false }; // 无合并
       }
     }
   }
-  // spanQueue 记录当前被哪个 rowspan 覆盖（剩余跳过行数）
-  let spanQueue = 0;
+  // 生成当前页的 rowspan 值：>=2 起新合并，0 由上方 rowspan 覆盖，1 单格
+  // 用 effQueue 顺序追踪本页已被 rowspan 覆盖的行，避免同页内多个延续行各自起合并造成重叠
+  const sizeSpan = new Array(pageData.length).fill(1);
+  if(mergeInfo) {
+    let effQueue = 0; // 本页剩余被覆盖行数
+    for(let k=0; k<pageData.length; k++){
+      if(effQueue > 0) { sizeSpan[k] = 0; effQueue--; continue; } // 已被本页上方 rowspan 覆盖
+      const mi = mergeInfo[startIdx + k];
+      if(!mi) { sizeSpan[k] = 1; continue; }
+      if(mi.span >= 2) {
+        // 起一个新 rowspan（跨页切断时本页首行重新起合并），截断到本页末尾
+        sizeSpan[k] = Math.min(mi.span, pageData.length - k);
+        effQueue = sizeSpan[k] - 1;
+      } else if(mi.span === 0) {
+        sizeSpan[k] = 0; // 延续行：省略该td
+      } else {
+        sizeSpan[k] = 1;
+      }
+    }
+  } else {
+    // 无 sizeSpan 数据的兜底：同系列+方法内连续相同且非空尺寸自动合并（不跨页）
+    for(let k=0;k<pageData.length;k++){
+      const p=pageData[k];
+      if(!p.sizeMm) continue;
+      let j=k+1;
+      while(j<pageData.length && pageData[j].series===p.series && pageData[j].method===p.method && pageData[j].sizeMm===p.sizeMm){
+        sizeSpan[k]++; j++;
+      }
+    }
+  }
   for(let idx=0; idx<pageData.length; idx++){
     const p = pageData[idx];
     const realIdx = PRODUCTS.indexOf(p);
@@ -1198,17 +1230,12 @@ function renderTable() {
     }
     const totalPanels = qty > 0 && panelsPerCase > 0 ? qty * panelsPerCase : 0;
 
-    // 尺寸列：判断是否作为rowspan首行；sizeSpan==0 是Excel合并的延续行(省略td)
+    // 尺寸列：sizeSpan>=2 起一个新 rowspan（已按当前页截断，不跨页）；sizeSpan==0 是Excel合并的延续行(省略td,由上方覆盖)；1 为单格
     let sizeTd = '';
-    if(sizeSpan[idx] === 0) {
-      sizeTd = '';
-      if(spanQueue > 0) spanQueue--;
-    } else if(spanQueue > 0) {
-      // 延续行：尺寸已由前面的 rowspan 单元格覆盖，省略此 td
-      spanQueue--;
-    } else if(sizeSpan[idx] >= 2) {
+    if(sizeSpan[idx] >= 2) {
       sizeTd = `<td rowspan="${sizeSpan[idx]}" style="max-width:90px;min-width:60px;word-break:break-all;vertical-align:middle;">${p.sizeMm||'-'}</td>`;
-      spanQueue = sizeSpan[idx] - 1;
+    } else if(sizeSpan[idx] === 0) {
+      sizeTd = '';
     } else {
       sizeTd = `<td style="max-width:90px;min-width:60px;word-break:break-all;">${p.sizeMm||'-'}</td>`;
     }
