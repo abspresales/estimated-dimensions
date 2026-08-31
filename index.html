@@ -18,7 +18,8 @@ body { font-family: Arial, "Microsoft YaHei", "微软雅黑", sans-serif; backgr
 .modal-close { background:none;border:none;font-size:20px;cursor:pointer;color:#999; }
 .modal-body { padding:24px;overflow-y:auto;flex:1; }
 .float-btn-group { position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column; gap:12px; z-index:100; }
-.float-btn { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); transition:transform 0.2s; }
+.float-btn { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); transition:transform 0.2s; }
+.float-btn svg { width:13px; height:13px; }
 .float-btn:hover { transform:scale(1.08); }
 .float-btn-log { background:#597a9b; color:#fff; }
 .float-btn-admin { background:#193a5b; color:#fff; }
@@ -499,10 +500,10 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
     gap: 10px;
   }
   .float-btn {
-    width: 44px;
-    height: 44px;
+    width: 22px;
+    height: 22px;
   }
-  .float-btn svg { width: 22px; height: 22px; }
+  .float-btn svg { width: 11px; height: 11px; }
 
   /* ===== Modal 弹窗 ===== */
   .modal-box {
@@ -3120,13 +3121,13 @@ function openModal(title, content) {
 
 <div class="float-btn-group">
   <div class="float-btn float-btn-log" onclick="showUpdateLog()" title="更新履历">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"></circle>
       <polyline points="12 6 12 12 16 14"></polyline>
     </svg>
   </div>
   <div class="float-btn float-btn-admin" onclick="showAdminPanel()" title="后台维护">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="3"></circle>
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
     </svg>
