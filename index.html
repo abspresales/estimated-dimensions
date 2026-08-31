@@ -2883,7 +2883,6 @@ async function initApp() {
   }
   if (!loaded) {
     PRODUCTS = DEFAULT_PRODUCTS;
-    showDataTip('未检测到 data.json，当前使用内置默认数据（' + DEFAULT_PRODUCTS.length + '条）。将 data.json 上传到同目录后刷新即可更新。');
   }
   initSeriesFilter();
   renderTable();
