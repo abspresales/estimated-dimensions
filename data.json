@@ -10,7 +10,8 @@
   "length": 1.15,
   "width": 0.63,
   "height": 0.73,
-  "weight": 110.0
+  "weight": 110.0,
+  "volume": 0.5289
  },
  {
   "scene": "舞台Rental",
@@ -23,7 +24,8 @@
   "length": 1.13,
   "width": 0.99,
   "height": 0.73,
-  "weight": 135.0
+  "weight": 135.0,
+  "volume": 0.8167
  },
  {
   "scene": "舞台Rental",
@@ -36,7 +38,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -49,7 +52,8 @@
   "length": 1.21,
   "width": 0.58,
   "height": 0.79,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.5544
  },
  {
   "scene": "舞台Rental",
@@ -62,7 +66,8 @@
   "length": 1.21,
   "width": 0.58,
   "height": 0.79,
-  "weight": 108.0
+  "weight": 108.0,
+  "volume": 0.5544
  },
  {
   "scene": "舞台Rental",
@@ -75,7 +80,8 @@
   "length": 1.16,
   "width": 0.85,
   "height": 0.67,
-  "weight": 148.0
+  "weight": 148.0,
+  "volume": 0.6606
  },
  {
   "scene": "舞台Rental",
@@ -88,7 +94,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -101,7 +108,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -114,7 +122,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -127,7 +136,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.77,
-  "weight": 116.0
+  "weight": 116.0,
+  "volume": 0.5636
  },
  {
   "scene": "舞台Rental",
@@ -140,7 +150,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.77,
-  "weight": 110.0
+  "weight": 110.0,
+  "volume": 0.5636
  },
  {
   "scene": "舞台Rental",
@@ -153,7 +164,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.78,
-  "weight": 115.0
+  "weight": 115.0,
+  "volume": 0.571
  },
  {
   "scene": "舞台Rental",
@@ -166,7 +178,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.78,
-  "weight": 121.0
+  "weight": 121.0,
+  "volume": 0.571
  },
  {
   "scene": "舞台Rental",
@@ -179,7 +192,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -192,7 +206,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -205,7 +220,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -218,7 +234,8 @@
   "length": 1.1,
   "width": 0.65,
   "height": 0.75,
-  "weight": 93.0
+  "weight": 93.0,
+  "volume": 0.5363
  },
  {
   "scene": "舞台Rental",
@@ -231,7 +248,8 @@
   "length": 1.16,
   "width": 1.11,
   "height": 0.73,
-  "weight": 122.0
+  "weight": 122.0,
+  "volume": 0.9399
  },
  {
   "scene": "舞台Rental",
@@ -244,7 +262,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 155.0
+  "weight": 155.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -257,7 +276,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 109.0
+  "weight": 109.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -270,7 +290,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -283,7 +304,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 171.0
+  "weight": 171.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -296,7 +318,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 101.0
+  "weight": 101.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -309,7 +332,8 @@
   "length": 1.16,
   "width": 0.72,
   "height": 0.59,
-  "weight": 113.0
+  "weight": 113.0,
+  "volume": 0.4928
  },
  {
   "scene": "舞台Rental",
@@ -322,7 +346,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -335,7 +360,8 @@
   "length": 1.64,
   "width": 0.75,
   "height": 1.37,
-  "weight": 356.0
+  "weight": 356.0,
+  "volume": 1.6851
  },
  {
   "scene": "舞台Rental",
@@ -348,7 +374,8 @@
   "length": 1.64,
   "width": 0.75,
   "height": 1.37,
-  "weight": 366.0
+  "weight": 366.0,
+  "volume": 1.6851
  },
  {
   "scene": "舞台Rental",
@@ -361,7 +388,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 142.0
+  "weight": 142.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -374,7 +402,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -387,7 +416,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 101.0
+  "weight": 101.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -400,7 +430,8 @@
   "length": 1.16,
   "width": 0.72,
   "height": 0.59,
-  "weight": 113.0
+  "weight": 113.0,
+  "volume": 0.4928
  },
  {
   "scene": "舞台Rental",
@@ -413,7 +444,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 155.0
+  "weight": 155.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -426,7 +458,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 109.0
+  "weight": 109.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -439,7 +472,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -452,7 +486,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 171.0
+  "weight": 171.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -465,7 +500,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -478,7 +514,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -491,7 +528,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -504,7 +542,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.77,
-  "weight": 147.0
+  "weight": 147.0,
+  "volume": 0.5636
  },
  {
   "scene": "舞台Rental",
@@ -517,7 +556,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.77,
-  "weight": 129.0
+  "weight": 129.0,
+  "volume": 0.5636
  },
  {
   "scene": "舞台Rental",
@@ -530,7 +570,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 142.0
+  "weight": 142.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -543,7 +584,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -556,7 +598,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 101.0
+  "weight": 101.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -569,7 +612,8 @@
   "length": 1.16,
   "width": 0.72,
   "height": 0.59,
-  "weight": 113.0
+  "weight": 113.0,
+  "volume": 0.4928
  },
  {
   "scene": "舞台Rental",
@@ -582,7 +626,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 155.0
+  "weight": 155.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -595,7 +640,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 109.0
+  "weight": 109.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -608,7 +654,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -621,7 +668,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 171.0
+  "weight": 171.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -634,7 +682,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -647,7 +696,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -660,7 +710,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -673,7 +724,8 @@
   "length": 1.1,
   "width": 0.65,
   "height": 0.75,
-  "weight": 93.0
+  "weight": 93.0,
+  "volume": 0.5363
  },
  {
   "scene": "舞台Rental",
@@ -686,7 +738,8 @@
   "length": 1.16,
   "width": 1.11,
   "height": 0.73,
-  "weight": 122.0
+  "weight": 122.0,
+  "volume": 0.9399
  },
  {
   "scene": "舞台Rental",
@@ -699,7 +752,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 155.0
+  "weight": 155.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -712,7 +766,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 109.0
+  "weight": 109.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -725,7 +780,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -738,7 +794,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 171.0
+  "weight": 171.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -751,7 +808,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -764,7 +822,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.75,
-  "weight": 110.0
+  "weight": 110.0,
+  "volume": 0.5394
  },
  {
   "scene": "舞台Rental",
@@ -777,7 +836,8 @@
   "length": 1.12,
   "width": 0.52,
   "height": 0.72,
-  "weight": 99.0
+  "weight": 99.0,
+  "volume": 0.4193
  },
  {
   "scene": "舞台Rental",
@@ -790,7 +850,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 101.0
+  "weight": 101.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -803,7 +864,8 @@
   "length": 1.16,
   "width": 0.72,
   "height": 0.59,
-  "weight": 113.0
+  "weight": 113.0,
+  "volume": 0.4928
  },
  {
   "scene": "舞台Rental",
@@ -816,7 +878,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -829,7 +892,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -842,7 +906,8 @@
   "length": 1.13,
   "width": 0.56,
   "height": 0.5,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.3164
  },
  {
   "scene": "舞台Rental",
@@ -855,7 +920,8 @@
   "length": 1.13,
   "width": 0.87,
   "height": 0.5,
-  "weight": 120.0
+  "weight": 120.0,
+  "volume": 0.4915
  },
  {
   "scene": "舞台Rental",
@@ -868,7 +934,8 @@
   "length": 1.23,
   "width": 0.6,
   "height": 0.46,
-  "weight": 160.0
+  "weight": 160.0,
+  "volume": 0.3395
  },
  {
   "scene": "舞台Rental",
@@ -881,7 +948,8 @@
   "length": 1.13,
   "width": 0.6,
   "height": 0.46,
-  "weight": 110.0
+  "weight": 110.0,
+  "volume": 0.3119
  },
  {
   "scene": "舞台Rental",
@@ -894,7 +962,8 @@
   "length": 1.13,
   "width": 0.58,
   "height": 0.5,
-  "weight": 90.0
+  "weight": 90.0,
+  "volume": 0.3277
  },
  {
   "scene": "舞台Rental",
@@ -907,7 +976,8 @@
   "length": 1.35,
   "width": 0.58,
   "height": 0.5,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.3915
  },
  {
   "scene": "舞台Rental",
@@ -920,7 +990,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 108.5
+  "weight": 108.5,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -933,7 +1004,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 137.6
+  "weight": 137.6,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -946,7 +1018,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 170.8
+  "weight": 170.8,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -959,7 +1032,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 182.0
+  "weight": 182.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -972,7 +1046,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 170.32
+  "weight": 170.32,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -985,7 +1060,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 182.8
+  "weight": 182.8,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -998,7 +1074,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 108.72
+  "weight": 108.72,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1011,7 +1088,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 94.8
+  "weight": 94.8,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1024,7 +1102,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 161.8
+  "weight": 161.8,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1037,7 +1116,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 146.5
+  "weight": 146.5,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1050,7 +1130,8 @@
   "length": 1.4,
   "width": 0.68,
   "height": 0.78,
-  "weight": 162.04
+  "weight": 162.04,
+  "volume": 0.7426
  },
  {
   "scene": "舞台Rental",
@@ -1063,7 +1144,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 102.0
+  "weight": 102.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1076,7 +1158,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 113.2
+  "weight": 113.2,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1089,7 +1172,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 126.0
+  "weight": 126.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1102,7 +1186,8 @@
   "length": 1.1,
   "width": 0.65,
   "height": 0.75,
-  "weight": 90.0
+  "weight": 90.0,
+  "volume": 0.5363
  },
  {
   "scene": "舞台Rental",
@@ -1115,7 +1200,8 @@
   "length": 1.15,
   "width": 0.99,
   "height": 0.73,
-  "weight": 124.0
+  "weight": 124.0,
+  "volume": 0.8311
  },
  {
   "scene": "舞台Rental",
@@ -1128,7 +1214,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 155.0
+  "weight": 155.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -1141,7 +1228,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 109.0
+  "weight": 109.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -1154,7 +1242,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -1167,7 +1256,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 171.0
+  "weight": 171.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -1180,7 +1270,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1193,7 +1284,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.76,
-  "weight": 102.0
+  "weight": 102.0,
+  "volume": 0.5466
  },
  {
   "scene": "舞台Rental",
@@ -1206,7 +1298,8 @@
   "length": 1.12,
   "width": 0.54,
   "height": 0.77,
-  "weight": 106.0
+  "weight": 106.0,
+  "volume": 0.4657
  },
  {
   "scene": "舞台Rental",
@@ -1219,7 +1312,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 142.0
+  "weight": 142.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -1232,7 +1326,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -1245,7 +1340,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 101.0
+  "weight": 101.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -1258,7 +1354,8 @@
   "length": 1.16,
   "width": 0.72,
   "height": 0.59,
-  "weight": 113.0
+  "weight": 113.0,
+  "volume": 0.4928
  },
  {
   "scene": "舞台Rental",
@@ -1271,7 +1368,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1284,7 +1382,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1297,7 +1396,8 @@
   "length": 0.93,
   "width": 0.7,
   "height": 0.63,
-  "weight": 123.0
+  "weight": 123.0,
+  "volume": 0.4101
  },
  {
   "scene": "舞台Rental",
@@ -1310,7 +1410,8 @@
   "length": 1.35,
   "width": 0.69,
   "height": 0.57,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.531
  },
  {
   "scene": "舞台Rental",
@@ -1323,7 +1424,8 @@
   "length": 1.38,
   "width": 0.69,
   "height": 0.57,
-  "weight": 137.0
+  "weight": 137.0,
+  "volume": 0.5428
  },
  {
   "scene": "舞台Rental",
@@ -1336,7 +1438,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1349,7 +1452,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1362,7 +1466,8 @@
   "length": 1.28,
   "width": 0.66,
   "height": 0.8,
-  "weight": 154.0
+  "weight": 154.0,
+  "volume": 0.6758
  },
  {
   "scene": "舞台Rental",
@@ -1375,7 +1480,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1388,7 +1494,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1401,7 +1508,8 @@
   "length": 1.09,
   "width": 0.85,
   "height": 2.35,
-  "weight": 375.0
+  "weight": 375.0,
+  "volume": 2.1773
  },
  {
   "scene": "舞台Rental",
@@ -1414,7 +1522,8 @@
   "length": 1.16,
   "width": 0.63,
   "height": 0.78,
-  "weight": 127.0
+  "weight": 127.0,
+  "volume": 0.57
  },
  {
   "scene": "舞台Rental",
@@ -1427,7 +1536,8 @@
   "length": 1.16,
   "width": 0.73,
   "height": 0.65,
-  "weight": 132.0
+  "weight": 132.0,
+  "volume": 0.5504
  },
  {
   "scene": "舞台Rental",
@@ -1440,7 +1550,8 @@
   "length": 2.09,
   "width": 0.6,
   "height": 0.63,
-  "weight": 159.0
+  "weight": 159.0,
+  "volume": 0.79
  },
  {
   "scene": "舞台Rental",
@@ -1453,7 +1564,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1466,7 +1578,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1479,7 +1592,8 @@
   "length": 2.12,
   "width": 0.82,
   "height": 1.35,
-  "weight": 406.0
+  "weight": 406.0,
+  "volume": 2.3468
  },
  {
   "scene": "舞台Rental",
@@ -1492,7 +1606,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.35,
-  "weight": 388.0
+  "weight": 388.0,
+  "volume": 1.8598
  },
  {
   "scene": "舞台Rental",
@@ -1505,7 +1620,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.35,
-  "weight": 329.0
+  "weight": 329.0,
+  "volume": 1.8598
  },
  {
   "scene": "舞台Rental",
@@ -1518,7 +1634,8 @@
   "length": 1.16,
   "width": 0.64,
   "height": 0.8,
-  "weight": 132.0
+  "weight": 132.0,
+  "volume": 0.5939
  },
  {
   "scene": "舞台Rental",
@@ -1531,7 +1648,8 @@
   "length": 1.16,
   "width": 0.73,
   "height": 0.65,
-  "weight": 132.0
+  "weight": 132.0,
+  "volume": 0.5504
  },
  {
   "scene": "舞台Rental",
@@ -1544,7 +1662,8 @@
   "length": 2.09,
   "width": 0.6,
   "height": 0.63,
-  "weight": 159.0
+  "weight": 159.0,
+  "volume": 0.79
  },
  {
   "scene": "舞台Rental",
@@ -1557,7 +1676,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1570,7 +1690,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1583,7 +1704,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1596,7 +1718,8 @@
   "length": 1.12,
   "width": 0.82,
   "height": 1.34,
-  "weight": 205.0
+  "weight": 205.0,
+  "volume": 1.2307
  },
  {
   "scene": "舞台Rental",
@@ -1609,7 +1732,8 @@
   "length": 1.09,
   "width": 0.81,
   "height": 1.34,
-  "weight": 183.0
+  "weight": 183.0,
+  "volume": 1.1831
  },
  {
   "scene": "舞台Rental",
@@ -1622,7 +1746,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.35,
-  "weight": 316.0
+  "weight": 316.0,
+  "volume": 1.8598
  },
  {
   "scene": "舞台Rental",
@@ -1635,7 +1760,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.35,
-  "weight": 276.0
+  "weight": 276.0,
+  "volume": 1.8598
  },
  {
   "scene": "舞台Rental",
@@ -1648,7 +1774,8 @@
   "length": 1.16,
   "width": 0.73,
   "height": 0.65,
-  "weight": 132.0
+  "weight": 132.0,
+  "volume": 0.5504
  },
  {
   "scene": "舞台Rental",
@@ -1661,7 +1788,8 @@
   "length": 2.09,
   "width": 0.6,
   "height": 0.63,
-  "weight": 159.0
+  "weight": 159.0,
+  "volume": 0.79
  },
  {
   "scene": "舞台Rental",
@@ -1674,7 +1802,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1687,7 +1816,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -1700,7 +1830,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1713,7 +1844,8 @@
   "length": 1.13,
   "width": 0.75,
   "height": 0.79,
-  "weight": 112.0
+  "weight": 112.0,
+  "volume": 0.6695
  },
  {
   "scene": "舞台Rental",
@@ -1726,7 +1858,8 @@
   "length": 1.12,
   "width": 0.75,
   "height": 0.78,
-  "weight": 118.0
+  "weight": 118.0,
+  "volume": 0.6552
  },
  {
   "scene": "舞台Rental",
@@ -1739,7 +1872,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 101.0
+  "weight": 101.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -1752,7 +1886,8 @@
   "length": 1.16,
   "width": 0.72,
   "height": 0.59,
-  "weight": 113.0
+  "weight": 113.0,
+  "volume": 0.4928
  },
  {
   "scene": "舞台Rental",
@@ -1765,7 +1900,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1778,7 +1914,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1791,7 +1928,8 @@
   "length": 1.09,
   "width": 0.64,
   "height": 0.73,
-  "weight": 75.0
+  "weight": 75.0,
+  "volume": 0.5092
  },
  {
   "scene": "舞台Rental",
@@ -1804,7 +1942,8 @@
   "length": 1.15,
   "width": 0.99,
   "height": 0.73,
-  "weight": 107.0
+  "weight": 107.0,
+  "volume": 0.8311
  },
  {
   "scene": "舞台Rental",
@@ -1817,7 +1956,8 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "舞台Rental",
@@ -1830,7 +1970,8 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "舞台Rental",
@@ -1843,7 +1984,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1856,7 +1998,8 @@
   "length": 1.13,
   "width": 0.71,
   "height": 0.8,
-  "weight": 131.0
+  "weight": 131.0,
+  "volume": 0.6418
  },
  {
   "scene": "舞台Rental",
@@ -1869,7 +2012,8 @@
   "length": 1.26,
   "width": 0.89,
   "height": 0.8,
-  "weight": 162.0
+  "weight": 162.0,
+  "volume": 0.8971
  },
  {
   "scene": "舞台Rental",
@@ -1882,7 +2026,8 @@
   "length": 2.18,
   "width": 0.61,
   "height": 0.63,
-  "weight": 154.0
+  "weight": 154.0,
+  "volume": 0.8378
  },
  {
   "scene": "舞台Rental",
@@ -1895,7 +2040,8 @@
   "length": 1.13,
   "width": 0.64,
   "height": 0.62,
-  "weight": 82.0
+  "weight": 82.0,
+  "volume": 0.4484
  },
  {
   "scene": "舞台Rental",
@@ -1908,7 +2054,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -1921,7 +2068,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1934,7 +2082,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1947,7 +2096,8 @@
   "length": 1.12,
   "width": 0.58,
   "height": 0.75,
-  "weight": 119.0
+  "weight": 119.0,
+  "volume": 0.4872
  },
  {
   "scene": "舞台Rental",
@@ -1960,7 +2110,8 @@
   "length": 1.2,
   "width": 0.41,
   "height": 0.6,
-  "weight": 82.0
+  "weight": 82.0,
+  "volume": 0.2952
  },
  {
   "scene": "舞台Rental",
@@ -1973,7 +2124,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -1986,7 +2138,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -1999,7 +2152,8 @@
   "length": 1.1,
   "width": 0.65,
   "height": 0.75,
-  "weight": 85.0
+  "weight": 85.0,
+  "volume": 0.5363
  },
  {
   "scene": "舞台Rental",
@@ -2012,7 +2166,8 @@
   "length": 1.15,
   "width": 0.99,
   "height": 0.73,
-  "weight": 110.0
+  "weight": 110.0,
+  "volume": 0.8311
  },
  {
   "scene": "舞台Rental",
@@ -2025,7 +2180,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 155.0
+  "weight": 155.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -2038,7 +2194,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 109.0
+  "weight": 109.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -2051,7 +2208,8 @@
   "length": 1.16,
   "width": 0.77,
   "height": 0.7,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.6252
  },
  {
   "scene": "舞台Rental",
@@ -2064,7 +2222,8 @@
   "length": 1.3,
   "width": 1.05,
   "height": 0.53,
-  "weight": 171.0
+  "weight": 171.0,
+  "volume": 0.7235
  },
  {
   "scene": "舞台Rental",
@@ -2077,7 +2236,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -2090,7 +2250,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.78,
-  "weight": 120.0
+  "weight": 120.0,
+  "volume": 0.571
  },
  {
   "scene": "舞台Rental",
@@ -2103,7 +2264,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.78,
-  "weight": 110.0
+  "weight": 110.0,
+  "volume": 0.571
  },
  {
   "scene": "舞台Rental",
@@ -2116,7 +2278,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.76,
-  "weight": 98.0
+  "weight": 98.0,
+  "volume": 0.5466
  },
  {
   "scene": "舞台Rental",
@@ -2129,7 +2292,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.76,
-  "weight": 96.0
+  "weight": 96.0,
+  "volume": 0.5466
  },
  {
   "scene": "舞台Rental",
@@ -2142,7 +2306,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 142.0
+  "weight": 142.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -2155,7 +2320,8 @@
   "length": 1.21,
   "width": 0.69,
   "height": 0.8,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.6679
  },
  {
   "scene": "舞台Rental",
@@ -2168,7 +2334,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.59,
-  "weight": 101.0
+  "weight": 101.0,
+  "volume": 0.4243
  },
  {
   "scene": "舞台Rental",
@@ -2181,7 +2348,8 @@
   "length": 1.16,
   "width": 0.72,
   "height": 0.59,
-  "weight": 113.0
+  "weight": 113.0,
+  "volume": 0.4928
  },
  {
   "scene": "舞台Rental",
@@ -2194,7 +2362,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -2207,7 +2376,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -2220,7 +2390,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -2233,7 +2404,8 @@
   "length": 1.2,
   "width": 0.61,
   "height": 0.78,
-  "weight": 120.0
+  "weight": 120.0,
+  "volume": 0.571
  },
  {
   "scene": "舞台Rental",
@@ -2246,7 +2418,8 @@
   "length": 1.16,
   "width": 0.62,
   "height": 0.76,
-  "weight": 98.0
+  "weight": 98.0,
+  "volume": 0.5466
  },
  {
   "scene": "舞台Rental",
@@ -2259,7 +2432,8 @@
   "length": 1.2,
   "width": 0.41,
   "height": 0.6,
-  "weight": 82.0
+  "weight": 82.0,
+  "volume": 0.2952
  },
  {
   "scene": "舞台Rental",
@@ -2272,7 +2446,8 @@
   "length": 1.28,
   "width": 0.59,
   "height": 0.53,
-  "weight": 108.0
+  "weight": 108.0,
+  "volume": 0.4003
  },
  {
   "scene": "舞台Rental",
@@ -2285,7 +2460,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -2298,7 +2474,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -2311,7 +2488,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -2324,7 +2502,8 @@
   "length": 1.27,
   "width": 0.75,
   "height": 0.73,
-  "weight": 114.0
+  "weight": 114.0,
+  "volume": 0.6953
  },
  {
   "scene": "舞台Rental",
@@ -2337,7 +2516,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "舞台Rental",
@@ -2350,7 +2530,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.35,
-  "weight": 385.0
+  "weight": 385.0,
+  "volume": 1.8598
  },
  {
   "scene": "舞台Rental",
@@ -2363,7 +2544,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.28,
-  "weight": 355.0
+  "weight": 355.0,
+  "volume": 1.7633
  },
  {
   "scene": "舞台Rental",
@@ -2376,7 +2558,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.35,
-  "weight": 326.0
+  "weight": 326.0,
+  "volume": 1.8598
  },
  {
   "scene": "舞台Rental",
@@ -2389,7 +2572,8 @@
   "length": 1.12,
   "width": 1.23,
   "height": 1.28,
-  "weight": 299.0
+  "weight": 299.0,
+  "volume": 1.7633
  },
  {
   "scene": "舞台Rental",
@@ -2402,7 +2586,8 @@
   "length": 1.21,
   "width": 0.61,
   "height": 0.78,
-  "weight": 121.0
+  "weight": 121.0,
+  "volume": 0.5757
  },
  {
   "scene": "舞台Rental",
@@ -2415,7 +2600,8 @@
   "length": 1.21,
   "width": 0.61,
   "height": 0.78,
-  "weight": 131.0
+  "weight": 131.0,
+  "volume": 0.5757
  },
  {
   "scene": "舞台Rental",
@@ -2428,7 +2614,8 @@
   "length": 1.21,
   "width": 0.61,
   "height": 0.81,
-  "weight": 136.0
+  "weight": 136.0,
+  "volume": 0.5979
  },
  {
   "scene": "舞台Rental",
@@ -2441,7 +2628,8 @@
   "length": 1.21,
   "width": 0.61,
   "height": 0.81,
-  "weight": 136.0
+  "weight": 136.0,
+  "volume": 0.5979
  },
  {
   "scene": "舞台Rental",
@@ -2454,7 +2642,8 @@
   "length": 1.21,
   "width": 0.61,
   "height": 0.8,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.5905
  },
  {
   "scene": "舞台Rental",
@@ -2467,7 +2656,8 @@
   "length": 1.21,
   "width": 0.61,
   "height": 0.8,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.5905
  },
  {
   "scene": "舞台Rental",
@@ -2480,7 +2670,8 @@
   "length": 0.87,
   "width": 0.87,
   "height": 0.94,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 0.7115
  },
  {
   "scene": "舞台Rental",
@@ -2493,7 +2684,8 @@
   "length": 1.2,
   "width": 0.68,
   "height": 0.78,
-  "weight": 240.0
+  "weight": 240.0,
+  "volume": 0.6365
  },
  {
   "scene": "舞台Rental",
@@ -2506,12 +2698,13 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
   "series": "A27 V3",
-  "method": "纸箱/卡板",
+  "method": "纸箱+卡板",
   "methodDetail": "纸箱+卡板",
   "qtyPerCase": "8IN1",
   "contents": "箱体",
@@ -2519,12 +2712,13 @@
   "length": 0.93,
   "width": 0.77,
   "height": 0.84,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.6015
  },
  {
   "scene": "ProAV",
   "series": "A27 V3",
-  "method": "纸箱/卡板",
+  "method": "纸箱+卡板",
   "methodDetail": "木箱",
   "qtyPerCase": "30IN1",
   "contents": "双倍挂架",
@@ -2532,12 +2726,13 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 116.0
+  "weight": 116.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
   "series": "A27 V3",
-  "method": "纸箱/卡板",
+  "method": "纸箱+卡板",
   "methodDetail": "木箱",
   "qtyPerCase": "32IN1",
   "contents": "单倍挂架",
@@ -2545,12 +2740,13 @@
   "length": 0.9,
   "width": 0.6,
   "height": 0.85,
-  "weight": 89.0
+  "weight": 89.0,
+  "volume": 0.459
  },
  {
   "scene": "ProAV",
   "series": "A27 V3",
-  "method": "纸箱/卡板",
+  "method": "纸箱+卡板",
   "methodDetail": "木箱",
   "qtyPerCase": "可按每10平米一个木箱",
   "contents": "备品",
@@ -2558,7 +2754,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2571,7 +2768,8 @@
   "length": 0.92,
   "width": 0.75,
   "height": 0.82,
-  "weight": 93.0
+  "weight": 93.0,
+  "volume": 0.5658
  },
  {
   "scene": "ProAV",
@@ -2584,7 +2782,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 116.0
+  "weight": 116.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2597,7 +2796,8 @@
   "length": 0.9,
   "width": 0.6,
   "height": 0.85,
-  "weight": 89.0
+  "weight": 89.0,
+  "volume": 0.459
  },
  {
   "scene": "ProAV",
@@ -2610,7 +2810,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2623,7 +2824,8 @@
   "length": 1.24,
   "width": 1.14,
   "height": 0.79,
-  "weight": 140.0
+  "weight": 140.0,
+  "volume": 1.1167
  },
  {
   "scene": "ProAV",
@@ -2636,7 +2838,8 @@
   "length": 1.22,
   "width": 0.72,
   "height": 0.79,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.6939
  },
  {
   "scene": "ProAV",
@@ -2649,7 +2852,8 @@
   "length": 1.01,
   "width": 0.73,
   "height": 0.75,
-  "weight": 200.0
+  "weight": 200.0,
+  "volume": 0.553
  },
  {
   "scene": "ProAV",
@@ -2662,7 +2866,8 @@
   "length": 1.22,
   "width": 0.72,
   "height": 0.79,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.6939
  },
  {
   "scene": "ProAV",
@@ -2675,7 +2880,8 @@
   "length": 1.1,
   "width": 0.65,
   "height": 0.86,
-  "weight": 107.0
+  "weight": 107.0,
+  "volume": 0.6149
  },
  {
   "scene": "ProAV",
@@ -2688,7 +2894,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2701,7 +2908,8 @@
   "length": 1.17,
   "width": 0.71,
   "height": 1.13,
-  "weight": 145.0
+  "weight": 145.0,
+  "volume": 0.9387
  },
  {
   "scene": "ProAV",
@@ -2714,7 +2922,8 @@
   "length": 1.01,
   "width": 0.72,
   "height": 0.84,
-  "weight": 78.0
+  "weight": 78.0,
+  "volume": 0.6108
  },
  {
   "scene": "ProAV",
@@ -2727,7 +2936,8 @@
   "length": 1.02,
   "width": 1.0,
   "height": 0.73,
-  "weight": 95.0
+  "weight": 95.0,
+  "volume": 0.7446
  },
  {
   "scene": "ProAV",
@@ -2740,7 +2950,8 @@
   "length": 1.33,
   "width": 1.0,
   "height": 0.73,
-  "weight": 110.0
+  "weight": 110.0,
+  "volume": 0.9709
  },
  {
   "scene": "ProAV",
@@ -2753,7 +2964,8 @@
   "length": 1.22,
   "width": 0.75,
   "height": 0.75,
-  "weight": 124.0
+  "weight": 124.0,
+  "volume": 0.6863
  },
  {
   "scene": "ProAV",
@@ -2766,7 +2978,8 @@
   "length": 1.1,
   "width": 0.65,
   "height": 0.86,
-  "weight": 107.0
+  "weight": 107.0,
+  "volume": 0.6149
  },
  {
   "scene": "ProAV",
@@ -2779,7 +2992,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2792,7 +3006,8 @@
   "length": 1.09,
   "width": 0.66,
   "height": 1.06,
-  "weight": 129.0
+  "weight": 129.0,
+  "volume": 0.7626
  },
  {
   "scene": "ProAV",
@@ -2805,7 +3020,8 @@
   "length": 1.0,
   "width": 0.71,
   "height": 0.73,
-  "weight": 72.0
+  "weight": 72.0,
+  "volume": 0.5183
  },
  {
   "scene": "ProAV",
@@ -2818,7 +3034,8 @@
   "length": 1.09,
   "width": 0.68,
   "height": 0.74,
-  "weight": 87.0
+  "weight": 87.0,
+  "volume": 0.5485
  },
  {
   "scene": "ProAV",
@@ -2831,7 +3048,8 @@
   "length": 1.21,
   "width": 0.74,
   "height": 0.72,
-  "weight": 115.0
+  "weight": 115.0,
+  "volume": 0.6447
  },
  {
   "scene": "ProAV",
@@ -2844,7 +3062,8 @@
   "length": 1.21,
   "width": 0.74,
   "height": 0.72,
-  "weight": 115.0
+  "weight": 115.0,
+  "volume": 0.6447
  },
  {
   "scene": "ProAV",
@@ -2857,7 +3076,8 @@
   "length": 1.1,
   "width": 0.65,
   "height": 0.86,
-  "weight": 107.0
+  "weight": 107.0,
+  "volume": 0.6149
  },
  {
   "scene": "ProAV",
@@ -2870,7 +3090,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2883,7 +3104,8 @@
   "length": 0.96,
   "width": 0.77,
   "height": 0.8,
-  "weight": 92.0
+  "weight": 92.0,
+  "volume": 0.5914
  },
  {
   "scene": "ProAV",
@@ -2896,7 +3118,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2909,7 +3132,8 @@
   "length": 1.55,
   "width": 1.01,
   "height": 0.52,
-  "weight": 147.0
+  "weight": 147.0,
+  "volume": 0.8141
  },
  {
   "scene": "ProAV",
@@ -2922,7 +3146,8 @@
   "length": 1.27,
   "width": 1.01,
   "height": 0.49,
-  "weight": 120.0
+  "weight": 120.0,
+  "volume": 0.6285
  },
  {
   "scene": "ProAV",
@@ -2935,7 +3160,8 @@
   "length": 1.01,
   "width": 0.99,
   "height": 0.49,
-  "weight": 94.0
+  "weight": 94.0,
+  "volume": 0.49
  },
  {
   "scene": "ProAV",
@@ -2948,7 +3174,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -2961,7 +3188,8 @@
   "length": 1.2,
   "width": 0.86,
   "height": 0.96,
-  "weight": 189.0
+  "weight": 189.0,
+  "volume": 0.9907
  },
  {
   "scene": "ProAV",
@@ -2974,7 +3202,8 @@
   "length": 1.37,
   "width": 0.81,
   "height": 0.83,
-  "weight": 106.0
+  "weight": 106.0,
+  "volume": 0.9211
  },
  {
   "scene": "ProAV",
@@ -2987,7 +3216,8 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "ProAV",
@@ -3000,7 +3230,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3013,7 +3244,8 @@
   "length": 1.16,
   "width": 0.82,
   "height": 0.97,
-  "weight": 167.0
+  "weight": 167.0,
+  "volume": 0.9227
  },
  {
   "scene": "ProAV",
@@ -3026,7 +3258,8 @@
   "length": 1.37,
   "width": 0.81,
   "height": 0.83,
-  "weight": 106.0
+  "weight": 106.0,
+  "volume": 0.9211
  },
  {
   "scene": "ProAV",
@@ -3039,7 +3272,8 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "ProAV",
@@ -3052,7 +3286,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3065,7 +3300,8 @@
   "length": 1.27,
   "width": 1.1,
   "height": 0.72,
-  "weight": 155.0
+  "weight": 155.0,
+  "volume": 1.0058
  },
  {
   "scene": "ProAV",
@@ -3078,7 +3314,8 @@
   "length": 1.27,
   "width": 0.86,
   "height": 0.72,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.7864
  },
  {
   "scene": "ProAV",
@@ -3091,7 +3328,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3104,7 +3342,8 @@
   "length": 1.39,
   "width": 0.88,
   "height": 0.97,
-  "weight": 213.0
+  "weight": 213.0,
+  "volume": 1.1865
  },
  {
   "scene": "ProAV",
@@ -3117,7 +3356,8 @@
   "length": 1.03,
   "width": 0.76,
   "height": 1.02,
-  "weight": 93.0
+  "weight": 93.0,
+  "volume": 0.7985
  },
  {
   "scene": "ProAV",
@@ -3130,7 +3370,8 @@
   "length": 1.27,
   "width": 0.87,
   "height": 1.2,
-  "weight": 233.0
+  "weight": 233.0,
+  "volume": 1.3259
  },
  {
   "scene": "ProAV",
@@ -3143,7 +3384,8 @@
   "length": 1.0,
   "width": 0.9,
   "height": 0.9,
-  "weight": 98.0
+  "weight": 98.0,
+  "volume": 0.81
  },
  {
   "scene": "ProAV",
@@ -3156,7 +3398,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3169,7 +3412,8 @@
   "length": 0.9,
   "width": 0.79,
   "height": 0.71,
-  "weight": 82.0
+  "weight": 82.0,
+  "volume": 0.5048
  },
  {
   "scene": "ProAV",
@@ -3182,7 +3426,8 @@
   "length": 0.48,
   "width": 0.79,
   "height": 0.71,
-  "weight": 65.0
+  "weight": 65.0,
+  "volume": 0.2692
  },
  {
   "scene": "ProAV",
@@ -3195,7 +3440,8 @@
   "length": 1.07,
   "width": 0.85,
   "height": 1.04,
-  "weight": 160.0
+  "weight": 160.0,
+  "volume": 0.9459
  },
  {
   "scene": "ProAV",
@@ -3208,7 +3454,8 @@
   "length": 0.9,
   "width": 0.6,
   "height": 1.07,
-  "weight": 90.0
+  "weight": 90.0,
+  "volume": 0.5778
  },
  {
   "scene": "ProAV",
@@ -3221,7 +3468,8 @@
   "length": 1.1,
   "width": 0.6,
   "height": 0.7,
-  "weight": 60.0
+  "weight": 60.0,
+  "volume": 0.462
  },
  {
   "scene": "ProAV",
@@ -3234,7 +3482,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3247,7 +3496,8 @@
   "length": 1.19,
   "width": 0.85,
   "height": 1.08,
-  "weight": 164.0
+  "weight": 164.0,
+  "volume": 1.0924
  },
  {
   "scene": "ProAV",
@@ -3260,7 +3510,8 @@
   "length": 0.87,
   "width": 0.72,
   "height": 1.09,
-  "weight": 107.0
+  "weight": 107.0,
+  "volume": 0.6828
  },
  {
   "scene": "ProAV",
@@ -3273,7 +3524,8 @@
   "length": 1.02,
   "width": 0.8,
   "height": 1.25,
-  "weight": 103.0
+  "weight": 103.0,
+  "volume": 1.02
  },
  {
   "scene": "ProAV",
@@ -3286,7 +3538,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3299,7 +3552,8 @@
   "length": 1.19,
   "width": 0.85,
   "height": 1.05,
-  "weight": 148.0
+  "weight": 148.0,
+  "volume": 1.0621
  },
  {
   "scene": "ProAV",
@@ -3312,7 +3566,8 @@
   "length": 1.11,
   "width": 0.86,
   "height": 0.82,
-  "weight": 96.0
+  "weight": 96.0,
+  "volume": 0.7828
  },
  {
   "scene": "ProAV",
@@ -3325,7 +3580,8 @@
   "length": 1.02,
   "width": 0.8,
   "height": 1.25,
-  "weight": 85.0
+  "weight": 85.0,
+  "volume": 1.02
  },
  {
   "scene": "ProAV",
@@ -3338,7 +3594,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3351,7 +3608,8 @@
   "length": 1.39,
   "width": 0.76,
   "height": 0.84,
-  "weight": 210.0
+  "weight": 210.0,
+  "volume": 0.8874
  },
  {
   "scene": "ProAV",
@@ -3364,7 +3622,8 @@
   "length": 1.39,
   "width": 0.75,
   "height": 0.45,
-  "weight": 119.0
+  "weight": 119.0,
+  "volume": 0.4691
  },
  {
   "scene": "ProAV",
@@ -3377,7 +3636,8 @@
   "length": 1.39,
   "width": 0.75,
   "height": 0.45,
-  "weight": 95.0
+  "weight": 95.0,
+  "volume": 0.4691
  },
  {
   "scene": "ProAV",
@@ -3390,7 +3650,8 @@
   "length": 1.0,
   "width": 0.75,
   "height": 0.8,
-  "weight": 79.0
+  "weight": 79.0,
+  "volume": 0.6
  },
  {
   "scene": "ProAV",
@@ -3403,7 +3664,8 @@
   "length": 1.14,
   "width": 0.76,
   "height": 0.84,
-  "weight": 175.0
+  "weight": 175.0,
+  "volume": 0.7278
  },
  {
   "scene": "ProAV",
@@ -3416,7 +3678,8 @@
   "length": 1.13,
   "width": 0.75,
   "height": 0.44,
-  "weight": 98.0
+  "weight": 98.0,
+  "volume": 0.3729
  },
  {
   "scene": "ProAV",
@@ -3429,7 +3692,8 @@
   "length": 1.13,
   "width": 0.75,
   "height": 0.44,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.3729
  },
  {
   "scene": "ProAV",
@@ -3442,7 +3706,8 @@
   "length": 1.0,
   "width": 0.75,
   "height": 0.8,
-  "weight": 85.0
+  "weight": 85.0,
+  "volume": 0.6
  },
  {
   "scene": "ProAV",
@@ -3455,7 +3720,8 @@
   "length": 0.89,
   "width": 0.76,
   "height": 0.84,
-  "weight": 140.0
+  "weight": 140.0,
+  "volume": 0.5682
  },
  {
   "scene": "ProAV",
@@ -3468,7 +3734,8 @@
   "length": 0.87,
   "width": 0.75,
   "height": 0.45,
-  "weight": 74.0
+  "weight": 74.0,
+  "volume": 0.2936
  },
  {
   "scene": "ProAV",
@@ -3481,7 +3748,8 @@
   "length": 0.89,
   "width": 0.75,
   "height": 0.45,
-  "weight": 62.0
+  "weight": 62.0,
+  "volume": 0.3004
  },
  {
   "scene": "ProAV",
@@ -3494,7 +3762,8 @@
   "length": 1.0,
   "width": 0.75,
   "height": 0.8,
-  "weight": 80.0
+  "weight": 80.0,
+  "volume": 0.6
  },
  {
   "scene": "ProAV",
@@ -3507,7 +3776,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3520,7 +3790,8 @@
   "length": 1.41,
   "width": 0.77,
   "height": 0.85,
-  "weight": 210.0
+  "weight": 210.0,
+  "volume": 0.9228
  },
  {
   "scene": "ProAV",
@@ -3533,7 +3804,8 @@
   "length": 1.4,
   "width": 0.77,
   "height": 0.48,
-  "weight": 125.0
+  "weight": 125.0,
+  "volume": 0.5174
  },
  {
   "scene": "ProAV",
@@ -3546,7 +3818,8 @@
   "length": 1.02,
   "width": 0.77,
   "height": 0.85,
-  "weight": 70.0
+  "weight": 70.0,
+  "volume": 0.6676
  },
  {
   "scene": "ProAV",
@@ -3559,7 +3832,8 @@
   "length": 1.15,
   "width": 0.77,
   "height": 0.8,
-  "weight": 170.0
+  "weight": 170.0,
+  "volume": 0.7084
  },
  {
   "scene": "ProAV",
@@ -3572,7 +3846,8 @@
   "length": 1.15,
   "width": 0.77,
   "height": 0.48,
-  "weight": 78.0
+  "weight": 78.0,
+  "volume": 0.425
  },
  {
   "scene": "ProAV",
@@ -3585,7 +3860,8 @@
   "length": 1.02,
   "width": 0.77,
   "height": 0.85,
-  "weight": 73.0
+  "weight": 73.0,
+  "volume": 0.6676
  },
  {
   "scene": "ProAV",
@@ -3598,7 +3874,8 @@
   "length": 0.92,
   "width": 0.77,
   "height": 0.85,
-  "weight": 115.0
+  "weight": 115.0,
+  "volume": 0.6021
  },
  {
   "scene": "ProAV",
@@ -3611,7 +3888,8 @@
   "length": 0.92,
   "width": 0.77,
   "height": 0.48,
-  "weight": 75.0
+  "weight": 75.0,
+  "volume": 0.34
  },
  {
   "scene": "ProAV",
@@ -3624,7 +3902,8 @@
   "length": 1.02,
   "width": 0.77,
   "height": 0.85,
-  "weight": 70.0
+  "weight": 70.0,
+  "volume": 0.6676
  },
  {
   "scene": "ProAV",
@@ -3637,7 +3916,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3650,7 +3930,8 @@
   "length": 1.1,
   "width": 0.81,
   "height": 1.21,
-  "weight": 128.0
+  "weight": 128.0,
+  "volume": 1.0781
  },
  {
   "scene": "ProAV",
@@ -3663,7 +3944,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3676,7 +3958,8 @@
   "length": 1.16,
   "width": 0.83,
   "height": 0.97,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.9339
  },
  {
   "scene": "ProAV",
@@ -3689,7 +3972,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3702,7 +3986,8 @@
   "length": 1.2,
   "width": 0.86,
   "height": 0.97,
-  "weight": 160.0
+  "weight": 160.0,
+  "volume": 1.001
  },
  {
   "scene": "ProAV",
@@ -3715,7 +4000,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3728,7 +4014,8 @@
   "length": 1.16,
   "width": 0.83,
   "height": 0.97,
-  "weight": 190.0
+  "weight": 190.0,
+  "volume": 0.9339
  },
  {
   "scene": "ProAV",
@@ -3741,7 +4028,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3754,7 +4042,8 @@
   "length": 1.31,
   "width": 0.85,
   "height": 0.98,
-  "weight": 208.0
+  "weight": 208.0,
+  "volume": 1.0912
  },
  {
   "scene": "ProAV",
@@ -3767,7 +4056,8 @@
   "length": 1.31,
   "width": 0.85,
   "height": 0.88,
-  "weight": 261.0
+  "weight": 261.0,
+  "volume": 0.9799
  },
  {
   "scene": "ProAV",
@@ -3780,7 +4070,8 @@
   "length": 1.49,
   "width": 0.92,
   "height": 0.86,
-  "weight": 127.0
+  "weight": 127.0,
+  "volume": 1.1789
  },
  {
   "scene": "ProAV",
@@ -3793,7 +4084,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3806,7 +4098,8 @@
   "length": 1.25,
   "width": 0.93,
   "height": 0.85,
-  "weight": 135.0
+  "weight": 135.0,
+  "volume": 0.9881
  },
  {
   "scene": "ProAV",
@@ -3819,7 +4112,8 @@
   "length": 0.8,
   "width": 0.72,
   "height": 1.03,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.5933
  },
  {
   "scene": "ProAV",
@@ -3832,7 +4126,8 @@
   "length": 1.41,
   "width": 1.03,
   "height": 2.11,
-  "weight": 338.0
+  "weight": 338.0,
+  "volume": 3.0644
  },
  {
   "scene": "ProAV",
@@ -3845,7 +4140,8 @@
   "length": 1.54,
   "width": 0.25,
   "height": 0.2,
-  "weight": 28.0
+  "weight": 28.0,
+  "volume": 0.077
  },
  {
   "scene": "ProAV",
@@ -3858,7 +4154,8 @@
   "length": 2.0,
   "width": 0.87,
   "height": 0.5,
-  "weight": 95.0
+  "weight": 95.0,
+  "volume": 0.87
  },
  {
   "scene": "ProAV",
@@ -3871,7 +4168,8 @@
   "length": 1.55,
   "width": 0.82,
   "height": 0.89,
-  "weight": 160.0
+  "weight": 160.0,
+  "volume": 1.1312
  },
  {
   "scene": "ProAV",
@@ -3884,7 +4182,8 @@
   "length": 1.54,
   "width": 0.25,
   "height": 0.2,
-  "weight": 28.0
+  "weight": 28.0,
+  "volume": 0.077
  },
  {
   "scene": "ProAV",
@@ -3897,7 +4196,8 @@
   "length": 2.0,
   "width": 0.87,
   "height": 0.5,
-  "weight": 95.0
+  "weight": 95.0,
+  "volume": 0.87
  },
  {
   "scene": "ProAV",
@@ -3910,7 +4210,8 @@
   "length": 1.41,
   "width": 1.03,
   "height": 2.07,
-  "weight": 373.0
+  "weight": 373.0,
+  "volume": 3.0063
  },
  {
   "scene": "ProAV",
@@ -3923,7 +4224,8 @@
   "length": 1.12,
   "width": 0.42,
   "height": 0.49,
-  "weight": 43.0
+  "weight": 43.0,
+  "volume": 0.2305
  },
  {
   "scene": "ProAV",
@@ -3936,7 +4238,8 @@
   "length": 2.2,
   "width": 0.86,
   "height": 0.5,
-  "weight": 98.0
+  "weight": 98.0,
+  "volume": 0.946
  },
  {
   "scene": "ProAV",
@@ -3949,7 +4252,8 @@
   "length": 1.94,
   "width": 0.82,
   "height": 1.03,
-  "weight": 228.0
+  "weight": 228.0,
+  "volume": 1.6385
  },
  {
   "scene": "ProAV",
@@ -3962,7 +4266,8 @@
   "length": 1.12,
   "width": 0.42,
   "height": 0.49,
-  "weight": 43.0
+  "weight": 43.0,
+  "volume": 0.2305
  },
  {
   "scene": "ProAV",
@@ -3975,7 +4280,8 @@
   "length": 2.2,
   "width": 0.86,
   "height": 0.5,
-  "weight": 98.0
+  "weight": 98.0,
+  "volume": 0.946
  },
  {
   "scene": "ProAV",
@@ -3988,7 +4294,8 @@
   "length": 1.35,
   "width": 0.94,
   "height": 1.98,
-  "weight": 351.0
+  "weight": 351.0,
+  "volume": 2.5126
  },
  {
   "scene": "ProAV",
@@ -4001,7 +4308,8 @@
   "length": 1.86,
   "width": 0.86,
   "height": 0.51,
-  "weight": 92.0
+  "weight": 92.0,
+  "volume": 0.8158
  },
  {
   "scene": "ProAV",
@@ -4014,7 +4322,8 @@
   "length": 1.9,
   "width": 1.35,
   "height": 0.77,
-  "weight": 261.0
+  "weight": 261.0,
+  "volume": 1.975
  },
  {
   "scene": "ProAV",
@@ -4027,7 +4336,8 @@
   "length": 1.86,
   "width": 0.87,
   "height": 0.5,
-  "weight": 92.0
+  "weight": 92.0,
+  "volume": 0.8091
  },
  {
   "scene": "ProAV",
@@ -4040,7 +4350,8 @@
   "length": 1.23,
   "width": 0.8,
   "height": 1.92,
-  "weight": 325.0
+  "weight": 325.0,
+  "volume": 1.8893
  },
  {
   "scene": "ProAV",
@@ -4053,7 +4364,8 @@
   "length": 1.44,
   "width": 0.38,
   "height": 0.2,
-  "weight": 44.0
+  "weight": 44.0,
+  "volume": 0.1094
  },
  {
   "scene": "ProAV",
@@ -4066,7 +4378,8 @@
   "length": 2.22,
   "width": 0.73,
   "height": 1.0,
-  "weight": 232.0
+  "weight": 232.0,
+  "volume": 1.6206
  },
  {
   "scene": "ProAV",
@@ -4079,7 +4392,8 @@
   "length": 1.05,
   "width": 0.92,
   "height": 0.73,
-  "weight": 83.0
+  "weight": 83.0,
+  "volume": 0.7052
  },
  {
   "scene": "ProAV",
@@ -4092,7 +4406,8 @@
   "length": 1.44,
   "width": 0.38,
   "height": 0.2,
-  "weight": 44.0
+  "weight": 44.0,
+  "volume": 0.1094
  },
  {
   "scene": "ProAV",
@@ -4105,7 +4420,8 @@
   "length": 1.26,
   "width": 1.02,
   "height": 1.83,
-  "weight": 376.0
+  "weight": 376.0,
+  "volume": 2.3519
  },
  {
   "scene": "ProAV",
@@ -4118,7 +4434,8 @@
   "length": 1.86,
   "width": 0.87,
   "height": 0.5,
-  "weight": 99.0
+  "weight": 99.0,
+  "volume": 0.8091
  },
  {
   "scene": "ProAV",
@@ -4131,7 +4448,8 @@
   "length": 1.9,
   "width": 0.9,
   "height": 0.57,
-  "weight": 139.0
+  "weight": 139.0,
+  "volume": 0.9747
  },
  {
   "scene": "ProAV",
@@ -4144,7 +4462,8 @@
   "length": 1.37,
   "width": 0.72,
   "height": 1.3,
-  "weight": 202.0
+  "weight": 202.0,
+  "volume": 1.2823
  },
  {
   "scene": "ProAV",
@@ -4157,7 +4476,8 @@
   "length": 1.86,
   "width": 0.87,
   "height": 0.5,
-  "weight": 99.0
+  "weight": 99.0,
+  "volume": 0.8091
  },
  {
   "scene": "ProAV",
@@ -4170,7 +4490,8 @@
   "length": 0.96,
   "width": 0.78,
   "height": 1.7,
-  "weight": 208.0
+  "weight": 208.0,
+  "volume": 1.273
  },
  {
   "scene": "ProAV",
@@ -4183,7 +4504,8 @@
   "length": 0.99,
   "width": 0.69,
   "height": 0.9,
-  "weight": 94.0
+  "weight": 94.0,
+  "volume": 0.6148
  },
  {
   "scene": "ProAV",
@@ -4196,7 +4518,8 @@
   "length": 1.0,
   "width": 0.75,
   "height": 1.79,
-  "weight": 238.0
+  "weight": 238.0,
+  "volume": 1.3425
  },
  {
   "scene": "ProAV",
@@ -4209,7 +4532,8 @@
   "length": 1.0,
   "width": 0.75,
   "height": 1.42,
-  "weight": 170.0
+  "weight": 170.0,
+  "volume": 1.065
  },
  {
   "scene": "ProAV",
@@ -4222,7 +4546,8 @@
   "length": 1.11,
   "width": 0.77,
   "height": 1.74,
-  "weight": 286.0
+  "weight": 286.0,
+  "volume": 1.4872
  },
  {
   "scene": "ProAV",
@@ -4235,7 +4560,8 @@
   "length": 1.07,
   "width": 0.76,
   "height": 1.57,
-  "weight": 214.0
+  "weight": 214.0,
+  "volume": 1.2767
  },
  {
   "scene": "ProAV",
@@ -4248,7 +4574,8 @@
   "length": 1.96,
   "width": 0.79,
   "height": 1.03,
-  "weight": 278.0
+  "weight": 278.0,
+  "volume": 1.5949
  },
  {
   "scene": "ProAV",
@@ -4261,7 +4588,8 @@
   "length": 1.86,
   "width": 0.87,
   "height": 0.5,
-  "weight": 90.0
+  "weight": 90.0,
+  "volume": 0.8091
  },
  {
   "scene": "ProAV",
@@ -4274,7 +4602,8 @@
   "length": 1.87,
   "width": 0.76,
   "height": 0.85,
-  "weight": 225.0
+  "weight": 225.0,
+  "volume": 1.208
  },
  {
   "scene": "ProAV",
@@ -4287,7 +4616,8 @@
   "length": 1.86,
   "width": 0.87,
   "height": 0.5,
-  "weight": 90.0
+  "weight": 90.0,
+  "volume": 0.8091
  },
  {
   "scene": "ProAV",
@@ -4300,7 +4630,8 @@
   "length": 2.3,
   "width": 0.78,
   "height": 1.14,
-  "weight": 362.0
+  "weight": 362.0,
+  "volume": 2.0452
  },
  {
   "scene": "ProAV",
@@ -4313,7 +4644,8 @@
   "length": 1.85,
   "width": 0.85,
   "height": 0.5,
-  "weight": 132.0
+  "weight": 132.0,
+  "volume": 0.7863
  },
  {
   "scene": "ProAV",
@@ -4326,7 +4658,8 @@
   "length": 2.22,
   "width": 0.75,
   "height": 0.97,
-  "weight": 321.0
+  "weight": 321.0,
+  "volume": 1.6151
  },
  {
   "scene": "ProAV",
@@ -4339,7 +4672,8 @@
   "length": 1.85,
   "width": 0.85,
   "height": 0.5,
-  "weight": 132.0
+  "weight": 132.0,
+  "volume": 0.7863
  },
  {
   "scene": "ProAV",
@@ -4352,7 +4686,8 @@
   "length": 1.98,
   "width": 0.83,
   "height": 2.01,
-  "weight": 455.0
+  "weight": 455.0,
+  "volume": 3.3032
  },
  {
   "scene": "ProAV",
@@ -4365,7 +4700,8 @@
   "length": 1.95,
   "width": 0.72,
   "height": 1.24,
-  "weight": 222.0
+  "weight": 222.0,
+  "volume": 1.741
  },
  {
   "scene": "ProAV",
@@ -4378,7 +4714,8 @@
   "length": 2.1,
   "width": 0.95,
   "height": 2.19,
-  "weight": 466.0
+  "weight": 466.0,
+  "volume": 4.369
  },
  {
   "scene": "广告DOOH",
@@ -4391,7 +4728,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 1.17,
-  "weight": 311.0
+  "weight": 311.0,
+  "volume": 1.8377
  },
  {
   "scene": "广告DOOH",
@@ -4404,7 +4742,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 1.17,
-  "weight": 259.0
+  "weight": 259.0,
+  "volume": 1.4146
  },
  {
   "scene": "广告DOOH",
@@ -4417,7 +4756,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 0.85,
-  "weight": 218.0
+  "weight": 218.0,
+  "volume": 1.3351
  },
  {
   "scene": "广告DOOH",
@@ -4430,7 +4770,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 0.85,
-  "weight": 184.0
+  "weight": 184.0,
+  "volume": 1.0277
  },
  {
   "scene": "广告DOOH",
@@ -4443,7 +4784,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 0.85,
-  "weight": 184.0
+  "weight": 184.0,
+  "volume": 1.0277
  },
  {
   "scene": "广告DOOH",
@@ -4456,7 +4798,8 @@
   "length": 1.13,
   "width": 0.75,
   "height": 0.85,
-  "weight": 125.0
+  "weight": 125.0,
+  "volume": 0.7204
  },
  {
   "scene": "广告DOOH",
@@ -4469,7 +4812,8 @@
   "length": 0.95,
   "width": 0.85,
   "height": 1.16,
-  "weight": 125.0
+  "weight": 125.0,
+  "volume": 0.9367
  },
  {
   "scene": "广告DOOH",
@@ -4482,7 +4826,8 @@
   "length": 1.1,
   "width": 0.7,
   "height": 1.21,
-  "weight": 115.0
+  "weight": 115.0,
+  "volume": 0.9317
  },
  {
   "scene": "广告DOOH",
@@ -4495,7 +4840,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4508,7 +4854,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 1.17,
-  "weight": 313.0
+  "weight": 313.0,
+  "volume": 1.8377
  },
  {
   "scene": "广告DOOH",
@@ -4521,7 +4868,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 1.17,
-  "weight": 263.0
+  "weight": 263.0,
+  "volume": 1.4146
  },
  {
   "scene": "广告DOOH",
@@ -4534,7 +4882,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 1.65,
-  "weight": 510.0
+  "weight": 510.0,
+  "volume": 2.5917
  },
  {
   "scene": "广告DOOH",
@@ -4547,7 +4896,8 @@
   "length": 1.56,
   "width": 1.14,
   "height": 1.17,
-  "weight": 418.0
+  "weight": 418.0,
+  "volume": 2.0807
  },
  {
   "scene": "广告DOOH",
@@ -4560,7 +4910,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 0.85,
-  "weight": 197.0
+  "weight": 197.0,
+  "volume": 1.0277
  },
  {
   "scene": "广告DOOH",
@@ -4573,7 +4924,8 @@
   "length": 1.1,
   "width": 0.7,
   "height": 1.21,
-  "weight": 122.0
+  "weight": 122.0,
+  "volume": 0.9317
  },
  {
   "scene": "广告DOOH",
@@ -4586,7 +4938,8 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "广告DOOH",
@@ -4599,7 +4952,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4612,7 +4966,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 1.17,
-  "weight": 286.0
+  "weight": 286.0,
+  "volume": 1.8377
  },
  {
   "scene": "广告DOOH",
@@ -4625,7 +4980,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 1.17,
-  "weight": 228.0
+  "weight": 228.0,
+  "volume": 1.4146
  },
  {
   "scene": "广告DOOH",
@@ -4638,7 +4994,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 1.65,
-  "weight": 433.0
+  "weight": 433.0,
+  "volume": 2.5917
  },
  {
   "scene": "广告DOOH",
@@ -4651,7 +5008,8 @@
   "length": 1.56,
   "width": 1.14,
   "height": 1.17,
-  "weight": 370.0
+  "weight": 370.0,
+  "volume": 2.0807
  },
  {
   "scene": "广告DOOH",
@@ -4664,7 +5022,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 0.85,
-  "weight": 180.0
+  "weight": 180.0,
+  "volume": 1.0277
  },
  {
   "scene": "广告DOOH",
@@ -4677,7 +5036,8 @@
   "length": 1.1,
   "width": 0.7,
   "height": 1.21,
-  "weight": 122.0
+  "weight": 122.0,
+  "volume": 0.9317
  },
  {
   "scene": "广告DOOH",
@@ -4690,7 +5050,8 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "广告DOOH",
@@ -4703,7 +5064,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4716,7 +5078,8 @@
   "length": 1.1,
   "width": 0.86,
   "height": 0.72,
-  "weight": 134.0
+  "weight": 134.0,
+  "volume": 0.6811
  },
  {
   "scene": "广告DOOH",
@@ -4729,7 +5092,8 @@
   "length": 1.1,
   "width": 0.6,
   "height": 0.72,
-  "weight": 100.0
+  "weight": 100.0,
+  "volume": 0.4752
  },
  {
   "scene": "广告DOOH",
@@ -4742,7 +5106,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4755,7 +5120,8 @@
   "length": 1.19,
   "width": 0.89,
   "height": 0.76,
-  "weight": 94.0
+  "weight": 94.0,
+  "volume": 0.8049
  },
  {
   "scene": "广告DOOH",
@@ -4768,7 +5134,8 @@
   "length": 1.19,
   "width": 0.89,
   "height": 0.76,
-  "weight": 98.0
+  "weight": 98.0,
+  "volume": 0.8049
  },
  {
   "scene": "广告DOOH",
@@ -4781,7 +5148,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4794,12 +5162,13 @@
   "length": 1.19,
   "width": 0.7,
   "height": 0.8,
-  "weight": 126.0
+  "weight": 126.0,
+  "volume": 0.6664
  },
  {
   "scene": "广告DOOH",
   "series": "AW PRO",
-  "method": "纸箱/卡板",
+  "method": "木箱",
   "methodDetail": "木箱",
   "qtyPerCase": "暂无数据 待更新",
   "contents": "单面灯箱",
@@ -4807,12 +5176,13 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "广告DOOH",
   "series": "AW PRO",
-  "method": "纸箱/卡板",
+  "method": "木箱",
   "methodDetail": "木箱",
   "qtyPerCase": "暂无数据 待更新",
   "contents": "双面灯箱",
@@ -4820,12 +5190,13 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "广告DOOH",
   "series": "AW PRO",
-  "method": "纸箱/卡板",
+  "method": "木箱",
   "methodDetail": "木箱",
   "qtyPerCase": "2IN1（待确认）",
   "contents": "单面灯箱",
@@ -4833,12 +5204,13 @@
   "length": 3.04,
   "width": 0.77,
   "height": 1.6,
-  "weight": 675.0
+  "weight": 675.0,
+  "volume": 3.7453
  },
  {
   "scene": "广告DOOH",
   "series": "AW PRO",
-  "method": "纸箱/卡板",
+  "method": "木箱",
   "methodDetail": "木箱",
   "qtyPerCase": "暂无数据 待更新",
   "contents": "双面灯箱",
@@ -4846,12 +5218,13 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "广告DOOH",
   "series": "AW PRO",
-  "method": "纸箱/卡板",
+  "method": "木箱",
   "methodDetail": "木箱",
   "qtyPerCase": "可按每15平米一个木箱",
   "contents": "备品",
@@ -4859,7 +5232,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4872,7 +5246,8 @@
   "length": 1.7,
   "width": 1.15,
   "height": 1.2,
-  "weight": 342.0
+  "weight": 342.0,
+  "volume": 2.346
  },
  {
   "scene": "广告DOOH",
@@ -4885,7 +5260,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4898,7 +5274,8 @@
   "length": 1.72,
   "width": 1.1,
   "height": 1.17,
-  "weight": 495.0
+  "weight": 495.0,
+  "volume": 2.2136
  },
  {
   "scene": "广告DOOH",
@@ -4911,7 +5288,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4924,7 +5302,8 @@
   "length": 1.7,
   "width": 1.15,
   "height": 1.2,
-  "weight": 388.0
+  "weight": 388.0,
+  "volume": 2.346
  },
  {
   "scene": "广告DOOH",
@@ -4937,7 +5316,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4950,7 +5330,8 @@
   "length": 1.72,
   "width": 1.1,
   "height": 1.27,
-  "weight": 501.0
+  "weight": 501.0,
+  "volume": 2.4028
  },
  {
   "scene": "广告DOOH",
@@ -4963,7 +5344,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -4976,7 +5358,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 1.17,
-  "weight": 282.0
+  "weight": 282.0,
+  "volume": 1.8377
  },
  {
   "scene": "广告DOOH",
@@ -4989,7 +5372,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 1.17,
-  "weight": 248.0
+  "weight": 248.0,
+  "volume": 1.4146
  },
  {
   "scene": "广告DOOH",
@@ -5002,7 +5386,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 0.85,
-  "weight": 160.0
+  "weight": 160.0,
+  "volume": 1.0277
  },
  {
   "scene": "广告DOOH",
@@ -5015,7 +5400,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 0.85,
-  "weight": 219.0
+  "weight": 219.0,
+  "volume": 1.3351
  },
  {
   "scene": "广告DOOH",
@@ -5028,7 +5414,8 @@
   "length": 0.95,
   "width": 0.86,
   "height": 1.17,
-  "weight": 124.0
+  "weight": 124.0,
+  "volume": 0.9559
  },
  {
   "scene": "广告DOOH",
@@ -5041,7 +5428,8 @@
   "length": 1.1,
   "width": 0.7,
   "height": 1.21,
-  "weight": 112.0
+  "weight": 112.0,
+  "volume": 0.9317
  },
  {
   "scene": "广告DOOH",
@@ -5054,7 +5442,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -5067,7 +5456,8 @@
   "length": 1.1,
   "width": 0.76,
   "height": 1.65,
-  "weight": 215.0
+  "weight": 215.0,
+  "volume": 1.3794
  },
  {
   "scene": "广告DOOH",
@@ -5080,7 +5470,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -5093,7 +5484,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 1.17,
-  "weight": 327.0
+  "weight": 327.0,
+  "volume": 1.8377
  },
  {
   "scene": "广告DOOH",
@@ -5106,7 +5498,8 @@
   "length": 1.07,
   "width": 1.06,
   "height": 1.14,
-  "weight": 210.0
+  "weight": 210.0,
+  "volume": 1.293
  },
  {
   "scene": "广告DOOH",
@@ -5119,7 +5512,8 @@
   "length": 1.39,
   "width": 1.13,
   "height": 0.85,
-  "weight": 255.0
+  "weight": 255.0,
+  "volume": 1.3351
  },
  {
   "scene": "广告DOOH",
@@ -5132,7 +5526,8 @@
   "length": 0,
   "width": 0,
   "height": 0,
-  "weight": 0
+  "weight": 0,
+  "volume": 0
  },
  {
   "scene": "广告DOOH",
@@ -5145,7 +5540,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -5158,7 +5554,8 @@
   "length": 1.13,
   "width": 1.07,
   "height": 0.85,
-  "weight": 168.0
+  "weight": 168.0,
+  "volume": 1.0277
  },
  {
   "scene": "广告DOOH",
@@ -5171,7 +5568,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "广告DOOH",
@@ -5184,7 +5582,8 @@
   "length": 1.4,
   "width": 1.14,
   "height": 1.22,
-  "weight": 316.0
+  "weight": 316.0,
+  "volume": 1.9471
  },
  {
   "scene": "广告DOOH",
@@ -5197,7 +5596,8 @@
   "length": 1.39,
   "width": 1.04,
   "height": 0.98,
-  "weight": 254.0
+  "weight": 254.0,
+  "volume": 1.4167
  },
  {
   "scene": "广告DOOH",
@@ -5210,7 +5610,8 @@
   "length": 0.9,
   "width": 0.85,
   "height": 1.07,
-  "weight": 150.0
+  "weight": 150.0,
+  "volume": 0.8186
  },
  {
   "scene": "创意",
@@ -5223,7 +5624,8 @@
   "length": 1.053,
   "width": 0.943,
   "height": 1.333,
-  "weight": 163.0
+  "weight": 163.0,
+  "volume": 1.3236
  },
  {
   "scene": "创意",
@@ -5236,7 +5638,8 @@
   "length": 0.533,
   "width": 0.873,
   "height": 1.333,
-  "weight": 91.0
+  "weight": 91.0,
+  "volume": 0.6203
  },
  {
   "scene": "创意",
@@ -5249,7 +5652,8 @@
   "length": 1.023,
   "width": 0.943,
   "height": 1.333,
-  "weight": 163.0
+  "weight": 163.0,
+  "volume": 1.2859
  },
  {
   "scene": "创意",
@@ -5262,7 +5666,8 @@
   "length": 0.533,
   "width": 0.943,
   "height": 1.333,
-  "weight": 91.0
+  "weight": 91.0,
+  "volume": 0.67
  },
  {
   "scene": "创意",
@@ -5275,7 +5680,8 @@
   "length": 1.019,
   "width": 0.925,
   "height": 1.333,
-  "weight": 175.0
+  "weight": 175.0,
+  "volume": 1.2565
  },
  {
   "scene": "创意",
@@ -5288,7 +5694,8 @@
   "length": 0.533,
   "width": 0.925,
   "height": 1.333,
-  "weight": 104.0
+  "weight": 104.0,
+  "volume": 0.6572
  },
  {
   "scene": "创意",
@@ -5301,7 +5708,8 @@
   "length": 2.154,
   "width": 0.56,
   "height": 0.89,
-  "weight": 245.0
+  "weight": 245.0,
+  "volume": 1.0736
  },
  {
   "scene": "创意",
@@ -5314,7 +5722,8 @@
   "length": 2.02,
   "width": 0.45,
   "height": 0.82,
-  "weight": 202.0
+  "weight": 202.0,
+  "volume": 0.7454
  },
  {
   "scene": "创意",
@@ -5327,7 +5736,8 @@
   "length": 1.7,
   "width": 0.7,
   "height": 0.825,
-  "weight": 0.0
+  "weight": 0.0,
+  "volume": 0.9817
  },
  {
   "scene": "创意",
@@ -5340,7 +5750,8 @@
   "length": 1.4,
   "width": 0.7,
   "height": 0.825,
-  "weight": 130.0
+  "weight": 130.0,
+  "volume": 0.8085
  },
  {
   "scene": "创意",
@@ -5353,6 +5764,7 @@
   "length": 1.2,
   "width": 0.7,
   "height": 0.825,
-  "weight": 120.0
+  "weight": 120.0,
+  "volume": 0.693
  }
 ]

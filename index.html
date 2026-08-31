@@ -718,6 +718,7 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
         <option value="运输架">运输架</option>
         <option value="小推车">小推车</option>
         <option value="纸箱/卡板">纸箱/卡板</option>
+        <option value="纸箱+卡板">纸箱+卡板</option>
         <option value="其他">其他</option>
       </select>
     </div>
@@ -1088,6 +1089,32 @@ function initSeriesFilter() {
     opt.value = s; opt.textContent = s;
     sel.appendChild(opt);
   });
+}
+
+// 根据当前 PRODUCTS 实际出现的打包类别(method)动态重建包装方式筛选下拉框
+function rebuildMethodFilter() {
+  const sel = document.getElementById('filterMethod');
+  if(!sel) return;
+  const current = sel.value;
+  const order = ['航空箱','木箱','运输架','小推车','纸箱/卡板','纸箱+卡板','其他'];
+  // 从当前数据中提取所有出现过且非空的类别，保持原出现顺序
+  const seen = [];
+  PRODUCTS.forEach(p => {
+    const m = (p.method||'').trim();
+    if(m && !seen.includes(m)) seen.push(m);
+  });
+  // 排序：优先按 order 里的约定顺序，其余按出现顺序
+  const byOrder = order.filter(o => seen.includes(o));
+  const rest = seen.filter(m => !order.includes(m));
+  const list = [...byOrder, ...rest];
+  sel.innerHTML = '<option value="">全部方式</option>';
+  list.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    sel.appendChild(opt);
+  });
+  // 恢复之前在列表中的选中值（若不在则置空）
+  sel.value = list.includes(current) ? current : '';
 }
 
 function onSceneChange() {
@@ -3006,6 +3033,7 @@ async function initApp() {
     PRODUCTS = DEFAULT_PRODUCTS;
   }
   initSeriesFilter();
+  rebuildMethodFilter();
   renderTable();
   initFreight();
 }
@@ -3209,19 +3237,21 @@ function handleAdminUpload(event) {
             }
             if(cur.length) groups.push(cur);
 
-            // 每组归属：优先用「打包类别」列(D列, 舞台等sheet); 无该列时用组内「箱体」行的包装方式推断大类
+            // 每组归属：优先用每行自己的「打包类别」列(D列); 该行缺失时回退组内第一个非空类别; 再回退「箱体」行推断
             for(const g of groups) {
-              let owner = null;
+              // 组内统一类别(回退用): 第一个非空打包类别
+              let grpCat = null;
               if(cCategory>=0) {
-                for(const row of g) { if(row[cCategory] && String(row[cCategory]).trim()) { owner = String(row[cCategory]).trim(); break; } }
+                for(const row of g) { if(row[cCategory] && String(row[cCategory]).trim()) { grpCat = String(row[cCategory]).trim(); break; } }
               }
-              if(!owner) {
-                for(const row of g) {
-                  const ct = String(row[cContent]||'');
-                  if(ct.indexOf('箱体') !== -1) { owner = getMethodGroup(row[cMethod], ct, ''); break; }
-                }
+              // 行类别: 本行打包类别 -> 组类别 -> 箱体行推断 -> 首行推断
+              function rowOwner(row) {
+                if(cCategory>=0 && row[cCategory] && String(row[cCategory]).trim()) return String(row[cCategory]).trim();
+                if(grpCat) return grpCat;
+                const ct = String(row[cContent]||'');
+                if(ct.indexOf('箱体') !== -1) return getMethodGroup(row[cMethod], ct, '');
+                return getMethodGroup(g[0][cMethod], g[0][cContent]||'', '');
               }
-              if(!owner) owner = getMethodGroup(g[0][cMethod], g[0][cContent]||'', '');
               for(const row of g) {
                 const s = String(row[cSeries]).trim();
                 const m = String(row[cMethod]).trim();
@@ -3231,7 +3261,7 @@ function handleAdminUpload(event) {
                 newProducts.push({
                   scene: scene,
                   series: s,
-                  method: owner,
+                  method: rowOwner(row),
                   methodDetail: m,
                   qtyPerCase: (cPer>=0 && row[cPer]) ? String(row[cPer]).trim() : '',
                   contents: (cContent>=0 && row[cContent]) ? String(row[cContent]).trim() : '',
@@ -3349,6 +3379,7 @@ function saveAdminData() {
   PRODUCTS = pendingProducts;
   qtyMap = {};
   initSeriesFilter();
+  rebuildMethodFilter();
   renderTable();
 
   // 保存产品数据到localStorage
