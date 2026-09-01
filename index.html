@@ -2989,6 +2989,8 @@ if(savedProducts) {
     }
   } catch(e) { console.error('读取产品数据失败', e); }
 }
+// 全局履历变量必须先声明（避免下面的赋值因 TDZ 报错导致履历永远为空）
+let UPDATE_LOGS = null;
 // 从localStorage读取更新后的履历数据
 const savedLogs = localStorage.getItem('led_update_logs');
 if(savedLogs) {
@@ -3071,7 +3073,6 @@ let adminLoggedIn = false;
 let pendingProducts = null;
 let pendingFileName = '';
 let pendingLogs = null;
-let UPDATE_LOGS = null;
 
 function showAdminPanel() {
   if(!adminLoggedIn) {
