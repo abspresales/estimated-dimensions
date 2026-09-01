@@ -3124,7 +3124,7 @@ function showAdminMain() {
       <div style="font-size:18px;font-weight:600;color:#333;margin-bottom:12px;">产品系列：${seriesCount} 个 | 打包方案：${PRODUCTS.length} 条</div>
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
         <button onclick="exportDataJson()" style="padding:10px 26px;background:#fa8c16;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;box-shadow:0 2px 6px rgba(250,140,22,.3);">🚀 导出并发布</button>
-        <span style="font-size:13px;color:#999;line-height:1.6;">点此按钮会把最新数据下载为 estimated-dimensions.json，<br>本机监控脚本将自动推送到线上，稍等片刻刷新即可生效。</span>
+        <span style="font-size:13px;color:#999;line-height:1.6;">上传 Excel → 点「保存并发布」即自动导出 estimated-dimensions.json<br>并推送到线上；此按钮为手动重发/兜底。</span>
       </div>
     </div>
     <div style="border:2px dashed #d9d9d9;border-radius:8px;padding:40px 20px;text-align:center;margin-bottom:20px;">
@@ -3335,7 +3335,7 @@ function handleAdminUpload(event) {
               </div>
             </div>
             <div style="text-align:center;">
-              <button onclick="saveAdminData()" style="padding:12px 48px;background:#52c41a;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:15px;font-weight:600;">💾 确认保存更新</button>
+              <button onclick="saveAdminData()" style="padding:12px 48px;background:#52c41a;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:15px;font-weight:600;">💾 保存并发布</button>
             </div>
           `;
         } catch(err) {
@@ -3374,7 +3374,7 @@ function saveAdminData() {
     alert('没有可保存的数据，请先上传Excel文件');
     return;
   }
-  if(!confirm('确定要覆盖更新当前数据吗？此操作不可撤销。')) return;
+  if(!confirm('确定要覆盖更新并发布当前数据吗？\n保存后将自动导出并推送到线上。')) return;
 
   PRODUCTS = pendingProducts;
   qtyMap = {};
@@ -3404,10 +3404,9 @@ function saveAdminData() {
   resultEl.innerHTML = `
     <div style="background:#f6ffed;border:1px solid #b7eb8f;border-radius:6px;padding:20px;text-align:center;">
       <div style="font-size:32px;margin-bottom:8px;">🎉</div>
-      <div style="font-size:16px;font-weight:600;color:#52c41a;margin-bottom:8px;">数据更新成功！</div>
+      <div style="font-size:16px;font-weight:600;color:#52c41a;margin-bottom:8px;">数据更新成功并已发布！</div>
       <div style="font-size:13px;color:#666;margin-bottom:16px;">产品系列：${newSeriesCount} 个 | 打包方案：${PRODUCTS.length} 条</div>
-      <div style="font-size:13px;color:#999;margin-bottom:10px;">下一步：点击下方「导出并发布」，本机监控脚本会自动推送线上，稍等刷新即可。</div>
-      <button onclick="exportDataJson()" style="padding:10px 32px;background:#fa8c16;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:14px;font-weight:600;">🚀 导出并发布</button>
+      <div style="font-size:13px;color:#999;line-height:1.8;">已自动导出 estimated-dimensions.json，<br>本机监控脚本将自动推送到线上，稍等片刻刷新即可生效。<br>若下方未出现下载，请点顶部「🚀 导出并发布」重新触发。</div>
     </div>
   `;
 
@@ -3416,6 +3415,10 @@ function saveAdminData() {
   if(statusEl && statusEl.querySelector('div:last-child')) {
     statusEl.querySelector('div:last-child').innerHTML = `产品系列：${newSeriesCount} 个 | 打包方案：${PRODUCTS.length} 条`;
   }
+
+  // 自动导出并发布：保存成功后立即触发下载 estimated-dimensions.json（监控脚本会自动推送）
+  // 直接用同步调用，确保仍处于用户点击「保存并发布」的手势内，避免被浏览器自动下载拦截
+  exportDataJson();
 }
 
 function openModal(title, content) {
