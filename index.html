@@ -3276,9 +3276,14 @@ function handleAdminUpload(event) {
             }
           });
           // 读取履历Sheet（严格按照Excel的内容和顺序，不合并、不排序）
+          // 兼容任意含「履历」的sheet名（履历/修订履历/更新履历等）
           let newLogs = [];
-          if(workbook.Sheets['履历']) {
-            const logRows = XLSX.utils.sheet_to_json(workbook.Sheets['履历'], {header:1, defval:'', raw:false});
+          let logSheet = null;
+          for(const sn of Object.keys(workbook.Sheets)) {
+            if(String(sn).indexOf('履历') !== -1) { logSheet = workbook.Sheets[sn]; break; }
+          }
+          if(logSheet) {
+            const logRows = XLSX.utils.sheet_to_json(logSheet, {header:1, defval:'', raw:false});
             // 日期格式化函数
             function fmtDate(d) {
               if(d instanceof Date) {
