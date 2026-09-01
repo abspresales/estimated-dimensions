@@ -2704,7 +2704,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "纸箱+卡板",
+    "method": "纸箱/卡板",
     "methodDetail": "纸箱+卡板",
     "qtyPerCase": "8IN1",
     "contents": "箱体",
@@ -2718,7 +2718,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "纸箱+卡板",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "30IN1",
     "contents": "双倍挂架",
@@ -2732,7 +2732,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "纸箱+卡板",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "32IN1",
     "contents": "单倍挂架",
@@ -2746,7 +2746,7 @@
   {
     "scene": "ProAV",
     "series": "A27 V3",
-    "method": "纸箱+卡板",
+    "method": "纸箱/卡板",
     "methodDetail": "木箱",
     "qtyPerCase": "可按每10平米一个木箱",
     "contents": "备品",
