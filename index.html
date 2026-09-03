@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3E7CBE">
 <title>LED尺寸速算 · 国际运费测算</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: Arial, "Microsoft YaHei", "微软雅黑", sans-serif; background:#f1f2f6; color:#333; font-size:14px; }
-.header { background:linear-gradient(135deg,#1a3a5c 0%,#2d5f8a 100%); color:#fff; padding:18px 24px; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+.header { background:#1a3a5c; color:#fff; padding:18px 24px; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
 .header h1 { font-size:20px; font-weight:600; }
 .header-btn { padding:6px 16px; background:rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.25); border-radius:20px; cursor:pointer; font-size:13px; }
 .header-btn:hover { background:rgba(255,255,255,0.22); }
@@ -667,7 +668,207 @@ input.qty-input.has-value { background:#fffbe6; border-color:#e6a23c; }
 .rate-input { width:90px; padding:6px 10px; border:1.5px solid #e2e8f0; border-radius:6px; font-size:13px; }
 .freight-system .exchange-box input, .freight-system .exchange-box input[type="number"] { width:90px; }
 .freight-system .multiplier-box .label { padding:0; margin:0; }
-</style>
+
+/* ==================================================================
+   🎨 视觉美化层 v3 · 对齐《标准线材速查表-介绍与使用指南》设计语言
+   ─────────────────────────────────────────
+   色彩：清新天蓝 #4E8CCC/#3E7CBE  ·  活力橙 #F39C12/#E67E22
+        暖橙提示 #FDF4E3  ·  浅蓝底 #EBF1F7
+   元素：橙色顶部条  ·  圆角白卡（橙/蓝色条）  ·  圆形深蓝图标
+        深蓝表头白字  ·  大号橙色数字
+   ================================================================== */
+:root{
+  --e-out:cubic-bezier(.16,1,.3,1);
+  --e-spr:cubic-bezier(.34,1.56,.64,1);
+  --e-sm:cubic-bezier(.4,0,.2,1);
+  --navy-900:#1E3A5F;
+  --navy-800:#33415C;
+  --navy-700:#3E5A7E;
+  --navy-600:#5A6B82;
+  --navy-500:#8A97A8;
+  --orange-500:#E78131;
+  --orange-600:#D96C1F;
+  --orange-700:#B85A18;
+  --cream-50:#FDF8F2;
+  --cream-100:#FBEEDD;
+  --paper-50:#F7F9FC;
+  --paper-100:#EDF1F6;
+  --line:#DDE4EE;
+  --ink:#1F2B3A;
+  --ink-soft:#5A6B82;
+  --brand:var(--orange-500);
+  --accent:var(--orange-500);
+  --ring:0 0 0 3px rgba(231,129,49,.22);
+}
+html{scroll-behavior:smooth;}
+::selection{background:rgba(243,156,18,.22);color:inherit;}
+:focus-visible{outline:2px solid rgba(243,156,18,.65);outline-offset:2px;}
+
+/* ---------- 滚动条 ---------- */
+*{scrollbar-width:thin;scrollbar-color:#cfd6e1 transparent;}
+::-webkit-scrollbar{width:9px;height:9px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#cfd6e1;border-radius:99px;border:2px solid transparent;background-clip:padding-box;}
+::-webkit-scrollbar-thumb:hover{background:#a4b1c4;}
+
+/* ---------- 顶部横幅：深蓝纯色 + 白字（去橙色/渐变） ---------- */
+.header{
+  position:relative;isolation:isolate;
+  background:linear-gradient(180deg,#EAF2FC,#DEEBFA)!important;text-align:left;
+  box-shadow:0 2px 14px rgba(150,80,20,.18);
+  padding:20px 24px!important;min-height:123px;box-sizing:border-box;
+  animation:headIn .55s var(--e-out) backwards;
+}
+@keyframes headIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:none;}}
+.header>*{position:relative;z-index:2;}
+.header h1{
+  font-size:22px!important;letter-spacing:1.5px;font-weight:800;
+  color:#1E3A5F!important;text-shadow:none;
+  margin:0 0 6px 0!important;
+  display:flex;align-items:center;gap:12px;text-align:left;
+}
+.header .sub{text-shadow:none;letter-spacing:.3px;text-align:left;}
+.header .sub:first-of-type{font-size:13px!important;font-weight:700;opacity:1!important;color:#1E3A5F;margin:0 0 4px 0!important;}
+.header .sub:last-of-type{opacity:1!important;line-height:1.7;color:#3A5A7A;margin:0!important;}
+
+/* ---------- 页面浅蓝底纹 ---------- */
+body{
+  font-family:Arial,"Microsoft YaHei","微软雅黑",sans-serif!important;
+  background:#F5F6F8!important;
+  background-attachment:fixed;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+
+/* ---------- 标签页：白卡 + 橙色激活条 ---------- */
+.tabs{
+  background:#fff;border-bottom:2px solid #E1E8F1;
+  box-shadow:0 2px 8px rgba(14,42,74,.05);
+  position:relative;z-index:210;
+}
+.tab{padding:13px 24px;font-weight:600;transition:color .2s var(--e-sm),border-color .2s var(--e-sm);border-bottom:2px solid transparent;}
+.tab:hover{color:var(--navy-700);}
+.tab.active{color:var(--navy-700);border-bottom-color:#1E3A5F!important;background:linear-gradient(180deg,#fff,#FBF7EF);}
+
+/* ---------- 卡片：白底 + 橙顶条 + 柔影 + 悬浮微动 ---------- */
+.filter-bar,.summary-bar,.table-wrap,.freight-card,.container-detail-wrap,.pagination-bar{
+  background:#fff;position:relative;
+  border:1px solid #E1E8F1;
+  box-shadow:0 1px 2px rgba(14,42,74,.04),0 8px 24px rgba(14,42,74,.06);
+  transition:box-shadow .35s var(--e-out),border-color .35s var(--e-out),transform .35s var(--e-out);
+}
+.filter-bar,.summary-bar,.freight-card{border-radius:14px;}
+.filter-bar:hover,.summary-bar:hover,.freight-card:hover,.container-detail-wrap:hover{
+  box-shadow:0 2px 5px rgba(14,42,74,.06),0 18px 40px rgba(14,42,74,.12);
+  border-color:#D2DCE9;transform:translateY(-2px);
+}
+.table-wrap{border-radius:14px;overflow:hidden;}
+.filter-bar{animation:cardIn .55s var(--e-out) .05s backwards;position:relative;z-index:200;}
+.summary-bar{animation:cardIn .55s var(--e-out) .12s backwards;}
+.table-wrap{animation:cardIn .55s var(--e-out) .19s backwards;}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+/* ---------- 筛选栏下拉：橙边 + 圆角 ---------- */
+.filter-bar select{
+  border-radius:9px;background:#FAFCFE;border-color:#D7E0EC;color:var(--ink);font-weight:500;
+  transition:border-color .22s var(--e-sm),box-shadow .22s var(--e-sm),background .22s;
+}
+.filter-bar select:hover{border-color:#B9C8DE;}
+.filter-bar select:focus{border-color:var(--orange-500);box-shadow:var(--ring);outline:none;background:#fff;}
+.filter-bar label{color:var(--navy-700);font-weight:600;letter-spacing:.3px;}
+.filter-bar .reset-btn{border-radius:9px;border:1.5px solid #B8C8E0;color:var(--navy-700);background:#fff;font-weight:600;transition:all .2s var(--e-sm);}
+.filter-bar .reset-btn:hover{background:linear-gradient(135deg,var(--cream-50),var(--cream-100));border-color:var(--orange-500);color:var(--orange-700);box-shadow:0 4px 12px rgba(243,156,18,.20);}
+.filter-bar .clear-btn{border-radius:9px;background:linear-gradient(135deg,var(--orange-500),var(--orange-600));border:none;color:#fff;font-weight:600;box-shadow:0 4px 12px rgba(230,126,34,.30);transition:transform .2s var(--e-spr),box-shadow .25s;}
+.filter-bar .clear-btn:hover{background:linear-gradient(135deg,#FBAE2E,#ED8525);box-shadow:0 6px 18px rgba(230,126,34,.45);transform:translateY(-1px);}
+
+/* ---------- 汇总卡：大号橙色数字 ---------- */
+.summary-bar{color:var(--ink-soft);}
+.summary-bar strong{color:var(--orange-600)!important;font-weight:800;font-size:15px;font-variant-numeric:tabular-nums;}
+.summary-bar .note{color:var(--ink-soft);font-style:italic;}
+
+/* ---------- 主表：深蓝表头白字 ---------- */
+.table-wrap{border:1px solid #E1E8F1;}
+table thead th,table.data-table th{
+  background:linear-gradient(180deg,#EAF2FC 0%,#DEEBFA 100%)!important;
+  color:#1E3A5F!important;letter-spacing:.5px;font-weight:700;
+  border-bottom:none!important;
+}
+table td{border-color:#ECF0F6!important;color:var(--ink);font-weight:500;}
+table tbody tr{transition:background .16s var(--e-sm);}
+tr.group-header td{background:linear-gradient(180deg,#EAF2FC 0%,#DEEBFA 100%)!important;color:#1E3A5F!important;font-weight:700;}
+tr.method-header td{background:linear-gradient(135deg,#EEF3FA,#E3EAF3)!important;color:#3E5A7E!important;font-weight:700;}
+
+/* ---------- 件数输入格 ---------- */
+input.qty-input{border-color:var(--orange-500);background:#FFFDF5;transition:border-color .2s,box-shadow .2s,background .2s;}
+input.qty-input:focus{border-color:var(--orange-500);box-shadow:var(--ring);background:#fff;}
+input.qty-input.has-value{background:#FFF8E3;border-color:var(--orange-500);color:var(--orange-700);font-weight:700;}
+
+/* ---------- 运费卡片头：浅蓝深字 + 橙色数字圆标 ---------- */
+.freight-section-header{
+  background:linear-gradient(135deg,#F0F7FE,#E3EDF9)!important;
+  color:#1E3A5F!important;border-bottom:3px solid #E1E8F1;
+}
+.freight-section-header h2{color:#1E3A5F!important;}
+.freight-section-header .fs-num{background:linear-gradient(135deg,var(--orange-500),var(--orange-600));color:#fff;box-shadow:0 2px 6px rgba(231,129,49,.4);}
+.freight-card h3{color:#1E3A5F!important;border-bottom:2px solid #E1E8F1!important;}
+
+/* ---------- 统计卡：浅蓝 + 橙色数字 ---------- */
+.stat-card{background:linear-gradient(135deg,#F4F7FB,#EBF1F7)!important;border:1px solid #E1E8F1;border-radius:12px;transition:transform .3s var(--e-out),box-shadow .3s var(--e-out);}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(14,42,74,.12);}
+.stat-card .stat-value{color:var(--navy-700)!important;font-variant-numeric:tabular-nums;}
+.stat-card .stat-unit{color:var(--orange-600);font-weight:700;}
+
+/* ---------- 结果区：深灰蓝底 + 大号橙色数字 ---------- */
+.result-box{background:linear-gradient(135deg,#33415C,#1E3A5F)!important;border-radius:14px;box-shadow:0 8px 24px rgba(30,58,95,.22);}
+.result-box .total-fee{color:#F7C978;}
+
+/* ---------- 按钮：橙为主、深蓝为辅 ---------- */
+.btn{border-radius:9px;font-weight:600;letter-spacing:.3px;transition:transform .2s var(--e-spr),box-shadow .25s var(--e-sm),background .2s;}
+.btn:active{transform:translateY(0) scale(.965);}
+.btn-primary{background:linear-gradient(135deg,var(--orange-500),var(--orange-600))!important;box-shadow:0 4px 12px rgba(230,126,34,.35);}
+.btn-primary:hover{background:linear-gradient(135deg,#FBAE2E,#ED8525)!important;box-shadow:0 6px 18px rgba(230,126,34,.48);}
+.btn-accent{background:linear-gradient(135deg,var(--orange-500),var(--orange-600))!important;box-shadow:0 4px 12px rgba(230,126,34,.35);}
+.btn-accent:hover{background:linear-gradient(135deg,#FBAE2E,#ED8525)!important;box-shadow:0 6px 18px rgba(230,126,34,.48);}
+.btn-success{background:linear-gradient(135deg,#27AE60,#1E8E4E)!important;box-shadow:0 4px 12px rgba(30,142,78,.35);}
+.btn-success:hover{background:linear-gradient(135deg,#2EC06B,#1F9954)!important;box-shadow:0 6px 18px rgba(30,142,78,.48);}
+.btn-outline{border-radius:9px;border:1.5px solid #B8C8E0;color:var(--navy-700);font-weight:600;}
+.btn-outline:hover{border-color:var(--orange-500);color:var(--orange-700);background:linear-gradient(135deg,var(--cream-50),var(--cream-100));}
+
+/* ---------- 分页：橙扇区 ---------- */
+.pagination-bar button{border-radius:8px;border-color:#D7E0EC;font-weight:600;transition:all .2s var(--e-sm);}
+.pagination-bar button:hover:not(:disabled){border-color:var(--orange-500);color:var(--orange-700);}
+.pagination-bar .page-info{color:var(--navy-700);font-weight:700;}
+
+/* ---------- 备注箱 ---------- */
+.note-box{background:linear-gradient(135deg,var(--cream-50),var(--cream-100))!important;border:1px solid #F0DBA8!important;border-radius:10px;color:var(--orange-700)!important;box-shadow:0 2px 10px rgba(230,126,34,.10);}
+.note-box strong{color:var(--orange-700)!important;}
+
+/* ---------- 空状态 ---------- */
+.empty-state{color:var(--ink-soft);}
+
+/* ---------- 浮动按钮：橙/蓝 ---------- */
+.float-btn{border-radius:50%;box-shadow:0 6px 16px rgba(14,42,74,.25);}
+.float-btn-log{background:linear-gradient(135deg,var(--orange-500),var(--orange-600));}
+.float-btn-admin{background:linear-gradient(135deg,#5A6B82,#414E63);}
+
+/* ---------- Modal：白色清爽头部 + 橙色底条 ---------- */
+.modal-box{border-radius:14px;overflow:hidden;}
+.modal-title{background:linear-gradient(180deg,#FFFFFF,#F5F8FC);border-bottom:3px solid #E1E8F1;padding:16px 24px;}
+.modal-title h3{color:#1E3A5F!important;letter-spacing:.5px;}
+.modal-close{color:#5A6B82;transition:all .2s;}
+.modal-close:hover{color:var(--orange-600);transform:rotate(90deg);}
+.modal-body{border-radius:0 0 14px 14px;}
+
+/* ---------- 减动效支持 ---------- */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important;}
+}
+
+/* ---------- Absen 官网排版细节 ---------- */
+h1,h2,h3,h4,strong,b{font-weight:700;color:#2A2F38;}
+.header h1,.header .sub{color:#1E3A5F;}
+.header .sub:first-of-type{color:#1E3A5F;}
+.header .sub:last-of-type{color:#3A5A7A;}
+body,table td,table th,table.data-table td,.summary-bar,.freight-card,.stat-card,.form-row label{color:#33373D;}
+.filter-bar,.summary-bar,.table-wrap,.freight-card,.stat-card,.note-box{}</style>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
