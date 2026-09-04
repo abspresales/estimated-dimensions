@@ -2578,7 +2578,7 @@
   {
     "scene": "舞台Rental",
     "series": "PL V3",
-    "method": "航空箱",
+    "method": "小推车",
     "methodDetail": "吊梁航空箱",
     "qtyPerCase": "4IN1",
     "contents": "1米三角吊梁",
@@ -2592,7 +2592,7 @@
   {
     "scene": "舞台Rental",
     "series": "PL V3",
-    "method": "航空箱",
+    "method": "小推车",
     "methodDetail": "吊梁航空箱",
     "qtyPerCase": "8IN1",
     "contents": "0.5米三角吊梁",
@@ -2606,7 +2606,7 @@
   {
     "scene": "舞台Rental",
     "series": "PL V3",
-    "method": "航空箱",
+    "method": "小推车",
     "methodDetail": "吊梁航空箱",
     "qtyPerCase": "9IN1",
     "contents": "1米不带三角架吊梁",
@@ -2620,7 +2620,7 @@
   {
     "scene": "舞台Rental",
     "series": "PL V3",
-    "method": "航空箱",
+    "method": "小推车",
     "methodDetail": "吊梁航空箱",
     "qtyPerCase": "18IN1",
     "contents": "0.5米不带三角架吊梁",
