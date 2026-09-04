@@ -844,10 +844,10 @@ input.qty-input.has-value{background:#FFF8E3;border-color:var(--orange-500);colo
 /* ---------- 空状态 ---------- */
 .empty-state{color:var(--ink-soft);}
 
-/* ---------- 浮动按钮：橙/蓝 ---------- */
-.float-btn{border-radius:50%;box-shadow:0 6px 16px rgba(14,42,74,.25);}
-.float-btn-log{background:linear-gradient(135deg,var(--orange-500),var(--orange-600));}
-.float-btn-admin{background:linear-gradient(135deg,#5A6B82,#414E63);}
+/* ---------- 浮动按钮：更新履历=橙、后台维护=深蓝灰（对齐线材站悬浮球） ---------- */
+.float-btn{border-radius:50%;border:2px solid #fff;}
+.float-btn-log{background:linear-gradient(135deg,var(--orange-500),var(--orange-600));box-shadow:0 6px 18px rgba(230,126,34,.45),0 0 0 4px rgba(243,156,18,.18);}
+.float-btn-admin{background:linear-gradient(135deg,#5A6B82,#414E63);box-shadow:0 6px 18px rgba(65,78,99,.50),0 0 0 4px rgba(90,107,130,.20);}
 
 /* ---------- Modal：白色清爽头部 + 橙色底条 ---------- */
 .modal-box{border-radius:14px;overflow:hidden;}
@@ -3328,8 +3328,8 @@ function showAdminLogin() {
       <input type="password" id="adminPwd" placeholder="请输入密码" style="width:100%;padding:10px 14px;border:1px solid #d9d9d9;border-radius:6px;font-size:14px;margin-bottom:12px;box-sizing:border-box;" onkeypress="if(event.key==='Enter')checkAdminPwd()">
       <div id="pwdError" style="color:#f5222d;font-size:13px;margin-bottom:12px;display:none;">密码错误，请重试</div>
       <div style="display:flex;gap:10px;">
-        <button onclick="checkAdminPwd()" style="flex:1;padding:10px;background:#fff;color:#374151;border:1px solid #d1d5db;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;">登录</button>
-        <button onclick="this.closest('.admin-modal-mask').remove()" style="flex:1;padding:10px;background:#fff;color:#6B7280;border:1px solid #d1d5db;border-radius:6px;cursor:pointer;font-size:14px;">取消</button>
+        <button onclick="checkAdminPwd()" style="flex:1;padding:10px;background:#fff;color:#374151;border:1px solid #d1d5db;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;">登录</button>
+        <button onclick="this.closest('.admin-modal-mask').remove()" style="flex:1;padding:10px;background:#fff;color:#6B7280;border:1px solid #d1d5db;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;">取消</button>
       </div>
     </div>
   `;
@@ -3357,7 +3357,7 @@ function showAdminMain() {
       <div style="font-size:14px;color:#999;margin-bottom:8px;">当前数据状态</div>
       <div style="font-size:18px;font-weight:600;color:#333;margin-bottom:12px;">产品系列：${seriesCount} 个 | 打包方案：${PRODUCTS.length} 条</div>
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-        <button onclick="exportDataJson()" style="padding:10px 26px;background:linear-gradient(135deg,#E78131,#D96C1F);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;box-shadow:0 2px 6px rgba(231,129,49,.3);">🚀 导出并发布</button>
+        <button onclick="exportDataJson()" style="padding:9px 20px;background:linear-gradient(135deg,#E78131,#D96C1F);color:#fff;border:none;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(231,129,49,.3);">🚀 导出并发布</button>
         <span style="font-size:13px;color:#999;line-height:1.6;">上传 Excel → 点「保存并发布」即自动导出 estimated-dimensions.json<br>并推送到线上；此按钮为手动重发/兜底。</span>
       </div>
     </div>
@@ -3366,12 +3366,12 @@ function showAdminMain() {
       <div style="font-size:18px;font-weight:600;color:#333;margin-bottom:8px;">上传 Excel 文件覆盖更新数据</div>
       <div style="font-size:13px;color:#999;margin-bottom:20px;">支持 .xlsx / .xls 格式，上传后将完全覆盖当前数据</div>
       <input type="file" id="adminFile" accept=".xlsx,.xls" style="display:none;" onchange="handleAdminUpload(event)">
-      <button onclick="document.getElementById('adminFile').click()" style="padding:12px 40px;background:#1a3a5c;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:15px;font-weight:500;">选择文件</button>
+      <button onclick="document.getElementById('adminFile').click()" style="padding:9px 20px;background:linear-gradient(135deg,#E78131,#D96C1F);color:#fff;border:none;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(231,129,49,.35);">选择文件</button>
     </div>
     <div id="uploadResult" style="margin-bottom:20px;"></div>
     <div style="display:flex;gap:12px;">
-      <button onclick="this.closest('.admin-modal-mask').remove()" style="flex:1;padding:12px;background:#f0f0f0;color:#666;border:none;border-radius:4px;cursor:pointer;font-size:14px;">关闭</button>
-      <button onclick="adminLogout()" style="flex:1;padding:12px;background:#fff1f0;color:#cf1322;border:1px solid #ffa39e;border-radius:4px;cursor:pointer;font-size:14px;">退出登录</button>
+      <button onclick="this.closest('.admin-modal-mask').remove()" style="flex:1;padding:10px;background:#fff;color:#6B7280;border:1px solid #d1d5db;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;">关闭</button>
+      <button onclick="adminLogout()" style="flex:1;padding:10px;background:linear-gradient(135deg,#E5484D,#C72A2F);color:#fff;border:none;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(199,42,47,.30);">退出登录</button>
     </div>
   `;
   openAdminModal('⚙ 后台维护', html);
