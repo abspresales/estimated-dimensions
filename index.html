@@ -865,6 +865,9 @@ input.qty-input.has-value{background:#FFF8E3;border-color:var(--orange-500);colo
 .admin-modal-header span{color:#1E3A5F!important;font-weight:700;letter-spacing:.5px;font-size:13px;}
 .admin-modal-close{width:32px;height:32px;border-radius:8px;border:1px solid #C9D8EA;background:#EAF1F8;color:#1E3A5F;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .18s var(--e-sm);}
 .admin-modal-close:hover{background:var(--orange-500);color:#fff;border-color:var(--orange-500);transform:rotate(90deg);}
+.admin-header-btns{display:flex;gap:8px;align-items:center;}
+.admin-modal-size{width:32px;height:32px;border-radius:8px;border:1px solid #C9D8EA;background:#EAF1F8;color:#1E3A5F;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .18s var(--e-sm);}
+.admin-modal-size:hover{background:var(--orange-500);color:#fff;border-color:var(--orange-500);transform:scale(1.08);}
 .admin-modal-body{flex:1;overflow-y:auto;padding:20px;}
 .admin-modal-body::-webkit-scrollbar{width:6px;}
 .admin-modal-body::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px;}
@@ -3257,6 +3260,19 @@ async function initApp() {
 initApp();
 
 // ==================== 更新履历 ====================
+// 统一日期为 YYYY-MM-DD（兼容 YYYY/M/D、YYYY.M.D、带时间后缀、Excel序列号；说明文字/空值保留原样）
+function normDate(d){
+  if(d === undefined || d === null || d === '') return '';
+  const s = String(d).trim();
+  const m = s.match(/^(\d{4})[/.\-](\d{1,2})[/.\-](\d{1,2})(?:[ T].*)?$/);
+  if(m) return m[1] + '-' + m[2].padStart(2,'0') + '-' + m[3].padStart(2,'0');
+  if(/^\d+(\.\d+)?$/.test(s)){
+    const utcDays = Math.floor(parseFloat(s) - 25569);
+    const dt = new Date(utcDays * 86400 * 1000);
+    return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0') + '-' + String(dt.getDate()).padStart(2,'0');
+  }
+  return s;
+}
 function showUpdateLog() {
   const defaultLogs = [{"date": "2025-03-03", "content": "制作预估尺寸计算表V1.0", "editor": "杜辉"}, {"date": "", "content": "说明：仅供参考，具体尺寸以下单打包尺寸为准；", "editor": "杜辉"}, {"date": "2025-03-04", "content": "输出预估尺寸计算表V1.1，Axx25由于系统中无数据，暂未统计", "editor": "杜辉"}, {"date": "", "content": "感谢北美商务李础楚、拉美商务周芳提供部分数据支持", "editor": "杜辉"}, {"date": "2025-03-05", "content": "补充AS V2系列各种尺寸打包预估尺寸，表格版本V1.2-20250305", "editor": "杜辉"}, {"date": "", "content": "使用说明：在表格左侧标黄区域输入对应打包件数", "editor": "杜辉"}, {"date": "2025-03-07", "content": "新增A27 V3系列木箱打包方式预估尺寸信息", "editor": "杜辉"}, {"date": "", "content": "新增AXX25预估打包尺寸信息，表格版本V1.3-20250307", "editor": "杜辉"}, {"date": "2025-03-15", "content": "修改CPS纸箱打包方式预估尺寸信息，表格版本V1.4-20250315", "editor": "杜辉"}, {"date": "2025-03-25", "content": "新增K V3纸箱预估打包尺寸信息，表格版本V1.5-20250325", "editor": "杜辉"}, {"date": "2025-04-10", "content": "新增XL纸箱预估打包尺寸信息", "editor": "杜辉"}, {"date": "", "content": "新增MC航空箱预估打包尺寸信息", "editor": "杜辉"}, {"date": "", "content": "新增LR V2航空箱预估打包尺寸信息，表格版本V1.6-20250410", "editor": "杜辉"}, {"date": "2025-04-18", "content": "新增FL航空箱预估打包尺寸信息，表格版本V1.7-20250418", "editor": "杜辉"}, {"date": "2025-05-09", "content": "新增KLCOB V2纸箱预估打包尺寸信息", "editor": "杜辉"}, {"date": "2025-05-27", "content": "新增NT V2预估打包尺寸信息", "editor": "杜辉"}, {"date": "", "content": "PL V2航空箱更新为木质10IN1和5IN1，更新预估打包尺寸", "editor": "杜辉"}, {"date": "2025-06-09", "content": "新增ICON X系列预估打包尺寸", "editor": "杜辉"}, {"date": "2025-06-10", "content": "新增HC V3木箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-07-24", "content": "新增FL V2航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "", "content": "补充NT V2塑胶航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-07-30", "content": "新增SA航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-08-04", "content": "补充NX其他箱体尺寸预估打包尺寸，修正部分错误", "editor": "杜辉"}, {"date": "2025-08-20", "content": "新增JP8 pro 8IN1小推车打包预估尺寸", "editor": "杜辉"}, {"date": "2025-09-02", "content": "补充NT V2木箱打包预估尺寸", "editor": "杜辉"}, {"date": "2025-09-09", "content": "新增新款落地支架预估打包尺寸--数据来自詹志安", "editor": "杜辉"}, {"date": "", "content": "增加LIVE版备品航空箱预估打包尺寸信息--数据来自詹志安", "editor": "杜辉"}, {"date": "2025-09-10", "content": "最后一列加入箱体总数，增加A25R打包预估尺寸", "editor": "杜辉"}, {"date": "", "content": "补充完整ICON X系列预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增ICON X V2系列预估打包尺寸", "editor": "杜辉"}, {"date": "2025-09-29", "content": "补充A25和A25R版本960*1440尺寸预估打包信息", "editor": "杜辉"}, {"date": "2025-10-20", "content": "新做C V2系列预估打包尺寸", "editor": "杜辉"}, {"date": "2025-11-04", "content": "新增JP pro系列吊梁预估打包尺寸", "editor": "杜辉"}, {"date": "2025-12-30", "content": "新增HC V3系列纸箱预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充ICON部分缺失的预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充PL V3部分缺失的预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充LR V2部分缺失的预估打包尺寸", "editor": "杜辉"}, {"date": "2026-01-05", "content": "补充A25和A25 R版本640*960预估打包尺寸", "editor": "杜辉"}, {"date": "2026-03-24", "content": "新增A99 V2系列运输架预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增CL V3系列预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-10", "content": "新增ICON X136F预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-17", "content": "补充CPS框架预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-22", "content": "新增SR系列预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增S6R&S10R预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增S6T&S10T预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-24", "content": "新增FL V2系列木箱预估打包尺寸", "editor": "杜辉"}, {"date": "2026-04-28", "content": "新增KL V3系列预估打包尺寸", "editor": "杜辉"}, {"date": "2026-05-07", "content": "增加FL V2弧形吊梁航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "", "content": "更新LR V2吊梁航空箱打包预估尺寸", "editor": "杜辉"}, {"date": "2026-05-08", "content": "补充NT V2 PL NT 2IN1吊地梁预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增PO系列预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增JD-H系列预估打包尺寸", "editor": "杜辉"}, {"date": "2026-05-13", "content": "修正PL V3航空箱预估打包数据错误", "editor": "杜辉"}, {"date": "", "content": "增加PL V3运输架预估打包数据", "editor": "杜辉"}, {"date": "2026-05-28", "content": "补充A99 V2木箱预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充AW V2预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "补充AW PRO预估打包尺寸", "editor": "杜辉"}, {"date": "2026-07-24", "content": "新增PO PRO V2预估打包尺寸", "editor": "杜辉"}, {"date": "2026-08-13", "content": "新增K2.5DS预估打包尺寸", "editor": "杜辉"}, {"date": "", "content": "新增AW pro单面灯箱预估打包尺寸", "editor": "杜辉"}, {"date": "2026-08-22", "content": "2222222", "editor": "杜辉"}];
   const logs = UPDATE_LOGS || defaultLogs;
@@ -3272,7 +3288,7 @@ function showUpdateLog() {
       <tbody>
         ${logs.map(l => `
           <tr style="border-bottom:1px solid #f0f0f0;">
-            <td style="padding:10px 12px;vertical-align:top;white-space:nowrap;color:#666;text-align:center;">${l.date}</td>
+            <td style="padding:10px 12px;vertical-align:top;white-space:nowrap;color:#666;text-align:center;">${normDate(l.date)}</td>
             <td style="padding:10px 12px;vertical-align:top;line-height:1.6;color:#333;word-break:break-all;text-align:left;">${l.content}</td>
             <td style="padding:10px 12px;vertical-align:top;white-space:nowrap;color:#999;text-align:center;">${l.editor}</td>
           </tr>
@@ -3671,7 +3687,11 @@ function openAdminModal(title, content) {
     <div class="admin-modal">
       <div class="admin-modal-header">
         <span>${title}</span>
-        <button class="admin-modal-close" onclick="this.closest('.admin-modal-mask').remove()">✕</button>
+        <div class="admin-header-btns">
+          <button class="admin-modal-size" onclick="shrinkAdminModal()" aria-label="缩小">−</button>
+          <button class="admin-modal-size" onclick="expandAdminModal()" aria-label="放大">□</button>
+          <button class="admin-modal-close" onclick="this.closest('.admin-modal-mask').remove()">✕</button>
+        </div>
       </div>
       <div class="admin-modal-body">
       ${content}
@@ -3679,6 +3699,28 @@ function openAdminModal(title, content) {
     </div>
   `;
   document.body.appendChild(mask);
+}
+
+// 后台维护弹窗：放大/缩小（对齐线材站/结构站）
+function shrinkAdminModal(){
+  const m = document.querySelector('.admin-modal-mask:last-child .admin-modal');
+  if(!m) return;
+  m.style.width = '';
+  m.style.height = '';
+  m.style.top = '';
+  m.style.left = '';
+  m.style.transform = '';
+  m.style.borderRadius = '';
+}
+function expandAdminModal(){
+  const m = document.querySelector('.admin-modal-mask:last-child .admin-modal');
+  if(!m) return;
+  m.style.width = '100vw';
+  m.style.height = '100vh';
+  m.style.top = '0';
+  m.style.left = '0';
+  m.style.transform = 'none';
+  m.style.borderRadius = '0';
 }
 
 </script>
