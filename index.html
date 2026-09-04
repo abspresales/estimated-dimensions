@@ -3297,11 +3297,6 @@ function showAdminLogin() {
     </div>
   `;
   openModal('后台数据维护', html);
-  // 登录弹窗缩小
-  setTimeout(() => {
-    const box = document.querySelector('.modal-box');
-    if(box) box.style.maxWidth = '420px';
-  }, 10);
   setTimeout(()=>document.getElementById('adminPwd').focus(), 100);
 }
 
@@ -3325,7 +3320,7 @@ function showAdminMain() {
       <div style="font-size:14px;color:#999;margin-bottom:8px;">当前数据状态</div>
       <div style="font-size:18px;font-weight:600;color:#333;margin-bottom:12px;">产品系列：${seriesCount} 个 | 打包方案：${PRODUCTS.length} 条</div>
       <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-        <button onclick="exportDataJson()" style="padding:10px 26px;background:#fa8c16;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;box-shadow:0 2px 6px rgba(250,140,22,.3);">🚀 导出并发布</button>
+        <button onclick="exportDataJson()" style="padding:10px 26px;background:linear-gradient(135deg,#E78131,#D96C1F);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;box-shadow:0 2px 6px rgba(231,129,49,.3);">🚀 导出并发布</button>
         <span style="font-size:13px;color:#999;line-height:1.6;">上传 Excel → 点「保存并发布」即自动导出 estimated-dimensions.json<br>并推送到线上；此按钮为手动重发/兜底。</span>
       </div>
     </div>
