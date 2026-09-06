@@ -728,8 +728,8 @@ html{scroll-behavior:smooth;}
   display:flex;align-items:center;gap:12px;text-align:left;
 }
 .header .sub{text-shadow:none;letter-spacing:.3px;text-align:left;}
-.header .sub:first-of-type{font-size:13px!important;font-weight:700;opacity:1!important;color:#1E3A5F;margin:0 0 4px 0!important;}
-.header .sub:last-of-type{opacity:1!important;line-height:1.7;color:#3A5A7A;margin:0!important;}
+.header .sub:first-of-type{font-size:22px!important;font-weight:700;opacity:1!important;color:#1E3A5F;margin:0 0 4px 0!important;line-height:1.35;}
+.header .sub:last-of-type{font-size:12px!important;opacity:1!important;line-height:1.7;color:#3A5A7A;margin:0!important;}
 
 /* ---------- 页面浅蓝底纹 ---------- */
 body{
@@ -906,12 +906,24 @@ body{
   line-height:1.3;
   text-shadow:0 1px 0 #fff,0 2px 8px rgba(30,58,95,.10)!important;
 }
-.header .sub{font-size:13.5px!important;font-weight:700!important;letter-spacing:1px!important;}
+.header .sub{font-size:22px!important;font-weight:700!important;letter-spacing:1px!important;line-height:1.35;}
 /* 3) 表格表头：更清晰的中英文字重与对比度 */
 .data-table th{
   font-size:14px!important;
   font-weight:800!important;
   letter-spacing:.8px!important;
+}
+/* 3b) 尺寸速算主表表头：对齐线材站表头规格（中文14px/800，英文11px/700） */
+#productTable thead th{
+  font-size:14px!important;
+  font-weight:800!important;
+  letter-spacing:.8px!important;
+}
+#productTable thead th span{
+  font-size:11px!important;
+  font-weight:700!important;
+  letter-spacing:.6px!important;
+  margin-top:2px!important;
 }
 /* 4) 表格正文：字色加深、加行高，数据更清晰易读 */
 .data-table td,table td{font-size:13.5px!important;line-height:1.6!important;color:#2A3038!important;}
