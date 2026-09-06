@@ -885,7 +885,45 @@ h1,h2,h3,h4,strong,b{font-weight:700;color:#2A2F38;}
 .header .sub:first-of-type{color:#1E3A5F;}
 .header .sub:last-of-type{color:#3A5A7A;}
 body,table td,table th,table.data-table td,.summary-bar,.freight-card,.stat-card,.form-row label{color:#33373D;}
-.filter-bar,.summary-bar,.table-wrap,.freight-card,.stat-card,.note-box{}</style>
+.filter-bar,.summary-bar,.table-wrap,.freight-card,.stat-card,.note-box{}
+
+/* ==================================================================
+   🖋️ 字体视觉强化层 v4 · 更美观更显眼的字体排版
+   ─────────────────────────────────────────
+   升级中文字体栈、增强字重层次、强化标题/表头/关键数据、优化行高可读性
+   ================================================================== */
+/* 1) 全局字体栈升级：优先现代浏览器自带字体，中文更圆润清晰 */
+body{
+  font-family:"PingFang SC","HarmonyOS Sans SC","MiSans","Source Han Sans SC","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif!important;
+  font-size:13.5px!important;
+  letter-spacing:.1px;
+}
+/* 2) 顶部主标题：更大更醒目，加字距 */
+.header h1,.header .sub:first-of-type{
+  font-size:25px!important;
+  font-weight:900!important;
+  letter-spacing:2.5px!important;
+  line-height:1.3;
+  text-shadow:0 1px 0 #fff,0 2px 8px rgba(30,58,95,.10)!important;
+}
+.header .sub{font-size:13.5px!important;font-weight:700!important;letter-spacing:1px!important;}
+/* 3) 表格表头：更清晰的中英文字重与对比度 */
+.data-table th{
+  font-size:14px!important;
+  font-weight:800!important;
+  letter-spacing:.8px!important;
+}
+/* 4) 表格正文：字色加深、加行高，数据更清晰易读 */
+.data-table td,table td{font-size:13.5px!important;line-height:1.6!important;color:#2A3038!important;}
+/* 5) 按钮文字：更饱满醒目 */
+.btn{font-size:13.5px!important;font-weight:700!important;letter-spacing:.6px!important;}
+/* 6) 输入控件：字体更大更清晰 */
+input,select,textarea{font-size:13.5px!important;font-weight:600!important;}
+/* 7) 表单/卡片标签：更大字重更醒目 */
+.form-row label,.summary-bar,.freight-card,.stat-card{font-size:13.5px!important;font-weight:600!important;}
+/* 8) 关键数字：更醒目 */
+.fs-num{font-weight:800!important;letter-spacing:.3px!important;}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
