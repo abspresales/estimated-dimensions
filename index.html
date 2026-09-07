@@ -936,16 +936,17 @@ input,select,textarea{font-size:13.5px!important;font-weight:600!important;}
 /* 8) 关键数字：更醒目 */
 .fs-num{font-weight:800!important;letter-spacing:.3px!important;}
 /* ===== 已选条件胶囊行 ===== */
-.active-filters{background:#fff;padding:10px 24px;border-radius:10px;box-shadow:0 1px 4px rgba(16,42,80,0.05);margin-bottom:14px;display:none;align-items:center;gap:8px;flex-wrap:wrap;border:1px solid #eef2f7;}
+.active-filters{background:#fff;padding:10px 18px;border-radius:10px;box-shadow:0 1px 4px rgba(16,42,80,0.05);margin-bottom:14px;display:none;align-items:center;gap:8px;flex-wrap:wrap;border:1px solid #eef2f7;}
 .active-filters.show{display:flex;animation:chipIn .32s var(--e-out) backwards;}
 .active-filters .af-lab{font-size:12px;color:#6b7280;font-weight:600;margin-right:2px;}
-.filter-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:16px;background:#eff6ff;color:#1a56db;font-size:12px;font-weight:600;border:1px solid #d3e3fa;transition:transform .2s,box-shadow .2s;}
+@keyframes chipIn{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;}}
+.filter-chip{background:linear-gradient(135deg,var(--cream-50),var(--cream-100));border:1px solid #F0DBA8;border-radius:999px;color:var(--orange-700);box-shadow:0 1px 4px rgba(230,126,34,.10);transition:transform .18s var(--e-spr),box-shadow .18s,background .18s;font-weight:600;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;font-size:12px;}
 .filter-chip:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(230,126,34,.20);background:#fff;}
-.filter-chip .chip-x{cursor:pointer;width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#F0DBA8;color:var(--orange-700);font-size:12px;line-height:1;transition:all .18s;}
+.filter-chip .chip-x{background:#F0DBA8;color:var(--orange-700);transition:all .18s var(--e-spr);width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;line-height:1;cursor:pointer;}
 .filter-chip .chip-x:hover{background:var(--orange-600);color:#fff;transform:rotate(90deg);}
-.af-clear-all{cursor:pointer;font-size:12px;font-weight:600;color:var(--orange-600);margin-left:6px;}
-.af-clear-all:hover{text-decoration:underline;}
-@keyframes chipIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+.af-clear-all{border-radius:999px;transition:all .18s;color:#C0392B;font-size:12px;cursor:pointer;margin-left:auto;white-space:nowrap;padding:3px 10px;}
+.af-clear-all:hover{background:#FDEBEC;}
+.filter-chip{font-size:12.5px!important;font-weight:700!important;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
