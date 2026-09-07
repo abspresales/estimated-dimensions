@@ -935,6 +935,17 @@ input,select,textarea{font-size:13.5px!important;font-weight:600!important;}
 .form-row label,.summary-bar,.freight-card,.stat-card{font-size:13.5px!important;font-weight:600!important;}
 /* 8) 关键数字：更醒目 */
 .fs-num{font-weight:800!important;letter-spacing:.3px!important;}
+/* ===== 已选条件胶囊行 ===== */
+.active-filters{background:#fff;padding:10px 24px;border-radius:10px;box-shadow:0 1px 4px rgba(16,42,80,0.05);margin-bottom:14px;display:none;align-items:center;gap:8px;flex-wrap:wrap;border:1px solid #eef2f7;}
+.active-filters.show{display:flex;animation:chipIn .32s var(--e-out) backwards;}
+.active-filters .af-lab{font-size:12px;color:#6b7280;font-weight:600;margin-right:2px;}
+.filter-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:16px;background:#eff6ff;color:#1a56db;font-size:12px;font-weight:600;border:1px solid #d3e3fa;transition:transform .2s,box-shadow .2s;}
+.filter-chip:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(230,126,34,.20);background:#fff;}
+.filter-chip .chip-x{cursor:pointer;width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#F0DBA8;color:var(--orange-700);font-size:12px;line-height:1;transition:all .18s;}
+.filter-chip .chip-x:hover{background:var(--orange-600);color:#fff;transform:rotate(90deg);}
+.af-clear-all{cursor:pointer;font-size:12px;font-weight:600;color:var(--orange-600);margin-left:6px;}
+.af-clear-all:hover{text-decoration:underline;}
+@keyframes chipIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
@@ -993,6 +1004,8 @@ input,select,textarea{font-size:13.5px!important;font-weight:600!important;}
     <button class="reset-btn" onclick="resetFilter()">重置筛选</button>
     <button class="clear-btn" onclick="resetAll()">清空件数</button>
   </div>
+
+  <div class="active-filters" id="activeFilters"><span class="af-lab">已选条件</span></div>
 
   <div class="summary-bar">
     <span>匹配产品：<strong id="sumProducts" style="color:#1890ff;">65</strong></span>
@@ -1392,6 +1405,7 @@ function onSceneChange() {
 }
 
 function renderTable() {
+  renderActiveFilters(); // 刷新「已选条件」胶囊行
   const scene = document.getElementById('filterScene').value;
   const series = document.getElementById('filterSeries').value;
   const method = document.getElementById('filterMethod').value;
@@ -1519,6 +1533,47 @@ function updateSummary() {
   document.getElementById('sumCases').textContent = totalPanels;
 }
 
+// 渲染「已选条件」胶囊行（应用场景/产品系列/包装方式）
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function renderActiveFilters() {
+  const cont = document.getElementById('activeFilters');
+  if(!cont) return;
+  cont.innerHTML = '';
+  const items = [];
+  const scene = (document.getElementById('filterScene')||{}).value || '';
+  const series = (document.getElementById('filterSeries')||{}).value || '';
+  const method = (document.getElementById('filterMethod')||{}).value || '';
+  if(scene) items.push({key:'scene', label:'场景:'+scene});
+  if(series) items.push({key:'series', label:'系列:'+series});
+  if(method) items.push({key:'method', label:'方式:'+method});
+  if(items.length===0){ cont.classList.remove('show'); return; }
+  cont.classList.add('show');
+  const lab = document.createElement('span'); lab.className='af-lab'; lab.textContent='已选条件'; cont.appendChild(lab);
+  items.forEach(it=>{
+    const chip = document.createElement('div'); chip.className='filter-chip';
+    chip.innerHTML = '<span>'+esc(it.label)+'</span><span class="chip-x" title="移除" data-key="'+it.key+'">\u2715</span>';
+    cont.appendChild(chip);
+  });
+  if(items.length>1){
+    const clear = document.createElement('span'); clear.className='af-clear-all'; clear.textContent='全部清除';
+    clear.onclick = function(){
+      document.getElementById('filterScene').value='';
+      document.getElementById('filterSeries').value='';
+      document.getElementById('filterMethod').value='';
+      initSeriesFilter(); renderTable();
+    };
+    cont.appendChild(clear);
+  }
+  cont.querySelectorAll('.chip-x').forEach(x=>{
+    const key = x.getAttribute('data-key');
+    x.onclick = function(){
+      if(key==='scene'){ document.getElementById('filterScene').value=''; initSeriesFilter(); }
+      else if(key==='series'){ document.getElementById('filterSeries').value=''; }
+      else if(key==='method'){ document.getElementById('filterMethod').value=''; }
+      currentPage = 1; renderTable();
+    };
+  });
+}
 function resetFilter() {
   currentPage = 1;
   document.getElementById('filterScene').value = '';
