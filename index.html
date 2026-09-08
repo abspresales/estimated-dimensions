@@ -812,7 +812,7 @@ tr.group-header td{background:linear-gradient(180deg,#EAF2FC 0%,#DEEBFA 100%)!im
 tr.method-header td{background:linear-gradient(135deg,#EEF3FA,#E3EAF3)!important;color:#3E5A7E!important;font-weight:700;}
 
 /* ---------- 件数输入格 ---------- */
-input.qty-input{border-color:var(--orange-500);background:#FFFDF5;transition:border-color .2s,box-shadow .2s,background .2s;}
+input.qty-input{border-color:var(--orange-500);border-radius:9px;background:#FFFDF5;color:var(--ink);font-weight:500;transition:border-color .2s,box-shadow .2s,background .2s;}
 input.qty-input:focus{border-color:var(--orange-500);box-shadow:var(--ring);background:#fff;}
 input.qty-input.has-value{background:#FFF8E3;border-color:var(--orange-500);color:var(--orange-700);font-weight:700;}
 
@@ -1023,6 +1023,13 @@ html[data-theme="dark"] .data-table td{background:transparent!important;}
 html[data-theme="dark"] tbody tr:not(.group-header):not(.method-header):hover{background:#232d3b!important;}
 /* 分页信息文字：深色下提亮 */
 html[data-theme="dark"] .pagination-bar .page-info{color:#c9d3df!important;}
+/* ===== 统一 Token（对齐线材站基准：主表/输入框/线条 深浅一致） ===== */
+html[data-theme="dark"] table.data-table th,html[data-theme="dark"] table th{background:#202a38!important;color:#bcd3ec!important;border-bottom-color:#2b3646!important;}
+html[data-theme="dark"] table.data-table td,html[data-theme="dark"] table td{color:#c9d3df!important;border-bottom-color:#25303d!important;}
+html[data-theme="dark"] tr.group-header td,html[data-theme="dark"] tr.method-header td{background:#1c2430!important;color:#bcd3ec!important;border-bottom-color:#25303d!important;}
+html[data-theme="dark"] input.qty-input{background:#141a22!important;border-color:#34404f!important;color:#e2e9f2!important;border-radius:9px!important;}
+html[data-theme="dark"] td.calc-cell,html[data-theme="dark"] thead{background:transparent!important;}
+html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{border-radius:9px!important;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
